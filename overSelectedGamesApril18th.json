@@ -1,0 +1,50 @@
+[
+    {
+        "game": "LA Angels @ TB Rays",
+        "seriesRunsEx": 9.578947368421053,
+        "pitcherBatterRunsEx": 22.28,
+        "confidenceLevel": 15.929473684210528,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "TBRays",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 8.844444444444445,
+            "pitcherBatterHomeExRuns": 13.435555555555556,
+            "seriesExWinner": "LAAngels",
+            "seriesConfidenceRanking": 14,
+            "seriesExpectedWinnerRuns": 5.2631578947368425,
+            "seriesExpectedLoserRuns": 4.315789473684211
+        }
+    },
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "seriesRunsEx": 9.2953216374269,
+        "pitcherBatterRunsEx": 17.35727272727273,
+        "confidenceLevel": 13.326297182349816,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.1472727272727266,
+            "pitcherBatterHomeExRuns": 10.21,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 57,
+            "seriesExpectedWinnerRuns": 5.611111111111111,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "ARI Diamondbacks @ SF Giants",
+        "seriesRunsEx": 9.736842105263158,
+        "pitcherBatterRunsEx": 15.7,
+        "confidenceLevel": 12.718421052631578,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SFGiants",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 7.109999999999999,
+            "pitcherBatterHomeExRuns": 8.59,
+            "seriesExWinner": "ARIDiamondbacks",
+            "seriesConfidenceRanking": 32,
+            "seriesExpectedWinnerRuns": 5.578947368421052,
+            "seriesExpectedLoserRuns": 4.157894736842105
+        }
+    }
+]

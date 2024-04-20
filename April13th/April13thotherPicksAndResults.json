@@ -1,0 +1,23 @@
+[
+    {
+        "betType": "ML",
+        "game": "KC Royals @ NY Mets",
+        "teamName": "KCRoyals",
+        "isWin": "Win",
+        "result": "W11-7"
+    },
+    {
+        "betType": "ML",
+        "game": "CIN Reds @ CHI White",
+        "teamName": "CINReds",
+        "isWin": "Win",
+        "result": "W5-0"
+    },
+    {
+        "betType": "ML",
+        "game": "CHI Cubs @ SEA Mariners",
+        "teamName": "CHICubs",
+        "isWin": "Win",
+        "result": "W4-1"
+    }
+]

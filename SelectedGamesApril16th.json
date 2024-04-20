@@ -1,0 +1,107 @@
+[
+    {
+        "game": "ATL Braves @ HOU Astros",
+        "expectedWinner": "ATLBraves",
+        "overallConfidence": 65,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ATLBraves",
+            "pitcherBatterFinalHandicap": 10,
+            "pitcherBatterAwayExRuns": 13.673333333333332,
+            "pitcherBatterHomeExRuns": 3.2777777777777777,
+            "seriesExWinner": "ATLBraves",
+            "seriesConfidenceRanking": 55,
+            "seriesExpectedWinnerRuns": 6.4375,
+            "seriesExpectedLoserRuns": 4.368421052631579
+        }
+    },
+    {
+        "game": "MIN Twins @ BAL Orioles",
+        "expectedWinner": "BALOrioles",
+        "overallConfidence": 58,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BALOrioles",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 5.029999999999999,
+            "pitcherBatterHomeExRuns": 9.943333333333333,
+            "seriesExWinner": "BALOrioles",
+            "seriesConfidenceRanking": 53,
+            "seriesExpectedWinnerRuns": 5.777777777777778,
+            "seriesExpectedLoserRuns": 3.411764705882353
+        }
+    },
+    {
+        "game": "COL Rockies @ PHI Phillies",
+        "expectedWinner": "PHIPhillies",
+        "overallConfidence": 42,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PHIPhillies",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 4.73,
+            "pitcherBatterHomeExRuns": 8.20277777777778,
+            "seriesExWinner": "PHIPhillies",
+            "seriesConfidenceRanking": 39,
+            "seriesExpectedWinnerRuns": 6.111111111111111,
+            "seriesExpectedLoserRuns": 3.888888888888889
+        }
+    },
+    {
+        "game": "NY Yankees @ TOR Blue",
+        "expectedWinner": "NYYankees",
+        "overallConfidence": 35,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 5.3527272727272734,
+            "pitcherBatterHomeExRuns": 5.283461538461538,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 35,
+            "seriesExpectedWinnerRuns": 4.666666666666667,
+            "seriesExpectedLoserRuns": 3.6666666666666665
+        }
+    },
+    {
+        "game": "SF Giants @ MIA Marlins",
+        "expectedWinner": "SFGiants",
+        "overallConfidence": 28,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SFGiants",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 6.477777777777778,
+            "pitcherBatterHomeExRuns": 5.07,
+            "seriesExWinner": "SFGiants",
+            "seriesConfidenceRanking": 27,
+            "seriesExpectedWinnerRuns": 5.526315789473684,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "STL Cardinals @ OAK Athletics",
+        "expectedWinner": "STLCardinals",
+        "overallConfidence": 24,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "STLCardinals",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 6.975,
+            "pitcherBatterHomeExRuns": 4.291111111111111,
+            "seriesExWinner": "STLCardinals",
+            "seriesConfidenceRanking": 21,
+            "seriesExpectedWinnerRuns": 4.166666666666667,
+            "seriesExpectedLoserRuns": 2.7777777777777777
+        }
+    },
+    {
+        "game": "CHI Cubs @ ARI Diamondbacks",
+        "expectedWinner": "ARIDiamondbacks",
+        "overallConfidence": 14,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ARIDiamondbacks",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 10.536666666666667,
+            "pitcherBatterHomeExRuns": 15.610000000000001,
+            "seriesExWinner": "ARIDiamondbacks",
+            "seriesConfidenceRanking": 9,
+            "seriesExpectedWinnerRuns": 5.722222222222222,
+            "seriesExpectedLoserRuns": 4.555555555555555
+        }
+    }
+]

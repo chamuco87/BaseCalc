@@ -1,0 +1,37 @@
+[
+    {
+        "betType": "ML",
+        "game": "PIT Pirates @ PHI Phillies",
+        "teamName": "PITPirates",
+        "isWin": "Win",
+        "result": "W9-2"
+    },
+    {
+        "betType": "ML",
+        "game": "ATL Braves @ MIA Marlins",
+        "teamName": "ATLBraves",
+        "isWin": "Win",
+        "result": "W9-7"
+    },
+    {
+        "betType": "ML",
+        "game": "CHI Cubs @ SEA Mariners",
+        "teamName": "CHICubs",
+        "isWin": "Win",
+        "result": "W3-2"
+    },
+    {
+        "betType": "ML",
+        "game": "SD Padres @ LA Dodgers",
+        "teamName": "LADodgers",
+        "isWin": "Lost",
+        "result": "L6-3"
+    },
+    {
+        "betType": "ML",
+        "game": " LA Angels @ BOS Red",
+        "teamName": "BOSRed",
+        "isWin": "Win",
+        "result": "W5-4"
+    }
+]

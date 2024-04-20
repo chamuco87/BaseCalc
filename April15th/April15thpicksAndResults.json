@@ -1,0 +1,149 @@
+{
+    "date": "April15th",
+    "totalPicksBets": 15,
+    "totalPicksBetsWin": 8,
+    "totalPicksBetsLost": 7,
+    "otherTotalPickWin": 1,
+    "otherTotalPickLost": 3,
+    "totalWinBetsOverall": 9,
+    "totalLostBetsOverall": 10,
+    "otherBets": 4,
+    "totalBetsOverall": 19,
+    "totalWinPercentage": 47.36842105263158,
+    "totalLostPercentage": 52.63157894736842,
+    "totalPicksWinPercentage": 53.333333333333336,
+    "totalPicksLostPercentage": 46.666666666666664,
+    "MLWinPercentage": 66.66666666666667,
+    "MLLostPercentage": 33.333333333333336,
+    "OverWinPercentage": 50,
+    "OverLostPercentage": 50,
+    "UnderWinPercentage": 50,
+    "UnderLostPercentage": 50,
+    "picksAndResults": [
+        {
+            "betType": "ML",
+            "game": "ATL Braves @ HOU Astros",
+            "teamName": "ATLBraves",
+            "isWin": "Win",
+            "result": "W6-1"
+        },
+        {
+            "betType": "ML",
+            "game": "WAS Nationals @ LA Dodgers",
+            "teamName": "LADodgers",
+            "isWin": "Lost",
+            "result": "L6-4"
+        },
+        {
+            "betType": "ML",
+            "game": "KC Royals @ CHI White",
+            "teamName": "KCRoyals",
+            "isWin": "Win",
+            "result": "W2-0"
+        },
+        {
+            "betType": "Over",
+            "game": "ATL Braves @ HOU Astros",
+            "isWin": "Lost",
+            "totalRuns": 7
+        },
+        {
+            "betType": "Over",
+            "game": "NY Yankees @ TOR Blue",
+            "isWin": "Lost",
+            "totalRuns": 4
+        },
+        {
+            "betType": "Over",
+            "game": "CHI Cubs @ ARI Diamondbacks",
+            "isWin": "Lost",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Over",
+            "game": "SD Padres @ MIL Brewers",
+            "isWin": "Win",
+            "totalRuns": 10
+        },
+        {
+            "betType": "Over",
+            "game": "SF Giants @ MIA Marlins",
+            "isWin": "Lost",
+            "totalRuns": 7
+        },
+        {
+            "betType": "Over",
+            "game": "PIT Pirates @ NY Mets",
+            "isWin": "Win",
+            "totalRuns": 9
+        },
+        {
+            "betType": "Over",
+            "game": "WAS Nationals @ LA Dodgers",
+            "isWin": "Win",
+            "totalRuns": 10
+        },
+        {
+            "betType": "Over",
+            "game": "MIN Twins @ BAL Orioles",
+            "isWin": "Win",
+            "totalRuns": 11
+        },
+        {
+            "betType": "Over",
+            "game": "LA Angels @ TB Rays",
+            "isWin": "Win",
+            "totalRuns": 10
+        },
+        {
+            "betType": "Over",
+            "game": "TEX Rangers @ DET Tigers",
+            "isWin": "Lost",
+            "totalRuns": 1
+        },
+        {
+            "betType": "Under",
+            "game": "CIN Reds @ SEA Mariners",
+            "isWin": "Lost",
+            "totalRuns": 12
+        },
+        {
+            "betType": "Under",
+            "game": "STL Cardinals @ OAK Athletics",
+            "isWin": "Win",
+            "totalRuns": 4
+        }
+    ],
+    "otherTotalWinPercentage": 25,
+    "otherTotalLostPercentage": 75,
+    "otherPicksAndResults": [
+        {
+            "betType": "ML",
+            "game": "MIN Twins @ BAL Orioles",
+            "teamName": "BALOrioles",
+            "isWin": "Win",
+            "result": "W7-4"
+        },
+        {
+            "betType": "ML",
+            "game": "NY Yankees @ TOR Blue",
+            "teamName": "NYYankees",
+            "isWin": "Lost",
+            "result": "L3-1"
+        },
+        {
+            "betType": "ML",
+            "game": "SD Padres @ MIL Brewers",
+            "teamName": "MILBrewers",
+            "isWin": "Lost",
+            "result": "L7-3"
+        },
+        {
+            "betType": "ML",
+            "game": "CIN Reds @ SEA Mariners",
+            "teamName": "CINReds",
+            "isWin": "Lost",
+            "result": "L9-3"
+        }
+    ]
+}

@@ -1,0 +1,659 @@
+[
+    {
+        "name": "Adolis Garcia RF",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "13"
+            },
+            {
+                "stat": "AB",
+                "value": "51"
+            },
+            {
+                "stat": "R",
+                "value": "9"
+            },
+            {
+                "stat": "H",
+                "value": "15"
+            },
+            {
+                "stat": "2B",
+                "value": "3"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "4"
+            },
+            {
+                "stat": "RBI",
+                "value": "13"
+            },
+            {
+                "stat": "TB",
+                "value": "30"
+            },
+            {
+                "stat": "BB",
+                "value": "3"
+            },
+            {
+                "stat": "SO",
+                "value": "16"
+            },
+            {
+                "stat": "SB",
+                "value": "2"
+            },
+            {
+                "stat": "AVG",
+                "value": ".294"
+            },
+            {
+                "stat": "OBP",
+                "value": ".339"
+            },
+            {
+                "stat": "SLG",
+                "value": ".588"
+            },
+            {
+                "stat": "OPS",
+                "value": ".928"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.5"
+            }
+        ]
+    },
+    {
+        "name": "Marcus Semien 2B",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "13"
+            },
+            {
+                "stat": "AB",
+                "value": "51"
+            },
+            {
+                "stat": "R",
+                "value": "10"
+            },
+            {
+                "stat": "H",
+                "value": "15"
+            },
+            {
+                "stat": "2B",
+                "value": "3"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "1"
+            },
+            {
+                "stat": "RBI",
+                "value": "10"
+            },
+            {
+                "stat": "TB",
+                "value": "21"
+            },
+            {
+                "stat": "BB",
+                "value": "9"
+            },
+            {
+                "stat": "SO",
+                "value": "6"
+            },
+            {
+                "stat": "SB",
+                "value": "1"
+            },
+            {
+                "stat": "AVG",
+                "value": ".294"
+            },
+            {
+                "stat": "OBP",
+                "value": ".400"
+            },
+            {
+                "stat": "SLG",
+                "value": ".412"
+            },
+            {
+                "stat": "OPS",
+                "value": ".812"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.7"
+            }
+        ]
+    },
+    {
+        "name": "Wyatt Langford LF",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "12"
+            },
+            {
+                "stat": "AB",
+                "value": "50"
+            },
+            {
+                "stat": "R",
+                "value": "4"
+            },
+            {
+                "stat": "H",
+                "value": "12"
+            },
+            {
+                "stat": "2B",
+                "value": "1"
+            },
+            {
+                "stat": "3B",
+                "value": "1"
+            },
+            {
+                "stat": "HR",
+                "value": "0"
+            },
+            {
+                "stat": "RBI",
+                "value": "6"
+            },
+            {
+                "stat": "TB",
+                "value": "15"
+            },
+            {
+                "stat": "BB",
+                "value": "4"
+            },
+            {
+                "stat": "SO",
+                "value": "10"
+            },
+            {
+                "stat": "SB",
+                "value": "0"
+            },
+            {
+                "stat": "AVG",
+                "value": ".240"
+            },
+            {
+                "stat": "OBP",
+                "value": ".291"
+            },
+            {
+                "stat": "SLG",
+                "value": ".300"
+            },
+            {
+                "stat": "OPS",
+                "value": ".591"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.0"
+            }
+        ]
+    },
+    {
+        "name": "Corey Seager SS",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "11"
+            },
+            {
+                "stat": "AB",
+                "value": "45"
+            },
+            {
+                "stat": "R",
+                "value": "8"
+            },
+            {
+                "stat": "H",
+                "value": "14"
+            },
+            {
+                "stat": "2B",
+                "value": "1"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "1"
+            },
+            {
+                "stat": "RBI",
+                "value": "5"
+            },
+            {
+                "stat": "TB",
+                "value": "18"
+            },
+            {
+                "stat": "BB",
+                "value": "6"
+            },
+            {
+                "stat": "SO",
+                "value": "9"
+            },
+            {
+                "stat": "SB",
+                "value": "0"
+            },
+            {
+                "stat": "AVG",
+                "value": ".311"
+            },
+            {
+                "stat": "OBP",
+                "value": ".392"
+            },
+            {
+                "stat": "SLG",
+                "value": ".400"
+            },
+            {
+                "stat": "OPS",
+                "value": ".792"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.4"
+            }
+        ]
+    },
+    {
+        "name": "Jonah Heim C",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "11"
+            },
+            {
+                "stat": "AB",
+                "value": "43"
+            },
+            {
+                "stat": "R",
+                "value": "3"
+            },
+            {
+                "stat": "H",
+                "value": "11"
+            },
+            {
+                "stat": "2B",
+                "value": "2"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "1"
+            },
+            {
+                "stat": "RBI",
+                "value": "7"
+            },
+            {
+                "stat": "TB",
+                "value": "16"
+            },
+            {
+                "stat": "BB",
+                "value": "1"
+            },
+            {
+                "stat": "SO",
+                "value": "9"
+            },
+            {
+                "stat": "SB",
+                "value": "0"
+            },
+            {
+                "stat": "AVG",
+                "value": ".256"
+            },
+            {
+                "stat": "OBP",
+                "value": ".289"
+            },
+            {
+                "stat": "SLG",
+                "value": ".372"
+            },
+            {
+                "stat": "OPS",
+                "value": ".661"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.3"
+            }
+        ]
+    },
+    {
+        "name": "Jared Walsh 1B",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "13"
+            },
+            {
+                "stat": "AB",
+                "value": "39"
+            },
+            {
+                "stat": "R",
+                "value": "9"
+            },
+            {
+                "stat": "H",
+                "value": "11"
+            },
+            {
+                "stat": "2B",
+                "value": "2"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "1"
+            },
+            {
+                "stat": "RBI",
+                "value": "5"
+            },
+            {
+                "stat": "TB",
+                "value": "16"
+            },
+            {
+                "stat": "BB",
+                "value": "6"
+            },
+            {
+                "stat": "SO",
+                "value": "12"
+            },
+            {
+                "stat": "SB",
+                "value": "0"
+            },
+            {
+                "stat": "AVG",
+                "value": ".282"
+            },
+            {
+                "stat": "OBP",
+                "value": ".378"
+            },
+            {
+                "stat": "SLG",
+                "value": ".410"
+            },
+            {
+                "stat": "OPS",
+                "value": ".788"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.2"
+            }
+        ]
+    },
+    {
+        "name": "Leody Taveras CF",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "11"
+            },
+            {
+                "stat": "AB",
+                "value": "38"
+            },
+            {
+                "stat": "R",
+                "value": "3"
+            },
+            {
+                "stat": "H",
+                "value": "9"
+            },
+            {
+                "stat": "2B",
+                "value": "2"
+            },
+            {
+                "stat": "3B",
+                "value": "1"
+            },
+            {
+                "stat": "HR",
+                "value": "0"
+            },
+            {
+                "stat": "RBI",
+                "value": "1"
+            },
+            {
+                "stat": "TB",
+                "value": "13"
+            },
+            {
+                "stat": "BB",
+                "value": "4"
+            },
+            {
+                "stat": "SO",
+                "value": "6"
+            },
+            {
+                "stat": "SB",
+                "value": "1"
+            },
+            {
+                "stat": "AVG",
+                "value": ".237"
+            },
+            {
+                "stat": "OBP",
+                "value": ".310"
+            },
+            {
+                "stat": "SLG",
+                "value": ".342"
+            },
+            {
+                "stat": "OPS",
+                "value": ".652"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.1"
+            }
+        ]
+    },
+    {
+        "name": "Evan Carter LF",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "11"
+            },
+            {
+                "stat": "AB",
+                "value": "37"
+            },
+            {
+                "stat": "R",
+                "value": "9"
+            },
+            {
+                "stat": "H",
+                "value": "7"
+            },
+            {
+                "stat": "2B",
+                "value": "4"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "1"
+            },
+            {
+                "stat": "RBI",
+                "value": "3"
+            },
+            {
+                "stat": "TB",
+                "value": "14"
+            },
+            {
+                "stat": "BB",
+                "value": "9"
+            },
+            {
+                "stat": "SO",
+                "value": "6"
+            },
+            {
+                "stat": "SB",
+                "value": "1"
+            },
+            {
+                "stat": "AVG",
+                "value": ".189"
+            },
+            {
+                "stat": "OBP",
+                "value": ".362"
+            },
+            {
+                "stat": "SLG",
+                "value": ".378"
+            },
+            {
+                "stat": "OPS",
+                "value": ".740"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.6"
+            }
+        ]
+    },
+    {
+        "name": "Josh Smith SS",
+        "playerStats": [
+            {
+                "stat": "GP",
+                "value": "12"
+            },
+            {
+                "stat": "AB",
+                "value": "28"
+            },
+            {
+                "stat": "R",
+                "value": "4"
+            },
+            {
+                "stat": "H",
+                "value": "9"
+            },
+            {
+                "stat": "2B",
+                "value": "2"
+            },
+            {
+                "stat": "3B",
+                "value": "0"
+            },
+            {
+                "stat": "HR",
+                "value": "0"
+            },
+            {
+                "stat": "RBI",
+                "value": "7"
+            },
+            {
+                "stat": "TB",
+                "value": "11"
+            },
+            {
+                "stat": "BB",
+                "value": "4"
+            },
+            {
+                "stat": "SO",
+                "value": "4"
+            },
+            {
+                "stat": "SB",
+                "value": "0"
+            },
+            {
+                "stat": "AVG",
+                "value": ".321"
+            },
+            {
+                "stat": "OBP",
+                "value": ".424"
+            },
+            {
+                "stat": "SLG",
+                "value": ".393"
+            },
+            {
+                "stat": "OPS",
+                "value": ".817"
+            },
+            {
+                "stat": "WAR",
+                "value": "0.0"
+            }
+        ]
+    }
+]

@@ -1,0 +1,621 @@
+[
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "gameTime": "17:40",
+        "overUnder": {
+            "overRuns": "O 999.0",
+            "overOdd": "",
+            "underRuns": "U 999.0",
+            "underOdd": ""
+        },
+        "awayTeam": {
+            "awayTeam": "MIAMarlins",
+            "awayId": "MIA",
+            "awayPitcher": "A.J. Puk",
+            "awayHandicapRuns": "+999.0",
+            "awayHandicapOdds": "",
+            "awayML": "",
+            "awayPitcherData": [
+                {
+                    "dataField": "GP",
+                    "description": "Games Played",
+                    "value": "58"
+                },
+                {
+                    "dataField": "GS",
+                    "description": "Games Started",
+                    "value": "0"
+                },
+                {
+                    "dataField": "W",
+                    "description": "Wins",
+                    "value": "7"
+                },
+                {
+                    "dataField": "L",
+                    "description": "Losses",
+                    "value": "5"
+                },
+                {
+                    "dataField": "W%",
+                    "description": "Win Percentage",
+                    "value": ".583"
+                },
+                {
+                    "dataField": "WAR",
+                    "description": "Wins Above Replacement",
+                    "value": "0.6"
+                },
+                {
+                    "dataField": "ERA",
+                    "description": "Earned Run Average",
+                    "value": "3.97"
+                },
+                {
+                    "dataField": "WHIP",
+                    "description": "Walks Plus Hits Per Inning Pitched",
+                    "value": "1.18"
+                },
+                {
+                    "dataField": "IP",
+                    "description": "Innings pitched",
+                    "value": "56.2"
+                },
+                {
+                    "dataField": "K",
+                    "description": "Strikeouts",
+                    "value": "78"
+                },
+                {
+                    "dataField": "BB",
+                    "description": "Walks",
+                    "value": "13"
+                },
+                {
+                    "dataField": "K/BB",
+                    "description": "Strikeout To Walk Ratio",
+                    "value": "6.0"
+                },
+                {
+                    "dataField": "H",
+                    "description": "Hits",
+                    "value": "54"
+                },
+                {
+                    "dataField": "R",
+                    "description": "Runs",
+                    "value": "29"
+                },
+                {
+                    "dataField": "ER",
+                    "description": "Earned runs",
+                    "value": "25"
+                },
+                {
+                    "dataField": "SV",
+                    "description": "Saves",
+                    "value": "15"
+                },
+                {
+                    "dataField": "HLD",
+                    "description": "Holds",
+                    "value": "2"
+                },
+                {
+                    "dataField": "BLSV",
+                    "description": "Blown Saves",
+                    "value": "9"
+                }
+            ],
+            "awayPitcherDataNew": [
+                {
+                    "currentStats": [
+                        {
+                            "dataField": "GP",
+                            "description": "Games Played",
+                            "value": "3"
+                        },
+                        {
+                            "dataField": "GS",
+                            "description": "Games Started",
+                            "value": "3"
+                        },
+                        {
+                            "dataField": "W",
+                            "description": "Wins",
+                            "value": "0"
+                        },
+                        {
+                            "dataField": "L",
+                            "description": "Losses",
+                            "value": "3"
+                        },
+                        {
+                            "dataField": "W%",
+                            "description": "Win Percentage",
+                            "value": ".000"
+                        },
+                        {
+                            "dataField": "WAR",
+                            "description": "Wins Above Replacement",
+                            "value": "-0.3"
+                        },
+                        {
+                            "dataField": "ERA",
+                            "description": "Earned Run Average",
+                            "value": "5.91"
+                        },
+                        {
+                            "dataField": "WHIP",
+                            "description": "Walks Plus Hits Per Inning Pitched",
+                            "value": "2.44"
+                        },
+                        {
+                            "dataField": "IP",
+                            "description": "Innings pitched",
+                            "value": "10.2"
+                        },
+                        {
+                            "dataField": "K",
+                            "description": "Strikeouts",
+                            "value": "8"
+                        },
+                        {
+                            "dataField": "BB",
+                            "description": "Walks",
+                            "value": "14"
+                        },
+                        {
+                            "dataField": "K/BB",
+                            "description": "Strikeout To Walk Ratio",
+                            "value": "0.6"
+                        },
+                        {
+                            "dataField": "H",
+                            "description": "Hits",
+                            "value": "12"
+                        },
+                        {
+                            "dataField": "R",
+                            "description": "Runs",
+                            "value": "10"
+                        },
+                        {
+                            "dataField": "ER",
+                            "description": "Earned runs",
+                            "value": "7"
+                        },
+                        {
+                            "dataField": "SV",
+                            "description": "Saves",
+                            "value": "0"
+                        },
+                        {
+                            "dataField": "HLD",
+                            "description": "Holds",
+                            "value": "0"
+                        },
+                        {
+                            "dataField": "BLSV",
+                            "description": "Blown Saves",
+                            "value": "0"
+                        }
+                    ],
+                    "carrerStats": [
+                        {
+                            "dataField": "GP",
+                            "description": "Games Played",
+                            "value": "145"
+                        },
+                        {
+                            "dataField": "GS",
+                            "description": "Games Started",
+                            "value": "3"
+                        },
+                        {
+                            "dataField": "W",
+                            "description": "Wins",
+                            "value": "13"
+                        },
+                        {
+                            "dataField": "L",
+                            "description": "Losses",
+                            "value": "14"
+                        },
+                        {
+                            "dataField": "W%",
+                            "description": "Win Percentage",
+                            "value": ".481"
+                        },
+                        {
+                            "dataField": "WAR",
+                            "description": "Wins Above Replacement",
+                            "value": "--"
+                        },
+                        {
+                            "dataField": "ERA",
+                            "description": "Earned Run Average",
+                            "value": "3.87"
+                        },
+                        {
+                            "dataField": "WHIP",
+                            "description": "Walks Plus Hits Per Inning Pitched",
+                            "value": "1.31"
+                        },
+                        {
+                            "dataField": "IP",
+                            "description": "Innings pitched",
+                            "value": "158.1"
+                        },
+                        {
+                            "dataField": "K",
+                            "description": "Strikeouts",
+                            "value": "191"
+                        },
+                        {
+                            "dataField": "BB",
+                            "description": "Walks",
+                            "value": "61"
+                        },
+                        {
+                            "dataField": "K/BB",
+                            "description": "Strikeout To Walk Ratio",
+                            "value": "3.1"
+                        },
+                        {
+                            "dataField": "H",
+                            "description": "Hits",
+                            "value": "147"
+                        },
+                        {
+                            "dataField": "R",
+                            "description": "Runs",
+                            "value": "79"
+                        },
+                        {
+                            "dataField": "ER",
+                            "description": "Earned runs",
+                            "value": "68"
+                        },
+                        {
+                            "dataField": "SV",
+                            "description": "Saves",
+                            "value": "19"
+                        },
+                        {
+                            "dataField": "HLD",
+                            "description": "Holds",
+                            "value": "24"
+                        },
+                        {
+                            "dataField": "BLSV",
+                            "description": "Blown Saves",
+                            "value": "17"
+                        }
+                    ],
+                    "currentEra": 5.91,
+                    "carrerEra": 3.87,
+                    "tendencia": "Negativa",
+                    "finalEra": 5.91
+                }
+            ]
+        },
+        "homeTeam": {
+            "homeTeam": "CHICubs",
+            "homeId": "CHI",
+            "homePitcher": "Jameson Taillon",
+            "homeHandicapRuns": "-999.0",
+            "homeHandicapOdds": "",
+            "homeML": "",
+            "homePitcherData": [
+                {
+                    "dataField": "GP",
+                    "description": "Games Played",
+                    "value": "32"
+                },
+                {
+                    "dataField": "GS",
+                    "description": "Games Started",
+                    "value": "32"
+                },
+                {
+                    "dataField": "W",
+                    "description": "Wins",
+                    "value": "14"
+                },
+                {
+                    "dataField": "L",
+                    "description": "Losses",
+                    "value": "5"
+                },
+                {
+                    "dataField": "W%",
+                    "description": "Win Percentage",
+                    "value": ".737"
+                },
+                {
+                    "dataField": "WAR",
+                    "description": "Wins Above Replacement",
+                    "value": "1.2"
+                },
+                {
+                    "dataField": "ERA",
+                    "description": "Earned Run Average",
+                    "value": "3.91"
+                },
+                {
+                    "dataField": "WHIP",
+                    "description": "Walks Plus Hits Per Inning Pitched",
+                    "value": "1.13"
+                },
+                {
+                    "dataField": "IP",
+                    "description": "Innings pitched",
+                    "value": "177.1"
+                },
+                {
+                    "dataField": "K",
+                    "description": "Strikeouts",
+                    "value": "151"
+                },
+                {
+                    "dataField": "BB",
+                    "description": "Walks",
+                    "value": "32"
+                },
+                {
+                    "dataField": "K/BB",
+                    "description": "Strikeout To Walk Ratio",
+                    "value": "4.7"
+                },
+                {
+                    "dataField": "H",
+                    "description": "Hits",
+                    "value": "168"
+                },
+                {
+                    "dataField": "R",
+                    "description": "Runs",
+                    "value": "78"
+                },
+                {
+                    "dataField": "ER",
+                    "description": "Earned runs",
+                    "value": "77"
+                },
+                {
+                    "dataField": "SV",
+                    "description": "Saves",
+                    "value": "0"
+                },
+                {
+                    "dataField": "HLD",
+                    "description": "Holds",
+                    "value": "0"
+                },
+                {
+                    "dataField": "BLSV",
+                    "description": "Blown Saves",
+                    "value": "0"
+                }
+            ],
+            "homePitcherDataNew": [
+                {
+                    "currentStats": [
+                        {
+                            "dataField": "GP",
+                            "description": "Games Played",
+                            "value": "30"
+                        },
+                        {
+                            "dataField": "GS",
+                            "description": "Games Started",
+                            "value": "29"
+                        },
+                        {
+                            "dataField": "W",
+                            "description": "Wins",
+                            "value": "8"
+                        },
+                        {
+                            "dataField": "L",
+                            "description": "Losses",
+                            "value": "10"
+                        },
+                        {
+                            "dataField": "W%",
+                            "description": "Win Percentage",
+                            "value": ".444"
+                        },
+                        {
+                            "dataField": "WAR",
+                            "description": "Wins Above Replacement",
+                            "value": "-0.1"
+                        },
+                        {
+                            "dataField": "ERA",
+                            "description": "Earned Run Average",
+                            "value": "4.84"
+                        },
+                        {
+                            "dataField": "WHIP",
+                            "description": "Walks Plus Hits Per Inning Pitched",
+                            "value": "1.28"
+                        },
+                        {
+                            "dataField": "IP",
+                            "description": "Innings pitched",
+                            "value": "154.1"
+                        },
+                        {
+                            "dataField": "K",
+                            "description": "Strikeouts",
+                            "value": "140"
+                        },
+                        {
+                            "dataField": "BB",
+                            "description": "Walks",
+                            "value": "41"
+                        },
+                        {
+                            "dataField": "K/BB",
+                            "description": "Strikeout To Walk Ratio",
+                            "value": "3.4"
+                        },
+                        {
+                            "dataField": "H",
+                            "description": "Hits",
+                            "value": "156"
+                        },
+                        {
+                            "dataField": "R",
+                            "description": "Runs",
+                            "value": "96"
+                        },
+                        {
+                            "dataField": "ER",
+                            "description": "Earned runs",
+                            "value": "83"
+                        },
+                        {
+                            "dataField": "SV",
+                            "description": "Saves",
+                            "value": "1"
+                        },
+                        {
+                            "dataField": "HLD",
+                            "description": "Holds",
+                            "value": "0"
+                        },
+                        {
+                            "dataField": "BLSV",
+                            "description": "Blown Saves",
+                            "value": "0"
+                        }
+                    ],
+                    "carrerStats": [
+                        {
+                            "dataField": "GP",
+                            "description": "Games Played",
+                            "value": "173"
+                        },
+                        {
+                            "dataField": "GS",
+                            "description": "Games Started",
+                            "value": "172"
+                        },
+                        {
+                            "dataField": "W",
+                            "description": "Wins",
+                            "value": "59"
+                        },
+                        {
+                            "dataField": "L",
+                            "description": "Losses",
+                            "value": "45"
+                        },
+                        {
+                            "dataField": "W%",
+                            "description": "Win Percentage",
+                            "value": ".567"
+                        },
+                        {
+                            "dataField": "WAR",
+                            "description": "Wins Above Replacement",
+                            "value": "--"
+                        },
+                        {
+                            "dataField": "ERA",
+                            "description": "Earned Run Average",
+                            "value": "4.00"
+                        },
+                        {
+                            "dataField": "WHIP",
+                            "description": "Walks Plus Hits Per Inning Pitched",
+                            "value": "1.22"
+                        },
+                        {
+                            "dataField": "IP",
+                            "description": "Innings pitched",
+                            "value": "942.0"
+                        },
+                        {
+                            "dataField": "K",
+                            "description": "Strikeouts",
+                            "value": "850"
+                        },
+                        {
+                            "dataField": "BB",
+                            "description": "Walks",
+                            "value": "234"
+                        },
+                        {
+                            "dataField": "K/BB",
+                            "description": "Strikeout To Walk Ratio",
+                            "value": "3.6"
+                        },
+                        {
+                            "dataField": "H",
+                            "description": "Hits",
+                            "value": "918"
+                        },
+                        {
+                            "dataField": "R",
+                            "description": "Runs",
+                            "value": "449"
+                        },
+                        {
+                            "dataField": "ER",
+                            "description": "Earned runs",
+                            "value": "419"
+                        },
+                        {
+                            "dataField": "SV",
+                            "description": "Saves",
+                            "value": "1"
+                        },
+                        {
+                            "dataField": "HLD",
+                            "description": "Holds",
+                            "value": "0"
+                        },
+                        {
+                            "dataField": "BLSV",
+                            "description": "Blown Saves",
+                            "value": "0"
+                        }
+                    ],
+                    "currentEra": 4.84,
+                    "carrerEra": 4,
+                    "tendencia": "Neutral",
+                    "finalEra": 4.42
+                }
+            ]
+        },
+        "selection": 1,
+        "expectedWinner": "CHICubs",
+        "diffRatio": 0.07822222222222225,
+        "totalRunsExpectedInGame": 9.15980506822612,
+        "bestPitcher": "CHICubs",
+        "bestBatting": "CHICubs",
+        "bestScoringAvg": "CHICubs",
+        "bestRecevingAvg": "CHICubs",
+        "battingAvgDiff": 0.018222222222222195,
+        "eraDiff": 0.06000000000000005,
+        "gameExpectedResult": {
+            "expectedWinnerF5": "CHICubs",
+            "resultTypeF5": "Winner",
+            "awayRunsF5": 4.42,
+            "homeRunsF5": 5.91,
+            "runsDiffF5": 1,
+            "expectedFinalWinner": "CHICubs",
+            "resultTypeFinal": "Winner",
+            "awayFinalExpectedRuns": 7.1472727272727266,
+            "homeFinalExpectedRuns": 10.21,
+            "finalHandicapExpected": 3,
+            "finalTotalRunsExpected": 17.35727272727273
+        },
+        "isConfidentExpectedWinner": true,
+        "isDifficultOpponent": false
+    }
+]

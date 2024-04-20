@@ -1,0 +1,130 @@
+[
+    {
+        "game": "ARI Diamondbacks @ SF Giants",
+        "seriesRunsEx": 9.5,
+        "pitcherBatterRunsEx": 23.395,
+        "confidenceLevel": 16.447499999999998,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ARIDiamondbacks",
+            "pitcherBatterFinalHandicap": 9,
+            "pitcherBatterAwayExRuns": 16.36,
+            "pitcherBatterHomeExRuns": 7.035,
+            "seriesExWinner": "ARIDiamondbacks",
+            "seriesConfidenceRanking": 21,
+            "seriesExpectedWinnerRuns": 5.3,
+            "seriesExpectedLoserRuns": 4.2
+        }
+    },
+    {
+        "game": "TEX Rangers @ ATL Braves",
+        "seriesRunsEx": 11,
+        "pitcherBatterRunsEx": 17.81888888888889,
+        "confidenceLevel": 14.409444444444444,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ATLBraves",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.468888888888889,
+            "pitcherBatterHomeExRuns": 10.35,
+            "seriesExWinner": "ATLBraves",
+            "seriesConfidenceRanking": 14,
+            "seriesExpectedWinnerRuns": 6.352941176470588,
+            "seriesExpectedLoserRuns": 4.647058823529412
+        }
+    },
+    {
+        "game": "BOS Red @ PIT Pirates",
+        "seriesRunsEx": 9.092105263157894,
+        "pitcherBatterRunsEx": 18.665,
+        "confidenceLevel": 13.878552631578946,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BOSRed",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 11.14,
+            "pitcherBatterHomeExRuns": 7.525,
+            "seriesExWinner": "PITPirates",
+            "seriesConfidenceRanking": 8,
+            "seriesExpectedWinnerRuns": 4.842105263157895,
+            "seriesExpectedLoserRuns": 4.25
+        }
+    },
+    {
+        "game": "SEA Mariners @ COL Rockies",
+        "seriesRunsEx": 10.157894736842106,
+        "pitcherBatterRunsEx": 16.90929292929293,
+        "confidenceLevel": 13.533593833067519,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "COLRockies",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.111111111111111,
+            "pitcherBatterHomeExRuns": 9.798181818181819,
+            "seriesExWinner": "SEAMariners",
+            "seriesConfidenceRanking": 35,
+            "seriesExpectedWinnerRuns": 6.157894736842105,
+            "seriesExpectedLoserRuns": 4
+        }
+    },
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "seriesRunsEx": 9.2953216374269,
+        "pitcherBatterRunsEx": 17.35727272727273,
+        "confidenceLevel": 13.326297182349816,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.1472727272727266,
+            "pitcherBatterHomeExRuns": 10.21,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 57,
+            "seriesExpectedWinnerRuns": 5.611111111111111,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "MIL Brewers @ STL Cardinals",
+        "seriesRunsEx": 9.44891640866873,
+        "pitcherBatterRunsEx": 14.61,
+        "confidenceLevel": 12.029458204334365,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MILBrewers",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 9.26,
+            "pitcherBatterHomeExRuns": 5.35,
+            "seriesExWinner": "MILBrewers",
+            "seriesConfidenceRanking": 36,
+            "seriesExpectedWinnerRuns": 5.764705882352941,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "HOU Astros @ WAS Nationals",
+        "seriesRunsEx": 9.85,
+        "pitcherBatterRunsEx": 11.946111111111112,
+        "confidenceLevel": 10.898055555555555,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "WASNationals",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.5600000000000005,
+            "pitcherBatterHomeExRuns": 6.386111111111111,
+            "seriesExWinner": "WASNationals",
+            "seriesConfidenceRanking": 11,
+            "seriesExpectedWinnerRuns": 5.5,
+            "seriesExpectedLoserRuns": 4.35
+        }
+    },
+    {
+        "game": "TOR Blue @ SD Padres",
+        "seriesRunsEx": 9.032581453634085,
+        "pitcherBatterRunsEx": 12.623333333333333,
+        "confidenceLevel": 10.82795739348371,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "TORBlue",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 6.756666666666666,
+            "pitcherBatterHomeExRuns": 5.866666666666667,
+            "seriesExWinner": "SDPadres",
+            "seriesConfidenceRanking": 30,
+            "seriesExpectedWinnerRuns": 5.190476190476191,
+            "seriesExpectedLoserRuns": 3.8421052631578947
+        }
+    }
+]

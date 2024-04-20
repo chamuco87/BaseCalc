@@ -1,0 +1,144 @@
+{
+    "date": "April14th",
+    "totalPicksBets": 13,
+    "totalPicksBetsWin": 7,
+    "totalPicksBetsLost": 6,
+    "otherTotalPickWin": 4,
+    "otherTotalPickLost": 1,
+    "totalWinBetsOverall": 11,
+    "totalLostBetsOverall": 7,
+    "otherBets": 5,
+    "totalBetsOverall": 18,
+    "totalWinPercentage": 61.111111111111114,
+    "totalLostPercentage": 38.888888888888886,
+    "totalPicksWinPercentage": 53.84615384615385,
+    "totalPicksLostPercentage": 46.15384615384615,
+    "MLWinPercentage": 33.333333333333336,
+    "MLLostPercentage": 66.66666666666667,
+    "OverWinPercentage": 66.66666666666667,
+    "OverLostPercentage": 33.333333333333336,
+    "UnderWinPercentage": 0,
+    "UnderLostPercentage": 100,
+    "picksAndResults": [
+        {
+            "betType": "ML",
+            "game": "CIN Reds @ CHI White",
+            "teamName": "CINReds",
+            "isWin": "Win",
+            "result": "W11-4"
+        },
+        {
+            "betType": "ML",
+            "game": "KC Royals @ NY Mets",
+            "teamName": "KCRoyals",
+            "isWin": "Lost",
+            "result": "L2-1"
+        },
+        {
+            "betType": "ML",
+            "game": "TEX Rangers @ HOU Astros",
+            "teamName": "TEXRangers",
+            "isWin": "Lost",
+            "result": "L8-5"
+        },
+        {
+            "betType": "Over",
+            "game": "SD Padres @ LA Dodgers",
+            "isWin": "Win",
+            "totalRuns": 9
+        },
+        {
+            "betType": "Over",
+            "game": "COL Rockies @ TOR Blue",
+            "isWin": "Lost",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Over",
+            "game": "MIL Brewers @ BAL Orioles",
+            "isWin": "Win",
+            "totalRuns": 10
+        },
+        {
+            "betType": "Over",
+            "game": "TEX Rangers @ HOU Astros",
+            "isWin": "Win",
+            "totalRuns": 13
+        },
+        {
+            "betType": "Over",
+            "game": "ATL Braves @ MIA Marlins",
+            "isWin": "Win",
+            "totalRuns": 16
+        },
+        {
+            "betType": "Over",
+            "game": " LA Angels @ BOS Red",
+            "isWin": "Win",
+            "totalRuns": 9
+        },
+        {
+            "betType": "Over",
+            "game": "STL Cardinals @ ARI Diamondbacks",
+            "isWin": "Lost",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Over",
+            "game": "PIT Pirates @ PHI Phillies",
+            "isWin": "Win",
+            "totalRuns": 11
+        },
+        {
+            "betType": "Over",
+            "game": "CHI Cubs @ SEA Mariners",
+            "isWin": "Lost",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Under",
+            "game": "SF Giants @ TB Rays",
+            "isWin": "Lost",
+            "totalRuns": 13
+        }
+    ],
+    "otherTotalWinPercentage": 80,
+    "otherTotalLostPercentage": 20,
+    "otherPicksAndResults": [
+        {
+            "betType": "ML",
+            "game": "PIT Pirates @ PHI Phillies",
+            "teamName": "PITPirates",
+            "isWin": "Win",
+            "result": "W9-2"
+        },
+        {
+            "betType": "ML",
+            "game": "ATL Braves @ MIA Marlins",
+            "teamName": "ATLBraves",
+            "isWin": "Win",
+            "result": "W9-7"
+        },
+        {
+            "betType": "ML",
+            "game": "CHI Cubs @ SEA Mariners",
+            "teamName": "CHICubs",
+            "isWin": "Win",
+            "result": "W3-2"
+        },
+        {
+            "betType": "ML",
+            "game": "SD Padres @ LA Dodgers",
+            "teamName": "LADodgers",
+            "isWin": "Lost",
+            "result": "L6-3"
+        },
+        {
+            "betType": "ML",
+            "game": " LA Angels @ BOS Red",
+            "teamName": "BOSRed",
+            "isWin": "Win",
+            "result": "W5-4"
+        }
+    ]
+}

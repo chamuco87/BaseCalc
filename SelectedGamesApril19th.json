@@ -1,0 +1,137 @@
+[
+    {
+        "game": "OAK Athletics @ CLE Guardians",
+        "expectedWinner": "CLEGuardians",
+        "overallConfidence": 64,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CLEGuardians",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 8.048181818181819,
+            "pitcherBatterHomeExRuns": 8.305,
+            "seriesExWinner": "CLEGuardians",
+            "seriesConfidenceRanking": 64,
+            "seriesExpectedWinnerRuns": 5.368421052631579,
+            "seriesExpectedLoserRuns": 2.9473684210526314
+        }
+    },
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "expectedWinner": "CHICubs",
+        "overallConfidence": 60,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.1472727272727266,
+            "pitcherBatterHomeExRuns": 10.21,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 57,
+            "seriesExpectedWinnerRuns": 5.611111111111111,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "CHI White @ PHI Phillies",
+        "expectedWinner": "PHIPhillies",
+        "overallConfidence": 59,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PHIPhillies",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 3.2444444444444445,
+            "pitcherBatterHomeExRuns": 5.911666666666667,
+            "seriesExWinner": "PHIPhillies",
+            "seriesConfidenceRanking": 56,
+            "seriesExpectedWinnerRuns": 5.111111111111111,
+            "seriesExpectedLoserRuns": 2.111111111111111
+        }
+    },
+    {
+        "game": "TB Rays @ NY Yankees",
+        "expectedWinner": "NYYankees",
+        "overallConfidence": 44,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 5.6923076923076925,
+            "pitcherBatterHomeExRuns": 11.126666666666667,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 39,
+            "seriesExpectedWinnerRuns": 5.05,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "MIL Brewers @ STL Cardinals",
+        "expectedWinner": "MILBrewers",
+        "overallConfidence": 40,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MILBrewers",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 9.26,
+            "pitcherBatterHomeExRuns": 5.35,
+            "seriesExWinner": "MILBrewers",
+            "seriesConfidenceRanking": 36,
+            "seriesExpectedWinnerRuns": 5.764705882352941,
+            "seriesExpectedLoserRuns": 3.6842105263157894
+        }
+    },
+    {
+        "game": "ARI Diamondbacks @ SF Giants",
+        "expectedWinner": "ARIDiamondbacks",
+        "overallConfidence": 30,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ARIDiamondbacks",
+            "pitcherBatterFinalHandicap": 9,
+            "pitcherBatterAwayExRuns": 16.36,
+            "pitcherBatterHomeExRuns": 7.035,
+            "seriesExWinner": "ARIDiamondbacks",
+            "seriesConfidenceRanking": 21,
+            "seriesExpectedWinnerRuns": 5.3,
+            "seriesExpectedLoserRuns": 4.2
+        }
+    },
+    {
+        "game": "TEX Rangers @ ATL Braves",
+        "expectedWinner": "ATLBraves",
+        "overallConfidence": 17,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ATLBraves",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.468888888888889,
+            "pitcherBatterHomeExRuns": 10.35,
+            "seriesExWinner": "ATLBraves",
+            "seriesConfidenceRanking": 14,
+            "seriesExpectedWinnerRuns": 6.352941176470588,
+            "seriesExpectedLoserRuns": 4.647058823529412
+        }
+    },
+    {
+        "game": "HOU Astros @ WAS Nationals",
+        "expectedWinner": "WASNationals",
+        "overallConfidence": 12,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "WASNationals",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.5600000000000005,
+            "pitcherBatterHomeExRuns": 6.386111111111111,
+            "seriesExWinner": "WASNationals",
+            "seriesConfidenceRanking": 11,
+            "seriesExpectedWinnerRuns": 5.5,
+            "seriesExpectedLoserRuns": 4.35
+        }
+    },
+    {
+        "game": "NY Mets @ LA Dodgers",
+        "expectedWinner": "NYMets",
+        "overallConfidence": 6,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYMets",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 7.916666666666666,
+            "pitcherBatterHomeExRuns": 6.116666666666666,
+            "seriesExWinner": "NYMets",
+            "seriesConfidenceRanking": 4,
+            "seriesExpectedWinnerRuns": 4.833333333333333,
+            "seriesExpectedLoserRuns": 4.055555555555555
+        }
+    }
+]

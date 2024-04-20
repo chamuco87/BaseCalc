@@ -1,0 +1,224 @@
+[
+    {
+        "game": "ATL Braves @ HOU Astros",
+        "gameTime": "18:10",
+        "overUnder": {
+            "overRuns": "O 10.0",
+            "overOdd": "1.90",
+            "underRuns": "U 10.0",
+            "underOdd": "1.90"
+        },
+        "awayTeam": {
+            "awayTeam": "ATLBraves",
+            "awayId": "ATL",
+            "awayPitcher": "R Lopez",
+            "awayHandicapRuns": "-1.5",
+            "awayHandicapOdds": "2.35",
+            "awayML": "1.86",
+            "awayPitcherData": [
+                {
+                    "dataField": "GP",
+                    "description": "Games Played",
+                    "value": "12"
+                },
+                {
+                    "dataField": "GS",
+                    "description": "Games Started",
+                    "value": "0"
+                },
+                {
+                    "dataField": "W",
+                    "description": "Wins",
+                    "value": "1"
+                },
+                {
+                    "dataField": "L",
+                    "description": "Losses",
+                    "value": "0"
+                },
+                {
+                    "dataField": "W%",
+                    "description": "Win Percentage",
+                    "value": "1.000"
+                },
+                {
+                    "dataField": "WAR",
+                    "description": "Wins Above Replacement",
+                    "value": "0.8"
+                },
+                {
+                    "dataField": "ERA",
+                    "description": "Earned Run Average",
+                    "value": "0.00"
+                },
+                {
+                    "dataField": "WHIP",
+                    "description": "Walks Plus Hits Per Inning Pitched",
+                    "value": "0.82"
+                },
+                {
+                    "dataField": "IP",
+                    "description": "Innings pitched",
+                    "value": "11.0"
+                },
+                {
+                    "dataField": "K",
+                    "description": "Strikeouts",
+                    "value": "12"
+                },
+                {
+                    "dataField": "BB",
+                    "description": "Walks",
+                    "value": "4"
+                },
+                {
+                    "dataField": "K/BB",
+                    "description": "Strikeout To Walk Ratio",
+                    "value": "3.0"
+                },
+                {
+                    "dataField": "H",
+                    "description": "Hits",
+                    "value": "5"
+                },
+                {
+                    "dataField": "R",
+                    "description": "Runs",
+                    "value": "0"
+                },
+                {
+                    "dataField": "ER",
+                    "description": "Earned runs",
+                    "value": "0"
+                },
+                {
+                    "dataField": "SV",
+                    "description": "Saves",
+                    "value": "0"
+                },
+                {
+                    "dataField": "HLD",
+                    "description": "Holds",
+                    "value": "8"
+                },
+                {
+                    "dataField": "BLSV",
+                    "description": "Blown Saves",
+                    "value": "0"
+                }
+            ]
+        },
+        "homeTeam": {
+            "homeTeam": "HOUAstros",
+            "homeId": "HOU",
+            "homePitcher": "H Brown",
+            "homeHandicapRuns": "+1.5",
+            "homeHandicapOdds": "1.62",
+            "homeML": "1.95",
+            "homePitcherData": [
+                {
+                    "dataField": "GP",
+                    "description": "Games Played",
+                    "value": "31"
+                },
+                {
+                    "dataField": "GS",
+                    "description": "Games Started",
+                    "value": "29"
+                },
+                {
+                    "dataField": "W",
+                    "description": "Wins",
+                    "value": "11"
+                },
+                {
+                    "dataField": "L",
+                    "description": "Losses",
+                    "value": "13"
+                },
+                {
+                    "dataField": "W%",
+                    "description": "Win Percentage",
+                    "value": ".458"
+                },
+                {
+                    "dataField": "WAR",
+                    "description": "Wins Above Replacement",
+                    "value": "0.0"
+                },
+                {
+                    "dataField": "ERA",
+                    "description": "Earned Run Average",
+                    "value": "5.09"
+                },
+                {
+                    "dataField": "WHIP",
+                    "description": "Walks Plus Hits Per Inning Pitched",
+                    "value": "1.36"
+                },
+                {
+                    "dataField": "IP",
+                    "description": "Innings pitched",
+                    "value": "155.2"
+                },
+                {
+                    "dataField": "K",
+                    "description": "Strikeouts",
+                    "value": "178"
+                },
+                {
+                    "dataField": "BB",
+                    "description": "Walks",
+                    "value": "55"
+                },
+                {
+                    "dataField": "K/BB",
+                    "description": "Strikeout To Walk Ratio",
+                    "value": "3.2"
+                },
+                {
+                    "dataField": "H",
+                    "description": "Hits",
+                    "value": "157"
+                },
+                {
+                    "dataField": "R",
+                    "description": "Runs",
+                    "value": "94"
+                },
+                {
+                    "dataField": "ER",
+                    "description": "Earned runs",
+                    "value": "88"
+                },
+                {
+                    "dataField": "SV",
+                    "description": "Saves",
+                    "value": "0"
+                },
+                {
+                    "dataField": "HLD",
+                    "description": "Holds",
+                    "value": "0"
+                },
+                {
+                    "dataField": "BLSV",
+                    "description": "Blown Saves",
+                    "value": "0"
+                }
+            ]
+        },
+        "selection": 1,
+        "expectedWinner": "ATLBraves",
+        "diffRatio": 5.131555555555556,
+        "totalRunsExpectedInGame": 8.807777777777778,
+        "bestPitcher": "ATLBraves",
+        "bestBatting": "ATLBraves",
+        "bestScoringAvg": "ATLBraves",
+        "bestRecevingAvg": "ATLBraves",
+        "battingAvgDiff": 0.04155555555555557,
+        "eraDiff": 5.09,
+        "isConfidentExpectedWinner": true,
+        "isDifficultOpponent": false
+    }
+]

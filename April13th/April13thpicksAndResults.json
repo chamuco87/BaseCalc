@@ -1,0 +1,156 @@
+{
+    "date": "April13th",
+    "totalPicksBets": 17,
+    "totalPicksBetsWin": 6,
+    "totalPicksBetsLost": 11,
+    "otherTotalPickWin": 3,
+    "otherTotalPickLost": 0,
+    "totalWinBetsOverall": 9,
+    "totalLostBetsOverall": 11,
+    "otherBets": 3,
+    "totalBetsOverall": 20,
+    "totalWinPercentage": 45,
+    "totalLostPercentage": 55,
+    "totalPicksWinPercentage": 35.294117647058826,
+    "totalPicksLostPercentage": 64.70588235294117,
+    "MLWinPercentage": 0,
+    "MLLostPercentage": 100,
+    "OverWinPercentage": 28.571428571428573,
+    "OverLostPercentage": 71.42857142857143,
+    "UnderWinPercentage": 80,
+    "UnderLostPercentage": 20,
+    "picksAndResults": [
+        {
+            "betType": "ML",
+            "game": "ATL Braves @ MIA Marlins",
+            "teamName": "ATLBraves",
+            "isWin": "Lost",
+            "result": "L5-1"
+        },
+        {
+            "betType": "ML",
+            "game": "PIT Pirates @ PHI Phillies",
+            "teamName": "PITPirates",
+            "isWin": "Lost",
+            "result": "L4-3"
+        },
+        {
+            "betType": "ML",
+            "game": "TEX Rangers @ HOU Astros",
+            "teamName": "TEXRangers",
+            "isWin": "Lost",
+            "result": "L9-2"
+        },
+        {
+            "betType": "ML",
+            "game": "MIN Twins @ DET Tigers",
+            "teamName": "DETTigers",
+            "isWin": "Lost",
+            "result": "L4-1"
+        },
+        {
+            "betType": "ML",
+            "game": "MIN Twins @ DET Tigers",
+            "teamName": "DETTigers",
+            "isWin": "Lost",
+            "result": "L4-1"
+        },
+        {
+            "betType": "Over",
+            "game": "SD Padres @ LA Dodgers",
+            "isWin": "Lost",
+            "totalRuns": 7
+        },
+        {
+            "betType": "Over",
+            "game": "ATL Braves @ MIA Marlins",
+            "isWin": "Lost",
+            "totalRuns": 6
+        },
+        {
+            "betType": "Over",
+            "game": "PIT Pirates @ PHI Phillies",
+            "isWin": "Lost",
+            "totalRuns": 7
+        },
+        {
+            "betType": "Over",
+            "game": "STL Cardinals @ ARI Diamondbacks",
+            "isWin": "Lost",
+            "totalRuns": 6
+        },
+        {
+            "betType": "Over",
+            "game": "TEX Rangers @ HOU Astros",
+            "isWin": "Win",
+            "totalRuns": 11
+        },
+        {
+            "betType": "Over",
+            "game": "MIL Brewers @ BAL Orioles",
+            "isWin": "Win",
+            "totalRuns": 16
+        },
+        {
+            "betType": "Over",
+            "game": "COL Rockies @ TOR Blue",
+            "isWin": "Lost",
+            "totalRuns": 8
+        },
+        {
+            "betType": "Under",
+            "game": "MIN Twins @ DET Tigers",
+            "isWin": "Win",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Under",
+            "game": "WAS Nationals @ OAK Athletics",
+            "isWin": "Win",
+            "totalRuns": 4
+        },
+        {
+            "betType": "Under",
+            "game": "MIN Twins @ DET Tigers",
+            "isWin": "Win",
+            "totalRuns": 5
+        },
+        {
+            "betType": "Under",
+            "game": "SF Giants @ TB Rays",
+            "isWin": "Lost",
+            "totalRuns": 13
+        },
+        {
+            "betType": "Under",
+            "game": "CHI Cubs @ SEA Mariners",
+            "isWin": "Win",
+            "totalRuns": 5
+        }
+    ],
+    "otherTotalWinPercentage": 100,
+    "otherTotalLostPercentage": 0,
+    "otherPicksAndResults": [
+        {
+            "betType": "ML",
+            "game": "KC Royals @ NY Mets",
+            "teamName": "KCRoyals",
+            "isWin": "Win",
+            "result": "W11-7"
+        },
+        {
+            "betType": "ML",
+            "game": "CIN Reds @ CHI White",
+            "teamName": "CINReds",
+            "isWin": "Win",
+            "result": "W5-0"
+        },
+        {
+            "betType": "ML",
+            "game": "CHI Cubs @ SEA Mariners",
+            "teamName": "CHICubs",
+            "isWin": "Win",
+            "result": "W4-1"
+        }
+    ]
+}
