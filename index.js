@@ -49,7 +49,7 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April19th";
+        var selectedDate = "April20th";
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -69,12 +69,12 @@ var teams = [
         //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate);
 
-        //await consolidateAlgorithmResults(selectedDate);
+        await consolidateAlgorithmResults(selectedDate);
 
         //await getScheduleData(selectedDate);
         //await getResults(selectedDate);
 
-        await getBestPitcherOfTheDay(selectedDate);
+        //await getBestPitcherOfTheDay(selectedDate);
 
     } 
     catch(Ex){
@@ -162,23 +162,23 @@ async function consolidateAlgorithmResults(date)
                 {
                     if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                     {
-                        homeConfidentExpectedWinners.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                     }
                     else{
-                        awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                     }
                 }
                 else{
                     if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                     {
-                        homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                     }
                     else{
-                        awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                     }
                 }
             }
@@ -189,12 +189,12 @@ async function consolidateAlgorithmResults(date)
             if(seriesWinnerGame.expectedTotalScore >= 9 && pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected >= 9)
             {
                 var confidenceLevel = (seriesWinnerGame.expectedTotalScore + pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected)/2;
-                overSelectedGames.push({game:pitcherBatterGame.game, seriesRunsEx: seriesWinnerGame.expectedTotalScore, pitcherBatterRunsEx: pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected, confidenceLevel:confidenceLevel, gameAnalisysDetails:gameAnalisysDetails  });
+                overSelectedGames.push({game:pitcherBatterGame.game, time:pitcherBatterGame.time  ,seriesRunsEx: seriesWinnerGame.expectedTotalScore, pitcherBatterRunsEx: pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected, confidenceLevel:confidenceLevel, gameAnalisysDetails:gameAnalisysDetails  });
             }
             else if(seriesWinnerGame.expectedTotalScore < 8 && pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected < 8)
             {
                 var confidenceLevel = (seriesWinnerGame.expectedTotalScore + pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected)/2;
-                underSelectedGames.push({game:pitcherBatterGame.game, seriesRunsEx: seriesWinnerGame.expectedTotalScore, pitcherBatterRunsEx: pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected, confidenceLevel:confidenceLevel, gameAnalisysDetails:gameAnalisysDetails  });
+                underSelectedGames.push({game:pitcherBatterGame.game, time:pitcherBatterGame.time  ,seriesRunsEx: seriesWinnerGame.expectedTotalScore, pitcherBatterRunsEx: pitcherBatterGame.gameExpectedResult.finalTotalRunsExpected, confidenceLevel:confidenceLevel, gameAnalisysDetails:gameAnalisysDetails  });
             }
 
         }

@@ -1,0 +1,178 @@
+[
+    {
+        "game": "OAK Athletics @ CLE Guardians",
+        "gameTime": "16:10",
+        "expectedWinner": "CLEGuardians",
+        "overallConfidence": 85,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CLEGuardians",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 6.969090909090909,
+            "pitcherBatterHomeExRuns": 10.85,
+            "seriesExWinner": "CLEGuardians",
+            "seriesConfidenceRanking": 81,
+            "seriesExpectedWinnerRuns": 5.6,
+            "seriesExpectedLoserRuns": 2.9
+        }
+    },
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "gameTime": "17:40",
+        "expectedWinner": "CHICubs",
+        "overallConfidence": 83,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 15,
+            "pitcherBatterAwayExRuns": 2.5833333333333335,
+            "pitcherBatterHomeExRuns": 17.9,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 68,
+            "seriesExpectedWinnerRuns": 5.7368421052631575,
+            "seriesExpectedLoserRuns": 3.65
+        }
+    },
+    {
+        "game": "CHI White @ PHI Phillies",
+        "gameTime": "16:05",
+        "expectedWinner": "PHIPhillies",
+        "overallConfidence": 76,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PHIPhillies",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 4.664444444444444,
+            "pitcherBatterHomeExRuns": 9.563333333333334,
+            "seriesExWinner": "PHIPhillies",
+            "seriesConfidenceRanking": 71,
+            "seriesExpectedWinnerRuns": 5.2105263157894735,
+            "seriesExpectedLoserRuns": 2
+        }
+    },
+    {
+        "game": "MIA Marlins @ CHI Cubs",
+        "gameTime": "12:20",
+        "expectedWinner": "CHICubs",
+        "overallConfidence": 75,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 7,
+            "pitcherBatterAwayExRuns": 5.148333333333333,
+            "pitcherBatterHomeExRuns": 12.05,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 68,
+            "seriesExpectedWinnerRuns": 5.7368421052631575,
+            "seriesExpectedLoserRuns": 3.65
+        }
+    },
+    {
+        "game": "ARI Diamondbacks @ SF Giants",
+        "gameTime": "14:05",
+        "expectedWinner": "ARIDiamondbacks",
+        "overallConfidence": 58,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ARIDiamondbacks",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 9.135,
+            "pitcherBatterHomeExRuns": 5.4399999999999995,
+            "seriesExWinner": "ARIDiamondbacks",
+            "seriesConfidenceRanking": 54,
+            "seriesExpectedWinnerRuns": 5.857142857142857,
+            "seriesExpectedLoserRuns": 4.0476190476190474
+        }
+    },
+    {
+        "game": "TB Rays @ NY Yankees",
+        "gameTime": "11:05",
+        "expectedWinner": "NYYankees",
+        "overallConfidence": 47,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 6.021153846153846,
+            "pitcherBatterHomeExRuns": 8.76,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 44,
+            "seriesExpectedWinnerRuns": 5.0476190476190474,
+            "seriesExpectedLoserRuns": 3.65
+        }
+    },
+    {
+        "game": "LA Angels @ CIN Reds",
+        "gameTime": "16:40",
+        "expectedWinner": "CINReds",
+        "overallConfidence": 30,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CINReds",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 8.015555555555554,
+            "pitcherBatterHomeExRuns": 8.719545454545454,
+            "seriesExWinner": "CINReds",
+            "seriesConfidenceRanking": 29,
+            "seriesExpectedWinnerRuns": 5.368421052631579,
+            "seriesExpectedLoserRuns": 4.35
+        }
+    },
+    {
+        "game": "DET Tigers @ MIN Twins",
+        "gameTime": "12:10",
+        "expectedWinner": "DETTigers",
+        "overallConfidence": 26,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "DETTigers",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 8.236666666666666,
+            "pitcherBatterHomeExRuns": 5.475555555555555,
+            "seriesExWinner": "DETTigers",
+            "seriesConfidenceRanking": 23,
+            "seriesExpectedWinnerRuns": 4.611111111111111,
+            "seriesExpectedLoserRuns": 3.4444444444444446
+        }
+    },
+    {
+        "game": "BAL Orioles @ KC Royals",
+        "gameTime": "17:10",
+        "expectedWinner": "KCRoyals",
+        "overallConfidence": 25,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "KCRoyals",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.18,
+            "pitcherBatterHomeExRuns": 5.755,
+            "seriesExWinner": "KCRoyals",
+            "seriesConfidenceRanking": 24,
+            "seriesExpectedWinnerRuns": 5.05,
+            "seriesExpectedLoserRuns": 2.8
+        }
+    },
+    {
+        "game": "NY Mets @ LA Dodgers",
+        "gameTime": "14:05",
+        "expectedWinner": "NYMets",
+        "overallConfidence": 20,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYMets",
+            "pitcherBatterFinalHandicap": 7,
+            "pitcherBatterAwayExRuns": 9.89,
+            "pitcherBatterHomeExRuns": 2.666666666666667,
+            "seriesExWinner": "NYMets",
+            "seriesConfidenceRanking": 13,
+            "seriesExpectedWinnerRuns": 5.052631578947368,
+            "seriesExpectedLoserRuns": 4.052631578947368
+        }
+    },
+    {
+        "game": "BOS Red @ PIT Pirates",
+        "gameTime": "14:05",
+        "expectedWinner": "BOSRed",
+        "overallConfidence": 12,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BOSRed",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 8.3,
+            "pitcherBatterHomeExRuns": 3.6018181818181816,
+            "seriesExWinner": "BOSRed",
+            "seriesConfidenceRanking": 7,
+            "seriesExpectedWinnerRuns": 4.45,
+            "seriesExpectedLoserRuns": 3.9047619047619047
+        }
+    }
+]
