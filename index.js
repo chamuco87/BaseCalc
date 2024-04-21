@@ -49,7 +49,8 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April20th";
+        var selectedDate = "April21th";
+        var descriptiveDate = "2024-04-21"
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -64,13 +65,14 @@ var teams = [
         //await getMoreReceivingTeams(selectedDate);
         //await evaluateGames(selectedDate);
         //await sortBetterAvgs(selectedDate);
-        //await filterConsistentPicks(selectedDate);
-
-        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+        //await filterConsistentPicks(selectedDate)
+        //
+        await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate);
 
+        //await getCoversWinPercentages(selectedDate, descriptiveDate);
         await consolidateAlgorithmResults(selectedDate);
-
+//
         //await getScheduleData(selectedDate);
         //await getResults(selectedDate);
 
@@ -82,6 +84,42 @@ var teams = [
     } finally {
       await driver.quit();
     }
+
+async function getCoversWinPercentages(date, descDate)
+{
+    var winPercentages = {};
+    var teamWinPercentages = [];
+    await driver.get("https://www.covers.com/sports/mlb/matchups?selectedDate="+descDate);
+    await driver.manage().setTimeouts({ implicit: 1000 });
+    await driver.executeScript(await GetWinPercentagesFromCovers()).then(function(return_value) {
+        winPercentages = JSON.parse(return_value);
+        for (let index = 0; index < winPercentages.length; index++) {
+            const game = winPercentages[index];
+            if(game.awayTeam.winPercentage != "nodata")
+            {
+                game.awayTeam.percentage = parseInt(game.awayTeam.winPercentage.replace("%",""));
+                teamWinPercentages.push({team: game.awayTeam.awayTeam, teamWinPercentage: game.awayTeam.percentage, field:'away'});
+            }
+            else{
+                game.awayTeam.percentage = 0;
+                teamWinPercentages.push({team: game.awayTeam.awayTeam, teamWinPercentage: game.awayTeam.percentage, field:'away'});
+            }
+            
+            if(game.homeTeam.winPercentage != "nodata")
+            {
+                game.homeTeam.percentage = parseInt(game.homeTeam.winPercentage.replace("%",""));
+                teamWinPercentages.push({team: game.homeTeam.homeTeam, teamWinPercentage: game.homeTeam.percentage, field:'home'});
+            }
+            else{
+                game.homeTeam.percentage = 0;
+                teamWinPercentages.push({team: game.homeTeam.homeTeam, teamWinPercentage: game.homeTeam.percentage, field:'home'});
+            }
+        }
+    });
+    var coversWinPercentageSortedv = await sorting(teamWinPercentages, "teamWinPercentage", "DESC");
+    await save(date+"CoversWinPercentagesSorted", coversWinPercentageSortedv, function(){}, "replace");
+    await save(date+"CoversWinPercentages", winPercentages, function(){}, "replace");
+}
 
 async function getBestPitcherOfTheDay(date)
 {
@@ -117,6 +155,7 @@ if(pitcherBatterGame.awayTeam.awayPitcherData && pitcherBatterGame.homeTeam.home
 
 
     var bestEraPitcher = await sorting(allPitchers, "era", "ASC");
+    await save(date+"BestPitcherForProps", bestEraPitcher, function(){}, "replace");
     var stopHere = "";
 }
 
@@ -124,6 +163,7 @@ async function consolidateAlgorithmResults(date)
 {
     var seriesWinnersResults = await load(date+"SeriesWinners");
     var pitcherBatterResults = await load(date);
+    var coversWinPredictions = await load(date+"CoversWinPercentages");
     var homeConfidentExpectedWinners = [];
     var awayConfidentExpectedWinners = [];
     var homeNoConfidentExpectedWinners = [];
@@ -131,6 +171,7 @@ async function consolidateAlgorithmResults(date)
     var noConclusiveGames = [];
 
     var selectedGames = [];
+    var parlayGames = [];
     var overSelectedGames = [];
     var underSelectedGames = [];
 
@@ -141,7 +182,29 @@ async function consolidateAlgorithmResults(date)
             return item.game.indexOf(pitcherBatterGame.game)>=0;         
             })[0];
 
-        
+        var awayCoversWinPercentage = coversWinPredictions.filter(function(item){
+            return item.awayTeam.awayTeam.indexOf(pitcherBatterGame.awayTeam.awayId)>=0;         
+            })[0];
+
+        if(awayCoversWinPercentage)
+        {
+            awayCoversWinPercentage = awayCoversWinPercentage.awayTeam.awayTeam + "," +awayCoversWinPercentage.awayTeam.winPercentage;
+        }
+        else{
+            awayCoversWinPercentage = "nodata";
+        }
+
+        var homeCoversWinPercentage = coversWinPredictions.filter(function(item){
+            return item.homeTeam.homeTeam.indexOf(pitcherBatterGame.homeTeam.homeId)>=0;         
+            })[0];
+
+        if(homeCoversWinPercentage)
+        {
+            homeCoversWinPercentage = homeCoversWinPercentage.homeTeam.homeTeam + "," +homeCoversWinPercentage.homeTeam.winPercentage;
+        }
+        else{
+            homeCoversWinPercentage = "nodata";
+        }
 
         if(pitcherBatterGame.gameExpectedResult && seriesWinnerGame)
         {
@@ -150,35 +213,74 @@ async function consolidateAlgorithmResults(date)
                 pitcherBatterFinalHandicap: pitcherBatterGame.gameExpectedResult.finalHandicapExpected,
                 pitcherBatterAwayExRuns : pitcherBatterGame.gameExpectedResult.awayFinalExpectedRuns,
                 pitcherBatterHomeExRuns : pitcherBatterGame.gameExpectedResult.homeFinalExpectedRuns,
+                pitcherBatterExF5Winner : pitcherBatterGame.gameExpectedResult.expectedWinnerF5,
+                pitcherBatterExF5Diff: pitcherBatterGame.gameExpectedResult.runsDiffF5,
                 seriesExWinner: seriesWinnerGame.seriesExpectedWinner,
                 seriesConfidenceRanking: seriesWinnerGame.confidenceRanking,
                 seriesExpectedWinnerRuns: seriesWinnerGame.expectedWinnerRuns,
-                seriesExpectedLoserRuns: seriesWinnerGame.expectedLoserRuns
+                seriesExpectedLoserRuns: seriesWinnerGame.expectedLoserRuns,
+                awayCoversWinPercentage: awayCoversWinPercentage,
+                homeCoversWinPercentage: homeCoversWinPercentage
             };
             if(pitcherBatterGame.gameExpectedResult.expectedFinalWinner == seriesWinnerGame.seriesExpectedWinner)
             {
-                var overallConfidence = pitcherBatterGame.gameExpectedResult.finalHandicapExpected + seriesWinnerGame.confidenceRanking;
-                if(seriesWinnerGame.isConsistent)
+                if(pitcherBatterGame.gameExpectedResult.expectedFinalWinner == pitcherBatterGame.gameExpectedResult.expectedWinnerF5)
                 {
-                    if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                    var overallConfidence = pitcherBatterGame.gameExpectedResult.finalHandicapExpected + seriesWinnerGame.confidenceRanking;
+                    if(seriesWinnerGame.isConsistent)
                     {
-                        homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                        {
+                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
+                        else{
+                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
                     }
                     else{
-                        awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                        {
+                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
+                        else{
+                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
                     }
                 }
                 else{
-                    if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                    var overallConfidence = pitcherBatterGame.gameExpectedResult.finalHandicapExpected + seriesWinnerGame.confidenceRanking;
+                    if(seriesWinnerGame.isConsistent)
                     {
-                        homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                        {
+                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
+                        else{
+                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
                     }
                     else{
-                        awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                        selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
+                        {
+                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
+                        else{
+                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                        }
                     }
                 }
             }
@@ -199,18 +301,22 @@ async function consolidateAlgorithmResults(date)
 
         }
         else if(pitcherBatterGame.gameExpectedResult){
-            noConclusiveGames.push(pitcherBatterGame.gameExpectedResult);
+            noConclusiveGames.push({gameExpectedResult: pitcherBatterGame.gameExpectedResult, awayCoversWinPercentage: awayCoversWinPercentage, homeCoversWinPercentage:homeCoversWinPercentage });
         }
         else{
-            noConclusiveGames.push(seriesWinnerGame);
+            noConclusiveGames.push({gameExpectedResult: seriesWinnerGame, awayCoversWinPercentage: awayCoversWinPercentage, homeCoversWinPercentage:homeCoversWinPercentage });
         }
-        
+
+
     }
 
+    parlayGames = await sorting(parlayGames, "overallConfidence", "DESC");
     selectedGames = await sorting(selectedGames, "overallConfidence", "DESC");
     overSelectedGames = await sorting(overSelectedGames, "confidenceLevel", "DESC");
     underSelectedGames = await sorting(underSelectedGames, "confidenceLevel", "ASC");
 
+    
+    await save("ParlayGames"+date, parlayGames, function(){}, "replace");
     await save("SelectedGames"+date, selectedGames, function(){}, "replace");
     await save("overSelectedGames"+date, overSelectedGames, function(){}, "replace");
     await save("underSelectedGames"+date, underSelectedGames, function(){}, "replace");
@@ -512,7 +618,7 @@ async function AlgoSeriesWinnerBasedOnResultAndPattern(date)
         }
 
         
-        var winsAndRunsCalcResult = (winningExpectedWinner == runsExpectedWinner) ? 
+        var winsAndRunsCalcResult = (winningExpectedWinner == runsExpectedWinner && WinningRankingWithDiff.WinningRankingBest == winningExpectedWinner) ? 
         {   game: game.game,
             seriesExpectedWinner: runsExpectedWinner, isConsistent: true, confidenceRanking: confidenceRanking,
         analysisData: {winningExpectedWinner:winningExpectedWinner, 
@@ -1625,6 +1731,58 @@ async function GetPitcherData()
 
 }
 
+
+async function GetWinPercentagesFromCovers()
+{
+
+    var script = 'var allGames = document.getElementsByClassName("cmg_matchup_game_box  cmg_game_data");';
+
+    script += 'var coversRecords = [];';
+    
+    script += 'for(var i =0; i< allGames.length; i++)';
+    script += '{';
+        script += 'const game = allGames[i];';
+        script += 'var awayTeam = game.getElementsByClassName("cmg_matchup_list_column_1")[0];';
+        script += 'var homeTeam = game.getElementsByClassName("cmg_matchup_list_column_3")[0];';
+        
+        script += 'var awayTeamName = awayTeam.getElementsByClassName("cmg_team_name")[0].innerText;';
+        script += 'awayTeamName = awayTeamName.split(" ")[0];';
+        script += 'while(awayTeamName.indexOf(" ") >= 0){';
+            script += 'awayTeamName = awayTeamName.replace(" ", "");';
+        script += '}';
+        script += 'console.log(awayTeamName);';
+        
+        
+        script += 'var homeTeamName = homeTeam.getElementsByClassName("cmg_team_name")[0].innerText;';
+        script += 'homeTeamName = homeTeamName.split(" ")[1];';
+        script += 'while(homeTeamName.indexOf(" ") >= 0){';
+            script += 'homeTeamName = homeTeamName.replace(" ", "");';
+        script += '}';
+        script += 'console.log(homeTeamName);';
+        
+        
+        script += 'var awayWinPercentage = "no data";';
+        script += 'if(awayTeam.getElementsByClassName("cmg_matchup_list_odds_value").length > 0)';
+        script += 'awayWinPercentage = awayTeam.getElementsByClassName("cmg_matchup_list_odds_value")[0].innerText;';
+        script += 'if(awayWinPercentage.indexOf(" ") >= 0){';
+            script += 'awayWinPercentage = awayWinPercentage.replace(" ", "");';
+        script += '}';
+        
+        script += 'var homeWinPercentage = "no data";';
+        script += 'if(homeTeam.getElementsByClassName("cmg_matchup_list_odds_value").length > 0)';
+        script += 'homeWinPercentage = homeTeam.getElementsByClassName("cmg_matchup_list_odds_value")[0].innerText;';
+        script += 'if(homeWinPercentage.indexOf(" ") >= 0){';
+            script += 'homeWinPercentage = homeWinPercentage.replace(" ", "");';
+        script += '}';
+        
+        script += 'var gameRecord= {game:awayTeamName + " @ "+ homeTeamName, time:"", awayTeam:{awayTeam: awayTeamName, winPercentage: awayWinPercentage}, homeTeam:{homeTeam: homeTeamName, winPercentage: homeWinPercentage}};';
+        
+        script += 'coversRecords.push(gameRecord);';
+    script += '}';
+    script += 'return JSON.stringify(coversRecords);';
+
+    return script;
+}
 
 async function GetPitcherDataWithFinalERA()
 {

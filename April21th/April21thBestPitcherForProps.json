@@ -1,0 +1,194 @@
+[
+    {
+        "team": "STLCardinals",
+        "game": "MIL Brewers @ STL Cardinals",
+        "pitcher": "S Gray",
+        "era": 0
+    },
+    {
+        "team": "TEXRangers",
+        "game": "TEX Rangers @ ATL Braves",
+        "pitcher": "M Lorenzen",
+        "era": 0
+    },
+    {
+        "team": "KCRoyals",
+        "game": "BAL Orioles @ KC Royals",
+        "pitcher": "S Lugo",
+        "era": 1.05
+    },
+    {
+        "team": "MIAMarlins",
+        "game": "MIA Marlins @ CHI Cubs",
+        "pitcher": "E Cabrera",
+        "era": 1.5
+    },
+    {
+        "team": "HOUAstros",
+        "game": "HOU Astros @ WAS Nationals",
+        "pitcher": "C Javier",
+        "era": 1.54
+    },
+    {
+        "team": "SFGiants",
+        "game": "ARI Diamondbacks @ SF Giants",
+        "pitcher": "J Hicks",
+        "era": 1.57
+    },
+    {
+        "team": "ATLBraves",
+        "game": "TEX Rangers @ ATL Braves",
+        "pitcher": "D Vines",
+        "era": 1.93
+    },
+    {
+        "team": "ARIDiamondbacks",
+        "game": "ARI Diamondbacks @ SF Giants",
+        "pitcher": "M Kelly",
+        "era": 2.19
+    },
+    {
+        "team": "COLRockies",
+        "game": "SEA Mariners @ COL Rockies",
+        "pitcher": "P Lambert",
+        "era": 2.31
+    },
+    {
+        "team": "PITPirates",
+        "game": "BOS Red @ PIT Pirates",
+        "pitcher": "M Perez",
+        "era": 2.55
+    },
+    {
+        "team": "MILBrewers",
+        "game": "MIL Brewers @ STL Cardinals",
+        "pitcher": "C Rea",
+        "era": 2.7
+    },
+    {
+        "team": "TBRays",
+        "game": "TB Rays @ NY Yankees",
+        "pitcher": "A Civale",
+        "era": 2.74
+    },
+    {
+        "team": "LADodgers",
+        "game": "NY Mets @ LA Dodgers",
+        "pitcher": "J Paxton",
+        "era": 3.245
+    },
+    {
+        "team": "PHIPhillies",
+        "game": "CHI White @ PHI Phillies",
+        "pitcher": "A Nola",
+        "era": 3.595
+    },
+    {
+        "team": "CHIWhite",
+        "game": "CHI White @ PHI Phillies",
+        "pitcher": "N Nastrini",
+        "era": 3.6
+    },
+    {
+        "team": "WASNationals",
+        "game": "HOU Astros @ WAS Nationals",
+        "pitcher": "M Parker",
+        "era": 3.6
+    },
+    {
+        "team": "TORBlue",
+        "game": "TOR Blue @ SD Padres",
+        "pitcher": "C Bassitt",
+        "era": 3.765
+    },
+    {
+        "team": "NYYankees",
+        "game": "TB Rays @ NY Yankees",
+        "pitcher": "L Gil",
+        "era": 3.83
+    },
+    {
+        "team": "CINReds",
+        "game": "LA Angels @ CIN Reds",
+        "pitcher": "F Montas",
+        "era": 4.125
+    },
+    {
+        "team": "DETTigers",
+        "game": "DET Tigers @ MIN Twins",
+        "pitcher": "C Mize",
+        "era": 4.195
+    },
+    {
+        "team": "NYMets",
+        "game": "NY Mets @ LA Dodgers",
+        "pitcher": "A Houser",
+        "era": 4.359999999999999
+    },
+    {
+        "team": "LAAngels",
+        "game": "LA Angels @ CIN Reds",
+        "pitcher": "J Soriano",
+        "era": 4.375
+    },
+    {
+        "team": "BOSRed",
+        "game": "BOS Red @ PIT Pirates",
+        "pitcher": "Josh Winckowski",
+        "era": 4.449999999999999
+    },
+    {
+        "team": "CLEGuardians",
+        "game": "OAK Athletics @ CLE Guardians",
+        "pitcher": "T Bibee",
+        "era": 4.82
+    },
+    {
+        "team": "OAKAthletics",
+        "game": "OAK Athletics @ CLE Guardians",
+        "pitcher": "R Stripling",
+        "era": 5.32
+    },
+    {
+        "team": "COLRockies",
+        "game": "SEA Mariners @ COL Rockies",
+        "pitcher": "C Quantrill",
+        "era": 5.57
+    },
+    {
+        "team": "SDPadres",
+        "game": "TOR Blue @ SD Padres",
+        "pitcher": "J Musgrove",
+        "era": 6.29
+    },
+    {
+        "team": "SEAMariners",
+        "game": "SEA Mariners @ COL Rockies",
+        "pitcher": "G Kirby",
+        "era": 6.64
+    },
+    {
+        "team": "BALOrioles",
+        "game": "BAL Orioles @ KC Royals",
+        "pitcher": "C Irvin",
+        "era": 6.75
+    },
+    {
+        "team": "SEAMariners",
+        "game": "SEA Mariners @ COL Rockies",
+        "pitcher": "E Hancock",
+        "era": 7.98
+    },
+    {
+        "team": "MINTwins",
+        "game": "DET Tigers @ MIN Twins",
+        "pitcher": "L Varland",
+        "era": 8.36
+    },
+    {
+        "team": "CHICubs",
+        "game": "MIA Marlins @ CHI Cubs",
+        "pitcher": "K Hendricks",
+        "era": 12.71
+    }
+]
