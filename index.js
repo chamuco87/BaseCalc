@@ -49,8 +49,8 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April21th";
-        var descriptiveDate = "2024-04-21"
+        var selectedDate = "April22th";
+        var descriptiveDate = "2024-04-22"
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -66,15 +66,15 @@ var teams = [
         //await evaluateGames(selectedDate);
         //await sortBetterAvgs(selectedDate);
         //await filterConsistentPicks(selectedDate)
-        //
-        await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+    
+        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate);
 
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
         await consolidateAlgorithmResults(selectedDate);
-//
+
         //await getScheduleData(selectedDate);
-        //await getResults(selectedDate);
+        //OBSOLETE await getResults(selectedDate);
 
         //await getBestPitcherOfTheDay(selectedDate);
 
@@ -161,20 +161,25 @@ if(pitcherBatterGame.awayTeam.awayPitcherData && pitcherBatterGame.homeTeam.home
 
 async function consolidateAlgorithmResults(date)
 {
-    var seriesWinnersResults = await load(date+"SeriesWinners");
+    
     var pitcherBatterResults = await load(date);
     var coversWinPredictions = await load(date+"CoversWinPercentages");
-    var homeConfidentExpectedWinners = [];
-    var awayConfidentExpectedWinners = [];
-    var homeNoConfidentExpectedWinners = [];
-    var awayNoConfidentExpectedWinners = [];
-    var noConclusiveGames = [];
+    
 
-    var selectedGames = [];
-    var parlayGames = [];
-    var overSelectedGames = [];
-    var underSelectedGames = [];
+    var dataPeriod = [0,7,15];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        var seriesWinnersResults = await load(date+"SeriesWinners"+period);
+        var homeConfidentExpectedWinners = [];
+        var awayConfidentExpectedWinners = [];
+        var homeNoConfidentExpectedWinners = [];
+        var awayNoConfidentExpectedWinners = [];
+        var noConclusiveGames = [];
 
+        var selectedGames = [];
+        var parlayGames = [];
+        var overSelectedGames = [];
+        var underSelectedGames = [];
     for (let index = 0; index < pitcherBatterResults[0].games.length; index++) {
         const pitcherBatterGame = pitcherBatterResults[0].games[index];
 
@@ -219,6 +224,8 @@ async function consolidateAlgorithmResults(date)
                 seriesConfidenceRanking: seriesWinnerGame.confidenceRanking,
                 seriesExpectedWinnerRuns: seriesWinnerGame.expectedWinnerRuns,
                 seriesExpectedLoserRuns: seriesWinnerGame.expectedLoserRuns,
+                seriesFinalHandicap: seriesWinnerGame.expectedWinnerRuns - seriesWinnerGame.expectedLoserRuns,
+                finalHandicapExpected : Math.round((pitcherBatterGame.gameExpectedResult.finalHandicapExpected + (seriesWinnerGame.expectedWinnerRuns - seriesWinnerGame.expectedLoserRuns))/2),
                 awayCoversWinPercentage: awayCoversWinPercentage,
                 homeCoversWinPercentage: homeCoversWinPercentage
             };
@@ -231,25 +238,25 @@ async function consolidateAlgorithmResults(date)
                     {
                         if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                         {
-                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected ,overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                         else{
-                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            parlayGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                     }
                     else{
                         if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                         {
-                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                             selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                         else{
-                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                     }
                 }
@@ -259,27 +266,27 @@ async function consolidateAlgorithmResults(date)
                     {
                         if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                         {
-                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            homeConfidentExpectedWinners.push({game:pitcherBatterGame.game,gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                             
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  , expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                         else{
-                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            awayConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                             
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                     }
                     else{
                         if(seriesWinnerGame.seriesExpectedWinner == pitcherBatterGame.homeTeam.homeTeam)
                         {
-                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            homeNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                             
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                         else{
-                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            awayNoConfidentExpectedWinners.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                             
-                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
+                            selectedGames.push({game:pitcherBatterGame.game, gameTime:pitcherBatterGame.gameTime  ,expectedWinner: seriesWinnerGame.seriesExpectedWinner, avgHandicapExp: gameAnalisysDetails.finalHandicapExpected , overallConfidence:overallConfidence, gameAnalisysDetails:gameAnalisysDetails });
                         }
                     }
                 }
@@ -316,12 +323,65 @@ async function consolidateAlgorithmResults(date)
     underSelectedGames = await sorting(underSelectedGames, "confidenceLevel", "ASC");
 
     
-    await save("ParlayGames"+date, parlayGames, function(){}, "replace");
-    await save("SelectedGames"+date, selectedGames, function(){}, "replace");
-    await save("overSelectedGames"+date, overSelectedGames, function(){}, "replace");
-    await save("underSelectedGames"+date, underSelectedGames, function(){}, "replace");
-    await save("SonadoraGames"+date, noConclusiveGames, function(){}, "replace");
+    await save(period+"ParlayGames"+date, parlayGames, function(){}, "replace");
+    await save(period+"SelectedGames"+date, selectedGames, function(){}, "replace");
+    await save(period+"overSelectedGames"+date, overSelectedGames, function(){}, "replace");
+    await save(period+"underSelectedGames"+date, underSelectedGames, function(){}, "replace");
+    await save(period+"SonadoraGames"+date, noConclusiveGames, function(){}, "replace");
 
+    var allParlays = [];
+    var parlayAll = await load(0+"ParlayGames"+date);
+    var parlay7 = await load(7+"ParlayGames"+date);
+    var parlay15 = await load(15+"ParlayGames"+date);
+
+    allParlays = parlayAll.concat(parlay7);
+    allParlays = allParlays.concat(parlay15);
+
+    var parlaysGrouped = allParlays.reduce(function (r, a) {
+        r[a.game] = r[a.game] || [];
+        r[a.game].push(a);
+        return r;
+    }, Object.create(null));
+
+    var gameKeys = Object.keys(parlaysGrouped);
+
+    var finalParlay = [];
+    for (let r = 0; r < gameKeys.length; r++) {
+        const gameKey = gameKeys[r];
+        var selection = parlaysGrouped[gameKey];
+        var record ={game:gameKey, expectedWinner:"" ,avgHandicap:0, avgConfidence:0, algoCount:0};
+
+        record.algoCount = selection.length;
+        var sumHandicap =0;
+        var sumConfidence = 0;
+        var pastWinner = selection[0].expectedWinner;
+        var isSameWinner = true;
+        for (let y = 0; y < selection.length; y++) {
+            const sel = selection[y];
+            sumHandicap += sel.avgHandicapExp;
+            sumConfidence += sel.overallConfidence;
+            if(pastWinner != sel.expectedWinner)
+            {
+                isSameWinner = false;
+                break;
+            }
+        }
+        record.avgHandicap = sumHandicap/selection.length;
+        record.avgConfidence = sumConfidence/selection.length;
+        if(isSameWinner)
+        {
+            record.expectedWinner = pastWinner;
+            finalParlay.push(record);
+        }
+
+    }
+
+    var sortedParlays = await sorting(finalParlay,"avgConfidence","DESC")
+
+    await save("FinalParlay"+date, sortedParlays, function(){}, "replace");
+    var stopHere = "";
+
+    }
 }
 
 
@@ -468,217 +528,216 @@ async function AlgoDetailedPitchingAndBattingAnalysis(date)
             //console.log(expectedFinalWinner, finalHandicapExpected, resultTypeFinal,  finalTotalRunsExpected);
         }
     }
+    
     var stopHere = "";
 }
 
 async function AlgoSeriesWinnerBasedOnResultAndPattern(date)
 {
     var allGames = await load(date);
-    var teamsResultsData = await load(date+"TeamSchedules");
-    var teamsReceivingRuns = await load(date+"TeamSchedulesByReceiving");
-    var teamsScoringRuns = await load(date+"TeamSchedulesByScoring");
-    var teamsWinningResults = await load(date+"TeamSchedulesByWinning");
-
 
     
-    var battersData = await load(date+"BattersData");
-    var hittingBatterData = await load(date+"HittingBattersTeamsByHits");
-    var runsBatterData = await load(date+"ScoringBattersTeamsByRuns");
+    var dataPeriod = [0,7,15];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+
+        var teamsResultsData = await load(date+"TeamSchedules");
+        var dataScope = teamsResultsData.filter(function(item){
+            return item.period == period;         
+            });
+
+        var teamsReceivingRuns = await load(date+"TeamSchedulesByReceiving"+period);
+        var teamsScoringRuns = await load(date+"TeamSchedulesByScoring"+period);
+        var teamsWinningResults = await load(date+"TeamSchedulesByWinning"+period);
+
+        var noDataGames = [];
+        var winnersByResults = [];
+        for (let index = 0; index < allGames[0].games.length; index++) {
+            const game = allGames[0].games[index];
+            
+
+            /// Comparing Results
+            
+            var teamHomeResultsData = dataScope.filter(function(item){
+                return item.teamName.indexOf(game.homeTeam.homeTeam)>=0;         
+                })[0];
+            
+            var homeReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+            var homeScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+            var homeWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+
+            var teamAwayResultsData = dataScope.filter(function(item){
+                return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;         
+                })[0];
+            
+            var awayReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+            var awayScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+            var awayWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+
+            var WinningRankingWithDiff = (awayWinningRanking>=homeWinningRanking) ? 
+                                            {WinningRankingBest: game.homeTeam.homeTeam,
+                                            WinningRankingDiff:(awayWinningRanking - homeWinningRanking), 
+                                            WinningGamesCountDiff: (teamHomeResultsData.totalWins - teamAwayResultsData.totalWins )} 
+                                            : 
+                                            {WinningRankingBest: game.awayTeam.awayTeam,
+                                                WinningRankingDiff:(homeWinningRanking - awayWinningRanking), 
+                                                WinningGamesCountDiff: (teamAwayResultsData.totalWins - teamHomeResultsData.totalWins )};
+
+            var ScoringRankingWithDiff = (awayScoringRanking>=homeScoringRanking) ? 
+            {ScoringRankingBest: game.homeTeam.homeTeam,
+                ScoringRankingDiff:(awayScoringRanking - homeScoringRanking), 
+                ScoringGamesCountDiff: (teamHomeResultsData.totalRunsScored - teamAwayResultsData.totalRunsScored )} 
+                : 
+                {ScoringRankingBest: game.awayTeam.awayTeam,
+                ScoringRankingDiff:(homeScoringRanking - awayScoringRanking), 
+                ScoringGamesCountDiff: (teamAwayResultsData.totalRunsScored - teamHomeResultsData.totalRunsScored )};
 
 
-
-    var pitchersData = await load(date+"PitchersData");
-    var starterPitchersAllowedRuns = await load(date+"StarterPitcherTeamsByRunsAllowed");
-    var relevingPitchersAllowedRuns = await load(date+"RelevingPitcherTeamsByRunsAllowed");
-    var overallPitchersAllowedRuns = await load(date+"OverallPitcherTeamsByRunsAllowed");
-    
-    var noDataGames = [];
-    var winnersByResults = [];
-    for (let index = 0; index < allGames[0].games.length; index++) {
-        const game = allGames[0].games[index];
-        
-
-        /// Comparing Results
-        
-        var teamHomeResultsData = teamsResultsData.filter(function(item){
-            return item.teamName.indexOf(game.homeTeam.homeTeam)>=0;         
-            })[0];
-        
-        var homeReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
-        var homeScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
-        var homeWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
-
-        var teamAwayResultsData = teamsResultsData.filter(function(item){
-            return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;         
-            })[0];
-        
-        var awayReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
-        var awayScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
-        var awayWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
-
-        var WinningRankingWithDiff = (awayWinningRanking>=homeWinningRanking) ? 
-                                        {WinningRankingBest: game.homeTeam.homeTeam,
-                                         WinningRankingDiff:(awayWinningRanking - homeWinningRanking), 
-                                         WinningGamesCountDiff: (teamHomeResultsData.totalWins - teamAwayResultsData.totalWins )} 
-                                         : 
-                                         {WinningRankingBest: game.awayTeam.awayTeam,
-                                            WinningRankingDiff:(homeWinningRanking - awayWinningRanking), 
-                                            WinningGamesCountDiff: (teamAwayResultsData.totalWins - teamHomeResultsData.totalWins )};
-
-        var ScoringRankingWithDiff = (awayScoringRanking>=homeScoringRanking) ? 
-        {ScoringRankingBest: game.homeTeam.homeTeam,
-            ScoringRankingDiff:(awayScoringRanking - homeScoringRanking), 
-            ScoringGamesCountDiff: (teamHomeResultsData.totalRunsScored - teamAwayResultsData.totalRunsScored )} 
-            : 
-            {ScoringRankingBest: game.awayTeam.awayTeam,
-            ScoringRankingDiff:(homeScoringRanking - awayScoringRanking), 
-            ScoringGamesCountDiff: (teamAwayResultsData.totalRunsScored - teamHomeResultsData.totalRunsScored )};
+            var ReceivingRankingWithDiff = (awayReceivingRanking<=homeReceivingRanking) ? 
+            {ReceivingRankingBest: game.awayTeam.awayTeam,
+                ReceivingRankingDiff:(homeReceivingRanking - awayReceivingRanking), 
+                ReceivingGamesCountDiff: (teamHomeResultsData.totalRunsReceived - teamAwayResultsData.totalRunsReceived )} 
+                : 
+                {ReceivingRankingBest: game.homeTeam.homeTeam,
+                ReceivingRankingDiff:(awayReceivingRanking - homeReceivingRanking), 
+                ReceivingGamesCountDiff: (teamAwayResultsData.totalRunsReceived - teamHomeResultsData.totalRunsReceived )};
 
 
-        var ReceivingRankingWithDiff = (awayReceivingRanking<=homeReceivingRanking) ? 
-        {ReceivingRankingBest: game.awayTeam.awayTeam,
-            ReceivingRankingDiff:(homeReceivingRanking - awayReceivingRanking), 
-            ReceivingGamesCountDiff: (teamHomeResultsData.totalRunsReceived - teamAwayResultsData.totalRunsReceived )} 
-            : 
-            {ReceivingRankingBest: game.homeTeam.homeTeam,
-            ReceivingRankingDiff:(awayReceivingRanking - homeReceivingRanking), 
-            ReceivingGamesCountDiff: (teamAwayResultsData.totalRunsReceived - teamHomeResultsData.totalRunsReceived )};
+            var winningExpectedWinner = "";
+            var runsExpectedWinner = "";
+            var confidenceRanking = 0;
 
-
-        var winningExpectedWinner = "";
-        var runsExpectedWinner = "";
-        var confidenceRanking = 0;
-
-        if(WinningRankingWithDiff.WinningGamesCountDiff > 0)
-        {
-            winningExpectedWinner = WinningRankingWithDiff.WinningRankingBest;
-            confidenceRanking += WinningRankingWithDiff.WinningGamesCountDiff;
-
-            if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+            if(WinningRankingWithDiff.WinningGamesCountDiff > 0)
             {
-                runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
-                
-                if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                winningExpectedWinner = WinningRankingWithDiff.WinningRankingBest;
+                confidenceRanking += WinningRankingWithDiff.WinningGamesCountDiff;
+
+                if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
                 {
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
+                    
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                }
+                else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
+                    
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
+                    }
+
                 }
                 else{
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
-                }
-            }
-            else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
-            {
-                runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
-                
-                if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
-                {
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
-                }
-                else{
-                    confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
+                    runsExpectedWinner = winningExpectedWinner;
                 }
 
             }
             else{
-                runsExpectedWinner = winningExpectedWinner;
-            }
 
-        }
-        else{
-
-            if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
-            {
-                runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
-
-                if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
                 {
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
+
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                }
+                else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
+
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
+                    }
                 }
                 else{
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    runsExpectedWinner = "No clear winner";
                 }
-            }
-            else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
-            {
-                runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
 
-                if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
-                {
-                    confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
-                }
-                else{
-                    confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
-                }
-            }
-            else{
-                runsExpectedWinner = "No clear winner";
+                winningExpectedWinner = runsExpectedWinner;
             }
 
-            winningExpectedWinner = runsExpectedWinner;
-        }
-
-        
-        var winsAndRunsCalcResult = (winningExpectedWinner == runsExpectedWinner && WinningRankingWithDiff.WinningRankingBest == winningExpectedWinner) ? 
-        {   game: game.game,
-            seriesExpectedWinner: runsExpectedWinner, isConsistent: true, confidenceRanking: confidenceRanking,
-        analysisData: {winningExpectedWinner:winningExpectedWinner, 
-                        runsExpectedWinner:runsExpectedWinner,
-                        teamsData: { 
-                                   teamHomeResultsData:teamHomeResultsData, 
-                                   teamAwayResultsData: teamAwayResultsData,
-                                   WinningRankingWithDiff: WinningRankingWithDiff,
-                                   ScoringRankingWithDiff:ScoringRankingWithDiff,
-                                   ReceivingRankingWithDiff: ReceivingRankingWithDiff
-                                     }} } 
-        : 
-        {   game: game.game,
-            seriesExpectedWinner: runsExpectedWinner, isConsistent: false, confidenceRanking: confidenceRanking,
+            
+            var winsAndRunsCalcResult = (winningExpectedWinner == runsExpectedWinner && WinningRankingWithDiff.WinningRankingBest == winningExpectedWinner) ? 
+            {   game: game.game,
+                seriesExpectedWinner: runsExpectedWinner, isConsistent: true, confidenceRanking: confidenceRanking,
             analysisData: {winningExpectedWinner:winningExpectedWinner, 
                             runsExpectedWinner:runsExpectedWinner,
                             teamsData: { 
-                                       teamHomeResultsData:teamHomeResultsData, 
-                                       teamAwayResultsData: teamAwayResultsData,
-                                       WinningRankingWithDiff: WinningRankingWithDiff,
-                                       ScoringRankingWithDiff:ScoringRankingWithDiff,
-                                       ReceivingRankingWithDiff: ReceivingRankingWithDiff
-                                         }} } 
-
-
-        winsAndRunsCalcResult.expectedTotalScore = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
-                            ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) + 
-                            ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
-                            : 
-                            ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) + 
-                            ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
-                        );
-        
-        winsAndRunsCalcResult.expectedWinnerRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
-            ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) 
+                                    teamHomeResultsData:teamHomeResultsData, 
+                                    teamAwayResultsData: teamAwayResultsData,
+                                    WinningRankingWithDiff: WinningRankingWithDiff,
+                                    ScoringRankingWithDiff:ScoringRankingWithDiff,
+                                    ReceivingRankingWithDiff: ReceivingRankingWithDiff
+                                        }} } 
             : 
-            ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) 
-        );
+            {   game: game.game,
+                seriesExpectedWinner: runsExpectedWinner, isConsistent: false, confidenceRanking: confidenceRanking,
+                analysisData: {winningExpectedWinner:winningExpectedWinner, 
+                                runsExpectedWinner:runsExpectedWinner,
+                                teamsData: { 
+                                        teamHomeResultsData:teamHomeResultsData, 
+                                        teamAwayResultsData: teamAwayResultsData,
+                                        WinningRankingWithDiff: WinningRankingWithDiff,
+                                        ScoringRankingWithDiff:ScoringRankingWithDiff,
+                                        ReceivingRankingWithDiff: ReceivingRankingWithDiff
+                                            }} } 
 
-        winsAndRunsCalcResult.expectedLoserRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
-                            ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
-                            : 
-                            ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
-                        );
 
-        winsAndRunsCalcResult.expectedHandicap = winsAndRunsCalcResult.expectedWinnerRuns - winsAndRunsCalcResult.expectedLoserRuns;
-                                         
-        winnersByResults.push(winsAndRunsCalcResult);
+            winsAndRunsCalcResult.expectedTotalScore = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                                ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) + 
+                                ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
+                                : 
+                                ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) + 
+                                ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
+                            );
+            
+            winsAndRunsCalcResult.expectedWinnerRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) 
+                : 
+                ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) 
+            );
+
+            winsAndRunsCalcResult.expectedLoserRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                                ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
+                                : 
+                                ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
+                            );
+
+            winsAndRunsCalcResult.expectedHandicap = winsAndRunsCalcResult.expectedWinnerRuns - winsAndRunsCalcResult.expectedLoserRuns;
+                                            
+            winnersByResults.push(winsAndRunsCalcResult);
+        }
+        var highestConfidence = await sorting(winnersByResults, "confidenceRanking", "DESC");
+        highestConfidence = highestConfidence.filter(function(item){
+            return item.isConsistent == true;         
+            });
+
+        var highestHandicap = await sorting(highestConfidence, "expectedHandicap", "DESC");
+
+        var highestScore = await sorting(winnersByResults, "expectedTotalScore", "DESC");
+
+        await save(date+"SeriesWinners"+period, winnersByResults, function(){},"replace");
     }
-
-    var highestConfidence = await sorting(winnersByResults, "confidenceRanking", "DESC");
-    highestConfidence = highestConfidence.filter(function(item){
-        return item.isConsistent == true;         
-        });
-
-    var highestHandicap = await sorting(highestConfidence, "expectedHandicap", "DESC");
-
-    var highestScore = await sorting(winnersByResults, "expectedTotalScore", "DESC");
-
-    await save(date+"SeriesWinners", winnersByResults, function(){},"replace");
+    
 
 }
 
@@ -725,6 +784,9 @@ async function getBestRelievingPitchersTeams(date)
 async function getResults(date)
 {
     var teamsData = await load(date+"TeamSchedules");
+    teamsData= teamsData.filter(function(item){
+        return item.period == 0;         
+        });
     var MLPicks = await load(date+"MLPicks");
     var OverPicks = await load(date+"OverPicks");
     var UnderPicks = await load(date+"UnderPicks");
@@ -885,28 +947,55 @@ async function getResults(date)
 async function getMoreWininigTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var moreWininngTeams = await sorting(teamsData, "totalWins", "DESC");
-    await save(date+"TeamSchedulesByWinning", moreWininngTeams, function(){}, "replace");
+    var dataPeriod = [0,7,15];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        var dataScope = teamsData;
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreWininngTeams = await sorting(teamsInScope, "totalWins", "DESC");
+        await save(date+"TeamSchedulesByWinning"+period, moreWininngTeams, function(){}, "replace");
+    }
+    
 }
 
 async function getMoreScoringTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var moreScoringTeams = await sorting(teamsData, "avgRunsScored", "DESC");
-    await save(date+"TeamSchedulesByScoring", moreScoringTeams, function(){}, "replace");
+    var dataPeriod = [0,7,15];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];    
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreScoringTeams = await sorting(teamsInScope, "avgRunsScored", "DESC");
+        await save(date+"TeamSchedulesByScoring"+period, moreScoringTeams, function(){}, "replace");
+        }
 }
 
 async function getMoreReceivingTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var moreReceivingTeams = await sorting(teamsData, "avgRunsReceived", "ASC");
-    await save(date+"TeamSchedulesByReceiving", moreReceivingTeams, function(){}, "replace");
+    var dataPeriod = [0,7,15];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreReceivingTeams = await sorting(teamsInScope, "avgRunsReceived", "ASC");
+        await save(date+"TeamSchedulesByReceiving"+period, moreReceivingTeams, function(){}, "replace");
+        }
 }
 
 async function filterConsistentPicks(date)
 {
     var allGames = await load(date);
     var teamsData = await load(date+"TeamSchedules");
+    teamsData = teamsData.filter(function(item){
+        return item.period == 0;         
+        });
     var picksSummary = [];
     var winningGames = allGames[0].games.filter(function(item){
         return item.selection == 1;         
@@ -1051,6 +1140,9 @@ async function evaluateGames(date)
     var allGames = await load(date);
     var battersData = await load(date+"battersData");
     var teamsData = await load(date+"TeamSchedules");
+    teamsData = teamsData.filter(function(item){
+        return item.period == 0;         
+        });
     var noDataGames = [];
     for (let index = 0; index < allGames[0].games.length; index++) {
         const game = allGames[0].games[index];
@@ -1251,14 +1343,29 @@ async function getScheduleData(date)
         await driver.manage().setTimeouts({ implicit: 1000 });
         var scheduleData = [];
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            var dataPeriod = [0,7,15];
             scheduleData = JSON.parse(return_value);
-            //for (let a = 0; a < scheduleData.length; a++) {
-                //const game = scheduleData[a];
-                var wins =  scheduleData.filter(function(item){
+            for (let a = 0; a < dataPeriod.length; a++) {
+                const period = dataPeriod[a];
+                
+                var dataScope = scheduleData;
+                
+                if(period != 0 &&  dataScope.length>=15)
+                {   
+                    
+                    dataScope = scheduleData.slice(Math.max(scheduleData.length - period, 1));
+                }
+                else if(period != 0 &&  dataScope.length>=7)
+                {
+                    dataScope = scheduleData.slice(Math.max(scheduleData.length - period, 1));
+                }
+                
+
+                var wins =  dataScope.filter(function(item){
                     return item.ISWIN == "Win";         
                   });
 
-                var loses =  scheduleData.filter(function(item){
+                var loses =  dataScope.filter(function(item){
                 return item.ISWIN == "Lost";         
                 });
 
@@ -1296,6 +1403,7 @@ async function getScheduleData(date)
                 
             //}
             schedulesAllData.push({
+                period:period,
                 teamName: teamName, 
                 totalWins:totalWins, 
                 totalLoses:totalLoses,  
@@ -1303,8 +1411,8 @@ async function getScheduleData(date)
                 totalRunsReceived:totalRunsReceived,
                 avgRunsScored:avgRunsScored,
                 avgRunsReceived:avgRunsReceived,
-                scheduleData: scheduleData});
-            //}
+                scheduleData: dataScope});
+            }
         });
         await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
     }

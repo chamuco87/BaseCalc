@@ -1,0 +1,140 @@
+[
+    {
+        "game": "PHI Phillies @ CIN Reds",
+        "gameTime": "16:40",
+        "expectedWinner": "PHIPhillies",
+        "avgHandicapExp": 3,
+        "overallConfidence": 45,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PHIPhillies",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 8.030555555555555,
+            "pitcherBatterHomeExRuns": 5.639090909090909,
+            "pitcherBatterExF5Winner": "PHIPhillies",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "PHIPhillies",
+            "seriesConfidenceRanking": 43,
+            "seriesExpectedWinnerRuns": 6.428571428571429,
+            "seriesExpectedLoserRuns": 2,
+            "seriesFinalHandicap": 4.428571428571429,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "PHI,nodata",
+            "homeCoversWinPercentage": "CIN,nodata"
+        }
+    },
+    {
+        "game": "SD Padres @ COL Rockies",
+        "gameTime": "18:40",
+        "expectedWinner": "SDPadres",
+        "avgHandicapExp": 4,
+        "overallConfidence": 35,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SDPadres",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 10.425,
+            "pitcherBatterHomeExRuns": 5.262727272727273,
+            "pitcherBatterExF5Winner": "SDPadres",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "SDPadres",
+            "seriesConfidenceRanking": 30,
+            "seriesExpectedWinnerRuns": 5,
+            "seriesExpectedLoserRuns": 1.7142857142857142,
+            "seriesFinalHandicap": 3.2857142857142856,
+            "finalHandicapExpected": 4,
+            "awayCoversWinPercentage": "SD,nodata",
+            "homeCoversWinPercentage": "COL,nodata"
+        }
+    },
+    {
+        "game": "MIA Marlins @ ATL Braves",
+        "gameTime": "17:20",
+        "expectedWinner": "ATLBraves",
+        "avgHandicapExp": 3,
+        "overallConfidence": 31,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "ATLBraves",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 3.611111111111111,
+            "pitcherBatterHomeExRuns": 7.154545454545454,
+            "pitcherBatterExF5Winner": "ATLBraves",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "ATLBraves",
+            "seriesConfidenceRanking": 27,
+            "seriesExpectedWinnerRuns": 5.285714285714286,
+            "seriesExpectedLoserRuns": 2.5714285714285716,
+            "seriesFinalHandicap": 2.714285714285714,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "MIA,nodata",
+            "homeCoversWinPercentage": "ATL,nodata"
+        }
+    },
+    {
+        "game": "BAL Orioles @ LA Angels",
+        "gameTime": "19:38",
+        "expectedWinner": "BALOrioles",
+        "avgHandicapExp": 3,
+        "overallConfidence": 31,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BALOrioles",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 5.6445454545454545,
+            "pitcherBatterHomeExRuns": 3.4,
+            "pitcherBatterExF5Winner": "BALOrioles",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "BALOrioles",
+            "seriesConfidenceRanking": 29,
+            "seriesExpectedWinnerRuns": 6.571428571428571,
+            "seriesExpectedLoserRuns": 3.5714285714285716,
+            "seriesFinalHandicap": 2.9999999999999996,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "BAL,nodata",
+            "homeCoversWinPercentage": "LAA,nodata"
+        }
+    },
+    {
+        "game": "NY Mets @ SF Giants",
+        "gameTime": "19:45",
+        "expectedWinner": "NYMets",
+        "avgHandicapExp": 2,
+        "overallConfidence": 25,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYMets",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 8.648636363636363,
+            "pitcherBatterHomeExRuns": 5.64,
+            "pitcherBatterExF5Winner": "NYMets",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "NYMets",
+            "seriesConfidenceRanking": 22,
+            "seriesExpectedWinnerRuns": 5,
+            "seriesExpectedLoserRuns": 3.4285714285714284,
+            "seriesFinalHandicap": 1.5714285714285716,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "NYM,nodata",
+            "homeCoversWinPercentage": "SF,nodata"
+        }
+    },
+    {
+        "game": "OAK Athletics @ NY Yankees",
+        "gameTime": "11:05",
+        "expectedWinner": "NYYankees",
+        "avgHandicapExp": 2,
+        "overallConfidence": 14,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 5.898846153846154,
+            "pitcherBatterHomeExRuns": 7.725,
+            "pitcherBatterExF5Winner": "NYYankees",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 12,
+            "seriesExpectedWinnerRuns": 4.428571428571429,
+            "seriesExpectedLoserRuns": 2.5714285714285716,
+            "seriesFinalHandicap": 1.8571428571428572,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "OAK,nodata",
+            "homeCoversWinPercentage": "NYY,nodata"
+        }
+    }
+]

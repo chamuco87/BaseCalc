@@ -120,26 +120,6 @@
         }
     },
     {
-        "game": "LA Angels @ CIN Reds",
-        "gameTime": "16:40",
-        "expectedWinner": "CINReds",
-        "overallConfidence": 30,
-        "gameAnalisysDetails": {
-            "pitcherBatterExWinner": "CINReds",
-            "pitcherBatterFinalHandicap": 1,
-            "pitcherBatterAwayExRuns": 8.015555555555554,
-            "pitcherBatterHomeExRuns": 8.719545454545454,
-            "pitcherBatterExF5Winner": "LAAngels",
-            "pitcherBatterExF5Diff": 0,
-            "seriesExWinner": "CINReds",
-            "seriesConfidenceRanking": 29,
-            "seriesExpectedWinnerRuns": 5.368421052631579,
-            "seriesExpectedLoserRuns": 4.35,
-            "awayCoversWinPercentage": "LAA,nodata",
-            "homeCoversWinPercentage": "CIN,nodata"
-        }
-    },
-    {
         "game": "DET Tigers @ MIN Twins",
         "gameTime": "12:10",
         "expectedWinner": "DETTigers",
@@ -177,26 +157,6 @@
             "seriesExpectedLoserRuns": 2.8,
             "awayCoversWinPercentage": "BAL,nodata",
             "homeCoversWinPercentage": "KC,nodata"
-        }
-    },
-    {
-        "game": "NY Mets @ LA Dodgers",
-        "gameTime": "14:05",
-        "expectedWinner": "NYMets",
-        "overallConfidence": 20,
-        "gameAnalisysDetails": {
-            "pitcherBatterExWinner": "NYMets",
-            "pitcherBatterFinalHandicap": 7,
-            "pitcherBatterAwayExRuns": 9.89,
-            "pitcherBatterHomeExRuns": 2.666666666666667,
-            "pitcherBatterExF5Winner": "NYMets",
-            "pitcherBatterExF5Diff": 5,
-            "seriesExWinner": "NYMets",
-            "seriesConfidenceRanking": 13,
-            "seriesExpectedWinnerRuns": 5.052631578947368,
-            "seriesExpectedLoserRuns": 4.052631578947368,
-            "awayCoversWinPercentage": "NYM,nodata",
-            "homeCoversWinPercentage": "LAD,nodata"
         }
     },
     {
