@@ -49,8 +49,8 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April22th";
-        var descriptiveDate = "2024-04-22"
+        var selectedDate = "April23rd";
+        var descriptiveDate = "2024-04-23"
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -71,8 +71,10 @@ var teams = [
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate);
 
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
-        await consolidateAlgorithmResults(selectedDate);
+        //await consolidateAlgorithmResults(selectedDate);
 
+        await ProcessGameByGame(selectedDate);
+        
         //await getScheduleData(selectedDate);
         //OBSOLETE await getResults(selectedDate);
 
@@ -84,6 +86,71 @@ var teams = [
     } finally {
       await driver.quit();
     }
+
+
+async function ProcessGameByGame(date)
+{
+    var teamsResultsData = await load(date+"TeamSchedules");
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+    
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        var allGamesDetails = {teamName : team.TeamName, games:[]};
+    for (let index = 0; index < team.scheduleData.length; index++) {
+        const game = team.scheduleData[index];
+        var gameDetails = {game:"",date:game.DATE, homeTeam:"", awayTeam:"" , resultDetails:game, homeDetails:{}, awayDetails:{}};
+        var homeTeam = "";
+        var awayTeam = "";
+        if(game.OPPONENT.indexOf("vs") >= 0)
+        {
+            var opponent = game.OPPONENT.replace("vs\n","");
+            homeTeam = team.teamName;
+            awayTeam = opponent;
+            
+        }
+        else{
+            var opponent = game.OPPONENT.replace("@\n","");
+            homeTeam = opponent;
+            awayTeam = team.teamName;
+        }
+
+        gameDetails.awayTeam = awayTeam;
+        gameDetails.homeTeam = homeTeam;
+        gameDetails.game = awayTeam + " @ " + homeTeam;
+        
+        await driver.get(game.GAMELINK);
+        await driver.manage().setTimeouts({ implicit: 1000 });
+
+        await driver.executeScript(await ProcessRunsHitsGameData()).then(function(return_value) {
+            var hitsRunsData = JSON.parse(return_value);
+            gameDetails.awayDetails.runsHitsDeatils = hitsRunsData.away;
+            gameDetails.homeDetails.runsHitsDeatils = hitsRunsData.home;
+        });
+
+        await driver.executeScript(await ProcessPitcherGameData()).then(function(return_value) {
+            var pitchersData = JSON.parse(return_value);
+            gameDetails.awayDetails.pitchersDeatils = pitchersData.away;
+            gameDetails.homeDetails.pitchersDeatils = pitchersData.home;
+        });
+
+        await driver.executeScript(await ProcessBatterGameData()).then(function(return_value) {
+            var battersData = JSON.parse(return_value);
+            gameDetails.awayDetails.battersDeatils = battersData.away;
+            gameDetails.homeDetails.battersDeatils = battersData.home;
+        });
+        
+        allGamesDetails.games.push(gameDetails);
+
+        await save("Games"+team.teamName+"Details"+date, allGamesDetails, function(){}, "replace");
+        
+    }
+
+        var stopHere = "";
+        
+    }
+}
 
 async function getCoversWinPercentages(date, descDate)
 {
@@ -329,6 +396,9 @@ async function consolidateAlgorithmResults(date)
     await save(period+"underSelectedGames"+date, underSelectedGames, function(){}, "replace");
     await save(period+"SonadoraGames"+date, noConclusiveGames, function(){}, "replace");
 
+    
+
+    }
     var allParlays = [];
     var parlayAll = await load(0+"ParlayGames"+date);
     var parlay7 = await load(7+"ParlayGames"+date);
@@ -380,8 +450,6 @@ async function consolidateAlgorithmResults(date)
 
     await save("FinalParlay"+date, sortedParlays, function(){}, "replace");
     var stopHere = "";
-
-    }
 }
 
 
@@ -1998,84 +2066,213 @@ async function save(fileName, jsonObject, callback, appendOrReplace)
 
 async function GetTeamSchedule()
 {
-    var script = 'var scheduleData = document.getElementsByClassName("page-container cf")[0];';
-script += 'var scheduleRows = scheduleData.getElementsByClassName("Table__TR Table__TR--sm Table__even");';
-script += 'var columns = [];';
-script += 'var schedules = [];';
-
-script += 'for (let index = 0; index < scheduleRows.length; index++) {';
-    script += 'const row = scheduleRows[index];';
-    script += 'var values = row.getElementsByClassName("Table__TD");';
-    script += 'var scheduleValues = [];';
-    script += 'var record = {';
-        script += 'DATE: "",';
-        script += 'OPPONENT: "",';
-        script += 'RESULT: "",';
-        script += '"W-L": "",';
-        script += 'WIN: "",';
-        script += 'LOSS: "",';
-        script += 'SAVE: "",';
-        script += 'ATT: "",';
-        script += 'WINS: "",';
-        script += 'LOSES: "",';
-        script += 'RUNSSCORED: "",';
-        script += 'RUNSRECEIVED: "",';
-        script += 'ISWIN: ""';
-    script += '};';
-    script += 'for (let id = 0; id < values.length; id++) {';
-        script += 'const val = values[id];';
-        script += 'if (index == 0) {';
-            script += 'columns.push(val.innerText);';
-        script += '} else {';
-            script += 'if (columns[id] != val.innerText) {';
-                script += 'if (columns[id] == "W-L") {';
-                    script += 'var wins = val.innerText.split("-")[0];';
-                    script += 'var loses = val.innerText.split("-")[1];';
-                    script += 'record[columns[id]] = val.innerText;';
-                    script += 'record.WINS = wins;';
-                    script += 'record.LOSES = loses;';
-
-                script += '} else if (columns[id] == "RESULT") {';
-                    script += 'var score = val.innerText.split(" ")[0];';
-                    script += 'var runsScored = "";';
-                    script += 'var runsReceived = "";';
-                    script += 'var isWin = "";';
-                    script += 'var scoreDiff = "";';
-                    script += 'if(score.indexOf("LIVE") < 0){';
-                    script += 'if (score.indexOf("W") >= 0) {';
-                        script += 'runsScored = score.replace("W").split("-")[0].replace("undefined", "");';
-                        script += 'runsReceived = score.replace("W").split("-")[1].replace("undefined", "");';
-                        script += 'isWin = "Win";';
-                        script += 'scoreDiff = runsScored - runsReceived;';
-                    script += '} else if (score.indexOf("L") >= 0) {';
-                        script += 'runsScored = score.replace("L").split("-")[1].replace("undefined", "");';
-                        script += 'runsReceived = score.replace("L").split("-")[0].replace("undefined", "");';
-                        script += 'isWin = "Lost";';
-                        script += 'scoreDiff = runsReceived - runsScored;';
-                    script += '}}';
-                    script += 'record[columns[id]] = val.innerText;';
-                    script += 'record.RUNSSCORED = runsScored;';
-                    script += 'record.RUNSRECEIVED = runsReceived;';
-                    script += 'record.ISWIN = isWin;';
-
-                script += '} else {';
-                    script += 'record[columns[id]] = val.innerText;';
-                script += '}';
-            script += '} else {';
-                script += 'break;';
-            script += '}';
-        script += '}';
-    script += '}';
-script += 'if (record.ISWIN) {';
-    script += 'schedules.push(record);';
-
-script += '}';
-script += '}';
-
-script += 'return JSON.stringify(schedules);';
+    var script = 'var scheduleData = document.getElementsByClassName("page-container cf")[0];                           ';
+script += 'var scheduleRows = scheduleData.getElementsByClassName("Table__TR Table__TR--sm Table__even");       ';
+script += 'var columns = [];                                                                                    ';
+script += 'var schedules = [];                                                                                  ';
+script += 'for (let index = 0; index < scheduleRows.length; index++) {                                          ';
+script += '    const row = scheduleRows[index];                                                                 ';
+script += '    var values = row.getElementsByClassName("Table__TD");                                            ';
+script += '    var scheduleValues = [];                                                                         ';
+script += '    var record = {                                                                                   ';
+script += '        DATE: "",                                                                                    ';
+script += '        OPPONENT: "",                                                                                ';
+script += '        RESULT: "",                                                                                  ';
+script += '        "W-L": "",                                                                                   ';
+script += '        WIN: "",                                                                                     ';
+script += '        LOSS: "",                                                                                    ';
+script += '        SAVE: "",                                                                                    ';
+script += '        ATT: "",                                                                                     ';
+script += '        WINS: "",                                                                                    ';
+script += '        LOSES: "",                                                                                   ';
+script += '        RUNSSCORED: "",                                                                              ';
+script += '        RUNSRECEIVED: "",                                                                            ';
+script += '        ISWIN: "",                                                                                   ';
+script += '        GAMELINK: ""                                                                                 ';
+script += '    };                                                                                               ';
+script += '    for (let id = 0; id < values.length; id++) {                                                     ';
+script += '        const val = values[id];                                                                      ';
+script += '        if (index == 0) {                                                                            ';
+script += '            columns.push(val.innerText);                                                             ';
+script += '        } else {                                                                                     ';
+script += '            if (columns[id] != val.innerText) {                                                      ';
+script += '                if (columns[id] == "W-L") {                                                          ';
+script += '                    var wins = val.innerText.split("-")[0];                                          ';
+script += '                    var loses = val.innerText.split("-")[1];                                         ';
+script += '                    record[columns[id]] = val.innerText;                                             ';
+script += '                    record.WINS = wins;                                                              ';
+script += '                    record.LOSES = loses;                                                            ';
+script += '                } else if (columns[id] == "RESULT") {                                                ';
+script += '                try{                                                                                  '; 
+script += '                    gameLink = val.getElementsByClassName("AnchorLink")[0].href;';
+script += '                    }';
+script += '                    catch';
+script += '                    {';
+script += '                        gameLink = "Postponed";';
+script += '                    }';
+script += '                    var score = val.innerText.split(" ")[0];                                         ';
+script += '                    var runsScored = "";                                                             ';
+script += '                    var runsReceived = "";                                                           ';
+script += '                    var isWin = "";                                                                  ';
+script += '                    var scoreDiff = "";                                                              ';
+script += '                    if (score.indexOf("LIVE") < 0) {                                                 ';
+script += '                        if (score.indexOf("W") >= 0) {                                               ';
+script += '                            runsScored = score.replace("W").split("-")[0].replace("undefined", "");  ';
+script += '                            runsReceived = score.replace("W").split("-")[1].replace("undefined", "");';
+script += '                            isWin = "Win";                                                           ';
+script += '                            scoreDiff = runsScored - runsReceived;                                   ';
+script += '                        } else if (score.indexOf("L") >= 0) {                                        ';
+script += '                            runsScored = score.replace("L").split("-")[1].replace("undefined", "");  ';
+script += '                            runsReceived = score.replace("L").split("-")[0].replace("undefined", "");';
+script += '                            isWin = "Lost";                                                          ';
+script += '                            scoreDiff = runsReceived - runsScored;                                   ';
+script += '                        }                                                                            ';
+script += '                    }                                                                                ';
+script += '                    record[columns[id]] = val.innerText;                                             ';
+script += '                    record.RUNSSCORED = runsScored;                                                  ';
+script += '                    record.RUNSRECEIVED = runsReceived;                                              ';
+script += '                    record.ISWIN = isWin;                                                            ';
+script += '                    record.GAMELINK = gameLink;                                                      ';
+script += '                } else {                                                                             ';
+script += '                    record[columns[id]] = val.innerText;                                             ';
+script += '                }                                                                                    ';
+script += '            } else {                                                                                 ';
+script += '                break;                                                                               ';
+script += '            }                                                                                        ';
+script += '        }                                                                                            ';
+script += '    }                                                                                                ';
+script += '    if (record.ISWIN) {                                                                              ';
+script += '        schedules.push(record);                                                                      ';
+script += '    }                                                                                                ';
+script += '} return JSON.stringify(schedules);																	';
 
 
             return script;
+}
+
+async function ProcessRunsHitsGameData(){
+    var script = 'var scoreBoard = document.getElementsByClassName("ResponsiveTable")[0];                      ' ;
+script += 'var scoreHeadersData = scoreBoard.getElementsByClassName("Table__TH");                          ' ;
+script += '    var scoreData = scoreBoard.getElementsByClassName("playByPlay__linescore__score Table__TD");' ;
+script += '    var scoreHeaders = [];                                                                      ' ;
+script += '    for (let i = 0; i < scoreHeadersData.length-1; i++) {                                       ' ;
+script += '        const header = scoreHeadersData[i].innerText.trim();                                    ' ;
+script += '        scoreHeaders.push(header);                                                              ' ;
+script += '    }                                                                                           ' ;
+script += '                                                                                                ' ;
+script += '    var scoreDetails = {away:[],home:[]};                                                       ' ;
+script += '    var times = 0;                                                                              ' ;
+script += '    for (let index = 0; index < scoreData.length-1; index++) {                                  ' ;
+script += '        var scoreDataDetail = {};                                                               ' ;
+script += '                                                                                                ' ;
+script += '        for (let r = 0; r < scoreHeaders.length; r++) {                                         ' ;
+script += '            const header = scoreHeaders[r];                                                     ' ;
+script += '            var data = scoreData[index].innerText;                                              ' ;
+script += '            scoreDataDetail[header] = data;                                                     ' ;
+script += '            index++;                                                                            ' ;
+script += '        }                                                                                       ' ;
+script += '                                                                                                ' ;
+script += '        if(times == 0)                                                                          ' ;
+script += '        {                                                                                       ' ;
+script += '            scoreDetails.home.push(scoreDataDetail);                                            ' ;
+script += '        }                                                                                       ' ;
+script += '        else{                                                                                   ' ;
+script += '            scoreDetails.away.push(scoreDataDetail);                                            ' ;
+script += '        }                                                                                       ' ;
+script += '        times++;                                                                                ' ;
+script += '        index = ((scoreHeaders.length-1)*times);                                                ' ;
+script += '    }                                                                                           ' ;
+script += '    return JSON.stringify(scoreDetails);															';
+
+return script;
+}
+
+
+async function ProcessPitcherGameData(){
+    var script = 'var pitcherDetails = {away:[],home:[]};                                               ';
+script += '    var indexes = [3,5];                                                                  ';
+script += '    for (let t = 0; t < indexes.length; t++)                                             ';
+script += '    {                                                                                    ';
+script += '        var ind = indexes[t];                                                            ';
+script += '        var pitcherBoard = document.getElementsByClassName("ResponsiveTable")[ind];      ';
+script += '        var pitchersHeadersData = pitcherBoard.getElementsByClassName("Table__TH");      ';
+script += '        var pitchersData = pitcherBoard.getElementsByClassName("Table__TD");             ';
+script += '        var pitcherHeaders = [];                                                         ';
+script += '        for (let i = 0; i < pitchersHeadersData.length; i++) {                           ';
+script += '            const header = pitchersHeadersData[i].innerText.trim();                      ';
+script += '            pitcherHeaders.push(header);                                                 ';
+script += '        }                                                                                ';
+script += '                                                                                         ';
+script += '        var times = 0;                                                                   ';
+script += '        for (let index = 0; index < pitchersData.length-1; index++) {                    ';
+script += '            var pitcherDataDetail = {};                                                  ';
+script += '                                                                                         ';
+script += '            for (let r = 0; r < pitcherHeaders.length; r++) {                            ';
+script += '                const header = pitcherHeaders[r];                                        ';
+script += '                var data = pitchersData[index].innerText;                                ';
+script += '                pitcherDataDetail[header] = data;                                        ';
+script += '                index++;                                                                 ';
+script += '                                                                                         ';
+script += '            }                                                                            ';
+script += '            if(ind == 3)                                                                 ';
+script += '            {                                                                            ';
+script += '                pitcherDetails.home.push(pitcherDataDetail);                             ';
+script += '            }                                                                            ';
+script += '            else{                                                                        ';
+script += '                pitcherDetails.away.push(pitcherDataDetail);                             ';
+script += '            }                                                                            ';
+script += '            times++;                                                                     ';
+script += '            index = ((pitcherHeaders.length)*times)-1;                                   ';
+script += '                                                                                         ';
+script += '        }                                                                                ';
+script += '                                                                                         ';
+script += '    }                                                                                    ';
+script += '    return JSON.stringify(pitcherDetails);												';
+
+    return script;
+}
+
+async function ProcessBatterGameData(){
+    var script = 'var batterDetails = {away:[],home:[]};                                               ' ;
+script += '   var indexes = [2,4];                                                                  ' ;
+script += '    for (let t = 0; t < indexes.length; t++)                                            ' ;
+script += '    {                                                                                   ' ;
+script += '        var ind = indexes[t];                                                           ' ;
+script += '        var batterBoard = document.getElementsByClassName("ResponsiveTable")[ind];      ' ;
+script += '        var battersHeadersData = batterBoard.getElementsByClassName("Table__TH");       ' ;
+script += '        var battersData = batterBoard.getElementsByClassName("Table__TD");              ' ;
+script += '        var batterHeaders = [];                                                         ' ;
+script += '        for (let i = 0; i < battersHeadersData.length; i++) {                           ' ;
+script += '            const header = battersHeadersData[i].innerText.trim();                      ' ;
+script += '            batterHeaders.push(header);                                                 ' ;
+script += '        }                                                                               ' ;
+script += '                                                                                        ' ;
+script += '        var times = 0;                                                                  ' ;
+script += '        for (let index = 0; index < battersData.length-1; index++) {                    ' ;
+script += '            var batterDataDetail = {};                                                  ' ;
+script += '                                                                                        ' ;
+script += '            for (let r = 0; r < batterHeaders.length; r++) {                            ' ;
+script += '                const header = batterHeaders[r];                                        ' ;
+script += '                var data = battersData[index].innerText;                                ' ;
+script += '                batterDataDetail[header] = data;                                        ' ;
+script += '                index++;                                                                ' ;
+script += '                                                                                        ' ;
+script += '            }                                                                           ' ;
+script += '            if(ind == 2)                                                                ' ;
+script += '            {                                                                           ' ;
+script += '                batterDetails.home.push(batterDataDetail);                              ' ;
+script += '            }                                                                           ' ;
+script += '            else{                                                                       ' ;
+script += '                batterDetails.away.push(batterDataDetail);                              ' ;
+script += '            }                                                                           ' ;
+script += '            times++;                                                                    ' ;
+script += '            index = ((batterHeaders.length)*times)-1;                                   ' ;
+script += '                                                                                        ' ;
+script += '        }                                                                               ' ;
+script += '                                                                                        ' ;
+script += '    }                                                                                   ' ;
+script += '    return JSON.stringify(batterDetails);												';
+    return script;
 }
 
 async function JSGetDataFromBet365()

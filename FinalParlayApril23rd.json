@@ -1,0 +1,44 @@
+[
+    {
+        "game": "SD Padres @ COL Rockies",
+        "expectedWinner": "SDPadres",
+        "avgHandicap": 3.6666666666666665,
+        "avgConfidence": 55,
+        "algoCount": 3
+    },
+    {
+        "game": "BAL Orioles @ LA Angels",
+        "expectedWinner": "BALOrioles",
+        "avgHandicap": 4.333333333333333,
+        "avgConfidence": 49,
+        "algoCount": 3
+    },
+    {
+        "game": "SEA Mariners @ TEX Rangers",
+        "expectedWinner": "SEAMariners",
+        "avgHandicap": 3.5,
+        "avgConfidence": 36,
+        "algoCount": 2
+    },
+    {
+        "game": "LA Dodgers @ WAS Nationals",
+        "expectedWinner": "LADodgers",
+        "avgHandicap": 3,
+        "avgConfidence": 32,
+        "algoCount": 1
+    },
+    {
+        "game": "NY Mets @ SF Giants",
+        "expectedWinner": "NYMets",
+        "avgHandicap": 2.6666666666666665,
+        "avgConfidence": 27,
+        "algoCount": 3
+    },
+    {
+        "game": "PHI Phillies @ CIN Reds",
+        "expectedWinner": "PHIPhillies",
+        "avgHandicap": 1,
+        "avgConfidence": 23.333333333333332,
+        "algoCount": 3
+    }
+]

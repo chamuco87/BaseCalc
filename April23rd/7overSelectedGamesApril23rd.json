@@ -1,0 +1,46 @@
+[
+    {
+        "game": "BAL Orioles @ LA Angels",
+        "seriesRunsEx": 9.142857142857142,
+        "pitcherBatterRunsEx": 18.734545454545454,
+        "confidenceLevel": 13.938701298701298,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BALOrioles",
+            "pitcherBatterFinalHandicap": 6,
+            "pitcherBatterAwayExRuns": 12.504545454545454,
+            "pitcherBatterHomeExRuns": 6.23,
+            "pitcherBatterExF5Winner": "BALOrioles",
+            "pitcherBatterExF5Diff": 5,
+            "seriesExWinner": "BALOrioles",
+            "seriesConfidenceRanking": 36,
+            "seriesExpectedWinnerRuns": 6.285714285714286,
+            "seriesExpectedLoserRuns": 2.857142857142857,
+            "seriesFinalHandicap": 3.4285714285714284,
+            "finalHandicapExpected": 5,
+            "awayCoversWinPercentage": "BAL,82%",
+            "homeCoversWinPercentage": "LAA,18%"
+        }
+    },
+    {
+        "game": "BOS Red @ CLE Guardians",
+        "seriesRunsEx": 9,
+        "pitcherBatterRunsEx": 10.222727272727273,
+        "confidenceLevel": 9.611363636363636,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BOSRed",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.50909090909091,
+            "pitcherBatterHomeExRuns": 4.713636363636364,
+            "pitcherBatterExF5Winner": "BOSRed",
+            "pitcherBatterExF5Diff": 2,
+            "seriesExWinner": "CLEGuardians",
+            "seriesConfidenceRanking": 19,
+            "seriesExpectedWinnerRuns": 6.142857142857143,
+            "seriesExpectedLoserRuns": 2.857142857142857,
+            "seriesFinalHandicap": 3.285714285714286,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "BOS,33%",
+            "homeCoversWinPercentage": "CLE,68%"
+        }
+    }
+]
