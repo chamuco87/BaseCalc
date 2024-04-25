@@ -1,0 +1,72 @@
+[
+    {
+        "game": "MIA Marlins @ ATL Braves",
+        "expectedWinner": "ATLBraves",
+        "avgHandicap": 5,
+        "avgConfidence": 67.66666666666667,
+        "algoCount": 3
+    },
+    {
+        "game": "ARI Diamondbacks @ STL Cardinals",
+        "expectedWinner": "ARIDiamondbacks",
+        "avgHandicap": 3.3333333333333335,
+        "avgConfidence": 61,
+        "algoCount": 3
+    },
+    {
+        "game": "CHI White @ MIN Twins",
+        "expectedWinner": "MINTwins",
+        "avgHandicap": 3,
+        "avgConfidence": 48.333333333333336,
+        "algoCount": 3
+    },
+    {
+        "game": "SEA Mariners @ TEX Rangers",
+        "expectedWinner": "SEAMariners",
+        "avgHandicap": 3.5,
+        "avgConfidence": 46,
+        "algoCount": 2
+    },
+    {
+        "game": "MIL Brewers @ PIT Pirates",
+        "expectedWinner": "MILBrewers",
+        "avgHandicap": 4.333333333333333,
+        "avgConfidence": 43,
+        "algoCount": 3
+    },
+    {
+        "game": "OAK Athletics @ NY Yankees",
+        "expectedWinner": "NYYankees",
+        "avgHandicap": 3,
+        "avgConfidence": 40,
+        "algoCount": 3
+    },
+    {
+        "game": "BOS Red @ CLE Guardians",
+        "expectedWinner": "CLEGuardians",
+        "avgHandicap": 2,
+        "avgConfidence": 31,
+        "algoCount": 3
+    },
+    {
+        "game": "DET Tigers @ TB Rays",
+        "expectedWinner": "DETTigers",
+        "avgHandicap": 2.3333333333333335,
+        "avgConfidence": 31,
+        "algoCount": 3
+    },
+    {
+        "game": "NY Mets @ SF Giants",
+        "expectedWinner": "NYMets",
+        "avgHandicap": 5.5,
+        "avgConfidence": 30.5,
+        "algoCount": 2
+    },
+    {
+        "game": "TOR Blue @ KC Royals",
+        "expectedWinner": "TORBlue",
+        "avgHandicap": 0,
+        "avgConfidence": 7,
+        "algoCount": 1
+    }
+]

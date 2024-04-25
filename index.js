@@ -49,31 +49,31 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April23rd";
-        var descriptiveDate = "2024-04-23"
+        var selectedDate = "April24th";
+        var descriptiveDate = "2024-04-24"
         //await getESPNData(selectedDate);
-        //await getBattersData(selectedDate);
-        //await getBestScoringTeamsByBatting(selectedDate);
-        //await getBestHittingTeamsByBatting(selectedDate);
-        //await getAllPitchersData(selectedDate);
-        //await getBestStartingPitchersTeams(selectedDate);
-        //await getBestRelievingPitchersTeams(selectedDate);
-        //await getBestOverallPitchersTeams(selectedDate);
-        //await getScheduleData(selectedDate);
-        //await getMoreWininigTeams(selectedDate);
-        //await getMoreScoringTeams(selectedDate);
-        //await getMoreReceivingTeams(selectedDate);
-        //await evaluateGames(selectedDate);
-        //await sortBetterAvgs(selectedDate);
-        //await filterConsistentPicks(selectedDate)
+        await getBattersData(selectedDate);
+        await getBestScoringTeamsByBatting(selectedDate);
+        await getBestHittingTeamsByBatting(selectedDate);
+        await getAllPitchersData(selectedDate);
+        await getBestStartingPitchersTeams(selectedDate);
+        await getBestRelievingPitchersTeams(selectedDate);
+        await getBestOverallPitchersTeams(selectedDate);
+        await getScheduleData(selectedDate);
+        await getMoreWininigTeams(selectedDate);
+        await getMoreScoringTeams(selectedDate);
+        await getMoreReceivingTeams(selectedDate);
+        await evaluateGames(selectedDate);
+        await sortBetterAvgs(selectedDate);
+        await filterConsistentPicks(selectedDate)
     
-        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-        //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate);
+        await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+        await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+        
+        await getCoversWinPercentages(selectedDate, descriptiveDate);
+        await consolidateAlgorithmResults(selectedDate);
 
-        //await getCoversWinPercentages(selectedDate, descriptiveDate);
-        //await consolidateAlgorithmResults(selectedDate);
-
-        await ProcessGameByGame(selectedDate);
+        //await ProcessGameByGame(selectedDate);
         
         //await getScheduleData(selectedDate);
         //OBSOLETE await getResults(selectedDate);
