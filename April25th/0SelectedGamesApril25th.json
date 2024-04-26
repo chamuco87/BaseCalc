@@ -1,0 +1,117 @@
+[
+    {
+        "game": "SD Padres @ COL Rockies",
+        "gameTime": "13:10",
+        "expectedWinner": "SDPadres",
+        "avgHandicapExp": 4,
+        "overallConfidence": 81,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SDPadres",
+            "pitcherBatterFinalHandicap": 6,
+            "pitcherBatterAwayExRuns": 11.559999999999999,
+            "pitcherBatterHomeExRuns": 5.724545454545455,
+            "pitcherBatterExF5Winner": "SDPadres",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "SDPadres",
+            "seriesConfidenceRanking": 75,
+            "seriesExpectedWinnerRuns": 5.88,
+            "seriesExpectedLoserRuns": 3.6,
+            "seriesFinalHandicap": 2.28,
+            "finalHandicapExpected": 4,
+            "awayCoversWinPercentage": "SD,76%",
+            "homeCoversWinPercentage": "COL,24%"
+        }
+    },
+    {
+        "game": "CHI White @ MIN Twins",
+        "gameTime": "11:10",
+        "expectedWinner": "MINTwins",
+        "avgHandicapExp": 4,
+        "overallConfidence": 79,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MINTwins",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 6.687777777777778,
+            "pitcherBatterHomeExRuns": 11.166666666666666,
+            "pitcherBatterExF5Winner": "MINTwins",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "MINTwins",
+            "seriesConfidenceRanking": 75,
+            "seriesExpectedWinnerRuns": 5.625,
+            "seriesExpectedLoserRuns": 2.2083333333333335,
+            "seriesFinalHandicap": 3.4166666666666665,
+            "finalHandicapExpected": 4,
+            "awayCoversWinPercentage": "nodata",
+            "homeCoversWinPercentage": "MIN,79%"
+        }
+    },
+    {
+        "game": "OAK Athletics @ NY Yankees",
+        "gameTime": "17:05",
+        "expectedWinner": "NYYankees",
+        "avgHandicapExp": 4,
+        "overallConfidence": 78,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 6,
+            "pitcherBatterAwayExRuns": 5.907692307692308,
+            "pitcherBatterHomeExRuns": 11.89,
+            "pitcherBatterExF5Winner": "NYYankees",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 72,
+            "seriesExpectedWinnerRuns": 4.44,
+            "seriesExpectedLoserRuns": 2.84,
+            "seriesFinalHandicap": 1.6000000000000005,
+            "finalHandicapExpected": 4,
+            "awayCoversWinPercentage": "OAK,22%",
+            "homeCoversWinPercentage": "NYY,78%"
+        }
+    },
+    {
+        "game": "MIL Brewers @ PIT Pirates",
+        "gameTime": "10:35",
+        "expectedWinner": "MILBrewers",
+        "avgHandicapExp": 3,
+        "overallConfidence": 40,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MILBrewers",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 8.655,
+            "pitcherBatterHomeExRuns": 5.1,
+            "pitcherBatterExF5Winner": "MILBrewers",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "MILBrewers",
+            "seriesConfidenceRanking": 36,
+            "seriesExpectedWinnerRuns": 5.217391304347826,
+            "seriesExpectedLoserRuns": 3.782608695652174,
+            "seriesFinalHandicap": 1.4347826086956523,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "MIL,65%",
+            "homeCoversWinPercentage": "PIT,35%"
+        }
+    },
+    {
+        "game": "HOU Astros @ CHI Cubs",
+        "gameTime": "12:20",
+        "expectedWinner": "CHICubs",
+        "avgHandicapExp": 1,
+        "overallConfidence": 9,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CHICubs",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.525,
+            "pitcherBatterHomeExRuns": 6.720000000000001,
+            "pitcherBatterExF5Winner": "CHICubs",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "CHICubs",
+            "seriesConfidenceRanking": 8,
+            "seriesExpectedWinnerRuns": 5.416666666666667,
+            "seriesExpectedLoserRuns": 4.04,
+            "seriesFinalHandicap": 1.376666666666667,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "HOU,54%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    }
+]

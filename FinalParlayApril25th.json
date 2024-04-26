@@ -1,0 +1,65 @@
+[
+    {
+        "game": "CHI White @ MIN Twins",
+        "expectedWinner": "MINTwins",
+        "avgHandicap": 4,
+        "avgConfidence": 58.333333333333336,
+        "algoCount": 3
+    },
+    {
+        "game": "OAK Athletics @ NY Yankees",
+        "expectedWinner": "NYYankees",
+        "avgHandicap": 4,
+        "avgConfidence": 50.333333333333336,
+        "algoCount": 3
+    },
+    {
+        "game": "SD Padres @ COL Rockies",
+        "expectedWinner": "SDPadres",
+        "avgHandicap": 4,
+        "avgConfidence": 48.666666666666664,
+        "algoCount": 3
+    },
+    {
+        "game": "MIL Brewers @ PIT Pirates",
+        "expectedWinner": "MILBrewers",
+        "avgHandicap": 3,
+        "avgConfidence": 42,
+        "algoCount": 3
+    },
+    {
+        "game": "SEA Mariners @ TEX Rangers",
+        "expectedWinner": "SEAMariners",
+        "avgHandicap": 3.5,
+        "avgConfidence": 28.5,
+        "algoCount": 2
+    },
+    {
+        "game": "HOU Astros @ CHI Cubs",
+        "expectedWinner": "CHICubs",
+        "avgHandicap": 1.6666666666666667,
+        "avgConfidence": 28.333333333333332,
+        "algoCount": 3
+    },
+    {
+        "game": "BOS Red @ CLE Guardians",
+        "expectedWinner": "BOSRed",
+        "avgHandicap": 2,
+        "avgConfidence": 12,
+        "algoCount": 1
+    },
+    {
+        "game": "TOR Blue @ KC Royals",
+        "expectedWinner": "TORBlue",
+        "avgHandicap": 2,
+        "avgConfidence": 8,
+        "algoCount": 1
+    },
+    {
+        "game": "PHI Phillies @ CIN Reds",
+        "expectedWinner": "PHIPhillies",
+        "avgHandicap": 2,
+        "avgConfidence": 6,
+        "algoCount": 1
+    }
+]

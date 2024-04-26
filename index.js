@@ -49,9 +49,9 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April24th";
-        var descriptiveDate = "2024-04-24"
-        //await getESPNData(selectedDate);
+        var selectedDate = "April25th";
+        var descriptiveDate = "2024-04-25"
+        await getESPNData(selectedDate);
         await getBattersData(selectedDate);
         await getBestScoringTeamsByBatting(selectedDate);
         await getBestHittingTeamsByBatting(selectedDate);
