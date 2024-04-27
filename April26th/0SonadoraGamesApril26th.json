@@ -1,0 +1,50 @@
+[
+    {
+        "pitcherBatterExWinner": "TORBlue",
+        "pitcherBatterFinalHandicap": 3,
+        "pitcherBatterAwayExRuns": 7.533333333333333,
+        "pitcherBatterHomeExRuns": 10.083333333333332,
+        "pitcherBatterExF5Winner": "TORBlue",
+        "pitcherBatterExF5Diff": 1,
+        "seriesExWinner": "LADodgers",
+        "seriesConfidenceRanking": 45,
+        "seriesExpectedWinnerRuns": 5.222222222222222,
+        "seriesExpectedLoserRuns": 3.6923076923076925,
+        "seriesFinalHandicap": 1.5299145299145298,
+        "finalHandicapExpected": 2,
+        "awayCoversWinPercentage": "LAD,55%",
+        "homeCoversWinPercentage": "TOR,45%"
+    },
+    {
+        "pitcherBatterExWinner": "TEXRangers",
+        "pitcherBatterFinalHandicap": 1,
+        "pitcherBatterAwayExRuns": 7.604090909090909,
+        "pitcherBatterHomeExRuns": 8.226818181818182,
+        "pitcherBatterExF5Winner": "TEXRangers",
+        "pitcherBatterExF5Diff": 1,
+        "seriesExWinner": "CINReds",
+        "seriesConfidenceRanking": 1,
+        "seriesExpectedWinnerRuns": 5.08,
+        "seriesExpectedLoserRuns": 4.32,
+        "seriesFinalHandicap": 0.7599999999999998,
+        "finalHandicapExpected": 1,
+        "awayCoversWinPercentage": "CIN,32%",
+        "homeCoversWinPercentage": "TEX,68%"
+    },
+    {
+        "pitcherBatterExWinner": "SFGiants",
+        "pitcherBatterFinalHandicap": 3,
+        "pitcherBatterAwayExRuns": 9.426666666666666,
+        "pitcherBatterHomeExRuns": 12.25,
+        "pitcherBatterExF5Winner": "SFGiants",
+        "pitcherBatterExF5Diff": 1,
+        "seriesExWinner": "PITPirates",
+        "seriesConfidenceRanking": 18,
+        "seriesExpectedWinnerRuns": 4.884615384615385,
+        "seriesExpectedLoserRuns": 4.115384615384615,
+        "seriesFinalHandicap": 0.76923076923077,
+        "finalHandicapExpected": 2,
+        "awayCoversWinPercentage": "PIT,33%",
+        "homeCoversWinPercentage": "SF,67%"
+    }
+]
