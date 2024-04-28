@@ -1,0 +1,140 @@
+[
+    {
+        "game": "OAK Athletics @ BAL Orioles",
+        "gameTime": "14:05",
+        "expectedWinner": "BALOrioles",
+        "avgHandicapExp": 1,
+        "overallConfidence": 70,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BALOrioles",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 7.474444444444444,
+            "pitcherBatterHomeExRuns": 7.8149999999999995,
+            "pitcherBatterExF5Winner": "OAKAthletics",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "BALOrioles",
+            "seriesConfidenceRanking": 70,
+            "seriesExpectedWinnerRuns": 5.52,
+            "seriesExpectedLoserRuns": 2.8518518518518516,
+            "seriesFinalHandicap": 2.668148148148148,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "OAK,21%",
+            "homeCoversWinPercentage": "BAL,79%"
+        }
+    },
+    {
+        "game": "TB Rays @ CHI White",
+        "gameTime": "17:10",
+        "expectedWinner": "TBRays",
+        "avgHandicapExp": 5,
+        "overallConfidence": 66,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "TBRays",
+            "pitcherBatterFinalHandicap": 6,
+            "pitcherBatterAwayExRuns": 11.853333333333332,
+            "pitcherBatterHomeExRuns": 6.1322222222222225,
+            "pitcherBatterExF5Winner": "TBRays",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "TBRays",
+            "seriesConfidenceRanking": 60,
+            "seriesExpectedWinnerRuns": 5.576923076923077,
+            "seriesExpectedLoserRuns": 2.5,
+            "seriesFinalHandicap": 3.0769230769230766,
+            "finalHandicapExpected": 5,
+            "awayCoversWinPercentage": "TB,75%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "KC Royals @ DET Tigers",
+        "gameTime": "16:10",
+        "expectedWinner": "KCRoyals",
+        "avgHandicapExp": 1,
+        "overallConfidence": 51,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "KCRoyals",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 6.061111111111112,
+            "pitcherBatterHomeExRuns": 5.982222222222222,
+            "pitcherBatterExF5Winner": "KCRoyals",
+            "pitcherBatterExF5Diff": 0,
+            "seriesExWinner": "KCRoyals",
+            "seriesConfidenceRanking": 51,
+            "seriesExpectedWinnerRuns": 4.703703703703703,
+            "seriesExpectedLoserRuns": 2.962962962962963,
+            "seriesFinalHandicap": 1.7407407407407405,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "KC,57%",
+            "homeCoversWinPercentage": "DET,43%"
+        }
+    },
+    {
+        "game": "WAS Nationals @ MIA Marlins",
+        "gameTime": "14:10",
+        "expectedWinner": "WASNationals",
+        "avgHandicapExp": 2,
+        "overallConfidence": 36,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "WASNationals",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 7.5088888888888885,
+            "pitcherBatterHomeExRuns": 5.611111111111111,
+            "pitcherBatterExF5Winner": "WASNationals",
+            "pitcherBatterExF5Diff": 2,
+            "seriesExWinner": "WASNationals",
+            "seriesConfidenceRanking": 34,
+            "seriesExpectedWinnerRuns": 5.111111111111111,
+            "seriesExpectedLoserRuns": 3.2962962962962963,
+            "seriesFinalHandicap": 1.8148148148148144,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "WAS,45%",
+            "homeCoversWinPercentage": "MIA,55%"
+        }
+    },
+    {
+        "game": "HOU Astros @ COL Rockies",
+        "gameTime": "16:05",
+        "expectedWinner": "HOUAstros",
+        "avgHandicapExp": 3,
+        "overallConfidence": 24,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "HOUAstros",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 8.923333333333332,
+            "pitcherBatterHomeExRuns": 5.13,
+            "pitcherBatterExF5Winner": "HOUAstros",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "HOUAstros",
+            "seriesConfidenceRanking": 20,
+            "seriesExpectedWinnerRuns": 6,
+            "seriesExpectedLoserRuns": 3.8461538461538463,
+            "seriesFinalHandicap": 2.1538461538461537,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "HOU,66%",
+            "homeCoversWinPercentage": "COL,34%"
+        }
+    },
+    {
+        "game": "MIN Twins @ LA Angels",
+        "gameTime": "19:38",
+        "expectedWinner": "MINTwins",
+        "avgHandicapExp": 0,
+        "overallConfidence": 12,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MINTwins",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 7.666666666666667,
+            "pitcherBatterHomeExRuns": 7.646923076923077,
+            "pitcherBatterExF5Winner": "LAAngels",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "MINTwins",
+            "seriesConfidenceRanking": 12,
+            "seriesExpectedWinnerRuns": 4.923076923076923,
+            "seriesExpectedLoserRuns": 4.1923076923076925,
+            "seriesFinalHandicap": 0.7307692307692308,
+            "finalHandicapExpected": 0,
+            "awayCoversWinPercentage": "MIN,39%",
+            "homeCoversWinPercentage": "LAA,61%"
+        }
+    }
+]

@@ -1,0 +1,30 @@
+[
+    {
+        "game": "TB Rays @ CHI White",
+        "expectedWinner": "TBRays",
+        "avgHandicap": 4.666666666666667,
+        "avgConfidence": 42.333333333333336,
+        "algoCount": 3
+    },
+    {
+        "game": "KC Royals @ DET Tigers",
+        "expectedWinner": "KCRoyals",
+        "avgHandicap": 1,
+        "avgConfidence": 36,
+        "algoCount": 2
+    },
+    {
+        "game": "PIT Pirates @ SF Giants",
+        "expectedWinner": "SFGiants",
+        "avgHandicap": 2,
+        "avgConfidence": 20,
+        "algoCount": 2
+    },
+    {
+        "game": "WAS Nationals @ MIA Marlins",
+        "expectedWinner": "WASNationals",
+        "avgHandicap": 2,
+        "avgConfidence": 17.333333333333332,
+        "algoCount": 3
+    }
+]
