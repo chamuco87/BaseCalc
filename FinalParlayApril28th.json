@@ -1,0 +1,37 @@
+[
+    {
+        "game": "HOU Astros @ COL Rockies",
+        "expectedWinner": "HOUAstros",
+        "avgHandicap": 3,
+        "avgConfidence": 41,
+        "algoCount": 1
+    },
+    {
+        "game": "ARI Diamondbacks @ SEA Mariners",
+        "expectedWinner": "SEAMariners",
+        "avgHandicap": 4,
+        "avgConfidence": 31.5,
+        "algoCount": 2
+    },
+    {
+        "game": "CIN Reds @ TEX Rangers",
+        "expectedWinner": "CINReds",
+        "avgHandicap": 1.3333333333333333,
+        "avgConfidence": 18.333333333333332,
+        "algoCount": 3
+    },
+    {
+        "game": "PIT Pirates @ SF Giants",
+        "expectedWinner": "PITPirates",
+        "avgHandicap": 1,
+        "avgConfidence": 15,
+        "algoCount": 1
+    },
+    {
+        "game": "CLE Guardians @ ATL Braves",
+        "expectedWinner": "ATLBraves",
+        "avgHandicap": 1,
+        "avgConfidence": 10.5,
+        "algoCount": 2
+    }
+]
