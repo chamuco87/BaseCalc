@@ -1,0 +1,48 @@
+[
+    {
+        "game": "SF Giants @ BOS Red",
+        "gameTime": "11:35",
+        "expectedWinner": "BOSRed",
+        "avgHandicapExp": 0,
+        "overallConfidence": 35,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BOSRed",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 7.681153846153846,
+            "pitcherBatterHomeExRuns": 7.83,
+            "pitcherBatterExF5Winner": "BOSRed",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "BOSRed",
+            "seriesConfidenceRanking": 35,
+            "seriesExpectedWinnerRuns": 2.7142857142857144,
+            "seriesExpectedLoserRuns": 3.5714285714285716,
+            "seriesFinalHandicap": -0.8571428571428572,
+            "finalHandicapExpected": 0,
+            "awayCoversWinPercentage": "SF,39%",
+            "homeCoversWinPercentage": "BOS,61%"
+        }
+    },
+    {
+        "game": "WAS Nationals @ TEX Rangers",
+        "gameTime": "12:35",
+        "expectedWinner": "WASNationals",
+        "avgHandicapExp": 1,
+        "overallConfidence": 6,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "WASNationals",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 6.5,
+            "pitcherBatterHomeExRuns": 6.0337499999999995,
+            "pitcherBatterExF5Winner": "WASNationals",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "WASNationals",
+            "seriesConfidenceRanking": 6,
+            "seriesExpectedWinnerRuns": 5.142857142857143,
+            "seriesExpectedLoserRuns": 3.5714285714285716,
+            "seriesFinalHandicap": 1.5714285714285716,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "WAS,33%",
+            "homeCoversWinPercentage": "TEX,67%"
+        }
+    }
+]

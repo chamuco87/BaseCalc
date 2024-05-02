@@ -49,17 +49,17 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April29th";
-        var descriptiveDate = "2024-04-29"
-        //await getESPNData(selectedDate);
-        //await getBattersData(selectedDate);
+        var selectedDate = "May2nd";
+        var descriptiveDate = "2024-05-02"
+        await getESPNData(selectedDate);
+        await getBattersData(selectedDate);
         await getBestScoringTeamsByBatting(selectedDate);
         await getBestHittingTeamsByBatting(selectedDate);
-        //await getAllPitchersData(selectedDate);
+        await getAllPitchersData(selectedDate);
         await getBestStartingPitchersTeams(selectedDate);
         await getBestRelievingPitchersTeams(selectedDate);
         await getBestOverallPitchersTeams(selectedDate);
-        //await getScheduleData(selectedDate);
+        await getScheduleData(selectedDate);
         await getMoreWininigTeams(selectedDate);
         await getMoreScoringTeams(selectedDate);
         await getMoreReceivingTeams(selectedDate);
@@ -1652,7 +1652,7 @@ async function getAllPitchersData(date)
         var term = homeOrAway == "home" ? game.homeTeam.homePitcher + " " + game.homeTeam.homeId +" "+ game.homeTeam.homeTeam.replace(game.homeTeam.homeId,"") : game.awayTeam.awayPitcher +" "+ game.awayTeam.awayId +" "+game.awayTeam.awayTeam.replace(game.awayTeam.awayId,"");
         try{
             var search = await driver.findElement(By.name("q")).sendKeys('site:www.espn.com.mx stats pitcher ' + term, Key.ENTER);
-            var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
+            //var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
             var espnId = (await driver.getCurrentUrl()).split("_/")[1];
             await driver.get(statsURL+espnId);
             }
