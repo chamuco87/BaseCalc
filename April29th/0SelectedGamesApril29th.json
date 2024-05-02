@@ -1,0 +1,163 @@
+[
+    {
+        "game": "MIN Twins @ CHI White",
+        "gameTime": "17:40",
+        "expectedWinner": "MINTwins",
+        "avgHandicapExp": 3,
+        "overallConfidence": 97,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MINTwins",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 10.017058823529412,
+            "pitcherBatterHomeExRuns": 5.655,
+            "pitcherBatterExF5Winner": "MINTwins",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "MINTwins",
+            "seriesConfidenceRanking": 93,
+            "seriesExpectedWinnerRuns": 5.5,
+            "seriesExpectedLoserRuns": 2.75,
+            "seriesFinalHandicap": 2.75,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "MIN,78%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "PHI Phillies @ LA Angels",
+        "gameTime": "19:38",
+        "expectedWinner": "PHIPhillies",
+        "avgHandicapExp": 3,
+        "overallConfidence": 75,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PHIPhillies",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 12.321428571428571,
+            "pitcherBatterHomeExRuns": 7.21,
+            "pitcherBatterExF5Winner": "PHIPhillies",
+            "pitcherBatterExF5Diff": 5,
+            "seriesExWinner": "PHIPhillies",
+            "seriesConfidenceRanking": 70,
+            "seriesExpectedWinnerRuns": 5.535714285714286,
+            "seriesExpectedLoserRuns": 3.793103448275862,
+            "seriesFinalHandicap": 1.7426108374384235,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "PHI,74%",
+            "homeCoversWinPercentage": "LAA,26%"
+        }
+    },
+    {
+        "game": "TB Rays @ MIL Brewers",
+        "gameTime": "17:40",
+        "expectedWinner": "MILBrewers",
+        "avgHandicapExp": 1,
+        "overallConfidence": 51,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "MILBrewers",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 7.416666666666666,
+            "pitcherBatterHomeExRuns": 7.9833333333333325,
+            "pitcherBatterExF5Winner": "TBRays",
+            "pitcherBatterExF5Diff": 0,
+            "seriesExWinner": "MILBrewers",
+            "seriesConfidenceRanking": 50,
+            "seriesExpectedWinnerRuns": 5.2592592592592595,
+            "seriesExpectedLoserRuns": 4,
+            "seriesFinalHandicap": 1.2592592592592595,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "TB,17%",
+            "homeCoversWinPercentage": "MIL,83%"
+        }
+    },
+    {
+        "game": "PIT Pirates @ OAK Athletics",
+        "gameTime": "19:40",
+        "expectedWinner": "PITPirates",
+        "avgHandicapExp": 3,
+        "overallConfidence": 44,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PITPirates",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 11.059999999999999,
+            "pitcherBatterHomeExRuns": 6.13,
+            "pitcherBatterExF5Winner": "PITPirates",
+            "pitcherBatterExF5Diff": 4,
+            "seriesExWinner": "PITPirates",
+            "seriesConfidenceRanking": 39,
+            "seriesExpectedWinnerRuns": 4.379310344827586,
+            "seriesExpectedLoserRuns": 2.896551724137931,
+            "seriesFinalHandicap": 1.4827586206896552,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "PIT,66%",
+            "homeCoversWinPercentage": "OAK,34%"
+        }
+    },
+    {
+        "game": "CIN Reds @ SD Padres",
+        "gameTime": "19:40",
+        "expectedWinner": "CINReds",
+        "avgHandicapExp": 2,
+        "overallConfidence": 28,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CINReds",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 8.448636363636364,
+            "pitcherBatterHomeExRuns": 5.756363636363636,
+            "pitcherBatterExF5Winner": "CINReds",
+            "pitcherBatterExF5Diff": 2,
+            "seriesExWinner": "CINReds",
+            "seriesConfidenceRanking": 25,
+            "seriesExpectedWinnerRuns": 4.964285714285714,
+            "seriesExpectedLoserRuns": 4.214285714285714,
+            "seriesFinalHandicap": 0.75,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "CIN,51%",
+            "homeCoversWinPercentage": "SD,49%"
+        }
+    },
+    {
+        "game": "LA Dodgers @ ARI Diamondbacks",
+        "gameTime": "19:40",
+        "expectedWinner": "LADodgers",
+        "avgHandicapExp": 2,
+        "overallConfidence": 17,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "LADodgers",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 9.862272727272728,
+            "pitcherBatterHomeExRuns": 6.46,
+            "pitcherBatterExF5Winner": "LADodgers",
+            "pitcherBatterExF5Diff": 3,
+            "seriesExWinner": "LADodgers",
+            "seriesConfidenceRanking": 14,
+            "seriesExpectedWinnerRuns": 5.266666666666667,
+            "seriesExpectedLoserRuns": 4,
+            "seriesFinalHandicap": 1.2666666666666666,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "LAD,72%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "NY Yankees @ BAL Orioles",
+        "gameTime": "16:35",
+        "expectedWinner": "NYYankees",
+        "avgHandicapExp": 2,
+        "overallConfidence": 13,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 8.61,
+            "pitcherBatterHomeExRuns": 6.115,
+            "pitcherBatterExF5Winner": "NYYankees",
+            "pitcherBatterExF5Diff": 0,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 11,
+            "seriesExpectedWinnerRuns": 5.103448275862069,
+            "seriesExpectedLoserRuns": 3.6206896551724137,
+            "seriesFinalHandicap": 1.4827586206896557,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "NYY,48%",
+            "homeCoversWinPercentage": "BAL,52%"
+        }
+    }
+]

@@ -49,17 +49,17 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "April28th";
-        var descriptiveDate = "2024-04-28"
-        await getESPNData(selectedDate);
-        await getBattersData(selectedDate);
+        var selectedDate = "April29th";
+        var descriptiveDate = "2024-04-29"
+        //await getESPNData(selectedDate);
+        //await getBattersData(selectedDate);
         await getBestScoringTeamsByBatting(selectedDate);
         await getBestHittingTeamsByBatting(selectedDate);
-        await getAllPitchersData(selectedDate);
+        //await getAllPitchersData(selectedDate);
         await getBestStartingPitchersTeams(selectedDate);
         await getBestRelievingPitchersTeams(selectedDate);
         await getBestOverallPitchersTeams(selectedDate);
-        await getScheduleData(selectedDate);
+        //await getScheduleData(selectedDate);
         await getMoreWininigTeams(selectedDate);
         await getMoreScoringTeams(selectedDate);
         await getMoreReceivingTeams(selectedDate);
@@ -1855,7 +1855,7 @@ async function GetBattingStats()
 
     script += 'var playersDat = [];';
     script += 'var a = 0;';
-    script += 'for (var index = 0; index < 9; index++) {';
+    script += 'for (var index = 0; index < players.length-1; index++) {';
         script += 'var playersStats =[];';
         script += 'var playersInfo = {name:"", playerStats:[]};';
         script += 'var player = players[index].innerText;';
