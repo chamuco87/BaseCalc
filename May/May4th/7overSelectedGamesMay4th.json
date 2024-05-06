@@ -1,0 +1,90 @@
+[
+    {
+        "game": "COL Rockies @ PIT Pirates",
+        "seriesRunsEx": 10.428571428571429,
+        "pitcherBatterRunsEx": 15.905714285714286,
+        "confidenceLevel": 13.167142857142856,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "PITPirates",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 6.93,
+            "pitcherBatterHomeExRuns": 8.975714285714286,
+            "pitcherBatterExF5Winner": "PITPirates",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "PITPirates",
+            "seriesConfidenceRanking": 3,
+            "seriesExpectedWinnerRuns": 6.714285714285714,
+            "seriesExpectedLoserRuns": 3.7142857142857144,
+            "seriesFinalHandicap": 3,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "COL,nodata",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "BOS Red @ MIN Twins",
+        "seriesRunsEx": 11.857142857142858,
+        "pitcherBatterRunsEx": 11.671923076923077,
+        "confidenceLevel": 11.764532967032967,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "BOSRed",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 6.865,
+            "pitcherBatterHomeExRuns": 4.806923076923077,
+            "pitcherBatterExF5Winner": "BOSRed",
+            "pitcherBatterExF5Diff": 4,
+            "seriesExWinner": "MINTwins",
+            "seriesConfidenceRanking": 17,
+            "seriesExpectedWinnerRuns": 8,
+            "seriesExpectedLoserRuns": 3.857142857142857,
+            "seriesFinalHandicap": 4.142857142857142,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "BOS,nodata",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "MIA Marlins @ OAK Athletics",
+        "seriesRunsEx": 9,
+        "pitcherBatterRunsEx": 14.280073529411764,
+        "confidenceLevel": 11.640036764705883,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "OAKAthletics",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 6.898823529411764,
+            "pitcherBatterHomeExRuns": 7.38125,
+            "pitcherBatterExF5Winner": "OAKAthletics",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "OAKAthletics",
+            "seriesConfidenceRanking": 23,
+            "seriesExpectedWinnerRuns": 6.285714285714286,
+            "seriesExpectedLoserRuns": 2.7142857142857144,
+            "seriesFinalHandicap": 3.571428571428571,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "nodata",
+            "homeCoversWinPercentage": "OAK,nodata"
+        }
+    },
+    {
+        "game": "SEA Mariners @ HOU Astros",
+        "seriesRunsEx": 9.571428571428571,
+        "pitcherBatterRunsEx": 11.191122994652407,
+        "confidenceLevel": 10.38127578304049,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SEAMariners",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 6.342941176470589,
+            "pitcherBatterHomeExRuns": 4.848181818181818,
+            "pitcherBatterExF5Winner": "SEAMariners",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "HOUAstros",
+            "seriesConfidenceRanking": 18,
+            "seriesExpectedWinnerRuns": 6.571428571428571,
+            "seriesExpectedLoserRuns": 3,
+            "seriesFinalHandicap": 3.571428571428571,
+            "finalHandicapExpected": 2,
+            "awayCoversWinPercentage": "nodata",
+            "homeCoversWinPercentage": "HOU,nodata"
+        }
+    }
+]

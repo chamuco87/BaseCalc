@@ -49,29 +49,31 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May2nd";
-        var descriptiveDate = "2024-05-02"
-        await getESPNData(selectedDate);
-        await getBattersData(selectedDate);
-        await getBestScoringTeamsByBatting(selectedDate);
-        await getBestHittingTeamsByBatting(selectedDate);
-        await getAllPitchersData(selectedDate);
-        await getBestStartingPitchersTeams(selectedDate);
-        await getBestRelievingPitchersTeams(selectedDate);
-        await getBestOverallPitchersTeams(selectedDate);
-        await getScheduleData(selectedDate);
-        await getMoreWininigTeams(selectedDate);
-        await getMoreScoringTeams(selectedDate);
-        await getMoreReceivingTeams(selectedDate);
-        await evaluateGames(selectedDate);
-        await sortBetterAvgs(selectedDate);
-        await filterConsistentPicks(selectedDate)
-    
-        await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-        await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-        
-        await getCoversWinPercentages(selectedDate, descriptiveDate);
-        await consolidateAlgorithmResults(selectedDate);
+        var selectedDate = "May5th";
+        var descriptiveDate = "2024-05-05"
+        //await getESPNData(selectedDate);
+        //await getBattersData(selectedDate);
+        //await getBestScoringTeamsByBatting(selectedDate);
+        //await getBestHittingTeamsByBatting(selectedDate);
+        //await getAllPitchersData(selectedDate);
+        //await getBestStartingPitchersTeams(selectedDate);
+        //await getBestRelievingPitchersTeams(selectedDate);
+        //await getBestOverallPitchersTeams(selectedDate);
+        //await getScheduleData(selectedDate);
+        //await getMoreWininigTeams(selectedDate);
+        //await getMoreScoringTeams(selectedDate);
+        //await getMoreReceivingTeams(selectedDate);
+        //await evaluateGames(selectedDate);
+        //await sortBetterAvgs(selectedDate);
+        //await filterConsistentPicks(selectedDate)
+    //
+        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+        //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+        //
+        //await getCoversWinPercentages(selectedDate, descriptiveDate);
+        //await consolidateAlgorithmResults(selectedDate);
+
+        await CalculateWinnersViaFormula(selectedDate);
 
         //await ProcessGameByGame(selectedDate);
         
@@ -87,6 +89,306 @@ var teams = [
       await driver.quit();
     }
 
+async function CalculateWinnersViaFormula(date)
+{
+    var pitchersData = await load(date);
+    var battersData = await load(date+"BattersData");
+    var seriesData0 = await load(date+"SeriesWinners0");
+    var seriesData7 = await load(date+"SeriesWinners7");
+    var seriesData3 = await load(date+"SeriesWinners3");
+    var teamsSchedule = await load(date+"TeamSchedules");
+
+    var games = [];
+    for (let index = 0; index < pitchersData[0].games.length; index++) {
+        var gameData = {};
+        const game = pitchersData[0].games[index];
+        var homePitcher = game.homeTeam.homePitcherDataNew[0];
+        var homeBatter = battersData.filter(function(item){
+            return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
+        })[0];
+        var awayPitcher = game.awayTeam.awayPitcherDataNew[0];
+        var awayBatter = battersData.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;
+        })[0];
+
+        var awayFactors = await CalculateFactors(awayPitcher, awayBatter);
+        var homeFactors = await CalculateFactors(homePitcher, homeBatter);
+
+        var stdDev = await getStandardDeviation([awayPitcher.currentEra, awayPitcher.carrerEra, homePitcher.currentEra, homePitcher.carrerEra]);
+
+        var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
+
+        gameData.game = game.game;
+        gameData.time = game.gameTime;
+        gameData.away = game.awayTeam.awayTeam;
+        gameData.home = game.homeTeam.homeTeam;
+        gameData.formulaWinner = calcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+        gameData.formulaWin = calcs.winner;
+        gameData.formulaawayWinPercentage = calcs.totalAwayPercenatge;
+        gameData.formulahomeWinPercentage = calcs.totalHomePercentage;
+        gameData.stdDev = calcs.stdDev;
+        gameData.formulaDiff = Math.abs(gameData.formulaawayWinPercentage - gameData.formulahomeWinPercentage);
+
+
+        var serie0 = seriesData0.filter(function(item){
+            return item.game.replace(" ","") == game.game.replace(" ","");
+        })[0];
+
+        var serie3 = seriesData3.filter(function(item){
+            return item.game.replace(" ","") == game.game.replace(" ","");
+        })[0];
+
+        var serie7 = seriesData7.filter(function(item){
+            return item.game.replace(" ","") == game.game.replace(" ","");
+        })[0];
+
+        gameData.seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
+        if(gameData.seriesIsConsistent)
+        {
+            gameData.seriesWinner = serie0.seriesExpectedWinner;
+        }
+        else{
+            if(serie0.seriesExpectedWinner == serie7.seriesExpectedWinner)
+            {
+                gameData.seriesWinner = serie0.seriesExpectedWinner+"07";
+            }
+            else if(serie3.seriesExpectedWinner == serie7.seriesExpectedWinner)
+            {
+                gameData.seriesWinner = serie3.seriesExpectedWinner+"37";
+            }
+            else if(serie0.seriesExpectedWinner == serie3.seriesExpectedWinner){
+                gameData.seriesWinner = serie3.seriesExpectedWinner+"03";
+            }
+        }
+
+        var awayResults = teamsSchedule.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+
+        var homeResults = teamsSchedule.filter(function(item){
+            return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+        })[0];
+
+        gameData.awayLastResult = awayResults.scheduleData[awayResults.scheduleData.length-1].RESULT;
+        gameData.awayLastOpponent = awayResults.scheduleData[awayResults.scheduleData.length-1].OPPONENT;
+        gameData.awayWins = awayResults.scheduleData[awayResults.scheduleData.length-1].WINS;
+        gameData.awayLosses = awayResults.scheduleData[awayResults.scheduleData.length-1].LOSES;
+
+        gameData.homeLastResult = homeResults.scheduleData[homeResults.scheduleData.length-1].RESULT;
+        gameData.homeLastOpponent = homeResults.scheduleData[homeResults.scheduleData.length-1].OPPONENT;
+        gameData.homeWins = homeResults.scheduleData[homeResults.scheduleData.length-1].WINS;
+        gameData.homeLosses = homeResults.scheduleData[homeResults.scheduleData.length-1].LOSES;
+
+        games.push(gameData);
+
+        await save(date+"FinalSelections", games, function(){}, "replace");
+    }
+    var stopHere = "";
+}
+
+async function getStandardDeviation (array) {
+    const n = array.length
+    const mean = array.reduce((a, b) => a + b) / n
+    return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
+  }
+
+
+async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
+{
+    var old ={
+        average:{ diff:0, winPercenatge:0, lostPercentage:0 , winner:""}, 
+        current:{diff:0, winPercenatge:0, lostPercentage:0, winner:""}, 
+        carrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        currentCarrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        carrerCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        awayPercentage : 0,
+        homePercenatge: 0,
+        awayScenarios: 0,
+        homeScenarios: 0,
+        awayFinalPercentage: 0,
+        homeFinalPercentage: 0
+    };
+
+    var neww ={
+        average:{ diff:0, winPercenatge:0, lostPercentage:0, winner:"" }, 
+        current:{diff:0, winPercenatge:0, lostPercentage:0, winner:""}, 
+        carrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        currentCarrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        carrerCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        awayPercentage : 0,
+        homePercenatge: 0,
+        awayScenarios: 0,
+        homeScenarios: 0,
+        awayFinalPercentage: 0,
+        homeFinalPercentage: 0
+    };
+
+    old.average.diff = awayFactors.old.average > homeFactors.old.average ? awayFactors.old.average - homeFactors.old.average : homeFactors.old.average - awayFactors.old.average;
+    old.current.diff = awayFactors.old.current > homeFactors.old.current ? awayFactors.old.current - homeFactors.old.current : homeFactors.old.current - awayFactors.old.current;
+    old.carrer.diff = awayFactors.old.carrer > homeFactors.old.carrer ? awayFactors.old.carrer - homeFactors.old.carrer : homeFactors.old.carrer - awayFactors.old.carrer;
+    old.currentCarrer.diff = awayFactors.old.current > homeFactors.old.carrer ? awayFactors.old.current - homeFactors.old.carrer : homeFactors.old.carrer - awayFactors.old.current;
+    old.carrerCurrent.diff = awayFactors.old.carrer > homeFactors.old.current ? awayFactors.old.carrer - homeFactors.old.current : homeFactors.old.current - awayFactors.old.carrer;
+    
+    old.average.winPercenatge = awayFactors.old.average > homeFactors.old.average ? (Math.abs(awayFactors.old.average)/ (Math.abs(homeFactors.old.average) + Math.abs(awayFactors.old.average)))*100 : (Math.abs(homeFactors.old.average)/ (Math.abs(homeFactors.old.average) + Math.abs(awayFactors.old.average)))*100;
+    old.current.winPercenatge = awayFactors.old.current > homeFactors.old.current ? (Math.abs(awayFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.current)))*100 : (Math.abs(homeFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.current)))*100;
+    old.carrer.winPercenatge = awayFactors.old.carrer > homeFactors.old.carrer ? (Math.abs(awayFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.carrer)))*100 : (Math.abs(homeFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.carrer)))*100;
+    old.currentCarrer.winPercenatge = awayFactors.old.current > homeFactors.old.carrer ? (Math.abs(awayFactors.old.current)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.current)))*100 : (Math.abs(homeFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.current)))*100;
+    old.carrerCurrent.winPercenatge = awayFactors.old.carrer > homeFactors.old.current ? (Math.abs(awayFactors.old.carrer)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.carrer)))*100 : (Math.abs(homeFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.carrer)))*100;
+
+    old.average.lostPercentage = 100 - old.average.winPercenatge;
+    old.current.lostPercentage = 100 - old.current.winPercenatge;
+    old.carrer.lostPercentage = 100 - old.carrer.winPercenatge;
+    old.currentCarrer.lostPercentage = 100 - old.currentCarrer.winPercenatge;
+    old.carrerCurrent.lostPercentage = 100 - old.carrerCurrent.winPercenatge;
+
+    old.average.winner = awayFactors.old.average < homeFactors.old.average ? "away" : "home";
+    old.current.winner = awayFactors.old.current < homeFactors.old.current ? "away" : "home";
+    old.carrer.winner = awayFactors.old.carrer < homeFactors.old.carrer ? "away" : "home";
+    old.currentCarrer.winner = awayFactors.old.current < homeFactors.old.carrer ? "away" : "home";
+    old.carrerCurrent.winner = awayFactors.old.carrer < homeFactors.old.current ? "away" : "home";
+
+    old.awayScenarios = old.average.winner == "away"? 1:0;
+    old.awayScenarios += old.current.winner == "away"? 1:0;
+    old.awayScenarios += old.carrer.winner == "away"? 1:0;
+    old.awayScenarios += old.currentCarrer.winner == "away"? 1:0;
+    old.awayScenarios += old.carrerCurrent.winner == "away"? 1:0;
+
+    old.homeScenarios = old.average.winner == "home"? 1:0;
+    old.homeScenarios += old.current.winner == "home"? 1:0;
+    old.homeScenarios += old.carrer.winner == "home"? 1:0;
+    old.homeScenarios += old.currentCarrer.winner == "home"? 1:0;
+    old.homeScenarios += old.carrerCurrent.winner == "home"? 1:0;
+
+    var awaySum = old.average.winner == "away"? old.average.winPercenatge:old.average.lostPercentage;
+    awaySum += old.current.winner == "away"? old.current.winPercenatge:old.current.lostPercentage;
+    awaySum += old.carrer.winner == "away"? old.carrer.winPercenatge:old.carrer.lostPercentage;
+    awaySum += old.currentCarrer.winner == "away"? old.currentCarrer.winPercenatge:old.currentCarrer.lostPercentage;
+    awaySum += old.carrerCurrent.winner == "away"? old.carrerCurrent.winPercenatge:old.carrerCurrent.lostPercentage;
+
+    var homeSum = old.average.winner == "home"? old.average.winPercenatge:old.currentCarrer.lostPercentage;
+    homeSum += old.current.winner == "home"? old.current.winPercenatge:old.currentCarrer.lostPercentage;
+    homeSum += old.carrer.winner == "home"? old.carrer.winPercenatge:old.currentCarrer.lostPercentage;
+    homeSum += old.currentCarrer.winner == "home"? old.currentCarrer.winPercenatge:old.currentCarrer.lostPercentage;
+    homeSum += old.carrerCurrent.winner == "home"? old.carrerCurrent.winPercenatge:old.carrerCurrent.lostPercentage;
+
+    old.awayPercentage = awaySum/5;
+    old.homePercenatge = homeSum/5;
+
+    old.awayScenarios = old.awayScenarios*20;
+    old.homeScenarios = old.homeScenarios*20;
+
+    old.awayFinalPercentage = (old.awayPercentage + old.awayScenarios)/2;
+    old.homeFinalPercentage = (old.homePercenatge + old.homeScenarios)/2;
+
+
+    neww.average.diff = awayFactors.new.average > homeFactors.new.average ? awayFactors.new.average - homeFactors.new.average : homeFactors.new.average - awayFactors.new.average;
+    neww.current.diff = awayFactors.new.current > homeFactors.new.current ? awayFactors.new.current - homeFactors.new.current : homeFactors.new.current - awayFactors.new.current;
+    neww.carrer.diff = awayFactors.new.carrer > homeFactors.new.carrer ? awayFactors.new.carrer - homeFactors.new.carrer : homeFactors.new.carrer - awayFactors.new.carrer;
+    neww.currentCarrer.diff = awayFactors.new.current > homeFactors.new.carrer ? awayFactors.new.current - homeFactors.new.carrer : homeFactors.new.carrer - awayFactors.new.current;
+    neww.carrerCurrent.diff = awayFactors.new.carrer > homeFactors.new.current ? awayFactors.new.carrer - homeFactors.new.current : homeFactors.new.current - awayFactors.new.carrer;
+    
+    neww.average.winPercenatge = awayFactors.new.average > homeFactors.new.average ? (Math.abs(awayFactors.new.average)/ (Math.abs(homeFactors.new.average) + Math.abs(awayFactors.new.average)))*100: (Math.abs(homeFactors.new.average)/ (Math.abs(homeFactors.new.average) + Math.abs(awayFactors.new.average)))*100;
+    neww.current.winPercenatge = awayFactors.new.current > homeFactors.new.current ? (Math.abs(awayFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.current)))*100 : (Math.abs(homeFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.current)))*100;
+    neww.carrer.winPercenatge = awayFactors.new.carrer > homeFactors.new.carrer ? (Math.abs(awayFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.carrer)))*100 : (Math.abs(homeFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.carrer)))*100;
+    neww.currentCarrer.winPercenatge = awayFactors.new.current > homeFactors.new.carrer ? (Math.abs(awayFactors.new.current)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.current)))*100 : (Math.abs(homeFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.current)))*100;
+    neww.carrerCurrent.winPercenatge = awayFactors.new.carrer > homeFactors.new.current ? (Math.abs(awayFactors.new.carrer)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.carrer)))*100 : (Math.abs(homeFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.carrer)))*100;
+
+    neww.average.lostPercentage = 100 - neww.average.winPercenatge;
+    neww.current.lostPercentage = 100 - neww.current.winPercenatge;
+    neww.carrer.lostPercentage = 100 - neww.carrer.winPercenatge;
+    neww.currentCarrer.lostPercentage = 100 - neww.currentCarrer.winPercenatge;
+    neww.carrerCurrent.lostPercentage = 100 - neww.carrerCurrent.winPercenatge;
+
+    neww.average.winner = awayFactors.new.average < homeFactors.new.average ? "away" : "home";
+    neww.current.winner = awayFactors.new.current < homeFactors.new.current ? "away" : "home";
+    neww.carrer.winner = awayFactors.new.carrer < homeFactors.new.carrer ? "away" : "home";
+    neww.currentCarrer.winner = awayFactors.new.current < homeFactors.new.carrer ? "away" : "home";
+    neww.carrerCurrent.winner = awayFactors.new.carrer < homeFactors.new.current ? "away" : "home";
+
+    neww.awayScenarios = neww.average.winner == "away"? 1:0;
+    neww.awayScenarios += neww.current.winner == "away"? 1:0;
+    neww.awayScenarios += neww.carrer.winner == "away"? 1:0;
+    neww.awayScenarios += neww.currentCarrer.winner == "away"? 1:0;
+    neww.awayScenarios += neww.carrerCurrent.winner == "away"? 1:0;
+
+    neww.homeScenarios = neww.average.winner == "home"? 1:0;
+    neww.homeScenarios += neww.current.winner == "home"? 1:0;
+    neww.homeScenarios += neww.carrer.winner == "home"? 1:0;
+    neww.homeScenarios += neww.currentCarrer.winner == "home"? 1:0;
+    neww.homeScenarios += neww.carrerCurrent.winner == "home"? 1:0;
+
+    var awaySum = neww.average.winner == "away"? neww.average.winPercenatge:neww.average.lostPercentage;
+    awaySum += neww.current.winner == "away"? neww.current.winPercenatge:neww.current.lostPercentage;
+    awaySum += neww.carrer.winner == "away"? neww.carrer.winPercenatge:neww.carrer.lostPercentage;
+    awaySum += neww.currentCarrer.winner == "away"? neww.currentCarrer.winPercenatge:neww.currentCarrer.lostPercentage;
+    awaySum += neww.carrerCurrent.winner == "away"? neww.carrerCurrent.winPercenatge:neww.carrerCurrent.lostPercentage;
+
+    var homeSum = neww.average.winner == "home"? neww.average.winPercenatge:neww.currentCarrer.lostPercentage;
+    homeSum += neww.current.winner == "home"? neww.current.winPercenatge:neww.currentCarrer.lostPercentage;
+    homeSum += neww.carrer.winner == "home"? neww.carrer.winPercenatge:neww.currentCarrer.lostPercentage;
+    homeSum += neww.currentCarrer.winner == "home"? neww.currentCarrer.winPercenatge:neww.currentCarrer.lostPercentage;
+    homeSum += neww.carrerCurrent.winner == "home"? neww.carrerCurrent.winPercenatge:neww.carrerCurrent.lostPercentage;
+
+    neww.awayPercentage = awaySum/5;
+    neww.homePercenatge = homeSum/5;
+
+    neww.awayScenarios = neww.awayScenarios*20;
+    neww.homeScenarios = neww.homeScenarios*20;
+
+    neww.awayFinalPercentage = (neww.awayPercentage + neww.awayScenarios)/2;
+    neww.homeFinalPercentage = (neww.homePercenatge + neww.homeScenarios)/2;
+
+    var summary = {awayPercentage: 0, homePercentage:0, awayScenarios:0, homeScenarios:0, totalAwayPercenatge:0, totalHomePercentage:0, winner:"", stdDev:stdDev , old:old, new: neww}
+
+    summary.awayPercentage =  (old.awayFinalPercentage + neww.awayFinalPercentage)/2;
+    summary.homePercentage =  (old.homeFinalPercentage + neww.homeFinalPercentage)/2;
+
+    summary.awayScenarios =  (old.awayScenarios + neww.awayScenarios)/2;
+    summary.homeScenarios =  (old.homeScenarios + neww.homeScenarios)/2;
+
+    summary.totalAwayPercenatge = ((summary.awayPercentage + summary.awayScenarios)/2)/stdDev;
+    summary.totalHomePercentage = ((summary.homePercentage + summary.homeScenarios)/2)/stdDev;
+
+    summary.winner = summary.totalAwayPercenatge > summary.totalHomePercentage ? "away" :"home";
+
+
+    return summary;
+
+
+
+}
+
+async function CalculateFactors(pitcher, batter)
+{
+    var factors = {old:{ average:0, current:0, carrer:0 }, new:{ average:0, current:0, carrer:0 }};
+
+    var avg = parseFloat(batter.totalsData.filter(function(item){
+        return item.stat == "AVG"
+    })[0].value);
+
+    var obp = parseFloat(batter.totalsData.filter(function(item){
+        return item.stat == "OBP"
+    })[0].value);
+
+    var slg = parseFloat(batter.totalsData.filter(function(item){
+        return item.stat == "SLG"
+    })[0].value);
+
+    var ops = parseFloat(batter.totalsData.filter(function(item){
+        return item.stat == "OPS"
+    })[0].value);
+
+    factors.old.average = (avg + obp + slg + ops) + pitcher.finalEra;
+    factors.old.current = (avg + obp + slg + ops) + pitcher.currentEra;
+    factors.old.carrer = (avg + obp + slg + ops) + pitcher.carrerEra;
+
+    factors.new.average = pitcher.finalEra - (avg + obp + slg + ops);
+    factors.new.current = pitcher.currentEra - (avg + obp + slg + ops);
+    factors.new.carrer = pitcher.carrerEra - (avg + obp + slg + ops);
+
+    return factors;
+
+}
 
 async function ProcessGameByGame(date)
 {
@@ -233,7 +535,7 @@ async function consolidateAlgorithmResults(date)
     var coversWinPredictions = await load(date+"CoversWinPercentages");
     
 
-    var dataPeriod = [0,7,15];
+    var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];
         var seriesWinnersResults = await load(date+"SeriesWinners"+period);
@@ -605,7 +907,7 @@ async function AlgoSeriesWinnerBasedOnResultAndPattern(date)
     var allGames = await load(date);
 
     
-    var dataPeriod = [0,7,15];
+    var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];
 
@@ -1015,7 +1317,7 @@ async function getResults(date)
 async function getMoreWininigTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var dataPeriod = [0,7,15];
+    var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];
         var dataScope = teamsData;
@@ -1031,7 +1333,7 @@ async function getMoreWininigTeams(date)
 async function getMoreScoringTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var dataPeriod = [0,7,15];
+    var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];    
         var teamsInScope = teamsData.filter(function(item){
@@ -1045,7 +1347,7 @@ async function getMoreScoringTeams(date)
 async function getMoreReceivingTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
-    var dataPeriod = [0,7,15];
+    var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];
         
@@ -1411,7 +1713,7 @@ async function getScheduleData(date)
         await driver.manage().setTimeouts({ implicit: 1000 });
         var scheduleData = [];
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
-            var dataPeriod = [0,7,15];
+            var dataPeriod = [0,7,3];
             scheduleData = JSON.parse(return_value);
             for (let a = 0; a < dataPeriod.length; a++) {
                 const period = dataPeriod[a];
@@ -1572,19 +1874,35 @@ async function getAllPitchersData(date)
             await driver.manage().setTimeouts({ implicit: 1000 });
             var battersData = [];
             var sumAvg = 0;
+            var sumOBP = 0;
+            var sumOPS = 0;
+            var sumSLG = 0;
+            var sumWAR = 0;
             var sumHits = 0;
             var sumRuns = 0;
             await driver.executeScript(await GetBattingStats()).then(function(return_value) {
                 battersData = JSON.parse(return_value);
-                for (let ele = 0; ele < battersData.length; ele++) {
-                    const batter = battersData[ele];
+                for (let ele = 0; ele < battersData.playersDat.length; ele++) {
+                    const batter = battersData.playersDat[ele];
                     var avg =  batter.playerStats.filter(function(item){
                         return item.stat == "AVG";         
+                      });
+
+                    var obp =  batter.playerStats.filter(function(item){
+                    return item.stat == "OBP";         
+                    });
+
+                    var slg =  batter.playerStats.filter(function(item){
+                        return item.stat == "SLG";         
                       });
 
                     var ops =  batter.playerStats.filter(function(item){
                     return item.stat == "OPS";         
                     });
+
+                    var war =  batter.playerStats.filter(function(item){
+                        return item.stat == "WAR";         
+                      });
 
                     var r =  batter.playerStats.filter(function(item){
                         return item.stat == "R";         
@@ -1595,14 +1913,23 @@ async function getAllPitchersData(date)
                     });
 
                     sumAvg += parseFloat(avg[0].value);
+                    sumOPS += parseFloat(ops[0].value);
+                    sumOBP += parseFloat(obp[0].value);  
+                    sumSLG += parseFloat(slg[0].value);  
+                    sumWAR += parseFloat(war[0].value);  
                     sumHits += parseFloat(h[0].value);  
                     sumRuns += parseFloat(r[0].value);     
                     allPlayersInfo.push({teamName: teamName, name: batter.name, r:parseFloat(r[0].value), h:parseFloat(h[0].value) ,avg:parseFloat(avg[0].value), ops:parseFloat(ops[0].value), totalChances: parseFloat(avg[0].value)+parseFloat(ops[0].value) });                
                 }
-                var battingAvg = sumAvg/battersData.length;
-                var runsAvg = sumRuns/battersData.length;
-                var hitsAvg = sumHits/battersData.length;
-                battersAllData.push({teamName: teamName, battingAvg: battingAvg, battersData: battersData, runsAvg:runsAvg, hitsAvg:hitsAvg});
+                var battingAvg = sumAvg/battersData.playersDat.length;
+                var battingOBP = sumOBP/battersData.playersDat.length;
+                var battingSLG = sumSLG/battersData.playersDat.length;
+                var battingOPS = sumOPS/battersData.playersDat.length;
+                var battingWAR= sumWAR;
+                var runsAvg = sumRuns/battersData.playersDat.length;
+                var hitsAvg = sumHits/battersData.playersDat.length;
+            
+                battersAllData.push({teamName: teamName, totalsData:battersData.totalsDat  ,battingAvg: battingAvg,battingOPS:battingOPS ,battingOBP:battingOBP, battingSLG:battingSLG,battingWAR:battingWAR ,battersData: battersData.playersDat, runsAvg:runsAvg, hitsAvg:hitsAvg});
                 
             });
 
@@ -1652,7 +1979,7 @@ async function getAllPitchersData(date)
         var term = homeOrAway == "home" ? game.homeTeam.homePitcher + " " + game.homeTeam.homeId +" "+ game.homeTeam.homeTeam.replace(game.homeTeam.homeId,"") : game.awayTeam.awayPitcher +" "+ game.awayTeam.awayId +" "+game.awayTeam.awayTeam.replace(game.awayTeam.awayId,"");
         try{
             var search = await driver.findElement(By.name("q")).sendKeys('site:www.espn.com.mx stats pitcher ' + term, Key.ENTER);
-            //var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
+            var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
             var espnId = (await driver.getCurrentUrl()).split("_/")[1];
             await driver.get(statsURL+espnId);
             }
@@ -1848,37 +2175,54 @@ return script;
 
 async function GetBattingStats()
 {
-    var script = 'var battersTable = document.getElementsByClassName("ResponsiveTable--fixed-left")[0];';
-    script += 'var players = battersTable.getElementsByClassName("Table Table--align-right Table--fixed Table--fixed-left")[0].getElementsByClassName("Table__TD");';
-    script += 'var playersData = battersTable.getElementsByClassName("Table__Scroller")[0].getElementsByClassName("Table__TD");';
-    script += 'var statsCatalog = battersTable.getElementsByClassName("Table__header-group Table__THEAD")[1].getElementsByClassName("stats-cell Table__TH");';
-
-    script += 'var playersDat = [];';
-    script += 'var a = 0;';
-    script += 'for (var index = 0; index < players.length-1; index++) {';
-        script += 'var playersStats =[];';
-        script += 'var playersInfo = {name:"", playerStats:[]};';
-        script += 'var player = players[index].innerText;';
-        script += 'playersInfo.name = player;';
-        script += 'if(index == 0)';
-        script += '{';
-            script += 'a = index*16;';
-            script += '}';
-            script += 'else{';
-                script += 'a = (index*17);';
-                script += '}';
-                script += 'var d =0;';
-                script += 'for (var b = a; d < statsCatalog.length; b++) {';
-                    script += 'var stat = statsCatalog[d].innerText;';
-                    script += 'var value = playersData[b].innerText;';
-                    script += 'd++;';
-                    script += 'playersStats.push({stat:stat, value:value});';
-                    script += '}';
-
-                    script += 'playersInfo.playerStats = playersStats;';
-                    script += 'playersDat.push(playersInfo);';
-                    script += '}';
-                    script += 'return JSON.stringify(playersDat);';
+    var script = 'var battersTable = document.getElementsByClassName("ResponsiveTable--fixed-left")[0];                                                               ';
+script += 'var players = battersTable.getElementsByClassName("Table Table--align-right Table--fixed Table--fixed-left")[0].getElementsByClassName("Table__TD");   ';
+script += 'var totalsData = battersTable.getElementsByClassName("Stats__TotalRow fw-bold Table__TD");                                                             ';
+script += 'var playersData = battersTable.getElementsByClassName("Table__Scroller")[0].getElementsByClassName("Table__TD");                                       ';
+script += 'var statsCatalog = battersTable.getElementsByClassName("Table__header-group Table__THEAD")[1].getElementsByClassName("stats-cell Table__TH");          ';
+script += 'var playersDat = [];                                                                                                                                   ';
+script += 'var totalsDat = [];                                                                                                                                    ';
+script += 'var a = 0;                                                                                                                                             ';
+script += 'for (var index = 0; index < players.length - 1; index++) {                                                                                             ';
+script += '    var playersStats = [];                                                                                                                             ';
+script += '    var playersInfo = {                                                                                                                                ';
+script += '        name: "",                                                                                                                                      ';
+script += '        playerStats: []                                                                                                                                ';
+script += '    };                                                                                                                                                 ';
+script += '    var player = players[index].innerText;                                                                                                             ';
+script += '    playersInfo.name = player;                                                                                                                         ';
+script += '    if (index == 0) {                                                                                                                                  ';
+script += '        a = index * 16;                                                                                                                                ';
+script += '    } else {                                                                                                                                           ';
+script += '        a = (index * 17);                                                                                                                              ';
+script += '    }                                                                                                                                                  ';
+script += '    var d = 0;                                                                                                                                         ';
+script += '    for (var b = a; d < statsCatalog.length; b++) {                                                                                                    ';
+script += '        var stat = statsCatalog[d].innerText;                                                                                                          ';
+script += '        var value = playersData[b].innerText;                                                                                                          ';
+script += '        d++;                                                                                                                                           ';
+script += '        playersStats.push({                                                                                                                            ';
+script += '            stat: stat,                                                                                                                                ';
+script += '            value: value                                                                                                                               ';
+script += '        });                                                                                                                                            ';
+script += '    }                                                                                                                                                  ';
+script += '    playersInfo.playerStats = playersStats;                                                                                                            ';
+script += '    playersDat.push(playersInfo);                                                                                                                      ';
+script += '                                                                                                                                                       ';
+script += '                                                                                                                                                       ';
+script += '}                                                                                                                                                      ';
+script += 'var d = statsCatalog.length-1;                                                                                                                         ';
+script += '    for (var t = totalsData.length - 1; d > 1 ; t--) {                                                                                                 ';
+script += '        var stat = statsCatalog[d].innerText;                                                                                                          ';
+script += '        var value = totalsData[t].innerText;                                                                                                           ';
+script += '        d--;                                                                                                                                           ';
+script += '        totalsDat.push({                                                                                                                               ';
+script += '            stat: stat,                                                                                                                                ';
+script += '            value: value                                                                                                                               ';
+script += '        });                                                                                                                                            ';
+script += '    }                                                                                                                                                  ';
+script += 'var batterData = {playersDat: playersDat, totalsDat:totalsDat};                                                                                        ';
+script += 'return JSON.stringify(batterData);																														  ';
 
         return script;
 } 

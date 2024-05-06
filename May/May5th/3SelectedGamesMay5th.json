@@ -1,0 +1,138 @@
+[
+    {
+        "game": "MIA Marlins @ OAK Athletics",
+        "gameTime": "14:07",
+        "expectedWinner": "OAKAthletics",
+        "avgHandicapExp": 5,
+        "overallConfidence": 43,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "OAKAthletics",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 9.756470588235294,
+            "pitcherBatterHomeExRuns": 12.14125,
+            "pitcherBatterExF5Winner": "OAKAthletics",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "OAKAthletics",
+            "seriesConfidenceRanking": 41,
+            "seriesExpectedWinnerRuns": 9,
+            "seriesExpectedLoserRuns": 1.6666666666666667,
+            "seriesFinalHandicap": 7.333333333333333,
+            "finalHandicapExpected": 5,
+            "awayCoversWinPercentage": "MIA,22%",
+            "homeCoversWinPercentage": "OAK,78%"
+        }
+    },
+    {
+        "game": "TEX Rangers @ KC Royals",
+        "gameTime": "12:10",
+        "expectedWinner": "TEXRangers",
+        "avgHandicapExp": 3,
+        "overallConfidence": 13,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "TEXRangers",
+            "pitcherBatterFinalHandicap": 2,
+            "pitcherBatterAwayExRuns": 8.81909090909091,
+            "pitcherBatterHomeExRuns": 6.8966666666666665,
+            "pitcherBatterExF5Winner": "TEXRangers",
+            "pitcherBatterExF5Diff": 2,
+            "seriesExWinner": "TEXRangers",
+            "seriesConfidenceRanking": 11,
+            "seriesExpectedWinnerRuns": 7.333333333333333,
+            "seriesExpectedLoserRuns": 3.6666666666666665,
+            "seriesFinalHandicap": 3.6666666666666665,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "TEX,75%",
+            "homeCoversWinPercentage": "KC,25%"
+        }
+    },
+    {
+        "game": "CHI White @ STL Cardinals",
+        "gameTime": "12:15",
+        "expectedWinner": "STLCardinals",
+        "overallConfidence": 10,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "STLCardinals",
+            "pitcherBatterFinalHandicap": 4,
+            "pitcherBatterAwayExRuns": 5.135,
+            "pitcherBatterHomeExRuns": 9.626249999999999,
+            "pitcherBatterExF5Winner": "STLCardinals",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "STLCardinals",
+            "seriesConfidenceRanking": 6,
+            "seriesExpectedWinnerRuns": 6,
+            "seriesExpectedLoserRuns": 3.3333333333333335,
+            "seriesFinalHandicap": 2.6666666666666665,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "nodata",
+            "homeCoversWinPercentage": "STL,85%"
+        }
+    },
+    {
+        "game": "TOR Blue @ WAS Nationals",
+        "gameTime": "11:35",
+        "expectedWinner": "WASNationals",
+        "overallConfidence": 8,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "WASNationals",
+            "pitcherBatterFinalHandicap": 3,
+            "pitcherBatterAwayExRuns": 7.1899999999999995,
+            "pitcherBatterHomeExRuns": 9.722941176470588,
+            "pitcherBatterExF5Winner": "WASNationals",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "WASNationals",
+            "seriesConfidenceRanking": 5,
+            "seriesExpectedWinnerRuns": 6,
+            "seriesExpectedLoserRuns": 3.3333333333333335,
+            "seriesFinalHandicap": 2.6666666666666665,
+            "finalHandicapExpected": 3,
+            "awayCoversWinPercentage": "TOR,45%",
+            "homeCoversWinPercentage": "WAS,55%"
+        }
+    },
+    {
+        "game": "SD Padres @ ARI Diamondbacks",
+        "gameTime": "14:10",
+        "expectedWinner": "SDPadres",
+        "avgHandicapExp": 5,
+        "overallConfidence": 4,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SDPadres",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 9.725,
+            "pitcherBatterHomeExRuns": 8.66578947368421,
+            "pitcherBatterExF5Winner": "SDPadres",
+            "pitcherBatterExF5Diff": 0,
+            "seriesExWinner": "SDPadres",
+            "seriesConfidenceRanking": 3,
+            "seriesExpectedWinnerRuns": 9.333333333333334,
+            "seriesExpectedLoserRuns": 0.6666666666666666,
+            "seriesFinalHandicap": 8.666666666666668,
+            "finalHandicapExpected": 5,
+            "awayCoversWinPercentage": "SD,47%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "DET Tigers @ NY Yankees",
+        "gameTime": "11:35",
+        "expectedWinner": "DETTigers",
+        "avgHandicapExp": 1,
+        "overallConfidence": 3,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "DETTigers",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 6.04,
+            "pitcherBatterHomeExRuns": 5.72,
+            "pitcherBatterExF5Winner": "DETTigers",
+            "pitcherBatterExF5Diff": 2,
+            "seriesExWinner": "DETTigers",
+            "seriesConfidenceRanking": 3,
+            "seriesExpectedWinnerRuns": 3.6666666666666665,
+            "seriesExpectedLoserRuns": 2.6666666666666665,
+            "seriesFinalHandicap": 1,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "DET,55%",
+            "homeCoversWinPercentage": "NYY,45%"
+        }
+    }
+]
