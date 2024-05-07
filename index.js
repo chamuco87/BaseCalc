@@ -49,8 +49,8 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May5th";
-        var descriptiveDate = "2024-05-05"
+        var selectedDate = "May6th";
+        var descriptiveDate = "2024-05-06"
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -59,7 +59,7 @@ var teams = [
         //await getBestStartingPitchersTeams(selectedDate);
         //await getBestRelievingPitchersTeams(selectedDate);
         //await getBestOverallPitchersTeams(selectedDate);
-        //await getScheduleData(selectedDate);
+        await getScheduleData(selectedDate);
         //await getMoreWininigTeams(selectedDate);
         //await getMoreScoringTeams(selectedDate);
         //await getMoreReceivingTeams(selectedDate);
@@ -71,7 +71,7 @@ var teams = [
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
         //
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
-        //await consolidateAlgorithmResults(selectedDate);
+        // consolidateAlgorithmResults(selectedDate);
 
         await CalculateWinnersViaFormula(selectedDate);
 
@@ -102,6 +102,8 @@ async function CalculateWinnersViaFormula(date)
     for (let index = 0; index < pitchersData[0].games.length; index++) {
         var gameData = {};
         const game = pitchersData[0].games[index];
+        if(game.homeTeam.homePitcher && game.awayTeam.awayPitcher)
+        {
         var homePitcher = game.homeTeam.homePitcherDataNew[0];
         var homeBatter = battersData.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
@@ -169,15 +171,17 @@ async function CalculateWinnersViaFormula(date)
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
 
-        gameData.awayLastResult = awayResults.scheduleData[awayResults.scheduleData.length-1].RESULT;
-        gameData.awayLastOpponent = awayResults.scheduleData[awayResults.scheduleData.length-1].OPPONENT;
-        gameData.awayWins = awayResults.scheduleData[awayResults.scheduleData.length-1].WINS;
-        gameData.awayLosses = awayResults.scheduleData[awayResults.scheduleData.length-1].LOSES;
+        gameData.awayCurrentStreak = awayResults.currentStreak;
+        gameData.awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
+        gameData.awayMostProbablePercentage = awayResults.mostProbablePercentage;
+        //gameData.awayWins = awayResults.scheduleData[awayResults.scheduleData.length-1].WINS;
+        //gameData.awayLosses = awayResults.scheduleData[awayResults.scheduleData.length-1].LOSES;
 
-        gameData.homeLastResult = homeResults.scheduleData[homeResults.scheduleData.length-1].RESULT;
-        gameData.homeLastOpponent = homeResults.scheduleData[homeResults.scheduleData.length-1].OPPONENT;
-        gameData.homeWins = homeResults.scheduleData[homeResults.scheduleData.length-1].WINS;
-        gameData.homeLosses = homeResults.scheduleData[homeResults.scheduleData.length-1].LOSES;
+        gameData.homeCurrentStreak = homeResults.currentStreak;
+        gameData.homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
+        gameData.homeMostProbablePercentage = homeResults.mostProbablePercentage;
+        //gameData.homeWins = homeResults.scheduleData[homeResults.scheduleData.length-1].WINS;
+        //gameData.homeLosses = homeResults.scheduleData[homeResults.scheduleData.length-1].LOSES;
 
         games.push(gameData);
 
@@ -185,8 +189,9 @@ async function CalculateWinnersViaFormula(date)
     }
     var stopHere = "";
 }
+}
 
-async function getStandardDeviation (array) {
+function getStandardDeviation (array) {
     const n = array.length
     const mean = array.reduce((a, b) => a + b) / n
     return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
@@ -704,7 +709,7 @@ async function consolidateAlgorithmResults(date)
     var allParlays = [];
     var parlayAll = await load(0+"ParlayGames"+date);
     var parlay7 = await load(7+"ParlayGames"+date);
-    var parlay15 = await load(15+"ParlayGames"+date);
+    var parlay15 = await load(3+"ParlayGames"+date);
 
     allParlays = parlayAll.concat(parlay7);
     allParlays = allParlays.concat(parlay15);
@@ -1768,21 +1773,208 @@ async function getScheduleData(date)
                 avgRunsScored = totalRunsScored/allGamesPlayed.length;
                 avgRunsReceived = totalRunsReceived/allGamesPlayed.length;
 
+                if(period == 0)
+                {
+                var winStreaks= [];
+                var losesStreaks = [];
+                var currentStreak = "";
+                var mostProbaleNextResult = "";
+                var mostProbablePercentage = 0;
+                var wins = 0;
+                var loses = 0;
+                var sumWins = 0;
+                var sumLoses = 0;
+                var previous = "";
+                for (let ser = 0; ser < dataScope.length; ser++) {
+                    const game = dataScope[ser];
+                    if(!previous)
+                    {
+                        previous = game.ISWIN;
+                        if(previous == "Win")
+                        {
+                            wins++;
+                        }
+                        else{
+                            loses++;
+                        }
+                    }
+                    else if(previous == "Win" && game.ISWIN == "Win")
+                    {
+                        wins++;
+                        if(ser == (dataScope.length - 1))
+                        {
+                            winStreaks.push(wins);
+                            sumWins += wins;
+                            currentStreak = "W"+wins+"-0";
+                        }
+                    }
+                    else if(previous == "Win" && game.ISWIN == "Lost")
+                    {
+                        winStreaks.push(wins);
+                        sumWins += wins;
+                        wins = 0;
+                        loses++;
+                        previous = "Lost";
+                        if(ser == (dataScope.length - 1))
+                        {
+                            losesStreaks.push(loses);
+                            sumLoses += loses;
+                            currentStreak = "L"+loses+"-0";
+                        }
+                        
+                    }
+                    else if(previous == "Lost" && game.ISWIN == "Lost")
+                    {
+                        loses++;
+                        if(ser == (dataScope.length - 1))
+                        {
+                            losesStreaks.push(loses);
+                            sumLoses += loses;
+                            currentStreak = "L"+loses+"-0";
+                        }
+                    }
+                    else if(previous == "Lost" && game.ISWIN == "Win")
+                    {
+                        losesStreaks.push(loses);
+                        sumLoses += loses;
+                        loses = 0;
+                        wins++;
+                        previous = "Win"
+                        if(ser == (dataScope.length - 1))
+                        {
+                            winStreaks.push(wins);
+                            sumWins += wins;
+                            currentStreak = "W"+wins+"-0";
+                        }
+                    }
 
+                    
+                }
 
+                var winStreakAverage = sumWins/winStreaks.length;
+                var winStreakStdDev = getStandardDeviation(winStreaks);
+                var losesStreakAverage = sumLoses/losesStreaks.length;
+                var losesStreakStdDev = getStandardDeviation(losesStreaks);
                 
-            //}
-            schedulesAllData.push({
-                period:period,
-                teamName: teamName, 
-                totalWins:totalWins, 
-                totalLoses:totalLoses,  
-                totalRunsScored:totalRunsScored, 
-                totalRunsReceived:totalRunsReceived,
-                avgRunsScored:avgRunsScored,
-                avgRunsReceived:avgRunsReceived,
-                scheduleData: dataScope});
+                var bestWinStreak = winStreaks.sort(function(a, b) {
+                    var x = parseFloat(a);
+                    var y = parseFloat(b);
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                  })[0];
+
+                var worstLostStreak = losesStreaks.sort(function(a, b) {
+                    var x = parseFloat(a);
+                    var y = parseFloat(b);
+                    return ((x > y) ? -1 : ((x < y) ? 1 : 0));
+                })[0];
+
+                if(currentStreak.indexOf("W")>=0)
+                {
+                    var currentWins = parseInt(currentStreak.split("-")[0].replace("W",""));
+                    var winLimit = winStreakAverage + winStreakStdDev;
+                    var diff = 0;
+                    if(currentWins< winLimit)
+                    {
+                        mostProbaleNextResult = "Win";
+                        diff = winLimit-currentWins;
+                        
+                        if(diff < 1)
+                        {
+                            mostProbaleNextResult = "Lost";
+                            mostProbablePercentage = 100-((diff*100)/(winLimit));
+                        }
+                        else{
+                            if(diff >= 2)
+                            {
+                                mostProbablePercentage = (100)/(diff-1);
+                            }
+                            else if(diff >= 3){
+                                mostProbablePercentage = (100)/(diff-2);
+                            }
+                            else if(diff >= 1){
+                                mostProbablePercentage = (100)/(diff);
+                            }
+                        }
+                        
+                        
+                    }
+                    else{
+                        mostProbaleNextResult = "Lost";
+                        mostProbablePercentage = (100)- ((diff*100)/winLimit);                        
+                    }
+                }
+                else{
+                    var currentLoses = parseInt(currentStreak.split("-")[0].replace("L",""));
+                    var loseLimit = losesStreakAverage + losesStreakStdDev;
+                    var diff = 0;
+                    if(currentLoses< loseLimit)
+                    {
+                        mostProbaleNextResult = "Lost";
+                        diff = loseLimit-currentLoses;
+                        
+                        if(diff < 1)
+                        {
+                            mostProbaleNextResult = "Lost";
+                            mostProbablePercentage = 100-((diff*100)/(loseLimit));
+                        }
+                        else{
+                            if(diff >= 2)
+                            {
+                                mostProbablePercentage = (100)/(diff-1);
+                            }
+                            else if(diff >= 3){
+                                mostProbablePercentage = (100)/(diff-2);
+                            }
+                            else if(diff >= 1){
+                                mostProbablePercentage = (100)/(diff);
+                            }
+                        }
+                        
+                        
+                    }
+                    else{
+                        mostProbaleNextResult = "Win";
+                        mostProbablePercentage = (100)- ((diff*100)/loseLimit);                        
+                    }
+                }
+
+
+                schedulesAllData.push({
+                    period:period,
+                    teamName: teamName, 
+                    totalWins:totalWins, 
+                    totalLoses:totalLoses,  
+                    totalRunsScored:totalRunsScored, 
+                    totalRunsReceived:totalRunsReceived,
+                    avgRunsScored:avgRunsScored,
+                    avgRunsReceived:avgRunsReceived,
+                    scheduleData: dataScope,
+                    winStreakAverage: winStreakAverage,
+                    losesStreakAverage:losesStreakAverage,
+                    bestWinStreak:bestWinStreak,
+                    worstLostStreak:worstLostStreak,
+                    currentStreak:currentStreak,
+                    mostProbaleNextResult:mostProbaleNextResult,
+                    mostProbablePercentage:mostProbablePercentage
+                });
+                }
+                else{
+                        schedulesAllData.push({
+                            period:period,
+                            teamName: teamName, 
+                            totalWins:totalWins, 
+                            totalLoses:totalLoses,  
+                            totalRunsScored:totalRunsScored, 
+                            totalRunsReceived:totalRunsReceived,
+                            avgRunsScored:avgRunsScored,
+                            avgRunsReceived:avgRunsReceived,
+                            scheduleData: dataScope});
+                    
+                }
+                
             }
+            
+            
         });
         await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
     }

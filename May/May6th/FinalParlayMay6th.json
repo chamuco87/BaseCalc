@@ -1,0 +1,30 @@
+[
+    {
+        "game": "TEX Rangers @ OAK Athletics",
+        "expectedWinner": "TEXRangers",
+        "avgHandicap": 2,
+        "avgConfidence": 52,
+        "algoCount": 1
+    },
+    {
+        "game": "NY Mets @ STL Cardinals",
+        "expectedWinner": "NYMets",
+        "avgHandicap": 2,
+        "avgConfidence": 23.5,
+        "algoCount": 2
+    },
+    {
+        "game": "SD Padres @ CHI Cubs",
+        "expectedWinner": "CHICubs",
+        "avgHandicap": 1,
+        "avgConfidence": 12,
+        "algoCount": 1
+    },
+    {
+        "game": "SEA Mariners @ MIN Twins",
+        "expectedWinner": "MINTwins",
+        "avgHandicap": 2,
+        "avgConfidence": 12,
+        "algoCount": 1
+    }
+]
