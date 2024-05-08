@@ -1,0 +1,65 @@
+[
+    {
+        "game": "MIA Marlins @ LA Dodgers",
+        "expectedWinner": "LADodgers",
+        "avgHandicap": 4,
+        "avgConfidence": 75,
+        "algoCount": 3
+    },
+    {
+        "game": "SF Giants @ COL Rockies",
+        "expectedWinner": "SFGiants",
+        "avgHandicap": 2,
+        "avgConfidence": 45,
+        "algoCount": 1
+    },
+    {
+        "game": "CHI White @ TB Rays",
+        "expectedWinner": "TBRays",
+        "avgHandicap": 3.3333333333333335,
+        "avgConfidence": 31,
+        "algoCount": 3
+    },
+    {
+        "game": "MIL Brewers @ KC Royals",
+        "expectedWinner": "KCRoyals",
+        "avgHandicap": 1,
+        "avgConfidence": 27,
+        "algoCount": 1
+    },
+    {
+        "game": "LA Angels @ PIT Pirates",
+        "expectedWinner": "PITPirates",
+        "avgHandicap": 2.6666666666666665,
+        "avgConfidence": 23.333333333333332,
+        "algoCount": 3
+    },
+    {
+        "game": "NY Mets @ STL Cardinals",
+        "expectedWinner": "NYMets",
+        "avgHandicap": 3.3333333333333335,
+        "avgConfidence": 21,
+        "algoCount": 3
+    },
+    {
+        "game": "SD Padres @ CHI Cubs",
+        "expectedWinner": "CHICubs",
+        "avgHandicap": 3,
+        "avgConfidence": 9,
+        "algoCount": 1
+    },
+    {
+        "game": "SEA Mariners @ MIN Twins",
+        "expectedWinner": "MINTwins",
+        "avgHandicap": 1,
+        "avgConfidence": 6.5,
+        "algoCount": 2
+    },
+    {
+        "game": "ARI Diamondbacks @ CIN Reds",
+        "expectedWinner": "ARIDiamondbacks",
+        "avgHandicap": 3,
+        "avgConfidence": 5,
+        "algoCount": 1
+    }
+]
