@@ -1,0 +1,71 @@
+[
+    {
+        "game": "CLE Guardians @ CHI White",
+        "gameTime": "17:40",
+        "expectedWinner": "CLEGuardians",
+        "avgHandicapExp": 4,
+        "overallConfidence": 150,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "CLEGuardians",
+            "pitcherBatterFinalHandicap": 5,
+            "pitcherBatterAwayExRuns": 9.376666666666667,
+            "pitcherBatterHomeExRuns": 4.6276190476190475,
+            "pitcherBatterExF5Winner": "CLEGuardians",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "CLEGuardians",
+            "seriesConfidenceRanking": 145,
+            "seriesExpectedWinnerRuns": 5.297297297297297,
+            "seriesExpectedLoserRuns": 2.891891891891892,
+            "seriesFinalHandicap": 2.4054054054054053,
+            "finalHandicapExpected": 4,
+            "awayCoversWinPercentage": "CLE,79%",
+            "homeCoversWinPercentage": "nodata"
+        }
+    },
+    {
+        "game": "HOU Astros @ NY Yankees",
+        "gameTime": "15:05",
+        "expectedWinner": "NYYankees",
+        "avgHandicapExp": 1,
+        "overallConfidence": 100,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "NYYankees",
+            "pitcherBatterFinalHandicap": 1,
+            "pitcherBatterAwayExRuns": 5.863333333333333,
+            "pitcherBatterHomeExRuns": 6.823333333333333,
+            "pitcherBatterExF5Winner": "HOUAstros",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "NYYankees",
+            "seriesConfidenceRanking": 99,
+            "seriesExpectedWinnerRuns": 5.277777777777778,
+            "seriesExpectedLoserRuns": 3.4473684210526314,
+            "seriesFinalHandicap": 1.8304093567251463,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "HOU,28%",
+            "homeCoversWinPercentage": "NYY,72%"
+        }
+    },
+    {
+        "game": "SF Giants @ COL Rockies",
+        "gameTime": "13:10",
+        "expectedWinner": "SFGiants",
+        "avgHandicapExp": 1,
+        "overallConfidence": 59,
+        "gameAnalisysDetails": {
+            "pitcherBatterExWinner": "SFGiants",
+            "pitcherBatterFinalHandicap": 0,
+            "pitcherBatterAwayExRuns": 8.349705882352941,
+            "pitcherBatterHomeExRuns": 8.279117647058822,
+            "pitcherBatterExF5Winner": "COLRockies",
+            "pitcherBatterExF5Diff": 1,
+            "seriesExWinner": "SFGiants",
+            "seriesConfidenceRanking": 59,
+            "seriesExpectedWinnerRuns": 5.916666666666667,
+            "seriesExpectedLoserRuns": 3.5833333333333335,
+            "seriesFinalHandicap": 2.3333333333333335,
+            "finalHandicapExpected": 1,
+            "awayCoversWinPercentage": "SF,65%",
+            "homeCoversWinPercentage": "COL,35%"
+        }
+    }
+]

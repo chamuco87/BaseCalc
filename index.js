@@ -49,30 +49,30 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May7th";
-        var descriptiveDate = "2024-05-07"
-        await getESPNData(selectedDate);
-        await getBattersData(selectedDate);
-        await getBestScoringTeamsByBatting(selectedDate);
-        await getBestHittingTeamsByBatting(selectedDate);
-        await getAllPitchersData(selectedDate);
-        await getBestStartingPitchersTeams(selectedDate);
-        await getBestRelievingPitchersTeams(selectedDate);
-        await getBestOverallPitchersTeams(selectedDate);
-        await getScheduleData(selectedDate);
-        await getMoreWininigTeams(selectedDate);
-        await getMoreScoringTeams(selectedDate);
-        await getMoreReceivingTeams(selectedDate);
-        await evaluateGames(selectedDate);
-        await sortBetterAvgs(selectedDate);
-        await filterConsistentPicks(selectedDate)
-    
-        await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-        await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-        
-        await getCoversWinPercentages(selectedDate, descriptiveDate);
-        await consolidateAlgorithmResults(selectedDate);
-
+        var selectedDate = "May10th";
+        var descriptiveDate = "2024-05-10"
+        //await getESPNData(selectedDate);
+        //await getBattersData(selectedDate);
+        //await getBestScoringTeamsByBatting(selectedDate);
+        //await getBestHittingTeamsByBatting(selectedDate);
+        //await getAllPitchersData(selectedDate);
+        //await getBestStartingPitchersTeams(selectedDate);
+        //await getBestRelievingPitchersTeams(selectedDate);
+        //await getBestOverallPitchersTeams(selectedDate);
+        //await getScheduleData(selectedDate);
+        //await getMoreWininigTeams(selectedDate);
+        //await getMoreScoringTeams(selectedDate);
+        //await getMoreReceivingTeams(selectedDate);
+        //await evaluateGames(selectedDate);
+        //await sortBetterAvgs(selectedDate);
+        //await filterConsistentPicks(selectedDate)
+    ////
+        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+        //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+        //
+        //await getCoversWinPercentages(selectedDate, descriptiveDate);
+        //await consolidateAlgorithmResults(selectedDate);
+//
         await CalculateWinnersViaFormula(selectedDate);
 
         //await ProcessGameByGame(selectedDate);
@@ -120,17 +120,7 @@ async function CalculateWinnersViaFormula(date)
 
         var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
 
-        gameData.game = game.game;
-        gameData.time = game.gameTime;
-        gameData.away = game.awayTeam.awayTeam;
-        gameData.home = game.homeTeam.homeTeam;
-        gameData.formulaWinner = calcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-        gameData.formulaWin = calcs.winner;
-        gameData.formulaawayWinPercentage = calcs.totalAwayPercenatge;
-        gameData.formulahomeWinPercentage = calcs.totalHomePercentage;
-        gameData.stdDev = calcs.stdDev;
-        gameData.formulaDiff = Math.abs(gameData.formulaawayWinPercentage - gameData.formulahomeWinPercentage);
-
+       
 
         var serie0 = seriesData0.filter(function(item){
             return item.game.replace(" ","") == game.game.replace(" ","");
@@ -144,24 +134,48 @@ async function CalculateWinnersViaFormula(date)
             return item.game.replace(" ","") == game.game.replace(" ","");
         })[0];
 
-        gameData.seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
-        if(gameData.seriesIsConsistent)
+        var seriesIsConsistent = "";
+        var seriesWinner = "";
+        var seriesWinnerPercentage = 0;
+        var confidenceRanking = 0;
+        seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
+        if(seriesIsConsistent)
         {
-            gameData.seriesWinner = serie0.seriesExpectedWinner;
+            seriesWinner = serie0.seriesExpectedWinner;
+            seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns + serie3.expectedWinnerRuns)/3)*10);
+            seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+            seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+            seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+            confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking + serie3.confidenceRanking)/3)*((serie0.expectedHandicap + serie3.expectedHandicap + serie7.expectedHandicap)/3);
         }
         else{
             if(serie0.seriesExpectedWinner == serie7.seriesExpectedWinner)
             {
-                gameData.seriesWinner = serie0.seriesExpectedWinner+"07";
+                seriesWinner = serie0.seriesExpectedWinner;
+                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking)/2)**((serie0.expectedHandicap + serie7.expectedHandicap)/2);
             }
             else if(serie3.seriesExpectedWinner == serie7.seriesExpectedWinner)
             {
-                gameData.seriesWinner = serie3.seriesExpectedWinner+"37";
+                seriesWinner = serie3.seriesExpectedWinner;
+                seriesWinnerPercentage = (((serie3.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                confidenceRanking = ((serie7.confidenceRanking + serie3.confidenceRanking)/2)*((serie3.expectedHandicap + serie7.expectedHandicap)/2);
             }
             else if(serie0.seriesExpectedWinner == serie3.seriesExpectedWinner){
-                gameData.seriesWinner = serie3.seriesExpectedWinner+"03";
+                seriesWinner = serie3.seriesExpectedWinner;
+                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie3.expectedWinnerRuns)/2)*10);
+                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
+                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
             }
         }
+
+        var homeSeriesPercentage = seriesWinner == game.homeTeam.homeTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
+        var awaySeriesPercentage = seriesWinner == game.awayTeam.awayTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
 
         var awayResults = teamsSchedule.filter(function(item){
             return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
@@ -171,17 +185,94 @@ async function CalculateWinnersViaFormula(date)
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
 
-        gameData.awayCurrentStreak = awayResults.currentStreak;
-        gameData.awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
-        gameData.awayMostProbablePercentage = awayResults.mostProbablePercentage;
-        //gameData.awayWins = awayResults.scheduleData[awayResults.scheduleData.length-1].WINS;
-        //gameData.awayLosses = awayResults.scheduleData[awayResults.scheduleData.length-1].LOSES;
 
+        var awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
+        var awayMostProbablePercentage = awayResults.mostProbablePercentage == 100 ? 85 : awayResults.mostProbablePercentage;
+        var awayNextWinningPercentage = 0;
+        var awayNextlosingPercentage = 0;
+        if(awayMostProbaleNextResult == "Win")
+        {
+            if(awayMostProbablePercentage > 50)
+            {
+                awayNextWinningPercentage = awayMostProbablePercentage;
+                awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+            }
+            else{
+                awayNextWinningPercentage = 60;
+                awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+            }
+        }
+        else{
+            if(awayMostProbablePercentage > 50)
+            {
+                awayNextlosingPercentage = awayMostProbablePercentage;
+                awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+            }
+            else{
+                awayNextlosingPercentage = 60;
+                awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+            }
+        }
+
+        var homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
+        var homeMostProbablePercentage = homeResults.mostProbablePercentage == 100 ? 85 : homeResults.mostProbablePercentage;
+        var homeNextWinningPercentage = 0;
+        var homeNextlosingPercentage = 0;
+        if(homeMostProbaleNextResult == "Win")
+        {
+            if(homeMostProbablePercentage > 50)
+            {
+                homeNextWinningPercentage = homeMostProbablePercentage;
+                homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+            }
+            else{
+                homeNextWinningPercentage = 60;
+                homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+            }
+        }
+        else{
+            if(homeMostProbablePercentage > 50)
+            {
+                homeNextlosingPercentage = homeMostProbablePercentage;
+                homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+            }
+            else{
+                homeNextlosingPercentage = 60;
+                homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+            }
+        }
+
+
+        gameData.game = game.game;
+        gameData.time = game.gameTime;
+        gameData.away = game.awayTeam.awayTeam;
+        gameData.formulaawayWinPercentage = calcs.totalAwayPercenatge;
+        gameData.awaySeriesPercentage = awaySeriesPercentage;
+        gameData.awayNextWinningPercentage = awayNextWinningPercentage;
+        gameData.awayCurrentStreak = awayResults.currentStreak;
+
+        gameData.home = game.homeTeam.homeTeam;
+        gameData.formulahomeWinPercentage = calcs.totalHomePercentage;
+        gameData.homeSeriesPercentage = homeSeriesPercentage;
+        gameData.homeNextWinningPercentage = homeNextWinningPercentage;
         gameData.homeCurrentStreak = homeResults.currentStreak;
-        gameData.homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
-        gameData.homeMostProbablePercentage = homeResults.mostProbablePercentage;
-        //gameData.homeWins = homeResults.scheduleData[homeResults.scheduleData.length-1].WINS;
-        //gameData.homeLosses = homeResults.scheduleData[homeResults.scheduleData.length-1].LOSES;
+        
+        
+        gameData.formulaWinner = calcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+        gameData.seriesWinner = seriesWinner;
+        gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+
+        var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
+        var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
+
+        gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+        gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+        gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+        // gameData.formulaWin = calcs.winner;
+        
+        gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
+        gameData.stdDev = calcs.stdDev;
+        
 
         games.push(gameData);
 
@@ -351,8 +442,15 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
     summary.awayScenarios =  (old.awayScenarios + neww.awayScenarios)/2;
     summary.homeScenarios =  (old.homeScenarios + neww.homeScenarios)/2;
 
-    summary.totalAwayPercenatge = ((summary.awayPercentage + summary.awayScenarios)/2)/stdDev;
-    summary.totalHomePercentage = ((summary.homePercentage + summary.homeScenarios)/2)/stdDev;
+
+    var totalAwayPercenatge = ((summary.awayPercentage + summary.awayScenarios)/2)/stdDev;
+    var totalHomePercentage = ((summary.homePercentage + summary.homeScenarios)/2)/stdDev;
+
+    summary.totalAwayPercenatge = (totalAwayPercenatge*100)/(totalAwayPercenatge + totalHomePercentage);
+    summary.totalHomePercentage = (totalHomePercentage*100)/(totalAwayPercenatge + totalHomePercentage);;
+    
+    
+    
 
     summary.winner = summary.totalAwayPercenatge > summary.totalHomePercentage ? "away" :"home";
 
