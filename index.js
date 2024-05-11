@@ -49,8 +49,8 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May10th";
-        var descriptiveDate = "2024-05-10"
+        var selectedDate = "May8th";
+        var descriptiveDate = "2024-05-08"
         //await getESPNData(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
@@ -59,7 +59,7 @@ var teams = [
         //await getBestStartingPitchersTeams(selectedDate);
         //await getBestRelievingPitchersTeams(selectedDate);
         //await getBestOverallPitchersTeams(selectedDate);
-        //await getScheduleData(selectedDate);
+        await getScheduleData(selectedDate);
         //await getMoreWininigTeams(selectedDate);
         //await getMoreScoringTeams(selectedDate);
         //await getMoreReceivingTeams(selectedDate);
@@ -73,9 +73,9 @@ var teams = [
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
         //await consolidateAlgorithmResults(selectedDate);
 //
-        await CalculateWinnersViaFormula(selectedDate);
+        //await CalculateWinnersViaFormula(selectedDate);
 
-        //await ProcessGameByGame(selectedDate);
+        await ProcessGameByGame(selectedDate);
         
         //await getScheduleData(selectedDate);
         //OBSOLETE await getResults(selectedDate);
