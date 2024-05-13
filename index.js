@@ -49,9 +49,11 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May8th";
-        var descriptiveDate = "2024-05-08"
+        var selectedDate = "May12th";
+        var descriptiveDate = "2024-05-12"
         //await getESPNData(selectedDate);
+        //await getScheduleData(selectedDate);
+        await ProcessGameByGame(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
         //await getBestHittingTeamsByBatting(selectedDate);
@@ -59,23 +61,26 @@ var teams = [
         //await getBestStartingPitchersTeams(selectedDate);
         //await getBestRelievingPitchersTeams(selectedDate);
         //await getBestOverallPitchersTeams(selectedDate);
-        await getScheduleData(selectedDate);
+        //
         //await getMoreWininigTeams(selectedDate);
         //await getMoreScoringTeams(selectedDate);
         //await getMoreReceivingTeams(selectedDate);
         //await evaluateGames(selectedDate);
         //await sortBetterAvgs(selectedDate);
         //await filterConsistentPicks(selectedDate)
-    ////
+//
         //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-        //
+//
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
         //await consolidateAlgorithmResults(selectedDate);
 //
-        //await CalculateWinnersViaFormula(selectedDate);
+        //await getPitcherGameByGame(selectedDate);
+        //await getBatterGameByGame(selectedDate);
 
-        await ProcessGameByGame(selectedDate);
+        await CalculateWinnersViaFormula(selectedDate);
+
+        //await EvaluateGamesInPast(selectedDate);
         
         //await getScheduleData(selectedDate);
         //OBSOLETE await getResults(selectedDate);
@@ -89,6 +94,37 @@ var teams = [
       await driver.quit();
     }
 
+    async function EvaluateGamesInPast(date)
+    {
+        var targetDate = ", Apr 15";
+        var teamsSchedule = await load(date+"TeamSchedules");
+        teamsSchedule = teamsSchedule.filter(function(item){
+            return item.period == 0; 
+        });
+
+        var allGames = [];
+        var gamesOnly = teamsSchedule.map(function(item){
+            return item.scheduleData;
+        });
+
+        for (let er = 0; er < gamesOnly.length; er++) {
+            const games = gamesOnly[er];
+            for (let ww = 0; ww < games.length; ww++) {
+                const game = games[ww];
+                allGames.push(game);
+            }
+            
+        }
+
+        var targetGames = allGames.filter(function(item){
+            return item.DATE.indexOf(targetDate) >= 0;
+        });
+        
+        var pitchersDataByGame = await load("PitchersByTeamByGame");
+        var battersDataByGame = await load("BattersByTeamByGame");
+
+    }
+
 async function CalculateWinnersViaFormula(date)
 {
     var pitchersData = await load(date);
@@ -97,12 +133,14 @@ async function CalculateWinnersViaFormula(date)
     var seriesData7 = await load(date+"SeriesWinners7");
     var seriesData3 = await load(date+"SeriesWinners3");
     var teamsSchedule = await load(date+"TeamSchedules");
+    var pitchersDataByGame = await load("PitchersByTeamByGame");
+    var battersDataByGame = await load("BattersByTeamByGame");
 
     var games = [];
     for (let index = 0; index < pitchersData[0].games.length; index++) {
         var gameData = {};
         const game = pitchersData[0].games[index];
-        if(game.homeTeam.homePitcher && game.awayTeam.awayPitcher)
+        if(game.homeTeam.homePitcherDataNew && game.awayTeam.awayPitcherDataNew)
         {
         var homePitcher = game.homeTeam.homePitcherDataNew[0];
         var homeBatter = battersData.filter(function(item){
@@ -117,166 +155,227 @@ async function CalculateWinnersViaFormula(date)
         var homeFactors = await CalculateFactors(homePitcher, homeBatter);
 
         var stdDev = await getStandardDeviation([awayPitcher.currentEra, awayPitcher.carrerEra, homePitcher.currentEra, homePitcher.carrerEra]);
-
         var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
 
-       
-
-        var serie0 = seriesData0.filter(function(item){
-            return item.game.replace(" ","") == game.game.replace(" ","");
-        })[0];
-
-        var serie3 = seriesData3.filter(function(item){
-            return item.game.replace(" ","") == game.game.replace(" ","");
-        })[0];
-
-        var serie7 = seriesData7.filter(function(item){
-            return item.game.replace(" ","") == game.game.replace(" ","");
-        })[0];
-
-        var seriesIsConsistent = "";
-        var seriesWinner = "";
-        var seriesWinnerPercentage = 0;
-        var confidenceRanking = 0;
-        seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
-        if(seriesIsConsistent)
-        {
-            seriesWinner = serie0.seriesExpectedWinner;
-            seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns + serie3.expectedWinnerRuns)/3)*10);
-            seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-            seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-            seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-            confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking + serie3.confidenceRanking)/3)*((serie0.expectedHandicap + serie3.expectedHandicap + serie7.expectedHandicap)/3);
-        }
-        else{
-            if(serie0.seriesExpectedWinner == serie7.seriesExpectedWinner)
-            {
-                seriesWinner = serie0.seriesExpectedWinner;
-                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
-                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-                confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking)/2)**((serie0.expectedHandicap + serie7.expectedHandicap)/2);
-            }
-            else if(serie3.seriesExpectedWinner == serie7.seriesExpectedWinner)
-            {
-                seriesWinner = serie3.seriesExpectedWinner;
-                seriesWinnerPercentage = (((serie3.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
-                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-                confidenceRanking = ((serie7.confidenceRanking + serie3.confidenceRanking)/2)*((serie3.expectedHandicap + serie7.expectedHandicap)/2);
-            }
-            else if(serie0.seriesExpectedWinner == serie3.seriesExpectedWinner){
-                seriesWinner = serie3.seriesExpectedWinner;
-                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie3.expectedWinnerRuns)/2)*10);
-                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
-                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
-                confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
-            }
-        }
-
-        var homeSeriesPercentage = seriesWinner == game.homeTeam.homeTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
-        var awaySeriesPercentage = seriesWinner == game.awayTeam.awayTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
-
-        var awayResults = teamsSchedule.filter(function(item){
-            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
-        })[0];
-
-        var homeResults = teamsSchedule.filter(function(item){
+        var homePitchersComplete = pitchersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
 
+        var homePitcherComplete = homePitchersComplete.pitchersData.filter(function(item){
+            return item.pitcher.indexOf(game.homeTeam.homePitcher.split(" ")[1])>=0;
+        });
 
-        var awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
-        var awayMostProbablePercentage = awayResults.mostProbablePercentage == 100 ? 85 : awayResults.mostProbablePercentage;
-        var awayNextWinningPercentage = 0;
-        var awayNextlosingPercentage = 0;
-        if(awayMostProbaleNextResult == "Win")
-        {
-            if(awayMostProbablePercentage > 50)
+        var homeBattersComplete = battersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+        })[0];
+
+        var homeBatterComplete = homeBattersComplete.battersData.games[homeBattersComplete.battersData.games.length-1];
+
+
+        var awayPitchersComplete = pitchersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+
+        var awayPitcherComplete = awayPitchersComplete.pitchersData.filter(function(item){
+            return item.pitcher.indexOf(game.awayTeam.awayPitcher.split(" ")[1])>=0;
+        });
+
+        var awayBattersComplete = battersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+
+        var awayBatterComplete = awayBattersComplete.battersData.games[awayBattersComplete.battersData.games.length-1];
+        if(homePitcherComplete.length > 0 && awayPitcherComplete.length > 0){
+            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:awayPitcher.carrerEra};
+            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:homePitcher.carrerEra}
+            var completeAwayBatter = {totalsData:[]};
+            completeAwayBatter.totalsData.push({stat:"AVG",value:awayBatterComplete.avgAvg});
+            completeAwayBatter.totalsData.push({stat:"OPS",value:awayBatterComplete.avgRunsHitsFactor});
+            completeAwayBatter.totalsData.push({stat:"OBP",value:awayBatterComplete.battingAvg});
+            completeAwayBatter.totalsData.push({stat:"SLG",value:awayBatterComplete.hitsRunsFactor});
+
+            var completeHomeBatter = {totalsData:[]};
+            completeHomeBatter.totalsData.push({stat:"AVG",value:homeBatterComplete.avgAvg});
+            completeHomeBatter.totalsData.push({stat:"OPS",value:homeBatterComplete.avgRunsHitsFactor});
+            completeHomeBatter.totalsData.push({stat:"OBP",value:homeBatterComplete.battingAvg});
+            completeHomeBatter.totalsData.push({stat:"SLG",value:homeBatterComplete.hitsRunsFactor});
+
+            var completeAwayFactors = await CalculateFactors(completeAwayPitcher, completeAwayBatter);
+            var completeHomeFactors = await CalculateFactors(completeHomePitcher, completeHomeBatter);
+
+            var allData = homePitcherComplete.concat(awayPitcherComplete);
+
+            var eras = allData.map(function(item){
+                return parseFloat(item.eraGame);
+            });
+
+            
+
+            var completeStdDev = await getStandardDeviation(eras);
+
+            var completeCalcs = await CalculateDiffsAndPercentages(completeAwayFactors, completeHomeFactors, completeStdDev);
+
+        
+
+            var serie0 = seriesData0.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var serie3 = seriesData3.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var serie7 = seriesData7.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var seriesIsConsistent = "";
+            var seriesWinner = "";
+            var seriesWinnerPercentage = 0;
+            var confidenceRanking = 0;
+            seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
+            if(seriesIsConsistent)
             {
-                awayNextWinningPercentage = awayMostProbablePercentage;
-                awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                seriesWinner = serie0.seriesExpectedWinner;
+                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns + serie3.expectedWinnerRuns)/3)*10);
+                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking + serie3.confidenceRanking)/3)*((serie0.expectedHandicap + serie3.expectedHandicap + serie7.expectedHandicap)/3);
             }
             else{
-                awayNextWinningPercentage = 60;
-                awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                if(serie0.seriesExpectedWinner == serie7.seriesExpectedWinner)
+                {
+                    seriesWinner = serie0.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking)/2)*((serie0.expectedHandicap + serie7.expectedHandicap)/2);
+                }
+                else if(serie3.seriesExpectedWinner == serie7.seriesExpectedWinner)
+                {
+                    seriesWinner = serie3.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie3.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie7.confidenceRanking + serie3.confidenceRanking)/2)*((serie3.expectedHandicap + serie7.expectedHandicap)/2);
+                }
+                else if(serie0.seriesExpectedWinner == serie3.seriesExpectedWinner){
+                    seriesWinner = serie3.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie3.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
+                }
             }
+
+            var homeSeriesPercentage = seriesWinner == game.homeTeam.homeTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
+            var awaySeriesPercentage = seriesWinner == game.awayTeam.awayTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
+
+            var awayResults = teamsSchedule.filter(function(item){
+                return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+            })[0];
+
+            var homeResults = teamsSchedule.filter(function(item){
+                return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+            })[0];
+
+
+            var awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
+            var awayMostProbablePercentage = awayResults.mostProbablePercentage == 100 ? 85 : awayResults.mostProbablePercentage;
+            var awayNextWinningPercentage = 0;
+            var awayNextlosingPercentage = 0;
+            if(awayMostProbaleNextResult == "Win")
+            {
+                if(awayMostProbablePercentage > 50)
+                {
+                    awayNextWinningPercentage = awayMostProbablePercentage;
+                    awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                }
+                else{
+                    awayNextWinningPercentage = 60;
+                    awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                }
+            }
+            else{
+                if(awayMostProbablePercentage > 50)
+                {
+                    awayNextlosingPercentage = awayMostProbablePercentage;
+                    awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+                }
+                else{
+                    awayNextlosingPercentage = 60;
+                    awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+                }
+            }
+
+            var homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
+            var homeMostProbablePercentage = homeResults.mostProbablePercentage == 100 ? 85 : homeResults.mostProbablePercentage;
+            var homeNextWinningPercentage = 0;
+            var homeNextlosingPercentage = 0;
+            if(homeMostProbaleNextResult == "Win")
+            {
+                if(homeMostProbablePercentage > 50)
+                {
+                    homeNextWinningPercentage = homeMostProbablePercentage;
+                    homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+                }
+                else{
+                    homeNextWinningPercentage = 60;
+                    homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+                }
+            }
+            else{
+                if(homeMostProbablePercentage > 50)
+                {
+                    homeNextlosingPercentage = homeMostProbablePercentage;
+                    homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+                }
+                else{
+                    homeNextlosingPercentage = 60;
+                    homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+                }
+            }
+
+
+            gameData.game = game.game;
+            gameData.time = game.gameTime;
+            gameData.away = game.awayTeam.awayTeam;
+            gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
+            gameData.awaySeriesPercentage = awaySeriesPercentage;
+            gameData.awayNextWinningPercentage = awayNextWinningPercentage;
+            gameData.awayCurrentStreak = awayResults.currentStreak;
+
+            gameData.home = game.homeTeam.homeTeam;
+            gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
+            gameData.homeSeriesPercentage = homeSeriesPercentage;
+            gameData.homeNextWinningPercentage = homeNextWinningPercentage;
+            gameData.homeCurrentStreak = homeResults.currentStreak;
+            
+            
+            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            gameData.seriesWinner = seriesWinner;
+            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+
+            var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
+            var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
+
+            gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+            gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            // gameData.formulaWin = completeCalcs.winner;
+            
+            gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
+            gameData.stdDev = completeCalcs.stdDev;
+            
+
+            games.push(gameData);
+
+            await save(date+"FinalSelections", games, function(){}, "replace");
         }
         else{
-            if(awayMostProbablePercentage > 50)
-            {
-                awayNextlosingPercentage = awayMostProbablePercentage;
-                awayNextWinningPercentage = (100 - awayNextlosingPercentage);
-            }
-            else{
-                awayNextlosingPercentage = 60;
-                awayNextWinningPercentage = (100 - awayNextlosingPercentage);
-            }
+            var stopHere = "";
         }
-
-        var homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
-        var homeMostProbablePercentage = homeResults.mostProbablePercentage == 100 ? 85 : homeResults.mostProbablePercentage;
-        var homeNextWinningPercentage = 0;
-        var homeNextlosingPercentage = 0;
-        if(homeMostProbaleNextResult == "Win")
-        {
-            if(homeMostProbablePercentage > 50)
-            {
-                homeNextWinningPercentage = homeMostProbablePercentage;
-                homeNextlosingPercentage = (100 - homeNextWinningPercentage);
-            }
-            else{
-                homeNextWinningPercentage = 60;
-                homeNextlosingPercentage = (100 - homeNextWinningPercentage);
-            }
-        }
-        else{
-            if(homeMostProbablePercentage > 50)
-            {
-                homeNextlosingPercentage = homeMostProbablePercentage;
-                homeNextWinningPercentage = (100 - homeNextlosingPercentage);
-            }
-            else{
-                homeNextlosingPercentage = 60;
-                homeNextWinningPercentage = (100 - homeNextlosingPercentage);
-            }
-        }
-
-
-        gameData.game = game.game;
-        gameData.time = game.gameTime;
-        gameData.away = game.awayTeam.awayTeam;
-        gameData.formulaawayWinPercentage = calcs.totalAwayPercenatge;
-        gameData.awaySeriesPercentage = awaySeriesPercentage;
-        gameData.awayNextWinningPercentage = awayNextWinningPercentage;
-        gameData.awayCurrentStreak = awayResults.currentStreak;
-
-        gameData.home = game.homeTeam.homeTeam;
-        gameData.formulahomeWinPercentage = calcs.totalHomePercentage;
-        gameData.homeSeriesPercentage = homeSeriesPercentage;
-        gameData.homeNextWinningPercentage = homeNextWinningPercentage;
-        gameData.homeCurrentStreak = homeResults.currentStreak;
-        
-        
-        gameData.formulaWinner = calcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-        gameData.seriesWinner = seriesWinner;
-        gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-
-        var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
-        var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
-
-        gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-        gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-        gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-        // gameData.formulaWin = calcs.winner;
-        
-        gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
-        gameData.stdDev = calcs.stdDev;
-        
-
-        games.push(gameData);
-
-        await save(date+"FinalSelections", games, function(){}, "replace");
     }
     var stopHere = "";
 }
@@ -481,16 +580,208 @@ async function CalculateFactors(pitcher, batter)
         return item.stat == "OPS"
     })[0].value);
 
-    factors.old.average = (avg + obp + slg + ops) + pitcher.finalEra;
+    factors.old.average = (avg + obp + slg + ops) + ((pitcher.currentEra + pitcher.carrerEra)/2);
     factors.old.current = (avg + obp + slg + ops) + pitcher.currentEra;
     factors.old.carrer = (avg + obp + slg + ops) + pitcher.carrerEra;
 
-    factors.new.average = pitcher.finalEra - (avg + obp + slg + ops);
+    factors.new.average = ((pitcher.currentEra + pitcher.carrerEra)/2) - (avg + obp + slg + ops);
     factors.new.current = pitcher.currentEra - (avg + obp + slg + ops);
     factors.new.carrer = pitcher.carrerEra - (avg + obp + slg + ops);
 
     return factors;
 
+}
+
+async function getPitcherGameByGame(date)
+{
+    var teamsResultsData = await load(date+"TeamSchedules");
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+        try{
+            var pitchersByTeam = await load("PitchersByTeamGameByGame");
+        }
+        catch{
+            var pitchersByTeam = [];
+        }
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        
+        var pitchersTeam = [];
+        var uniquePitchers = [];
+        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        var teamDetails = {teamName: team.teamName, pitchers:[]}
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+          var scope = [];
+            if(game.game.indexOf(team.teamName + " @") >= 0)
+            {
+                scope = game.homeDetails.pitchersDeatils;
+            }
+            else{
+                scope = game.awayDetails.pitchersDeatils;
+            }
+            
+            for (let re = 0; re < scope.length; re++) {
+                const pitcher = scope[re];
+                var pitcherData = { 
+                    team: team.teamName,
+                    date: game.date, 
+                    pitcher: pitcher.PITCHERS, 
+                    eraGame: pitcher.ERA
+                };
+                pitchersTeam.push(pitcherData);
+                var isPitcherInList = uniquePitchers.filter(function(item){
+                    return item == pitcherData.pitcher;
+                });
+                if(isPitcherInList == 0)
+                {
+                    uniquePitchers.push(pitcherData.pitcher);
+                }
+                else{
+                    var stopHere = "";
+                }
+            }
+            var stopHere = "";
+        }
+        
+        for (let pt = 0; pt < uniquePitchers.length; pt++) {
+            const pitcher = uniquePitchers[pt];
+            var pitcherGames = pitchersTeam.filter(function(item){
+                return item.pitcher == pitcher
+            });
+            var stopHere = "";
+            var sumEra = 0;
+            var eraValues = [];
+            var avgCount = 0;
+            for (let rr = 0; rr < pitcherGames.length; rr++) {
+                const game = pitcherGames[rr];
+                var era = parseFloat(game.eraGame);
+                if(!isNaN(era))
+                {
+                    avgCount++;
+                    sumEra += era;
+                    game.eraAvg = sumEra/(avgCount);
+                    eraValues.push(parseFloat(game.eraGame));
+                    game.stdDev= getStandardDeviation(eraValues);
+                    //console.log(game);
+                }
+            }
+            var stopHere = "";
+        }
+
+        pitchersByTeam.push({teamName: team.teamName, pitchersData:pitchersTeam});
+        await save("PitchersByTeamByGame", pitchersByTeam, function(){}, "replace");
+    }
+}
+
+async function getBatterGameByGame(date)
+{
+    var teamsResultsData = await load(date+"TeamSchedules");
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+        try{
+            var battersByTeam = await load("BattersByTeamGameByGame");
+        }
+        catch{
+            var battersByTeam = [];
+        }
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        
+        var battersTeam = [];
+        var uniqueBatters = [];
+        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        var teamDetails = {teamName: team.teamName, games:[]}
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+          var scope = [];
+            if(game.game.indexOf(team.teamName + " @") >= 0)
+            {
+                scope = game.homeDetails.battersDeatils;
+            }
+            else{
+                scope = game.awayDetails.battersDeatils;
+            }
+            var avgSum = 0;
+            var avgCount = 0;
+            var hitsSum = 0;
+            var runsSum = 0;
+            for (let re = 0; re < scope.length; re++) {
+                const player = scope[re];
+                var isValidPlayer = isNaN(parseFloat(player["H-AB"].split("-")[0])) ? false : true;
+                if( isValidPlayer)
+                {
+                    var playerData = { 
+                        team: team.teamName,
+                        date: game.date, 
+                        player: player.HITTERS.split("\n")[0], 
+                        position: player.HITTERS.split("\n")[1],
+                        avg: player.AVG,
+                        ab: player["H-AB"].split("-")[1],
+                        runs: player.R,
+                        hits: player["H-AB"].split("-")[0],
+                        homeRuns: player.HR,
+                        rbi: player.RBI
+                    };
+                    avgSum += parseFloat(player.AVG);
+                    avgCount++;
+                    runsSum += parseFloat(player.R);
+                    hitsSum += parseFloat(player["H-AB"].split("-")[0]);
+                    battersTeam.push(playerData);
+                    var isPlayerInList = uniqueBatters.filter(function(item){
+                        return item == playerData.player;
+                    });
+                    if(isPlayerInList == 0)
+                    {
+                        uniqueBatters.push(playerData.player);
+                    }
+                    else{
+                        var stopHere = "";
+                    }
+                }
+            }
+            var gameAvg = avgSum/avgCount;
+            hitsSum = hitsSum == 0 ? 1 : hitsSum;
+            var hitsRunsFactor = runsSum/hitsSum;
+            if(isNaN(hitsRunsFactor))
+            {
+                var stopHere = "";
+            }
+            teamDetails.games.push({date: game.date, battingAvg: gameAvg, hitsRunsFactor:hitsRunsFactor, hits: hitsSum, runs:runsSum});
+        }
+
+            var sumAvg = 0;
+            var sumRunHitFactor = 0;
+            var avgValues = [];
+            var runHitFactorValues = [];
+            var avgCount = 0;
+            for (let rr = 0; rr < teamDetails.games.length; rr++) {
+                const game = teamDetails.games[rr];
+                var avg = parseFloat(game.battingAvg);
+                if(!isNaN(avg))
+                {
+                    avgCount++;
+                    sumAvg += avg;
+                    sumRunHitFactor += game.hitsRunsFactor;
+                    game.avgAvg = sumAvg/(avgCount);
+                    avgValues.push(parseFloat(avg));
+                    game.avgStdDev= getStandardDeviation(avgValues);
+                    game.avgRunsHitsFactor = sumRunHitFactor/avgCount;
+                    runHitFactorValues.push(parseFloat(game.hitsRunsFactor));
+                    game.runsHitsStdDev= getStandardDeviation(runHitFactorValues);
+
+                    //console.log(game);
+                }
+            
+            var stopHere = +"";
+        }
+        
+
+        battersByTeam.push({teamName: team.teamName, battersData:teamDetails});
+        await save("BattersByTeamByGame", battersByTeam, function(){}, "replace");
+    }
 }
 
 async function ProcessGameByGame(date)
@@ -502,54 +793,71 @@ async function ProcessGameByGame(date)
     
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
-        var allGamesDetails = {teamName : team.TeamName, games:[]};
-    for (let index = 0; index < team.scheduleData.length; index++) {
-        const game = team.scheduleData[index];
-        var gameDetails = {game:"",date:game.DATE, homeTeam:"", awayTeam:"" , resultDetails:game, homeDetails:{}, awayDetails:{}};
-        var homeTeam = "";
-        var awayTeam = "";
-        if(game.OPPONENT.indexOf("vs") >= 0)
-        {
-            var opponent = game.OPPONENT.replace("vs\n","");
-            homeTeam = team.teamName;
-            awayTeam = opponent;
+        var processedDates = [];
+        try{
+        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+            processedDates.push(game.date);
             
         }
-        else{
-            var opponent = game.OPPONENT.replace("@\n","");
-            homeTeam = opponent;
-            awayTeam = team.teamName;
+    }
+    catch{
+        var allGamesDetails = {teamName : team.teamName, games:[]};
+    }
+    
+    for (let index = 0; index < team.scheduleData.length; index++) {
+        const game = team.scheduleData[index];
+        var isProcessed = processedDates.filter(function(item){
+            return item == game.DATE;
+        });
+        if(isProcessed.length ==0)
+            {
+            var gameDetails = {game:"",date:game.DATE, homeTeam:"", awayTeam:"" , resultDetails:game, homeDetails:{}, awayDetails:{}};
+            var homeTeam = "";
+            var awayTeam = "";
+            if(game.OPPONENT.indexOf("vs") >= 0)
+            {
+                var opponent = game.OPPONENT.replace("vs\n","");
+                homeTeam = team.teamName;
+                awayTeam = opponent;
+                
+            }
+            else{
+                var opponent = game.OPPONENT.replace("@\n","");
+                homeTeam = opponent;
+                awayTeam = team.teamName;
+            }
+
+            gameDetails.awayTeam = awayTeam;
+            gameDetails.homeTeam = homeTeam;
+            gameDetails.game = awayTeam + " @ " + homeTeam;
+            
+            await driver.get(game.GAMELINK);
+            await driver.manage().setTimeouts({ implicit: 1000 });
+
+            await driver.executeScript(await ProcessRunsHitsGameData()).then(function(return_value) {
+                var hitsRunsData = JSON.parse(return_value);
+                gameDetails.awayDetails.runsHitsDeatils = hitsRunsData.away;
+                gameDetails.homeDetails.runsHitsDeatils = hitsRunsData.home;
+            });
+
+            await driver.executeScript(await ProcessPitcherGameData()).then(function(return_value) {
+                var pitchersData = JSON.parse(return_value);
+                gameDetails.awayDetails.pitchersDeatils = pitchersData.away;
+                gameDetails.homeDetails.pitchersDeatils = pitchersData.home;
+            });
+
+            await driver.executeScript(await ProcessBatterGameData()).then(function(return_value) {
+                var battersData = JSON.parse(return_value);
+                gameDetails.awayDetails.battersDeatils = battersData.away;
+                gameDetails.homeDetails.battersDeatils = battersData.home;
+            });
+            
+            allGamesDetails.games.push(gameDetails);
+
+            await save("Games"+team.teamName+"Details", allGamesDetails, function(){}, "replace");
         }
-
-        gameDetails.awayTeam = awayTeam;
-        gameDetails.homeTeam = homeTeam;
-        gameDetails.game = awayTeam + " @ " + homeTeam;
-        
-        await driver.get(game.GAMELINK);
-        await driver.manage().setTimeouts({ implicit: 1000 });
-
-        await driver.executeScript(await ProcessRunsHitsGameData()).then(function(return_value) {
-            var hitsRunsData = JSON.parse(return_value);
-            gameDetails.awayDetails.runsHitsDeatils = hitsRunsData.away;
-            gameDetails.homeDetails.runsHitsDeatils = hitsRunsData.home;
-        });
-
-        await driver.executeScript(await ProcessPitcherGameData()).then(function(return_value) {
-            var pitchersData = JSON.parse(return_value);
-            gameDetails.awayDetails.pitchersDeatils = pitchersData.away;
-            gameDetails.homeDetails.pitchersDeatils = pitchersData.home;
-        });
-
-        await driver.executeScript(await ProcessBatterGameData()).then(function(return_value) {
-            var battersData = JSON.parse(return_value);
-            gameDetails.awayDetails.battersDeatils = battersData.away;
-            gameDetails.homeDetails.battersDeatils = battersData.home;
-        });
-        
-        allGamesDetails.games.push(gameDetails);
-
-        await save("Games"+team.teamName+"Details"+date, allGamesDetails, function(){}, "replace");
-        
     }
 
         var stopHere = "";
