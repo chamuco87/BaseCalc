@@ -49,9 +49,9 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May12th";
-        var descriptiveDate = "2024-05-12"
-        //await getESPNData(selectedDate);
+        var selectedDate = "May13th";
+        var descriptiveDate = "2024-05-13"
+        await getESPNData(selectedDate);
         //await getScheduleData(selectedDate);
         await ProcessGameByGame(selectedDate);
         //await getBattersData(selectedDate);
@@ -96,7 +96,7 @@ var teams = [
 
     async function EvaluateGamesInPast(date)
     {
-        var targetDate = ", Apr 15";
+        var targetDate = "Apr 15";
         var teamsSchedule = await load(date+"TeamSchedules");
         teamsSchedule = teamsSchedule.filter(function(item){
             return item.period == 0; 
@@ -120,8 +120,8 @@ var teams = [
             return item.DATE.indexOf(targetDate) >= 0;
         });
         
-        var pitchersDataByGame = await load("PitchersByTeamByGame");
-        var battersDataByGame = await load("BattersByTeamByGame");
+        var pitchersDataByGame = await load("PitchersByTeamByGame", "GameByGame");
+        var battersDataByGame = await load("BattersByTeamByGame", "GameByGame");
 
     }
 
@@ -133,8 +133,8 @@ async function CalculateWinnersViaFormula(date)
     var seriesData7 = await load(date+"SeriesWinners7");
     var seriesData3 = await load(date+"SeriesWinners3");
     var teamsSchedule = await load(date+"TeamSchedules");
-    var pitchersDataByGame = await load("PitchersByTeamByGame");
-    var battersDataByGame = await load("BattersByTeamByGame");
+    var pitchersDataByGame = await load("PitchersByTeamByGame", "GameByGame");
+    var battersDataByGame = await load("BattersByTeamByGame", "GameByGame");
 
     var games = [];
     for (let index = 0; index < pitchersData[0].games.length; index++) {
@@ -671,7 +671,7 @@ async function getPitcherGameByGame(date)
         }
 
         pitchersByTeam.push({teamName: team.teamName, pitchersData:pitchersTeam});
-        await save("PitchersByTeamByGame", pitchersByTeam, function(){}, "replace");
+        await save("PitchersByTeamByGame", pitchersByTeam, function(){}, "replace", "GameByGame");
     }
 }
 
@@ -780,7 +780,7 @@ async function getBatterGameByGame(date)
         
 
         battersByTeam.push({teamName: team.teamName, battersData:teamDetails});
-        await save("BattersByTeamByGame", battersByTeam, function(){}, "replace");
+        await save("BattersByTeamByGame", battersByTeam, function(){}, "replace", "GameByGame");
     }
 }
 
@@ -795,7 +795,7 @@ async function ProcessGameByGame(date)
         const team = dataScope[index];
         var processedDates = [];
         try{
-        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        var allGamesDetails = await load("Games"+team.teamName+"Details","GameByGame");
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
             processedDates.push(game.date);
@@ -856,7 +856,7 @@ async function ProcessGameByGame(date)
             
             allGamesDetails.games.push(gameDetails);
 
-            await save("Games"+team.teamName+"Details", allGamesDetails, function(){}, "replace");
+            await save("Games"+team.teamName+"Details", allGamesDetails, function(){}, "replace", "GameByGame");
         }
     }
 
@@ -2989,19 +2989,35 @@ script += 'return JSON.stringify(pitcherStats);';
 
 }
 
-async function load(filename)
+async function load(filename, foldername = null)
 {
-const data = fs.readFileSync("./"+filename+".json");
-return JSON.parse(data);
+    if(foldername)
+    {
+        const data = fs.readFileSync("./"+foldername+"/"+filename+".json");
+        return JSON.parse(data);
+    }
+    else{
+        const data = fs.readFileSync("./"+filename.split(/[0-9]/)[0]+"/"+filename+"/"+filename+".json");
+        return JSON.parse(data);
+    }
 
 }
 
 
-async function save(fileName, jsonObject, callback, appendOrReplace)
+async function save(fileName, jsonObject, callback, appendOrReplace, foldername = null)
 {
-    if(appendOrReplace == "replace")
+    if(foldername)
     {
-    fs.writeFileSync(fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+        if(appendOrReplace == "replace")
+        {
+        fs.writeFileSync("./"+foldername+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+        }
+    }
+    else{
+        if(appendOrReplace == "replace")
+        {
+        fs.writeFileSync("./"+fileName.split(/[0-9]/)[0]+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+        }
     }
 }
 
