@@ -6,18 +6,18 @@
                 "game": "TOR Blue @ BAL Orioles",
                 "gameTime": "16:35",
                 "overUnder": {
-                    "overRuns": "O 8.0",
-                    "overOdd": "1.90",
-                    "underRuns": "U 8.0",
-                    "underOdd": "1.90"
+                    "overRuns": "O 7.5",
+                    "overOdd": "1.86",
+                    "underRuns": "U 7.5",
+                    "underOdd": "1.95"
                 },
                 "awayTeam": {
                     "awayTeam": "TORBlue",
                     "awayId": "TOR",
                     "awayPitcher": "J Berrios",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.64",
-                    "awayML": "2.40",
+                    "awayHandicapOdds": "1.71",
+                    "awayML": "2.50",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -308,8 +308,8 @@
                     "homeId": "BAL",
                     "homePitcher": "C Burnes",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.30",
-                    "homeML": "1.60",
+                    "homeHandicapOdds": "2.20",
+                    "homeML": "1.55",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -597,13 +597,13 @@
                 },
                 "selection": 2,
                 "expectedWinner": "BALOrioles",
-                "diffRatio": 0.27141111111111094,
+                "diffRatio": 0.2601333333333331,
                 "totalRunsExpectedInGame": 8.154145299145299,
                 "bestPitcher": "BALOrioles",
                 "bestBatting": "TORBlue",
                 "bestScoringAvg": "BALOrioles",
                 "bestRecevingAvg": "BALOrioles",
-                "battingAvgDiff": 0.011411111111111122,
+                "battingAvgDiff": 0.0001333333333333464,
                 "eraDiff": 0.2599999999999998,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "TORBlue",
@@ -612,20 +612,20 @@
                     "homeRunsF5": 2.85,
                     "runsDiffF5": 0,
                     "expectedFinalWinner": "BALOrioles",
-                    "resultTypeFinal": "draw",
+                    "resultTypeFinal": "Winner",
                     "awayFinalExpectedRuns": 7.930000000000001,
-                    "homeFinalExpectedRuns": 8.35,
-                    "finalHandicapExpected": 0,
-                    "finalTotalRunsExpected": 16.28
+                    "homeFinalExpectedRuns": 8.673529411764706,
+                    "finalHandicapExpected": 1,
+                    "finalTotalRunsExpected": 16.603529411764708
                 }
             },
             {
                 "game": "MIA Marlins @ DET Tigers",
                 "gameTime": "16:40",
                 "overUnder": {
-                    "overRuns": "O 8.5",
+                    "overRuns": "O 9.0",
                     "overOdd": "2.00",
-                    "underRuns": "U 8.5",
+                    "underRuns": "U 9.0",
                     "underOdd": "1.83"
                 },
                 "awayTeam": {
@@ -633,8 +633,8 @@
                     "awayId": "MIA",
                     "awayPitcher": "S Sánchez",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.64",
-                    "awayML": "2.40",
+                    "awayHandicapOdds": "1.71",
+                    "awayML": "2.45",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -925,8 +925,8 @@
                     "homeId": "DET",
                     "homePitcher": "M Manning",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.30",
-                    "homeML": "1.60",
+                    "homeHandicapOdds": "2.20",
+                    "homeML": "1.58",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -1241,17 +1241,17 @@
                 "gameTime": "17:10",
                 "overUnder": {
                     "overRuns": "O 7.5",
-                    "overOdd": "1.90",
+                    "overOdd": "1.86",
                     "underRuns": "U 7.5",
-                    "underOdd": "1.90"
+                    "underOdd": "1.95"
                 },
                 "awayTeam": {
                     "awayTeam": "PHIPhillies",
                     "awayId": "PHI",
                     "awayPitcher": "C Sanchez",
                     "awayHandicapRuns": "-1.5",
-                    "awayHandicapOdds": "2.40",
-                    "awayML": "1.80",
+                    "awayHandicapOdds": "2.45",
+                    "awayML": "1.83",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -1542,8 +1542,8 @@
                     "homeId": "NY",
                     "homePitcher": "S Manaea",
                     "homeHandicapRuns": "+1.5",
-                    "homeHandicapOdds": "1.60",
-                    "homeML": "2.05",
+                    "homeHandicapOdds": "1.58",
+                    "homeML": "2.00",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -1857,10 +1857,10 @@
                 "game": "TB Rays @ BOS Red",
                 "gameTime": "17:10",
                 "overUnder": {
-                    "overRuns": "O 8.0",
-                    "overOdd": "1.90",
-                    "underRuns": "U 8.0",
-                    "underOdd": "1.90"
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.83",
+                    "underRuns": "U 8.5",
+                    "underOdd": "2.00"
                 },
                 "awayTeam": {
                     "awayTeam": "TBRays",
@@ -2448,13 +2448,13 @@
                 },
                 "selection": 3,
                 "expectedWinner": "TBRays",
-                "diffRatio": 0.5783913043478262,
+                "diffRatio": 0.559952380952381,
                 "totalRunsExpectedInGame": 8.08060975609756,
                 "bestPitcher": "TBRays",
                 "bestBatting": "TBRays",
                 "bestScoringAvg": "BOSRed",
                 "bestRecevingAvg": "BOSRed",
-                "battingAvgDiff": 0.03839130434782609,
+                "battingAvgDiff": 0.019952380952380944,
                 "eraDiff": 0.54,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "BOSRed",
@@ -2465,9 +2465,9 @@
                     "expectedFinalWinner": "BOSRed",
                     "resultTypeFinal": "Winner",
                     "awayFinalExpectedRuns": 6.365384615384615,
-                    "homeFinalExpectedRuns": 7.739130434782609,
-                    "finalHandicapExpected": 1,
-                    "finalTotalRunsExpected": 14.104515050167224
+                    "homeFinalExpectedRuns": 8.095238095238095,
+                    "finalHandicapExpected": 2,
+                    "finalTotalRunsExpected": 14.46062271062271
                 }
             },
             {
@@ -3091,18 +3091,18 @@
                 "game": "PIT Pirates @ MIL Brewers",
                 "gameTime": "17:40",
                 "overUnder": {
-                    "overRuns": "O 8.0",
-                    "overOdd": "1.83",
-                    "underRuns": "U 8.0",
-                    "underOdd": "2.00"
+                    "overRuns": "O 8.5",
+                    "overOdd": "2.00",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.83"
                 },
                 "awayTeam": {
                     "awayTeam": "PITPirates",
                     "awayId": "PIT",
                     "awayPitcher": "M Keller",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.54",
-                    "awayML": "2.20",
+                    "awayHandicapOdds": "1.55",
+                    "awayML": "2.25",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -3393,8 +3393,8 @@
                     "homeId": "MIL",
                     "homePitcher": "C Rea",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.55",
-                    "homeML": "1.71",
+                    "homeHandicapOdds": "2.50",
+                    "homeML": "1.66",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -3709,17 +3709,17 @@
                 "gameTime": "17:40",
                 "overUnder": {
                     "overRuns": "O 8.5",
-                    "overOdd": "1.95",
+                    "overOdd": "1.86",
                     "underRuns": "U 8.5",
-                    "underOdd": "1.86"
+                    "underOdd": "1.95"
                 },
                 "awayTeam": {
                     "awayTeam": "WASNationals",
                     "awayId": "WAS",
                     "awayPitcher": "T Williams",
                     "awayHandicapRuns": "-1.5",
-                    "awayHandicapOdds": "2.35",
-                    "awayML": "1.76",
+                    "awayHandicapOdds": "2.25",
+                    "awayML": "1.74",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -4010,8 +4010,8 @@
                     "homeId": "CHI",
                     "homePitcher": "C Flexen",
                     "homeHandicapRuns": "+1.5",
-                    "homeHandicapOdds": "1.62",
-                    "homeML": "2.10",
+                    "homeHandicapOdds": "1.66",
+                    "homeML": "2.15",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -4325,9 +4325,9 @@
                 "game": "CLE Guardians @ TEX Rangers",
                 "gameTime": "18:05",
                 "overUnder": {
-                    "overRuns": "O 8.5",
+                    "overRuns": "O 9.0",
                     "overOdd": "1.90",
-                    "underRuns": "U 8.5",
+                    "underRuns": "U 9.0",
                     "underOdd": "1.90"
                 },
                 "awayTeam": {
@@ -4336,7 +4336,7 @@
                     "awayPitcher": "T Bibee",
                     "awayHandicapRuns": "+1.5",
                     "awayHandicapOdds": "1.47",
-                    "awayML": "2.00",
+                    "awayML": "1.95",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -4628,7 +4628,7 @@
                     "homePitcher": "M Lorenzen",
                     "homeHandicapRuns": "-1.5",
                     "homeHandicapOdds": "2.75",
-                    "homeML": "1.83",
+                    "homeML": "1.86",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -4914,15 +4914,15 @@
                         }
                     ]
                 },
-                "selection": 3,
+                "selection": 5,
                 "expectedWinner": "CLEGuardians",
-                "diffRatio": 2.563757763975155,
+                "diffRatio": 2.549007936507936,
                 "totalRunsExpectedInGame": 8.754506387921024,
                 "bestPitcher": "CLEGuardians",
-                "bestBatting": "CLEGuardians",
+                "bestBatting": "TEXRangers",
                 "bestScoringAvg": "TEXRangers",
                 "bestRecevingAvg": "CLEGuardians",
-                "battingAvgDiff": 0.033757763975155314,
+                "battingAvgDiff": 0.019007936507936474,
                 "eraDiff": 2.53,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "TEXRangers",
@@ -4942,10 +4942,10 @@
                 "game": "OAK Athletics @ HOU Astros",
                 "gameTime": "18:10",
                 "overUnder": {
-                    "overRuns": "O 8.5",
-                    "overOdd": "1.80",
-                    "underRuns": "U 8.5",
-                    "underOdd": "2.05"
+                    "overRuns": "O 9.0",
+                    "overOdd": "2.00",
+                    "underRuns": "U 9.0",
+                    "underOdd": "1.83"
                 },
                 "awayTeam": {
                     "awayTeam": "OAKAthletics",
@@ -4953,7 +4953,7 @@
                     "awayPitcher": "R Stripling",
                     "awayHandicapRuns": "+1.5",
                     "awayHandicapOdds": "1.74",
-                    "awayML": "2.50",
+                    "awayML": "2.55",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -5245,7 +5245,7 @@
                     "homePitcher": "S Arrighetti",
                     "homeHandicapRuns": "-1.5",
                     "homeHandicapOdds": "2.15",
-                    "homeML": "1.55",
+                    "homeML": "1.54",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -5569,8 +5569,8 @@
                     "awayId": "STL",
                     "awayPitcher": "M Liberatore",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.47",
-                    "awayML": "1.95",
+                    "awayHandicapOdds": "1.45",
+                    "awayML": "1.90",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -5861,8 +5861,8 @@
                     "homeId": "LA",
                     "homePitcher": "J Soriano",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.75",
-                    "homeML": "1.86",
+                    "homeHandicapOdds": "2.80",
+                    "homeML": "1.90",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -6150,13 +6150,13 @@
                 },
                 "selection": 2,
                 "expectedWinner": "LAAngels",
-                "diffRatio": 1.6690842105263157,
+                "diffRatio": 1.6488117647058822,
                 "totalRunsExpectedInGame": 8.720040650406505,
                 "bestPitcher": "LAAngels",
                 "bestBatting": "LAAngels",
                 "bestScoringAvg": "LAAngels",
                 "bestRecevingAvg": "STLCardinals",
-                "battingAvgDiff": 0.05908421052631577,
+                "battingAvgDiff": 0.03881176470588232,
                 "eraDiff": 1.6099999999999999,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "STLCardinals",
@@ -6164,12 +6164,12 @@
                     "awayRunsF5": 4.13,
                     "homeRunsF5": 3.54,
                     "runsDiffF5": 1,
-                    "expectedFinalWinner": "LAAngels",
+                    "expectedFinalWinner": "STLCardinals",
                     "resultTypeFinal": "draw",
-                    "awayFinalExpectedRuns": 7.708947368421052,
+                    "awayFinalExpectedRuns": 8.129999999999999,
                     "homeFinalExpectedRuns": 7.79,
                     "finalHandicapExpected": 0,
-                    "finalTotalRunsExpected": 15.498947368421053
+                    "finalTotalRunsExpected": 15.919999999999998
                 }
             },
             {
@@ -6177,17 +6177,17 @@
                 "gameTime": "19:40",
                 "overUnder": {
                     "overRuns": "O 8.5",
-                    "overOdd": "1.80",
+                    "overOdd": "2.00",
                     "underRuns": "U 8.5",
-                    "underOdd": "2.05"
+                    "underOdd": "1.83"
                 },
                 "awayTeam": {
                     "awayTeam": "CINReds",
                     "awayId": "CIN",
                     "awayPitcher": "G Ashcraft",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.58",
-                    "awayML": "2.25",
+                    "awayHandicapOdds": "1.60",
+                    "awayML": "2.30",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -6478,8 +6478,8 @@
                     "homeId": "ARI",
                     "homePitcher": "J Montgomery",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.45",
-                    "homeML": "1.66",
+                    "homeHandicapOdds": "2.40",
+                    "homeML": "1.64",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -6767,13 +6767,13 @@
                 },
                 "selection": 2,
                 "expectedWinner": "ARIDiamondbacks",
-                "diffRatio": 1.9901644736842103,
+                "diffRatio": 2.0016527777777773,
                 "totalRunsExpectedInGame": 8.603455284552846,
                 "bestPitcher": "ARIDiamondbacks",
                 "bestBatting": "ARIDiamondbacks",
                 "bestScoringAvg": "ARIDiamondbacks",
                 "bestRecevingAvg": "CINReds",
-                "battingAvgDiff": 0.02016447368421051,
+                "battingAvgDiff": 0.03165277777777775,
                 "eraDiff": 1.9699999999999998,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "ARIDiamondbacks",
@@ -6782,21 +6782,21 @@
                     "homeRunsF5": 4.27,
                     "runsDiffF5": 1,
                     "expectedFinalWinner": "ARIDiamondbacks",
-                    "resultTypeFinal": "draw",
+                    "resultTypeFinal": "Winner",
                     "awayFinalExpectedRuns": 9.405000000000001,
-                    "homeFinalExpectedRuns": 9.664736842105263,
-                    "finalHandicapExpected": 0,
-                    "finalTotalRunsExpected": 19.069736842105264
+                    "homeFinalExpectedRuns": 9.964444444444444,
+                    "finalHandicapExpected": 1,
+                    "finalTotalRunsExpected": 19.369444444444447
                 }
             },
             {
                 "game": "COL Rockies @ SD Padres",
                 "gameTime": "19:40",
                 "overUnder": {
-                    "overRuns": "O 8.5",
-                    "overOdd": "2.00",
-                    "underRuns": "U 8.5",
-                    "underOdd": "1.83"
+                    "overRuns": "O 8.0",
+                    "overOdd": "1.90",
+                    "underRuns": "U 8.0",
+                    "underOdd": "1.90"
                 },
                 "awayTeam": {
                     "awayTeam": "COLRockies",
@@ -6804,7 +6804,7 @@
                     "awayPitcher": "D Hudson",
                     "awayHandicapRuns": "+1.5",
                     "awayHandicapOdds": "1.86",
-                    "awayML": "2.75",
+                    "awayML": "2.80",
                     "awayPitcherData": [
                         {
                             "dataField": "GP",
@@ -7096,7 +7096,7 @@
                     "homePitcher": "R Vasquez",
                     "homeHandicapRuns": "-1.5",
                     "homeHandicapOdds": "1.95",
-                    "homeML": "1.47",
+                    "homeML": "1.45",
                     "homePitcherData": [
                         {
                             "dataField": "GP",
@@ -7420,7 +7420,7 @@
                     "awayId": "KC",
                     "awayPitcher": "B Singer",
                     "awayHandicapRuns": "+1.5",
-                    "awayHandicapOdds": "1.54",
+                    "awayHandicapOdds": "1.55",
                     "awayML": "2.25",
                     "awayPitcherData": [
                         {
@@ -7712,7 +7712,7 @@
                     "homeId": "SEA",
                     "homePitcher": "G Kirby",
                     "homeHandicapRuns": "-1.5",
-                    "homeHandicapOdds": "2.55",
+                    "homeHandicapOdds": "2.50",
                     "homeML": "1.66",
                     "homePitcherData": [
                         {
@@ -7999,15 +7999,15 @@
                         }
                     ]
                 },
-                "selection": 3,
-                "expectedWinner": "SEAMariners",
-                "diffRatio": 2.1737019607843133,
+                "selection": 2,
+                "expectedWinner": "KCRoyals",
+                "diffRatio": 2.1824789915966383,
                 "totalRunsExpectedInGame": 8.134947735191638,
                 "bestPitcher": "SEAMariners",
-                "bestBatting": "SEAMariners",
+                "bestBatting": "KCRoyals",
                 "bestScoringAvg": "KCRoyals",
                 "bestRecevingAvg": "KCRoyals",
-                "battingAvgDiff": 0.0037019607843137015,
+                "battingAvgDiff": 0.012478991596638678,
                 "eraDiff": 2.1699999999999995,
                 "gameExpectedResult": {
                     "expectedWinnerF5": "KCRoyals",
@@ -8028,16 +8028,16 @@
                 "gameTime": "19:45",
                 "overUnder": {
                     "overRuns": "O 7.5",
-                    "overOdd": "2.00",
+                    "overOdd": "1.86",
                     "underRuns": "U 7.5",
-                    "underOdd": "1.83"
+                    "underOdd": "1.95"
                 },
                 "awayTeam": {
                     "awayTeam": "LADodgers",
                     "awayId": "LA",
                     "awayPitcher": "Y Yamamoto",
                     "awayHandicapRuns": "-1.5",
-                    "awayHandicapOdds": "1.95",
+                    "awayHandicapOdds": "1.90",
                     "awayML": "1.52",
                     "awayPitcherData": [
                         {
@@ -8329,7 +8329,7 @@
                     "homeId": "SF",
                     "homePitcher": "J Hicks",
                     "homeHandicapRuns": "+1.5",
-                    "homeHandicapOdds": "1.86",
+                    "homeHandicapOdds": "1.90",
                     "homeML": "2.60",
                     "homePitcherData": [
                         {

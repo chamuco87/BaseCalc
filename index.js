@@ -51,9 +51,9 @@ var teams = [
     try {
         var selectedDate = "May13th";
         var descriptiveDate = "2024-05-13"
-        await getESPNData(selectedDate);
+        //await getESPNData(selectedDate);
         //await getScheduleData(selectedDate);
-        await ProcessGameByGame(selectedDate);
+        //await ProcessGameByGame(selectedDate);
         //await getBattersData(selectedDate);
         //await getBestScoringTeamsByBatting(selectedDate);
         //await getBestHittingTeamsByBatting(selectedDate);
@@ -73,10 +73,10 @@ var teams = [
         //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
 //
         //await getCoversWinPercentages(selectedDate, descriptiveDate);
-        //await consolidateAlgorithmResults(selectedDate);
-//
-        //await getPitcherGameByGame(selectedDate);
-        //await getBatterGameByGame(selectedDate);
+        await consolidateAlgorithmResults(selectedDate);
+
+        await getPitcherGameByGame(selectedDate);
+        await getBatterGameByGame(selectedDate);
 
         await CalculateWinnersViaFormula(selectedDate);
 
@@ -609,7 +609,7 @@ async function getPitcherGameByGame(date)
         
         var pitchersTeam = [];
         var uniquePitchers = [];
-        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        var allGamesDetails = await load("Games"+team.teamName+"Details", "GameByGame");
         var teamDetails = {teamName: team.teamName, pitchers:[]}
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
@@ -692,7 +692,7 @@ async function getBatterGameByGame(date)
         
         var battersTeam = [];
         var uniqueBatters = [];
-        var allGamesDetails = await load("Games"+team.teamName+"Details");
+        var allGamesDetails = await load("Games"+team.teamName+"Details", "GameByGame");
         var teamDetails = {teamName: team.teamName, games:[]}
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
@@ -1103,19 +1103,19 @@ async function consolidateAlgorithmResults(date)
     underSelectedGames = await sorting(underSelectedGames, "confidenceLevel", "ASC");
 
     
-    await save(period+"ParlayGames"+date, parlayGames, function(){}, "replace");
-    await save(period+"SelectedGames"+date, selectedGames, function(){}, "replace");
-    await save(period+"overSelectedGames"+date, overSelectedGames, function(){}, "replace");
-    await save(period+"underSelectedGames"+date, underSelectedGames, function(){}, "replace");
-    await save(period+"SonadoraGames"+date, noConclusiveGames, function(){}, "replace");
+    await save(date+"ParlayGames"+period, parlayGames, function(){}, "replace");
+    await save(date+"SelectedGames"+period, selectedGames, function(){}, "replace");
+    await save(date+"overSelectedGames"+period, overSelectedGames, function(){}, "replace");
+    await save(date+"underSelectedGames"+period, underSelectedGames, function(){}, "replace");
+    await save(date+"SonadoraGames"+period, noConclusiveGames, function(){}, "replace");
 
     
 
     }
     var allParlays = [];
-    var parlayAll = await load(0+"ParlayGames"+date);
-    var parlay7 = await load(7+"ParlayGames"+date);
-    var parlay15 = await load(3+"ParlayGames"+date);
+    var parlayAll = await load(date+"ParlayGames"+0);
+    var parlay7 = await load(date+"ParlayGames"+7);
+    var parlay15 = await load(date+"ParlayGames"+3);
 
     allParlays = parlayAll.concat(parlay7);
     allParlays = allParlays.concat(parlay15);
@@ -1161,7 +1161,7 @@ async function consolidateAlgorithmResults(date)
 
     var sortedParlays = await sorting(finalParlay,"avgConfidence","DESC")
 
-    await save("FinalParlay"+date, sortedParlays, function(){}, "replace");
+    await save(date+"FinalParlay", sortedParlays, function(){}, "replace");
     var stopHere = "";
 }
 
@@ -2603,6 +2603,7 @@ async function getAllPitchersData(date)
         }
         try{
             await driver.executeScript(await GetPitcherData()).then(function(return_value) {
+                console.log(return_value);
             if(homeOrAway == "away")
             {
                 game.awayTeam.awayPitcherData = JSON.parse(return_value);
@@ -2997,7 +2998,15 @@ async function load(filename, foldername = null)
         return JSON.parse(data);
     }
     else{
-        const data = fs.readFileSync("./"+filename.split(/[0-9]/)[0]+"/"+filename+"/"+filename+".json");
+        var folder = "";
+            if(filename.indexOf("th") >= 0)
+            {
+                folder = filename.split("th")[0]+"th";
+            }
+            else{
+                folder = filename.split("rd")[0]+"rd";
+            }
+        const data = fs.readFileSync("./"+filename.split(/[0-9]/)[0]+"/"+folder+"/"+filename+".json");
         return JSON.parse(data);
     }
 
@@ -3016,7 +3025,15 @@ async function save(fileName, jsonObject, callback, appendOrReplace, foldername 
     else{
         if(appendOrReplace == "replace")
         {
-        fs.writeFileSync("./"+fileName.split(/[0-9]/)[0]+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+            var folder = "";
+            if(fileName.indexOf("th") >= 0)
+            {
+                folder = fileName.split("th")[0]+"th";
+            }
+            else{
+                folder = fileName.split("rd")[0]+"rd";
+            }
+            fs.writeFileSync("./"+fileName.split(/[0-9]/)[0]+"/"+folder+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
         }
     }
 }
