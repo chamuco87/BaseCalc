@@ -1,6 +1,7 @@
 var {Options} = require('selenium-webdriver/chrome')
 const {Builder, Browser, By, Key, until} = require('selenium-webdriver');
 var fs = require('fs');
+const { is } = require('express/lib/request');
 
 var statsURL = "https://www.espn.com/mlb/player/stats/_/";
 var battersURL = "https://www.espn.com/mlb/team/stats/_/name/";
@@ -49,44 +50,85 @@ var teams = [
           ).build()
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
-        var selectedDate = "May13th";
-        var descriptiveDate = "2024-05-13"
-        //await getESPNData(selectedDate);
-        //await getScheduleData(selectedDate);
-        //await ProcessGameByGame(selectedDate);
-        //await getBattersData(selectedDate);
-        //await getBestScoringTeamsByBatting(selectedDate);
-        //await getBestHittingTeamsByBatting(selectedDate);
-        //await getAllPitchersData(selectedDate);
-        //await getBestStartingPitchersTeams(selectedDate);
-        //await getBestRelievingPitchersTeams(selectedDate);
-        //await getBestOverallPitchersTeams(selectedDate);
-        //
-        //await getMoreWininigTeams(selectedDate);
-        //await getMoreScoringTeams(selectedDate);
-        //await getMoreReceivingTeams(selectedDate);
-        //await evaluateGames(selectedDate);
-        //await sortBetterAvgs(selectedDate);
-        //await filterConsistentPicks(selectedDate)
-//
-        //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-        //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-//
-        //await getCoversWinPercentages(selectedDate, descriptiveDate);
-        await consolidateAlgorithmResults(selectedDate);
+var datesAnalysis = [
+    {month:"April", from:8, to:30, monthNumber:"04"}, 
+    {month:"May", from:15, to:15, monthNumber:"05"}];
 
-        await getPitcherGameByGame(selectedDate);
-        await getBatterGameByGame(selectedDate);
+for (let te = 0; te < datesAnalysis.length; te++) {
+    const mmonth = datesAnalysis[te];
+    
 
-        await CalculateWinnersViaFormula(selectedDate);
+            for (let index =mmonth.from; index <= mmonth.to; index++)
+            {
+            var selectedDate = mmonth.month+ index;
+            if(index == 1)
+            {
+                selectedDate += "st";
+            }
+            else if(index == 3)
+            {
+                selectedDate += "rd";
 
-        //await EvaluateGamesInPast(selectedDate);
+            }
+            else{
+                selectedDate += "th";
+            }
+            if(index <10)
+            {
+                var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+            }
+            else{
+                var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
+            }
+            //await getESPNData(selectedDate);
+            //await getScheduleData(selectedDate);
+            //await ProcessGameByGame(selectedDate);
+            //await getBattersData(selectedDate);
+            //await getBestScoringTeamsByBatting(selectedDate);
+            //await getBestHittingTeamsByBatting(selectedDate);
+            //await getAllPitchersData(selectedDate);
+            //await getBestStartingPitchersTeams(selectedDate);
+            //await getBestRelievingPitchersTeams(selectedDate);
+            //await getBestOverallPitchersTeams(selectedDate);
+            //
+            //await getMoreWininigTeams(selectedDate);
+            //await getMoreScoringTeams(selectedDate);
+            //await getMoreReceivingTeams(selectedDate);
+            //await evaluateGames(selectedDate);
+            //await sortBetterAvgs(selectedDate);
+            //await filterConsistentPicks(selectedDate)
+    ////
+            //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+            //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+    //
+            //await getCoversWinPercentages(selectedDate, descriptiveDate);
+            //await consolidateAlgorithmResults(selectedDate)
+            //await getPitcherGameByGame(selectedDate);
+            //await getBatterGameByGame(selectedDate)
+            //await CalculateWinnersViaFormula(selectedDate);
+
+            
+
+            //Algo Evaluation for Past Games
+            //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+            //await getESPNData(selectedDate);
+            //await ProcessGameByGame(selectedDate);
+            //await getPitcherGameByGame(selectedDate);
+            //await getBatterGameByGame(selectedDate);
+            //await CalculateWinnersViaFormula(selectedDate); 
+
+
+            await EvaluateResults(selectedDate);
+
+            await EvaluateResultsPrototype(selectedDate);
+
+            }
+        }
+            await GetResultsSummary();
+            await GetResultsSummaryPrototype();
+
+            await ConsolidateSelectionsResults();
         
-        //await getScheduleData(selectedDate);
-        //OBSOLETE await getResults(selectedDate);
-
-        //await getBestPitcherOfTheDay(selectedDate);
-
     } 
     catch(Ex){
       console.log(Ex);
@@ -94,41 +136,671 @@ var teams = [
       await driver.quit();
     }
 
-    async function EvaluateGamesInPast(date)
+    async function ConsolidateSelectionsResults()
     {
-        var targetDate = "Apr 15";
-        var teamsSchedule = await load(date+"TeamSchedules");
-        teamsSchedule = teamsSchedule.filter(function(item){
-            return item.period == 0; 
-        });
+        var sel1 = await load("ResultsStatsWinner", "GameByGame");
+        var sel2 = await load("ResultsStatsWinnerPrototype", "GameByGame");
+        var allResults = [];
+        var days = [];
+        if(sel1.length >= sel2.length)
+        {
+            days = sel1;
+        }
+        else{
+            days = sel2;
+        }
 
-        var allGames = [];
-        var gamesOnly = teamsSchedule.map(function(item){
-            return item.scheduleData;
-        });
-
-        for (let er = 0; er < gamesOnly.length; er++) {
-            const games = gamesOnly[er];
-            for (let ww = 0; ww < games.length; ww++) {
-                const game = games[ww];
-                allGames.push(game);
+        for (let index = 0; index < days.length; index++) {
+            const day = days[index];
+            if(day.date == "May15th")
+            {
+                var stopHere = "";
             }
+            var selection1 = sel1.filter(function(item){
+                return day.date == item.date
+            });
+
+            var selection2 = sel2.filter(function(item){
+                return day.date == item.date
+            });
+
+            var result = {day:day.date, wins:0};
+            if(selection1.length >= 1 && selection2.length >= 1)
+            {
+                if(selection1[0].FinalSeriesWinnerPer == 100 && selection2[0].FinalFormulaWinnerPer == 100)
+                {
+                    result.wins = 2;
+                }
+                else if(selection1[0].FinalSeriesWinnerPer == 100)
+                {
+                    result.wins = 1;
+                }
+                else if(selection2[0].FinalFormulaWinnerPer == 100)
+                {
+                    result.wins = 1;
+                }
+            }
+            else if(selection1.length >= 1){
+                if(selection1[0].FinalSeriesWinnerPer == 100)
+                {
+                    result.wins = 1;
+                }
+            }
+            else if(selection2.length >= 1){
+                if(selection2[0].FinalFormulaWinnerPer == 100)
+                {
+                    result.wins = 1;
+                }
+            }
+            
+            allResults.push(result);
             
         }
 
-        var targetGames = allGames.filter(function(item){
-            return item.DATE.indexOf(targetDate) >= 0;
-        });
-        
-        var pitchersDataByGame = await load("PitchersByTeamByGame", "GameByGame");
-        var battersDataByGame = await load("BattersByTeamByGame", "GameByGame");
-
+        await save("DayByDayResults", allResults, function(){}, "replace", "GameByGame");
     }
 
+    async function EvaluateResultsPrototype(date)
+    {
+        var games = await load(date+"FinalSelections");
+
+        if(date == "April22th")
+        {
+            var stopHere = "";
+        }
+        console.log(date);
+        
+        // var homeSortedGames = await sorting(games,"homeNextWinningPercentage", "desc");
+        // var awaySortedGames = await sorting(games,"awayNextWinningPercentage", "desc");
+//-----------------------------------------33%----------------------------------------------------------
+        // var games = games.filter(function(item){
+        //     return item.home != item.nextWinners;
+        // });
+
+        // gameSelected = await sorting(games,"formulahomeWinPercentage", "asc");
+
+//--------------------------------27%-------------------------------------------------------------------
+
+// var games = games.filter(function(item){
+//     return item.away != item.overallWinner;
+// });
+
+// gameSelected = await sorting(games,"formulahomeWinPercentage", "asc");
+
+//---------------------------------------19%------------------------------------------------------------
+
+// var games = games.filter(function(item){
+//     return item.nextWinners == item.overallWinner && item.formulaWinner == item.overallWinner && item.seriesWinner == item.overallWinner  ;
+// });
+
+gameSelected = await sorting(games,"homeTotalPercentage", "desc");
+
+        // var homeGamesL = homeGames.filter(function(item){
+        //     return item.homeCurrentStreak.indexOf("L") >= 0;
+        // });
+        // if(homeGamesL.length >= 1)
+        // {
+        //     homeGames = homeGamesL;
+        // }
+
+        // var homeSortedGames = await sorting(homeGames,"homeCurrentStreak", "asc");
+
+        // var homeWorstStreak = homeSortedGames[homeSortedGames.length-1];
+
+        // var homeSortedGames = homeSortedGames.filter(function(item){
+        //     return item.homeCurrentStreak == homeWorstStreak.homeCurrentStreak;
+        // });
+
+        // var awayGames = awaySortedGames.filter(function(item){
+        //     return item.awayNextWinningPercentage == awaySortedGames[0].awayNextWinningPercentage;
+        // });
+
+        // var awayGamesL = awayGames.filter(function(item){
+        //     return item.awayCurrentStreak.indexOf("L") >= 0;
+        // });
+
+        // if(awayGamesL.length >= 1)
+        // {
+        //     awayGames = awayGamesL;
+        // }
+
+        // var awaySortedGames = await sorting(awayGames,"awayCurrentStreak", "asc");
+
+        // var awayWorstStreak = awaySortedGames[awaySortedGames.length-1];
+
+        // var awaySortedGames = awaySortedGames.filter(function(item){
+        //     return item.awayCurrentStreak == awayWorstStreak.awayCurrentStreak;
+        // });
+
+
+
+
+
+        // var homeGamesS = homeSortedGames.map(function(item){
+        //     return {team : item.home, average:  (item.formulahomeWinPercentage + item.homeSeriesPercentage)/2};
+        // });
+
+        // var awayGamesS = awaySortedGames.map(function(item){
+        //     return {team : item.away, average: (item.formulaawayWinPercentage + item.awaySeriesPercentage)/2
+        //     };
+        // });
+
+        // var allGames = homeGamesS.concat(awayGamesS); 
+
+        // var allGamesSorted = await sorting(allGames,"average", "desc");
+
+        // var gameSelected = games.filter(function(item){
+        //     return item.home == allGamesSorted[0].team || item.away == allGamesSorted[0].team;
+        // });
+
+
+        games = [];
+        if(gameSelected.length >=1)
+        {
+            games.push(gameSelected[0]);
+        }
+        // if(gameSelected.length > 1)
+        // {
+        //     games.push(gameSelected[1]);
+        // }
+        var F5FormulaWinnerSum = 0; 
+        var F5SeriesWinnerSum = 0;
+        var F5NextWinnerSum = 0; 
+        var F5OverallWinnerSum = 0; 
+
+        var FinalFormulaWinnerSum = 0;  
+        var FinalSeriesWinnerSum = 0; 
+        var FinalNextWinnerSum = 0; 
+        var FinalOverallWinnerSum = 0; 
+        var formulaWinner = "";
+        var handicap = 0;
+
+        try{
+            var stats = await load("ResultsStatsWinnerPrototype","GameByGame");
+            var exists = stats.findIndex(x => x.date == date);
+            if(exists >=0)
+            {
+               stats.splice(exists, 1);
+            }
+        }
+        catch{
+            var stats = [];
+        }
+
+        var selectionGamesCount = 0;
+        for (let index = 0; index < games.length; index++) {
+            const game = games[index];
+            // if(game.formulaWinner == game.seriesWinner)
+            // {
+                    selectionGamesCount++;
+                    var gamesDet =[];
+                    var isHomeOrAway = "";
+                    try{
+                        var gamesDet = await load("Games"+game.away+"Details", "GameByGame");
+                        isHomeOrAway = "away";
+                    }
+                    catch{
+                        var gamesDet = await load("Games"+game.home+"Details", "GameByGame");
+                        isHomeOrAway = "home";
+                    }
+
+                    var fullMonth = date.split(/[0-9]/)[0];
+                    var targetMonth = fullMonth.substring(0,3);
+                    var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+                    var datee = targetMonth + " " +targetDate;
+                    var targetGame = gamesDet.games.filter(function(item){
+                        var dat = item.date.split(" ")[1] + " " + item.date.split(" ")[2];
+                        
+                        return dat.toLowerCase() == datee.toLocaleLowerCase(); 
+                    })[0];
+
+                    var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+                    var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+                    var awayAfter5Runs = awayTotalRuns - awayF5Runs;
+
+                    var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+                    var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+                    var homeAfter5Runs = homeTotalRuns - homeF5Runs;
+
+
+                    game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+                    game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+                    if(game.formulaWinner == game.finalWinner)
+                    {
+                        handicap += awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+                    }
+                    else{
+                        handicap += awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
+                    }
+
+                    game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
+                    game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
+                    game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
+                    game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+
+                    game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
+                    game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
+                    game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
+                    game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
+
+                    formulaWinner += game.formulaWinner;
+
+                    // F5FormulaWinnerSum += game.F5FormulaWinner;
+                    // F5SeriesWinnerSum += game.F5SeriesWinner;
+                    // F5NextWinnerSum += game.F5NextWinner; 
+                    // F5OverallWinnerSum += game.F5OverallWinner; 
+                    FinalFormulaWinnerSum += game.FinalFormulaWinner;
+                    FinalSeriesWinnerSum += game.FinalSeriesWinner;
+                    FinalNextWinnerSum += game.FinalNextWinner; 
+                    FinalOverallWinnerSum += game.FinalOverallWinner; 
+
+
+                    //await save(date+"FinalSelections", games, function(){}, "replace");
+        //}
+        }
+
+        var stat = {
+                date: date,
+                //F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/games.length,
+                //F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/games.length,
+                //F5NextWinnerPer : (F5NextWinnerSum*100)/games.length, 
+                //F5OverallWinnerPer : (F5OverallWinnerSum*100)/games.length, 
+                //FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/games.length,
+                //FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/games.length,
+                //FinalNextWinnerPer : (FinalNextWinnerSum*100)/games.length, 
+                //FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/games.length, 
+
+                // F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
+                // F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
+                // F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
+                // F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
+                FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/selectionGamesCount,
+                FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/selectionGamesCount,
+                FinalNextWinnerPer : (FinalNextWinnerSum*100)/selectionGamesCount, 
+                FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/selectionGamesCount, 
+                NumberOGames: selectionGamesCount,
+                formulaWinner: formulaWinner,
+                handicap: handicap
+        }
+
+        stats.push(stat);
+
+        await save("ResultsStatsWinnerPrototype", stats, function(){}, "replace", "GameByGame");
+        
+        
+    }
+
+
+    async function EvaluateResults(date)
+    {
+        var games = await load(date+"FinalSelections");
+
+        if(date == "April18th")
+        {
+            var stopHere = "";
+        }
+        console.log(date);
+        
+        // var homeSortedGames = await sorting(games,"homeNextWinningPercentage", "desc");
+        // var awaySortedGames = await sorting(games,"awayNextWinningPercentage", "desc");
+//-----------------------------------------33%----------------------------------------------------------
+        // var games = games.filter(function(item){
+        //     return item.home != item.nextWinners;
+        // });
+
+        // gameSelected = await sorting(games,"formulahomeWinPercentage", "asc");
+
+//--------------------------------27%-------------------------------------------------------------------
+
+// var games = games.filter(function(item){
+//     return item.away != item.overallWinner;
+// });
+
+// gameSelected = await sorting(games,"formulahomeWinPercentage", "asc");
+
+//---------------------------------------19%------------------------------------------------------------
+
+var games = games.filter(function(item){
+    return item.nextWinners != item.overallWinner;
+    //return item.nextWinners != item.seriesWinner;
+});
+
+gameSelected = await sorting(games,"overallDiff", "desc");
+
+
+///Just this filter 73% 
+//gameSelected = await sorting(games,"homeTotalPercentage", "desc");
+
+        // var homeGamesL = homeGames.filter(function(item){
+        //     return item.homeCurrentStreak.indexOf("L") >= 0;
+        // });
+        // if(homeGamesL.length >= 1)
+        // {
+        //     homeGames = homeGamesL;
+        // }
+
+        // var homeSortedGames = await sorting(homeGames,"homeCurrentStreak", "asc");
+
+        // var homeWorstStreak = homeSortedGames[homeSortedGames.length-1];
+
+        // var homeSortedGames = homeSortedGames.filter(function(item){
+        //     return item.homeCurrentStreak == homeWorstStreak.homeCurrentStreak;
+        // });
+
+        // var awayGames = awaySortedGames.filter(function(item){
+        //     return item.awayNextWinningPercentage == awaySortedGames[0].awayNextWinningPercentage;
+        // });
+
+        // var awayGamesL = awayGames.filter(function(item){
+        //     return item.awayCurrentStreak.indexOf("L") >= 0;
+        // });
+
+        // if(awayGamesL.length >= 1)
+        // {
+        //     awayGames = awayGamesL;
+        // }
+
+        // var awaySortedGames = await sorting(awayGames,"awayCurrentStreak", "asc");
+
+        // var awayWorstStreak = awaySortedGames[awaySortedGames.length-1];
+
+        // var awaySortedGames = awaySortedGames.filter(function(item){
+        //     return item.awayCurrentStreak == awayWorstStreak.awayCurrentStreak;
+        // });
+
+
+
+
+
+        // var homeGamesS = homeSortedGames.map(function(item){
+        //     return {team : item.home, average:  (item.formulahomeWinPercentage + item.homeSeriesPercentage)/2};
+        // });
+
+        // var awayGamesS = awaySortedGames.map(function(item){
+        //     return {team : item.away, average: (item.formulaawayWinPercentage + item.awaySeriesPercentage)/2
+        //     };
+        // });
+
+        // var allGames = homeGamesS.concat(awayGamesS); 
+
+        // var allGamesSorted = await sorting(allGames,"average", "desc");
+
+        // var gameSelected = games.filter(function(item){
+        //     return item.home == allGamesSorted[0].team || item.away == allGamesSorted[0].team;
+        // });
+
+
+        games = [];
+        games.push(gameSelected[0]);
+        var F5FormulaWinnerSum = 0; 
+        var F5SeriesWinnerSum = 0;
+        var F5NextWinnerSum = 0; 
+        var F5OverallWinnerSum = 0; 
+
+        var FinalFormulaWinnerSum = 0;  
+        var FinalSeriesWinnerSum = 0; 
+        var FinalNextWinnerSum = 0; 
+        var FinalOverallWinnerSum = 0; 
+        var seriesWinner = "";
+        var handicap = 0;
+
+        try{
+            var stats = await load("ResultsStatsWinner","GameByGame");
+            var exists = stats.findIndex(x => x.date == date);
+            if(exists >=0)
+            {
+               stats.splice(exists, 1);
+            }
+        }
+        catch{
+            var stats = [];
+        }
+
+        var selectionGamesCount = 0;
+        for (let index = 0; index < games.length; index++) {
+            const game = games[index];
+            // if(game.formulaWinner == game.seriesWinner)
+            // {
+                    selectionGamesCount++;
+                    var gamesDet =[];
+                    var isHomeOrAway = "";
+                    try{
+                        var gamesDet = await load("Games"+game.away+"Details", "GameByGame");
+                        isHomeOrAway = "away";
+                    }
+                    catch{
+                        var gamesDet = await load("Games"+game.home+"Details", "GameByGame");
+                        isHomeOrAway = "home";
+                    }
+
+                    var fullMonth = date.split(/[0-9]/)[0];
+                    var targetMonth = fullMonth.substring(0,3);
+                    var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+                    var datee = targetMonth + " " +targetDate;
+                    var targetGame = gamesDet.games.filter(function(item){
+                        var dat = item.date.split(" ")[1] + " " + item.date.split(" ")[2];
+                        
+                        return dat.toLowerCase() == datee.toLocaleLowerCase(); 
+                    })[0];
+
+                    var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+                    var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+                    var awayAfter5Runs = awayTotalRuns - awayF5Runs;
+
+                    var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+                    var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+                    var homeAfter5Runs = homeTotalRuns - homeF5Runs;
+
+
+                    game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+                    game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+                    if(game.seriesWinner == game.finalWinner)
+                    {
+                        handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+                    }
+                    else{
+                        handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
+                    }
+
+                    game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
+                    game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
+                    game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
+                    game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+
+                    game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
+                    game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
+                    game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
+                    game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
+
+                    seriesWinner = game.seriesWinner;
+
+                    // F5FormulaWinnerSum += game.F5FormulaWinner;
+                    // F5SeriesWinnerSum += game.F5SeriesWinner;
+                    // F5NextWinnerSum += game.F5NextWinner; 
+                    // F5OverallWinnerSum += game.F5OverallWinner; 
+                    FinalFormulaWinnerSum += game.FinalFormulaWinner;
+                    FinalSeriesWinnerSum += game.FinalSeriesWinner;
+                    FinalNextWinnerSum += game.FinalNextWinner; 
+                    FinalOverallWinnerSum += game.FinalOverallWinner; 
+
+
+                    //await save(date+"FinalSelections", games, function(){}, "replace");
+        //}
+        }
+
+        var stat = {
+                date: date,
+                //F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/games.length,
+                //F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/games.length,
+                //F5NextWinnerPer : (F5NextWinnerSum*100)/games.length, 
+                //F5OverallWinnerPer : (F5OverallWinnerSum*100)/games.length, 
+                //FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/games.length,
+                //FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/games.length,
+                //FinalNextWinnerPer : (FinalNextWinnerSum*100)/games.length, 
+                //FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/games.length, 
+
+                // F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
+                // F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
+                // F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
+                // F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
+                FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/selectionGamesCount,
+                FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/selectionGamesCount,
+                FinalNextWinnerPer : (FinalNextWinnerSum*100)/selectionGamesCount, 
+                FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/selectionGamesCount, 
+                NumberOGames: selectionGamesCount,
+                seriesWinner: seriesWinner,
+                handicap: handicap
+        }
+
+        stats.push(stat);
+
+        await save("ResultsStatsWinner", stats, function(){}, "replace", "GameByGame");
+        
+        
+    }
+
+
+    async function GetResultsSummaryPrototype(){
+
+        var stats = await load("ResultsStatsWinnerPrototype", "GameByGame");
+            
+            var F5FormulaWinnerSum = 0; 
+            var F5SeriesWinnerSum = 0;
+            var F5NextWinnerSum = 0; 
+            var F5OverallWinnerSum = 0; 
+    
+            var FinalFormulaWinnerSum = 0;  
+            var FinalSeriesWinnerSum = 0; 
+            var FinalNextWinnerSum = 0; 
+            var FinalOverallWinnerSum = 0;
+            var handicapSum = 0; 
+            var handicapWins = 0;
+            var handicapLostSum = 0; 
+            var handicapLost = 0;
+    
+            for (let er = 0; er < stats.length; er++) {
+                const day = stats[er];
+    
+                // F5FormulaWinnerSum += day.F5FormulaWinnerPer;
+                // F5SeriesWinnerSum += day.F5SeriesWinnerPer;
+                // F5NextWinnerSum += day.F5NextWinnerPer; 
+                // F5OverallWinnerSum += day.F5OverallWinnerPer; 
+    
+                FinalFormulaWinnerSum += day.FinalFormulaWinnerPer;  
+                FinalSeriesWinnerSum += day.FinalSeriesWinnerPer; 
+                FinalNextWinnerSum += day.FinalNextWinnerPer; 
+                FinalOverallWinnerSum += day.FinalOverallWinnerPer; 
+                
+                if(day.handicap > 0 )
+                {
+                    handicapSum += day.handicap;
+                    handicapWins++;
+                }
+                else{
+                    handicapLostSum += day.handicap;
+                    handicapLost++;
+                }
+                
+            }
+            var summary = {
+                    // F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
+                    // F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
+                    // F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
+                    // F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
+                    FinalFormulaWinnerPer : (FinalFormulaWinnerSum)/stats.length,
+                    FinalSeriesWinnerPer : (FinalSeriesWinnerSum)/stats.length,
+                    FinalNextWinnerPer : (FinalNextWinnerSum)/stats.length, 
+                    FinalOverallWinnerPer : (FinalOverallWinnerSum)/stats.length, 
+                    handicapAvg : (handicapSum)/handicapWins, 
+                    handicapLostAvg : (handicapLostSum)/handicapLost, 
+                    DaysInScope : stats.length
+            }
+    
+            await save("ResulSummaryPrototype", summary, function(){}, "replace", "GameByGame");
+    }
+
+async function GetResultsSummary(){
+
+    var stats = await load("ResultsStatsWinner", "GameByGame");
+        
+        var F5FormulaWinnerSum = 0; 
+        var F5SeriesWinnerSum = 0;
+        var F5NextWinnerSum = 0; 
+        var F5OverallWinnerSum = 0; 
+
+        var FinalFormulaWinnerSum = 0;  
+        var FinalSeriesWinnerSum = 0; 
+        var FinalNextWinnerSum = 0; 
+        var FinalOverallWinnerSum = 0;
+        var handicapSum = 0; 
+        var handicapWins = 0;
+        var handicapLostSum = 0; 
+        var handicapLost = 0;
+
+        for (let er = 0; er < stats.length; er++) {
+            const day = stats[er];
+
+            // F5FormulaWinnerSum += day.F5FormulaWinnerPer;
+            // F5SeriesWinnerSum += day.F5SeriesWinnerPer;
+            // F5NextWinnerSum += day.F5NextWinnerPer; 
+            // F5OverallWinnerSum += day.F5OverallWinnerPer; 
+
+            FinalFormulaWinnerSum += day.FinalFormulaWinnerPer;  
+            FinalSeriesWinnerSum += day.FinalSeriesWinnerPer; 
+            FinalNextWinnerSum += day.FinalNextWinnerPer; 
+            FinalOverallWinnerSum += day.FinalOverallWinnerPer; 
+            
+            if(day.handicap > 0 )
+            {
+                handicapSum += day.handicap;
+                handicapWins++;
+            }
+            else{
+                handicapLostSum += day.handicap;
+                handicapLost++;
+            }
+            
+        }
+        var summary = {
+                // F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
+                // F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
+                // F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
+                // F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
+                FinalFormulaWinnerPer : (FinalFormulaWinnerSum)/stats.length,
+                FinalSeriesWinnerPer : (FinalSeriesWinnerSum)/stats.length,
+                FinalNextWinnerPer : (FinalNextWinnerSum)/stats.length, 
+                FinalOverallWinnerPer : (FinalOverallWinnerSum)/stats.length, 
+                handicapAvg : (handicapSum)/handicapWins, 
+                handicapLostAvg : (handicapLostSum)/handicapLost, 
+                DaysInScope : stats.length
+        }
+
+        await save("ResulSummary", summary, function(){}, "replace", "GameByGame");
+}
 async function CalculateWinnersViaFormula(date)
 {
     var pitchersData = await load(date);
-    var battersData = await load(date+"BattersData");
+    //var battersData = await load(date+"BattersData");
     var seriesData0 = await load(date+"SeriesWinners0");
     var seriesData7 = await load(date+"SeriesWinners7");
     var seriesData3 = await load(date+"SeriesWinners3");
@@ -137,33 +809,62 @@ async function CalculateWinnersViaFormula(date)
     var battersDataByGame = await load("BattersByTeamByGame", "GameByGame");
 
     var games = [];
-    for (let index = 0; index < pitchersData[0].games.length; index++) {
+    var gams = [];
+    if(pitchersData.length == 1)
+    {
+        gams = pitchersData[0].games;
+    }
+    else{
+        gams = pitchersData;
+    }
+    for (let index = 0; index < gams.length; index++) {
         var gameData = {};
-        const game = pitchersData[0].games[index];
+        const game = gams[index];
         if(game.homeTeam.homePitcherDataNew && game.awayTeam.awayPitcherDataNew)
         {
-        var homePitcher = game.homeTeam.homePitcherDataNew[0];
-        var homeBatter = battersData.filter(function(item){
-            return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
-        })[0];
-        var awayPitcher = game.awayTeam.awayPitcherDataNew[0];
-        var awayBatter = battersData.filter(function(item){
-            return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;
-        })[0];
+        // var homePitcher = game.homeTeam.homePitcherDataNew[0];
+        // var homeBatter = battersData.filter(function(item){
+        //     return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
+        // })[0];
+        // var awayPitcher = game.awayTeam.awayPitcherDataNew[0];
+        // var awayBatter = battersData.filter(function(item){
+        //     return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;
+        // })[0];
 
-        var awayFactors = await CalculateFactors(awayPitcher, awayBatter);
-        var homeFactors = await CalculateFactors(homePitcher, homeBatter);
+        // var awayFactors = await CalculateFactors(awayPitcher, awayBatter);
+        // var homeFactors = await CalculateFactors(homePitcher, homeBatter);
 
-        var stdDev = await getStandardDeviation([awayPitcher.currentEra, awayPitcher.carrerEra, homePitcher.currentEra, homePitcher.carrerEra]);
-        var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
+        // var stdDev = await getStandardDeviation([awayPitcher.currentEra, awayPitcher.carrerEra, homePitcher.currentEra, homePitcher.carrerEra]);
+        // var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
 
         var homePitchersComplete = pitchersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
 
+        var homePitcher = "";
+        var homePitcherParts = game.homeTeam.homePitcher.split(" ");
+        if(homePitcherParts.length > 1)
+        {
+            homePitcher = game.homeTeam.homePitcher.split(" ")[1];
+        }
+        else{
+            homePitcher = game.homeTeam.homePitcher;
+        }
+
         var homePitcherComplete = homePitchersComplete.pitchersData.filter(function(item){
-            return item.pitcher.indexOf(game.homeTeam.homePitcher.split(" ")[1])>=0;
+            return item.pitcher.indexOf(homePitcher)>=0;
         });
+
+        var homeIndexPitcher = homePitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0) ;
+
+        var homePitcherCompleteSliced = [];
+        if(homeIndexPitcher != -1)
+        {
+            homePitcherCompleteSliced = homePitcherComplete.slice(0,(homeIndexPitcher));
+        }
+        else{
+            homePitcherCompleteSliced = homePitcherComplete;
+        }
 
         var homeBattersComplete = battersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
@@ -171,23 +872,43 @@ async function CalculateWinnersViaFormula(date)
 
         var homeBatterComplete = homeBattersComplete.battersData.games[homeBattersComplete.battersData.games.length-1];
 
+        var awayPitcher = "";
+        var awayPitcherParts = game.awayTeam.awayPitcher.split(" ");
+        if(awayPitcherParts.length > 1)
+        {
+            awayPitcher = game.awayTeam.awayPitcher.split(" ")[1];
+        }
+        else{
+            awayPitcher = game.awayTeam.awayPitcher;
+        }
 
         var awayPitchersComplete = pitchersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
         })[0];
 
         var awayPitcherComplete = awayPitchersComplete.pitchersData.filter(function(item){
-            return item.pitcher.indexOf(game.awayTeam.awayPitcher.split(" ")[1])>=0;
+            return item.pitcher.indexOf(awayPitcher)>=0;
         });
+        
+        var awayIndexPitcher = awayPitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0);
+
+        var awayPitcherCompleteSliced = [];
+        if(awayIndexPitcher != -1)
+        {
+            awayPitcherCompleteSliced = awayPitcherComplete.slice(0,(awayIndexPitcher));
+        }
+        else{
+            awayPitcherCompleteSliced = awayPitcherComplete;
+        }
 
         var awayBattersComplete = battersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
         })[0];
 
         var awayBatterComplete = awayBattersComplete.battersData.games[awayBattersComplete.battersData.games.length-1];
-        if(homePitcherComplete.length > 0 && awayPitcherComplete.length > 0){
-            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:awayPitcher.carrerEra};
-            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:homePitcher.carrerEra}
+        if(homePitcherCompleteSliced.length > 0 && awayPitcherCompleteSliced.length > 0){
+            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra};
+            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra}
             var completeAwayBatter = {totalsData:[]};
             completeAwayBatter.totalsData.push({stat:"AVG",value:awayBatterComplete.avgAvg});
             completeAwayBatter.totalsData.push({stat:"OPS",value:awayBatterComplete.avgRunsHitsFactor});
@@ -599,7 +1320,7 @@ async function getPitcherGameByGame(date)
         return item.period == 0;         
         });
         try{
-            var pitchersByTeam = await load("PitchersByTeamGameByGame");
+            var pitchersByTeam = await load("PitchersByTeamByGame","GameByGame");
         }
         catch{
             var pitchersByTeam = [];
@@ -682,7 +1403,7 @@ async function getBatterGameByGame(date)
         return item.period == 0;         
         });
         try{
-            var battersByTeam = await load("BattersByTeamGameByGame");
+            var battersByTeam = await load("BattersByTeamByGame", "GameByGame");
         }
         catch{
             var battersByTeam = [];
@@ -1169,8 +1890,16 @@ async function consolidateAlgorithmResults(date)
 async function AlgoDetailedPitchingAndBattingAnalysis(date)
 {
     var allGamesWithPitcherData = await load(date);
-    for (let index = 0; index < allGamesWithPitcherData[0].games.length; index++) {
-        const game = allGamesWithPitcherData[0].games[index];
+    var gams = [];
+    if(allGamesWithPitcherData.length == 1)
+    {
+        gams = allGamesWithPitcherData[0].games;
+    }
+    else{
+        gams = allGamesWithPitcherData;
+    }
+    for (let index = 0; index < gams.length; index++) {
+        const game = gams[index];
         if(game.awayTeam.awayPitcherDataNew && game.homeTeam.homePitcherDataNew)
         {
             try{
@@ -1308,33 +2037,302 @@ async function AlgoDetailedPitchingAndBattingAnalysis(date)
             await save(date, allGamesWithPitcherData, function(){}, "replace");
             //console.log(expectedFinalWinner, finalHandicapExpected, resultTypeFinal,  finalTotalRunsExpected);
         }
+        else{
+
+            
+    
+
+            var stopHere = "";
+        }
     }
     
     var stopHere = "";
 }
 
+async function PopulatePitcherData(date)
+{
+    var games = await load(date);
+    var pitchersDataByGame = await load("PitchersByTeamByGame", "GameByGame");
+
+    for (let index = 0; index < games.length; index++) {
+        const game = games[index];
+            
+            var awayPitcherTeamsData = pitchersDataByGame.filter(function(item){
+                return item.teamName == game.awayTeam.awayTeam;
+            })[0].pitchersData;
+
+            var awayPitcherData = awayPitcherTeamsData.filter(function(item){
+                return item.pitcher.indexOf(game.awayTeam.awayPitcher) >= 0;
+            });
+
+            awayIndex = awayPitcherData.findIndex(x => x.date.indexOf(game.date) >= 0);
+            
+            var awayPitchData = awayPitcherData[awayIndex-1];
+            
+            game.awayTeam.awayPitcherDataNew = [
+                {
+                    currentEra: awayPitchData.eraGame,
+                    carrerEra: awayPitchData.eraAvg,
+                }];
+
+                var homePitcherTeamsData = pitchersDataByGame.filter(function(item){
+                    return item.teamName == game.homeTeam.homeTeam;
+                })[0].pitchersData;
+    
+                var homePitcherData = homePitcherTeamsData.filter(function(item){
+                    return item.pitcher.indexOf(game.homeTeam.homePitcher) >= 0;
+                });
+                
+                homeIndex = homePitcherData.findIndex(x => x.date.indexOf(game.date) >= 0);
+                
+                if(homePitcherData.length > 1)
+                {
+
+                    var homePitchData = homePitcherData[homeIndex-1];
+                }
+                else{
+                    var homePitchData = homePitcherData[homeIndex];
+                }
+                
+                game.homeTeam.homePitcherDataNew = [
+                    {
+                        currentEra: homePitchData.eraGame,
+                        carrerEra: homePitchData.eraAvg,
+                    }];
+
+            await save(date, games, function(){}, "replace");
+        }
+}
+
+async function GetLatestTeamSchedules(date)
+{
+    var dateparts = Date().split(" ");
+    var today = dateparts[1]+dateparts[2];
+
+    var fullMonth = date.split(/[0-9]/)[0];
+    var targetMonth = fullMonth.substring(0,3);
+    var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+
+    try{
+        var teamsSchedule = await load(today+"th"+"TeamSchedules");
+    }
+    catch{
+        try{
+            var teamsSchedule = await load(today+"rd"+"TeamSchedules");
+        }
+        catch{
+            try{
+                await getScheduleData(selectedDate);
+                var teamsSchedule = await load(selectedDate+"TeamSchedules");
+            }
+            catch{
+                var stopHere = "";
+            }
+        }
+    }
+    
+    var scopeSchedule = teamsSchedule.filter(function(item){
+        return item.period == 0;
+    });
+    var schedulesAllData = [];
+    for (let uts = 0; uts < scopeSchedule.length; uts++) {
+        const teamScheduleDet = scopeSchedule[uts].scheduleData;
+        index = -1;
+        var tries = 0;
+        while(index == -1)
+        {
+            index = teamScheduleDet.findIndex(x => x.DATE.indexOf(targetMonth+" "+ (parseInt(targetDate)-tries)) >= 0);
+            tries++;
+        }
+        try{
+            var slicedSchedule = teamScheduleDet.slice(0,(index+1));
+
+            var data = ProcessScheduleData(slicedSchedule, scopeSchedule[uts].teamName);
+            for (let rd = 0; rd < data.length; rd++) {
+                const periodData = data[rd];
+                schedulesAllData.push(periodData);
+            }
+            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+        }
+        catch(ex){
+            console.log(ex);
+            var stopHere = "";
+        }
+    }
+
+    return schedulesAllData;
+}
+
+async function BuildDayFiles(date)
+{
+    try{
+        var teamsSchedule = await load(date+"TeamSchedules");
+    }
+    catch{
+        var teamsSchedule = await GetLatestTeamSchedules(date);
+    }
+    var dataScope = teamsSchedule.filter(function(item){
+        return item.period == 0;;         
+        });
+    
+    var gamesInADay = [];
+    var targetMonth = date.split(/[0-9]/)[0].substring(0,3);
+    var targetDay = date.replace(/\D/g, "");
+    var datee = targetMonth+" "+targetDay; 
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        var teamName = team.teamName;
+        var games = team.scheduleData.filter(function(item){
+            var dat = item.DATE.split(" ")[1] + " " + item.DATE.split(" ")[2];
+            console.log(dat);
+            console.log(datee);
+            return dat.toLowerCase() == datee.toLocaleLowerCase();         
+        });
+        for (let wa = 0; wa < games.length; wa++) {
+            const game = games[wa];
+            if(game.OPPONENT.indexOf("@")>=0)
+            {
+                
+                var gameDet = {
+                    game:"", 
+                    awayTeam: {
+                        awayTeam: "",
+                        awayId: "",
+                        awayPitcher: ""
+                    },
+                    homeTeam: {
+                        homeTeam: "",
+                        homeId: "",
+                        homePitcher: ""
+                    },
+                };
+
+                
+                gameDet.awayTeam.awayTeam = teamName;
+                if(game.OPPONENT.indexOf("Los Angeles") >= 0 || game.OPPONENT.indexOf("St.") >= 0 || game.OPPONENT.indexOf("New York") >= 0 || game.OPPONENT.indexOf("Chicago") >= 0 || game.OPPONENT.indexOf("Boston") >= 0 )
+                {
+                    var potentialTeam = game.GAMELINK.split("-")[(game.GAMELINK.split("-")).length-1];
+                    if(potentialTeam == "sox")
+                    {
+                        potentialTeam = game.GAMELINK.split("-")[(game.GAMELINK.split("-")).length-2];
+                    }
+                    gameDet.homeTeam.homeTeam = getTeam(potentialTeam);
+                }
+                else{
+                    gameDet.homeTeam.homeTeam = getTeam(game.OPPONENT);
+                }
+                gameDet.date = game.DATE;
+                gameDet.game = gameDet.awayTeam.awayTeam + " @ "+ gameDet.homeTeam.homeTeam;
+
+                gameDet.awayTeam.awayPitcher = game.ISWIN == "Lost" ? game.LOSS.split(" ")[0] : game.WIN.split(" ")[0];
+                gameDet.homeTeam.homePitcher = game.ISWIN == "Lost" ? game.WIN.split(" ")[0] : game.LOSS.split(" ")[0];
+
+                gamesInADay.push(gameDet);
+            }
+            
+        }
+    }
+
+    await save(date, gamesInADay, function(){}, "replace");
+    return gamesInADay;
+}
+
+function getTeam(originalTeam)
+{
+    var homeTeam = originalTeam.replace("@\n","");
+    var homeParts = homeTeam.split(" ");
+    var homeTeam = "";
+    var initials = "";
+    if(homeParts.length > 1)
+    {
+        initials = homeParts[0].substring(0,1) + homeParts[1].substring(0,1);
+    }
+    else if(homeParts.length == 1 && originalTeam != "angels"&& originalTeam != "yankees" && originalTeam != "mets" && originalTeam != "white"&& originalTeam != "cubs"&& originalTeam != "cardinals")
+    {
+        initials = homeParts[0].substring(0,3);
+    }
+    else{
+        initials = originalTeam;
+    }
+    var possibleTeams = teams.filter(function(item){
+        return item.team.toLowerCase().indexOf(initials.toLowerCase())>=0 && item.url.toLowerCase().indexOf(initials.toLowerCase())>=0;
+    });
+    if(possibleTeams.length == 1)
+    {
+        homeTeam = possibleTeams[0].team.replace(" ","");
+    }
+    else{
+        var possibleTeams = teams.filter(function(item){
+            return item.url.toLowerCase().indexOf(homeParts[0].toLowerCase())>=0 && item.url.toLowerCase().indexOf(initials.toLowerCase())>=0;
+        });
+        if(possibleTeams.length == 1)
+        {
+            homeTeam = possibleTeams[0].team.replace(" ","");
+        }
+        else{
+            if(originalTeam == "red")
+            {
+                var possibleTeams = possibleTeams.filter(function(item){
+                    return item.url.toLowerCase().indexOf("cin") < 0;
+                });
+
+                if(possibleTeams.length == 1)
+                {
+                    homeTeam = possibleTeams[0].team.replace(" ","");
+                }
+                else{
+                    var stopHere = "";
+                }
+
+            }
+        }
+    }
+
+    return homeTeam;
+}
+
 async function AlgoSeriesWinnerBasedOnResultAndPattern(date)
 {
-    var allGames = await load(date);
+    try{
+        var allGames = await load(date);
+    }
+    catch{
+        var allGames = await BuildDayFiles(date);
+    }
 
     
     var dataPeriod = [0,7,3];
     for (let a = 0; a < dataPeriod.length; a++) {
         const period = dataPeriod[a];
-
-        var teamsResultsData = await load(date+"TeamSchedules");
+        try{
+            var teamsResultsData = await load(date+"TeamSchedules");
+        }
+        catch{
+            var teamsResultsData = await GetLatestTeamSchedules(date);
+        }
         var dataScope = teamsResultsData.filter(function(item){
             return item.period == period;         
             });
 
+        await getMoreWininigTeams(date);
+        await getMoreScoringTeams(date);
+        await getMoreReceivingTeams(date);
         var teamsReceivingRuns = await load(date+"TeamSchedulesByReceiving"+period);
         var teamsScoringRuns = await load(date+"TeamSchedulesByScoring"+period);
         var teamsWinningResults = await load(date+"TeamSchedulesByWinning"+period);
 
         var noDataGames = [];
         var winnersByResults = [];
-        for (let index = 0; index < allGames[0].games.length; index++) {
-            const game = allGames[0].games[index];
+        var gams = [];
+        if(allGames.length == 1)
+        {
+            gams = allGames[0].games
+        }
+        else{
+            gams = allGames
+        }
+        for (let index = 0; index < gams.length; index++) {
+            const game = gams[index];
             
 
             /// Comparing Results
@@ -2090,7 +3088,7 @@ async function sortBetterAvgs(date)
 async function sorting(dataSet, property, sort)
 {
   var sorted = [];
-  if(sort == "ASC")
+  if(sort == "ASC"|| sort == "asc")
   {
     sorted = dataSet.sort(function(a, b) {
       var x = parseFloat(a[property]);
@@ -2114,18 +3112,10 @@ async function sorting(dataSet, property, sort)
 
 }
 
-async function getScheduleData(date)
+function ProcessScheduleData(scheduleData, teamName)
 {
     var schedulesAllData =[];
-    for (let index = 0; index < teams.length; index++) {
-        const team = teams[index];
-        var teamName = team.team.replace(" ","");
-        await driver.get(schedulesURL+team.url);
-        await driver.manage().setTimeouts({ implicit: 1000 });
-        var scheduleData = [];
-        await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
-            var dataPeriod = [0,7,3];
-            scheduleData = JSON.parse(return_value);
+    var dataPeriod = [0,7,3];
             for (let a = 0; a < dataPeriod.length; a++) {
                 const period = dataPeriod[a];
                 
@@ -2379,8 +3369,27 @@ async function getScheduleData(date)
                 }
                 
             }
-            
-            
+
+            return schedulesAllData;
+}
+
+async function getScheduleData(date)
+{
+    var schedulesAllData = [];
+    for (let index = 0; index < teams.length; index++) {
+        const team = teams[index];
+        var teamName = team.team.replace(" ","");
+        await driver.get(schedulesURL+team.url);
+        await driver.manage().setTimeouts({ implicit: 1000 });
+        var scheduleData = [];
+        await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            scheduleData = JSON.parse(return_value);
+            var data = ProcessScheduleData(scheduleData,teamName);
+            for (let ar = 0; ar < data.length; ar++) {
+                const schedule = data[ar];
+                schedulesAllData.push(schedule);  
+            }
+                      
         });
         await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
     }
@@ -2542,8 +3551,17 @@ async function getAllPitchersData(date)
     {
         
         var data = await load(date);
-        for (let i = 0; i < data[0].games.length; i++) {
-            var game = data[0].games[i];
+        var gams = [];
+        if(data.length == 1)
+        {
+            gams = data[0].games;
+        }
+        else{
+            gams = data;
+        }
+
+        for (let i = 0; i < gams.length; i++) {
+            var game = gams[i];
             //
             if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
             {
@@ -2558,49 +3576,55 @@ async function getAllPitchersData(date)
     
     async function getPitcherData(game, homeOrAway, date)
     {
-        await driver.get("https://www.google.com");
-        await driver.manage().setTimeouts({ implicit: 1000 });
-        try{
-            var noPitcherDataGames = await load(date+"NoData");
+        var pitchersData = await load("PitchersData","GameByGame");
+        
+        var team = "";
+        var pitcherFullName = "";
+        if(homeOrAway == "home"){
+            team = game.homeTeam.homeTeam;
+            pitcherFullName = game.homeTeam.homePitcher;
         }
-        catch{
-            var noPitcherDataGames = [];
+        else{
+            team = game.awayTeam.awayTeam;
+            pitcherFullName = game.awayTeam.awayPitcher;
         }
 
-        try{
-            var fixSearch = await load(date+"FixSearch");
+        var homePitchers = pitchersData.filter(function(item){
+            return item.teamName.indexOf(team) >= 0;
+        })[0].pitchersData;
+        
+        var pitcherNameParts = pitcherFullName.split(" ");
+        var pitcherName = "";
+        if(pitcherNameParts.length > 1)
+        {
+            pitcherName = pitcherNameParts[1];
         }
-        catch{
-            var fixSearch = [];
+        else{ 
+            pitcherName = pitcherFullName;
         }
-        try{
-        var term = homeOrAway == "home" ? game.homeTeam.homePitcher + " " + game.homeTeam.homeId +" "+ game.homeTeam.homeTeam.replace(game.homeTeam.homeId,"") : game.awayTeam.awayPitcher +" "+ game.awayTeam.awayId +" "+game.awayTeam.awayTeam.replace(game.awayTeam.awayId,"");
-        try{
-            var search = await driver.findElement(By.name("q")).sendKeys('site:www.espn.com.mx stats pitcher ' + term, Key.ENTER);
-            var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
-            var espnId = (await driver.getCurrentUrl()).split("_/")[1];
-            await driver.get(statsURL+espnId);
-            }
-            catch{
-                try{
-                    var result = await driver.findElement(By.xpath('/html/body/div[4]/div/div[13]/div/div[2]/div[2]/div/div/div[1]/div/div/div/div[1]/div/div/span/a')).click();
-                    var espnId = (await driver.getCurrentUrl()).split("_/")[1];
-                    await driver.get(statsURL+espnId);
-                }
-                catch{
-                    await driver.get("https://www.google.com");
-                    var search = await driver.findElement(By.name("q")).sendKeys('site:www.espn.com.ar estadisticas pitcher ' + term, Key.ENTER);
-                    var result = await driver.findElement(By.xpath('//*[@id="rso"]/div[1]/div/div/div[1]/div/div/span/a')).click();
-                    var espnId = (await driver.getCurrentUrl()).split("_/")[1];
-                    await driver.get(statsURL+espnId);
-                }
-            }
+
+        var pitcher = homePitchers.filter(function(item){
+            return item.name.indexOf(pitcherName) >=0;
+        });
+        var pitcherUrl = "";
+        if(pitcher.length == 1)
+        {
+            pitcherUrl = pitcher[0].playerUrl;
         }
-        catch{
-            fixSearch.push(game);
-            await save(date+"FixSearch", fixSearch, function(){}, "replace");
-            console.log(term);
+        else{
+            var stopHere = "";
         }
+        
+        if(pitcherUrl)
+        {
+            //await driver.get();
+            //var espnId = (await driver.getCurrentUrl()).split("_/")[1];
+            await driver.get(statsURL+pitcherUrl.split("_/")[1]);
+        }
+        else{
+            var stopHere = "";
+        }
+            
         try{
             await driver.executeScript(await GetPitcherData()).then(function(return_value) {
                 console.log(return_value);
@@ -2725,8 +3749,6 @@ async function getAllPitchersData(date)
                 game.homeTeam.homePitcherData = pitcherData;
             }
             
-            noPitcherDataGames.push(game);
-            await save(date+"NoData", noPitcherDataGames, function(){}, "replace");
         }
         return game;
     }
@@ -2747,8 +3769,8 @@ script += 'for (var index = 0; index < players.length - 1; index++) {';
         script += 'name: "",';
         script += 'playerStats: []';
     script += '};';
-    script += 'var player = players[index].innerText;';
-    script += 'playersInfo.name = player;';
+    script += 'playersInfo.playerUrl = players[index].getElementsByClassName("AnchorLink")[0].href;';
+    script += 'playersInfo.name = players[index].innerText;';
     script += 'if (index == 0) {';
         script += 'a = index * 17;';
     script += '} else {';
@@ -3003,8 +4025,14 @@ async function load(filename, foldername = null)
             {
                 folder = filename.split("th")[0]+"th";
             }
-            else{
+            else if(filename.indexOf("rd") >= 0){
                 folder = filename.split("rd")[0]+"rd";
+            }
+            else if(filename.indexOf("nd") >= 0){
+                folder = filename.split("nd")[0]+"nd";
+            }
+            else if(filename.indexOf("st") >= 0){
+                folder = filename.split("st")[0]+"st";
             }
         const data = fs.readFileSync("./"+filename.split(/[0-9]/)[0]+"/"+folder+"/"+filename+".json");
         return JSON.parse(data);
@@ -3019,7 +4047,11 @@ async function save(fileName, jsonObject, callback, appendOrReplace, foldername 
     {
         if(appendOrReplace == "replace")
         {
-        fs.writeFileSync("./"+foldername+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+            var dir = "./"+foldername+"/";
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir, { recursive: true });
+            }  
+            fs.writeFileSync(dir+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
         }
     }
     else{
@@ -3030,10 +4062,22 @@ async function save(fileName, jsonObject, callback, appendOrReplace, foldername 
             {
                 folder = fileName.split("th")[0]+"th";
             }
-            else{
+            else if(fileName.indexOf("rd") >= 0){
                 folder = fileName.split("rd")[0]+"rd";
             }
-            fs.writeFileSync("./"+fileName.split(/[0-9]/)[0]+"/"+folder+"/"+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
+            else if(fileName.indexOf("nd") >= 0){
+                folder = fileName.split("nd")[0]+"nd";
+            }
+            else if(fileName.indexOf("st") >= 0){
+                folder = fileName.split("st")[0]+"st";
+            }
+
+            var dir = "./"+fileName.split(/[0-9]/)[0]+"/"+folder+"/";
+            if (!fs.existsSync(dir)){
+                fs.mkdirSync(dir, { recursive: true });
+            }  
+
+            fs.writeFileSync(dir+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
         }
     }
 }
@@ -3149,10 +4193,10 @@ script += '        }                                                            
 script += '                                                                                                ' ;
 script += '        if(times == 0)                                                                          ' ;
 script += '        {                                                                                       ' ;
-script += '            scoreDetails.home.push(scoreDataDetail);                                            ' ;
+script += '            scoreDetails.away.push(scoreDataDetail);                                            ' ;
 script += '        }                                                                                       ' ;
 script += '        else{                                                                                   ' ;
-script += '            scoreDetails.away.push(scoreDataDetail);                                            ' ;
+script += '            scoreDetails.home.push(scoreDataDetail);                                            ' ;
 script += '        }                                                                                       ' ;
 script += '        times++;                                                                                ' ;
 script += '        index = ((scoreHeaders.length-1)*times);                                                ' ;
@@ -3191,10 +4235,10 @@ script += '                                                                     
 script += '            }                                                                            ';
 script += '            if(ind == 3)                                                                 ';
 script += '            {                                                                            ';
-script += '                pitcherDetails.home.push(pitcherDataDetail);                             ';
+script += '                pitcherDetails.away.push(pitcherDataDetail);                             ';
 script += '            }                                                                            ';
 script += '            else{                                                                        ';
-script += '                pitcherDetails.away.push(pitcherDataDetail);                             ';
+script += '                pitcherDetails.home.push(pitcherDataDetail);                             ';
 script += '            }                                                                            ';
 script += '            times++;                                                                     ';
 script += '            index = ((pitcherHeaders.length)*times)-1;                                   ';
@@ -3235,10 +4279,10 @@ script += '                                                                     
 script += '            }                                                                           ' ;
 script += '            if(ind == 2)                                                                ' ;
 script += '            {                                                                           ' ;
-script += '                batterDetails.home.push(batterDataDetail);                              ' ;
+script += '                batterDetails.away.push(batterDataDetail);                              ' ;
 script += '            }                                                                           ' ;
 script += '            else{                                                                       ' ;
-script += '                batterDetails.away.push(batterDataDetail);                              ' ;
+script += '                batterDetails.home.push(batterDataDetail);                              ' ;
 script += '            }                                                                           ' ;
 script += '            times++;                                                                    ' ;
 script += '            index = ((batterHeaders.length)*times)-1;                                   ' ;

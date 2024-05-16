@@ -1,0 +1,382 @@
+[
+    {
+        "date": "April8th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "ATLBraves",
+        "handicap": -1
+    },
+    {
+        "date": "April9th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 3
+    },
+    {
+        "date": "April10th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "CLEGuardians",
+        "handicap": 1
+    },
+    {
+        "date": "April11th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "KCRoyals",
+        "handicap": 10
+    },
+    {
+        "date": "April12th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "TBRays",
+        "handicap": 1
+    },
+    {
+        "date": "April13th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "MILBrewers",
+        "handicap": 6
+    },
+    {
+        "date": "April14th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "CINReds",
+        "handicap": 7
+    },
+    {
+        "date": "April15th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "COLRockies",
+        "handicap": -1
+    },
+    {
+        "date": "April16th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "BALOrioles",
+        "handicap": 8
+    },
+    {
+        "date": "April17th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "BALOrioles",
+        "handicap": 2
+    },
+    {
+        "date": "April18th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LAAngels",
+        "handicap": -1
+    },
+    {
+        "date": "April19th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "PHIPhillies",
+        "handicap": 7
+    },
+    {
+        "date": "April20th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "PHIPhillies",
+        "handicap": 4
+    },
+    {
+        "date": "April21th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "PHIPhillies",
+        "handicap": 6
+    },
+    {
+        "date": "April22th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "NYMets",
+        "handicap": -3
+    },
+    {
+        "date": "April23th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "CHICubs",
+        "handicap": 5
+    },
+    {
+        "date": "April24th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "DETTigers",
+        "handicap": -2
+    },
+    {
+        "date": "April25th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "KCRoyals",
+        "handicap": 1
+    },
+    {
+        "date": "April26th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "BALOrioles",
+        "handicap": -1
+    },
+    {
+        "date": "April27th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "CHICubs",
+        "handicap": -17
+    },
+    {
+        "date": "April28th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "WASNationals",
+        "handicap": 3
+    },
+    {
+        "date": "April29th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 4
+    },
+    {
+        "date": "April30th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "OAKAthletics",
+        "handicap": 3
+    },
+    {
+        "date": "May1st",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "MINTwins",
+        "handicap": 5
+    },
+    {
+        "date": "May2th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "HOUAstros",
+        "handicap": 6
+    },
+    {
+        "date": "May3rd",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "STLCardinals",
+        "handicap": 3
+    },
+    {
+        "date": "May4th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "SDPadres",
+        "handicap": 12
+    },
+    {
+        "date": "May5th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 4
+    },
+    {
+        "date": "May6th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 3
+    },
+    {
+        "date": "May7th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "NYMets",
+        "handicap": 2
+    },
+    {
+        "date": "May8th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "NYYankees",
+        "handicap": 5
+    },
+    {
+        "date": "May9th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "ARIDiamondbacks",
+        "handicap": 1
+    },
+    {
+        "date": "May10th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "PHIPhillies",
+        "handicap": 6
+    },
+    {
+        "date": "May11th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 5
+    },
+    {
+        "date": "May12th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "KCRoyals",
+        "handicap": 2
+    },
+    {
+        "date": "May13th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "LADodgers",
+        "handicap": 2
+    },
+    {
+        "date": "May14th",
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "seriesWinner": "NYYankees",
+        "handicap": 4
+    },
+    {
+        "date": "May15th",
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 2,
+        "seriesWinner": "DETTigersCLEGuardians",
+        "handicap": -6
+    }
+]
