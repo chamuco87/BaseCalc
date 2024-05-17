@@ -52,7 +52,7 @@ var teams = [
     try {
 var datesAnalysis = [
     {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:15, to:15, monthNumber:"05"}];
+    {month:"May", from:1, to:17, monthNumber:"05"}];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
     const mmonth = datesAnalysis[te];
@@ -83,6 +83,8 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await getESPNData(selectedDate);
             //await getScheduleData(selectedDate);
             //await ProcessGameByGame(selectedDate);
+            //await getPitcherGameByGame(selectedDate);
+            //await getBatterGameByGame(selectedDate);
             //await getBattersData(selectedDate);
             //await getBestScoringTeamsByBatting(selectedDate);
             //await getBestHittingTeamsByBatting(selectedDate);
@@ -97,10 +99,9 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await evaluateGames(selectedDate);
             //await sortBetterAvgs(selectedDate);
             //await filterConsistentPicks(selectedDate)
-    ////
+            //
             //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
             //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-    //
             //await getCoversWinPercentages(selectedDate, descriptiveDate);
             //await consolidateAlgorithmResults(selectedDate)
             //await getPitcherGameByGame(selectedDate);
@@ -112,21 +113,15 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //Algo Evaluation for Past Games
             //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
             //await getESPNData(selectedDate);
-            //await ProcessGameByGame(selectedDate);
-            //await getPitcherGameByGame(selectedDate);
-            //await getBatterGameByGame(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
-
-
+            
             await EvaluateResults(selectedDate);
-
             await EvaluateResultsPrototype(selectedDate);
 
             }
         }
             await GetResultsSummary();
-            await GetResultsSummaryPrototype();
-
+            await GetResultsSummaryPrototype()
             await ConsolidateSelectionsResults();
         
     } 
@@ -140,6 +135,19 @@ for (let te = 0; te < datesAnalysis.length; te++) {
     {
         var sel1 = await load("ResultsStatsWinner", "GameByGame");
         var sel2 = await load("ResultsStatsWinnerPrototype", "GameByGame");
+
+        // sel1 = sel1.filter(function(item){
+        //     return item.handicap != "Pending Game";
+        // });
+
+        // sel2 = sel2.filter(function(item){
+        //     return item.handicap != "Pending Game";
+        // });
+
+        
+        var budget = 2000;
+        
+        var withHandicap = false;
         var allResults = [];
         var days = [];
         if(sel1.length >= sel2.length)
@@ -152,7 +160,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
         for (let index = 0; index < days.length; index++) {
             const day = days[index];
-            if(day.date == "May15th")
+            if(day.date == "May16th")
             {
                 var stopHere = "";
             }
@@ -163,40 +171,185 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             var selection2 = sel2.filter(function(item){
                 return day.date == item.date
             });
+            var result = {day:day.date, wins:0, result1:"", result2:"", budget:null};
+            if(index == 0)
+            {
+                result.budget = budget;
+            }
+            else{
+                result.budget = allResults[allResults.length-1].budget;
+            }
 
-            var result = {day:day.date, wins:0};
+            var individualBetAmount = result.budget/4;//500;
             if(selection1.length >= 1 && selection2.length >= 1)
             {
-                if(selection1[0].FinalSeriesWinnerPer == 100 && selection2[0].FinalFormulaWinnerPer == 100)
+                result.budget = result.budget - (individualBetAmount * 2);
+                var win1 = selection1[0].FinalSeriesWinnerPer == 100 ;
+                var win2 = selection2[0].FinalFormulaWinnerPer == 100;
+                var handicap1 = true;
+                var handicap2 = true;
+                var isPush1 = true;
+                var isPush2 = true;
+                var momio = 0;
+                if(withHandicap)
+                {
+                    handicap1 = (selection1[0].handicap > 1);
+                    handicap2 = (selection2[0].handicap > 1);
+                    isPush1 = (selection1[0].handicap == 1);
+                    isPush2 = (selection2[0].handicap == 1);
+                    momio = 2.5;
+                }
+                else{
+                    handicap1 = true;
+                    handicap2 = true;
+                    isPush1 = true;
+                    isPush2 = true;
+                    momio = 1.7;
+                }
+
+                if(win1 && win2)
                 {
                     result.wins = 2;
+                    result.result1 = "W-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                    result.result2 = "W-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                    if(handicap1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
+
+                    if(handicap2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
+                    
+                    
                 }
-                else if(selection1[0].FinalSeriesWinnerPer == 100)
+                else if(!win1 && !win2)
+                {
+                    if(selection1[0].handicap != "Pending Game" || selection2[0].handicap != "Pending Game")
+                    {
+                        result.result1 = "L-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                        result.result2 = "L-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                        result.budget = result.budget;
+                    }
+                    else{
+                        result.result1 = "Pending-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                        result.result2 = "Pending-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                        result.budget = "Pending";
+                    }
+                }
+                else if(win1)
                 {
                     result.wins = 1;
+                    result.result1 = "W-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                    result.result2 = "L-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                    if(handicap1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
+                    
+
                 }
-                else if(selection2[0].FinalFormulaWinnerPer == 100)
+                else if(win2)
                 {
                     result.wins = 1;
+                    result.result1 = "L-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                    result.result2 = "W-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                    if(handicap2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
                 }
             }
             else if(selection1.length >= 1){
-                if(selection1[0].FinalSeriesWinnerPer == 100)
+                result.budget = result.budget - (individualBetAmount * 1);
+                if(win1)
                 {
                     result.wins = 1;
+                    result.result1 = "W-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                    result.result2 = "NO GAME";
+                    if(handicap1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(handicap1){
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush1)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
+                }
+                else{
+                    result.result1 = "L-" + selection1[0].seriesWinner+"/"+selection1[0].handicap;
+                    result.result2 = "NO GAME";
+                    result.budget = result.budget;
                 }
             }
-            else if(selection2.length >= 1){
-                if(selection2[0].FinalFormulaWinnerPer == 100)
+            else if(selection2.length >= 1 && selection2[0].handicap > 1){
+                result.budget = result.budget - (individualBetAmount * 1);
+                if(win2)
                 {
                     result.wins = 1;
+                    result.result1 = "NO GAME";
+                    result.result2 = "W-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                    if(handicap2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(handicap2){
+                        result.budget = result.budget + ((individualBetAmount * momio)*1);
+                    }
+                    else if(isPush2)
+                    {
+                        result.budget = result.budget + ((individualBetAmount));
+                    }
+                    else{
+                        result.budget = result.budget;
+                    }
+                }
+                else{
+                    result.result1 = "NO GAME";
+                    result.result2 = "L-" + selection2[0].formulaWinner+"/"+selection2[0].handicap;
+                    result.budget = result.budget;
                 }
             }
             
             allResults.push(result);
             
         }
-
+        console.log(allResults);
         await save("DayByDayResults", allResults, function(){}, "replace", "GameByGame");
     }
 
@@ -353,7 +506,8 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         
                         return dat.toLowerCase() == datee.toLocaleLowerCase(); 
                     })[0];
-
+                    if(targetGame)
+                    {
                     var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
                     var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
                         awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
@@ -406,6 +560,15 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
 
                     //await save(date+"FinalSelections", games, function(){}, "replace");
+                }
+                else{
+                    formulaWinner = game.formulaWinner;
+                    FinalFormulaWinnerSum = 0;
+                    FinalSeriesWinnerSum = 0;
+                    FinalNextWinnerSum = 0;
+                    FinalOverallWinnerSum = 0;
+                    handicap = "Pending Game"
+                }
         //}
         }
 
@@ -434,7 +597,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         }
 
         stats.push(stat);
-
+        console.log(stats);
         await save("ResultsStatsWinnerPrototype", stats, function(){}, "replace", "GameByGame");
         
         
@@ -592,59 +755,69 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                         
                         return dat.toLowerCase() == datee.toLocaleLowerCase(); 
                     })[0];
-
-                    var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
-                    var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
-                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
-                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
-                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
-                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
-                    var awayAfter5Runs = awayTotalRuns - awayF5Runs;
-
-                    var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
-                    var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
-                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
-                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
-                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
-                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
-                    var homeAfter5Runs = homeTotalRuns - homeF5Runs;
-
-
-                    game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
-
-                    game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
-
-                    if(game.seriesWinner == game.finalWinner)
+                    if(targetGame)
                     {
-                        handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
-                    }
-                    else{
-                        handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
-                    }
+                        var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+                        var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                            awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                            awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                            awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                            awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+                        var awayAfter5Runs = awayTotalRuns - awayF5Runs;
 
-                    game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
-                    game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
-                    game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
-                    game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+                        var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+                        var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                            homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                            homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                            homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                            homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+                        var homeAfter5Runs = homeTotalRuns - homeF5Runs;
 
-                    game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
-                    game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
-                    game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
-                    game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
 
+                        game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+                        game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+                        if(game.seriesWinner == game.finalWinner)
+                        {
+                            handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+                        }
+                        else{
+                            handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
+                        }
+
+                        game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
+                        game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
+                        game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
+                        game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+
+                        game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
+                        game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
+                        game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
+                        game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
+
+                        seriesWinner = game.seriesWinner;
+
+                        // F5FormulaWinnerSum += game.F5FormulaWinner;
+                        // F5SeriesWinnerSum += game.F5SeriesWinner;
+                        // F5NextWinnerSum += game.F5NextWinner; 
+                        // F5OverallWinnerSum += game.F5OverallWinner; 
+                        FinalFormulaWinnerSum += game.FinalFormulaWinner;
+                        FinalSeriesWinnerSum += game.FinalSeriesWinner;
+                        FinalNextWinnerSum += game.FinalNextWinner; 
+                        FinalOverallWinnerSum += game.FinalOverallWinner; 
+
+
+                        //await save(date+"FinalSelections", games, function(){}, "replace");
+                }
+                else{
                     seriesWinner = game.seriesWinner;
-
-                    // F5FormulaWinnerSum += game.F5FormulaWinner;
-                    // F5SeriesWinnerSum += game.F5SeriesWinner;
-                    // F5NextWinnerSum += game.F5NextWinner; 
-                    // F5OverallWinnerSum += game.F5OverallWinner; 
-                    FinalFormulaWinnerSum += game.FinalFormulaWinner;
-                    FinalSeriesWinnerSum += game.FinalSeriesWinner;
-                    FinalNextWinnerSum += game.FinalNextWinner; 
-                    FinalOverallWinnerSum += game.FinalOverallWinner; 
-
-
-                    //await save(date+"FinalSelections", games, function(){}, "replace");
+                    FinalFormulaWinnerSum = 0;
+                    FinalSeriesWinnerSum = 0;
+                    FinalNextWinnerSum = 0;
+                    FinalOverallWinnerSum = 0;
+                    handicap = "Pending Game"
+                }
         //}
         }
 
@@ -673,7 +846,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
         }
 
         stats.push(stat);
-
+        console.log(stats);
         await save("ResultsStatsWinner", stats, function(){}, "replace", "GameByGame");
         
         
@@ -683,7 +856,10 @@ gameSelected = await sorting(games,"overallDiff", "desc");
     async function GetResultsSummaryPrototype(){
 
         var stats = await load("ResultsStatsWinnerPrototype", "GameByGame");
-            
+        
+        stats = stats.filter(function(item){
+            return item.handicap != "Pending Game";
+        });
             var F5FormulaWinnerSum = 0; 
             var F5SeriesWinnerSum = 0;
             var F5NextWinnerSum = 0; 
@@ -735,13 +911,17 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                     handicapLostAvg : (handicapLostSum)/handicapLost, 
                     DaysInScope : stats.length
             }
-    
+            console.log(summary);
             await save("ResulSummaryPrototype", summary, function(){}, "replace", "GameByGame");
     }
 
 async function GetResultsSummary(){
 
     var stats = await load("ResultsStatsWinner", "GameByGame");
+
+    stats = stats.filter(function(item){
+        return item.handicap != "Pending Game";
+    });
         
         var F5FormulaWinnerSum = 0; 
         var F5SeriesWinnerSum = 0;
@@ -794,7 +974,7 @@ async function GetResultsSummary(){
                 handicapLostAvg : (handicapLostSum)/handicapLost, 
                 DaysInScope : stats.length
         }
-
+        console.log(summary);
         await save("ResulSummary", summary, function(){}, "replace", "GameByGame");
 }
 async function CalculateWinnersViaFormula(date)
@@ -1392,6 +1572,7 @@ async function getPitcherGameByGame(date)
         }
 
         pitchersByTeam.push({teamName: team.teamName, pitchersData:pitchersTeam});
+        console.log(pitchersByTeam);
         await save("PitchersByTeamByGame", pitchersByTeam, function(){}, "replace", "GameByGame");
     }
 }
@@ -1501,6 +1682,7 @@ async function getBatterGameByGame(date)
         
 
         battersByTeam.push({teamName: team.teamName, battersData:teamDetails});
+        console.log(battersByTeam);
         await save("BattersByTeamByGame", battersByTeam, function(){}, "replace", "GameByGame");
     }
 }
@@ -1558,25 +1740,28 @@ async function ProcessGameByGame(date)
             await driver.manage().setTimeouts({ implicit: 1000 });
 
             await driver.executeScript(await ProcessRunsHitsGameData()).then(function(return_value) {
+                console.log(return_value);
                 var hitsRunsData = JSON.parse(return_value);
                 gameDetails.awayDetails.runsHitsDeatils = hitsRunsData.away;
                 gameDetails.homeDetails.runsHitsDeatils = hitsRunsData.home;
             });
 
             await driver.executeScript(await ProcessPitcherGameData()).then(function(return_value) {
+                console.log(return_value);
                 var pitchersData = JSON.parse(return_value);
                 gameDetails.awayDetails.pitchersDeatils = pitchersData.away;
                 gameDetails.homeDetails.pitchersDeatils = pitchersData.home;
             });
 
             await driver.executeScript(await ProcessBatterGameData()).then(function(return_value) {
+                console.log(return_value);
                 var battersData = JSON.parse(return_value);
                 gameDetails.awayDetails.battersDeatils = battersData.away;
                 gameDetails.homeDetails.battersDeatils = battersData.home;
             });
             
             allGamesDetails.games.push(gameDetails);
-
+            console.log(allGamesDetails);
             await save("Games"+team.teamName+"Details", allGamesDetails, function(){}, "replace", "GameByGame");
         }
     }
@@ -1593,6 +1778,7 @@ async function getCoversWinPercentages(date, descDate)
     await driver.get("https://www.covers.com/sports/mlb/matchups?selectedDate="+descDate);
     await driver.manage().setTimeouts({ implicit: 1000 });
     await driver.executeScript(await GetWinPercentagesFromCovers()).then(function(return_value) {
+        console.log(return_value);
         winPercentages = JSON.parse(return_value);
         for (let index = 0; index < winPercentages.length; index++) {
             const game = winPercentages[index];
@@ -3383,6 +3569,7 @@ async function getScheduleData(date)
         await driver.manage().setTimeouts({ implicit: 1000 });
         var scheduleData = [];
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            console.log(return_value);
             scheduleData = JSON.parse(return_value);
             var data = ProcessScheduleData(scheduleData,teamName);
             for (let ar = 0; ar < data.length; ar++) {
@@ -3411,6 +3598,7 @@ async function getAllPitchersData(date)
             var starterPitchersCount = 0;
             var relevingPitchersCount = 0
             await driver.executeScript(await GetAllPitchersStats()).then(function(return_value) {
+                console.log(return_value);
                pitchersData = JSON.parse(return_value);
                 for (let ele = 0; ele < pitchersData.length; ele++) {
                     const pitcher = pitchersData[ele];
@@ -3488,6 +3676,7 @@ async function getAllPitchersData(date)
             var sumHits = 0;
             var sumRuns = 0;
             await driver.executeScript(await GetBattingStats()).then(function(return_value) {
+                console.log(return_value);
                 battersData = JSON.parse(return_value);
                 for (let ele = 0; ele < battersData.playersDat.length; ele++) {
                     const batter = battersData.playersDat[ele];
@@ -3612,7 +3801,16 @@ async function getAllPitchersData(date)
             pitcherUrl = pitcher[0].playerUrl;
         }
         else{
-            var stopHere = "";
+            var pitcher = pitcher.filter(function(item){
+                return item.name.indexOf("SP") >=0;
+            });
+            if(pitcher.length == 1)
+            {
+                pitcherUrl = pitcher[0].playerUrl;
+            }
+            else{
+                var stopHere = "";
+            }
         }
         
         if(pitcherUrl)
@@ -3638,6 +3836,7 @@ async function getAllPitchersData(date)
             });
 
             await driver.executeScript(await GetPitcherDataWithFinalERA()).then(function(return_value) {
+                console.log(return_value);
                 if(homeOrAway == "away")
                 {
                     game.awayTeam.awayPitcherDataNew = JSON.parse(return_value);
