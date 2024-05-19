@@ -52,7 +52,7 @@ var teams = [
     try {
 var datesAnalysis = [
     {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:17, monthNumber:"05"}];
+    {month:"May", from:1, to:18, monthNumber:"05"}];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
     const mmonth = datesAnalysis[te];
@@ -106,15 +106,13 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await consolidateAlgorithmResults(selectedDate)
             //await getPitcherGameByGame(selectedDate);
             //await getBatterGameByGame(selectedDate)
-            //await CalculateWinnersViaFormula(selectedDate);
-
-            
-
+            //await CalculateWinnersViaFormula(selectedDate)
+    
             //Algo Evaluation for Past Games
             //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
             //await getESPNData(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
-            
+    
             await EvaluateResults(selectedDate);
             await EvaluateResultsPrototype(selectedDate);
 
@@ -467,6 +465,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         var FinalOverallWinnerSum = 0; 
         var formulaWinner = "";
         var handicap = 0;
+        var handicapF5 = 0;
 
         try{
             var stats = await load("ResultsStatsWinnerPrototype","GameByGame");
@@ -529,6 +528,14 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
                     game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
+                    if(game.formulaWinner == game.F5Winner)
+                    {
+                        handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
+                    }
+                    else{
+                        handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
+                    }
+
                     if(game.formulaWinner == game.finalWinner)
                     {
                         handicap += awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
@@ -548,11 +555,11 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                     game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
 
                     formulaWinner += game.formulaWinner;
-
-                    // F5FormulaWinnerSum += game.F5FormulaWinner;
-                    // F5SeriesWinnerSum += game.F5SeriesWinner;
-                    // F5NextWinnerSum += game.F5NextWinner; 
-                    // F5OverallWinnerSum += game.F5OverallWinner; 
+                    
+                    F5FormulaWinnerSum += game.F5FormulaWinner;
+                    F5SeriesWinnerSum += game.F5SeriesWinner;
+                    F5NextWinnerSum += game.F5NextWinner; 
+                    F5OverallWinnerSum += game.F5OverallWinner; 
                     FinalFormulaWinnerSum += game.FinalFormulaWinner;
                     FinalSeriesWinnerSum += game.FinalSeriesWinner;
                     FinalNextWinnerSum += game.FinalNextWinner; 
@@ -562,7 +569,12 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                     //await save(date+"FinalSelections", games, function(){}, "replace");
                 }
                 else{
+                    console.log(date + "Winner = "+ game.formulaWinner);
                     formulaWinner = game.formulaWinner;
+                    F5FormulaWinnerSum = 0;
+                    F5SeriesWinnerSum = 0;
+                    F5NextWinnerSum = 0;
+                    F5OverallWinnerSum = 0;
                     FinalFormulaWinnerSum = 0;
                     FinalSeriesWinnerSum = 0;
                     FinalNextWinnerSum = 0;
@@ -574,26 +586,18 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
         var stat = {
                 date: date,
-                //F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/games.length,
-                //F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/games.length,
-                //F5NextWinnerPer : (F5NextWinnerSum*100)/games.length, 
-                //F5OverallWinnerPer : (F5OverallWinnerSum*100)/games.length, 
-                //FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/games.length,
-                //FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/games.length,
-                //FinalNextWinnerPer : (FinalNextWinnerSum*100)/games.length, 
-                //FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/games.length, 
-
-                // F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
-                // F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
-                // F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
-                // F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
+                F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
+                F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
+                F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
+                F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
                 FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/selectionGamesCount,
                 FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/selectionGamesCount,
                 FinalNextWinnerPer : (FinalNextWinnerSum*100)/selectionGamesCount, 
                 FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/selectionGamesCount, 
                 NumberOGames: selectionGamesCount,
                 formulaWinner: formulaWinner,
-                handicap: handicap
+                handicap: handicap,
+                handicapF5: handicapF5
         }
 
         stats.push(stat);
@@ -716,6 +720,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
         var FinalOverallWinnerSum = 0; 
         var seriesWinner = "";
         var handicap = 0;
+        var handicapF5 = 0;
 
         try{
             var stats = await load("ResultsStatsWinner","GameByGame");
@@ -729,6 +734,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
             var stats = [];
         }
 
+        
         var selectionGamesCount = 0;
         for (let index = 0; index < games.length; index++) {
             const game = games[index];
@@ -778,6 +784,14 @@ gameSelected = await sorting(games,"overallDiff", "desc");
 
                         game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
+                        if(game.seriesWinner == game.F5Winner)
+                        {
+                            handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
+                        }
+                        else{
+                            handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
+                        }
+
                         if(game.seriesWinner == game.finalWinner)
                         {
                             handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
@@ -797,11 +811,11 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                         game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
 
                         seriesWinner = game.seriesWinner;
-
-                        // F5FormulaWinnerSum += game.F5FormulaWinner;
-                        // F5SeriesWinnerSum += game.F5SeriesWinner;
-                        // F5NextWinnerSum += game.F5NextWinner; 
-                        // F5OverallWinnerSum += game.F5OverallWinner; 
+                        
+                        F5FormulaWinnerSum += game.F5FormulaWinner;
+                        F5SeriesWinnerSum += game.F5SeriesWinner;
+                        F5NextWinnerSum += game.F5NextWinner; 
+                        F5OverallWinnerSum += game.F5OverallWinner; 
                         FinalFormulaWinnerSum += game.FinalFormulaWinner;
                         FinalSeriesWinnerSum += game.FinalSeriesWinner;
                         FinalNextWinnerSum += game.FinalNextWinner; 
@@ -811,7 +825,12 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                         //await save(date+"FinalSelections", games, function(){}, "replace");
                 }
                 else{
+                    console.log(date + "Winner = "+ game.seriesWinner);
                     seriesWinner = game.seriesWinner;
+                    F5FormulaWinnerSum = 0;
+                    F5SeriesWinnerSum = 0;
+                    F5NextWinnerSum = 0;
+                    F5OverallWinnerSum = 0;
                     FinalFormulaWinnerSum = 0;
                     FinalSeriesWinnerSum = 0;
                     FinalNextWinnerSum = 0;
@@ -823,26 +842,18 @@ gameSelected = await sorting(games,"overallDiff", "desc");
 
         var stat = {
                 date: date,
-                //F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/games.length,
-                //F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/games.length,
-                //F5NextWinnerPer : (F5NextWinnerSum*100)/games.length, 
-                //F5OverallWinnerPer : (F5OverallWinnerSum*100)/games.length, 
-                //FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/games.length,
-                //FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/games.length,
-                //FinalNextWinnerPer : (FinalNextWinnerSum*100)/games.length, 
-                //FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/games.length, 
-
-                // F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
-                // F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
-                // F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
-                // F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
+                F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
+                F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
+                F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
+                F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
                 FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/selectionGamesCount,
                 FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/selectionGamesCount,
                 FinalNextWinnerPer : (FinalNextWinnerSum*100)/selectionGamesCount, 
                 FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/selectionGamesCount, 
                 NumberOGames: selectionGamesCount,
                 seriesWinner: seriesWinner,
-                handicap: handicap
+                handicap: handicap,
+                handicapF5: handicapF5
         }
 
         stats.push(stat);
@@ -873,14 +884,18 @@ gameSelected = await sorting(games,"overallDiff", "desc");
             var handicapWins = 0;
             var handicapLostSum = 0; 
             var handicapLost = 0;
+            var handicapF5Sum = 0; 
+            var handicapF5Wins = 0;
+            var handicapF5LostSum = 0; 
+            var handicapF5Lost = 0;
     
             for (let er = 0; er < stats.length; er++) {
                 const day = stats[er];
     
-                // F5FormulaWinnerSum += day.F5FormulaWinnerPer;
-                // F5SeriesWinnerSum += day.F5SeriesWinnerPer;
-                // F5NextWinnerSum += day.F5NextWinnerPer; 
-                // F5OverallWinnerSum += day.F5OverallWinnerPer; 
+                F5FormulaWinnerSum += day.F5FormulaWinnerPer;
+                F5SeriesWinnerSum += day.F5SeriesWinnerPer;
+                F5NextWinnerSum += day.F5NextWinnerPer; 
+                F5OverallWinnerSum += day.F5OverallWinnerPer; 
     
                 FinalFormulaWinnerSum += day.FinalFormulaWinnerPer;  
                 FinalSeriesWinnerSum += day.FinalSeriesWinnerPer; 
@@ -896,19 +911,31 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                     handicapLostSum += day.handicap;
                     handicapLost++;
                 }
+
+                if(day.handicapF5 > 0 )
+                {
+                    handicapF5Sum += day.handicapF5;
+                    handicapF5Wins++;
+                }
+                else{
+                    handicapF5LostSum += day.handicapF5;
+                    handicapF5Lost++;
+                }
                 
             }
             var summary = {
-                    // F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
-                    // F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
-                    // F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
-                    // F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
+                    F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
+                    F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
+                    F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
+                    F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
                     FinalFormulaWinnerPer : (FinalFormulaWinnerSum)/stats.length,
                     FinalSeriesWinnerPer : (FinalSeriesWinnerSum)/stats.length,
                     FinalNextWinnerPer : (FinalNextWinnerSum)/stats.length, 
                     FinalOverallWinnerPer : (FinalOverallWinnerSum)/stats.length, 
                     handicapAvg : (handicapSum)/handicapWins, 
                     handicapLostAvg : (handicapLostSum)/handicapLost, 
+                    handicapF5Avg : (handicapF5Sum)/handicapF5Wins, 
+                    handicapF5LostAvg : (handicapF5LostSum)/handicapF5Lost, 
                     DaysInScope : stats.length
             }
             console.log(summary);
@@ -936,14 +963,18 @@ async function GetResultsSummary(){
         var handicapWins = 0;
         var handicapLostSum = 0; 
         var handicapLost = 0;
+        var handicapF5Sum = 0; 
+        var handicapF5Wins = 0;
+        var handicapF5LostSum = 0; 
+        var handicapF5Lost = 0;
 
         for (let er = 0; er < stats.length; er++) {
             const day = stats[er];
 
-            // F5FormulaWinnerSum += day.F5FormulaWinnerPer;
-            // F5SeriesWinnerSum += day.F5SeriesWinnerPer;
-            // F5NextWinnerSum += day.F5NextWinnerPer; 
-            // F5OverallWinnerSum += day.F5OverallWinnerPer; 
+            F5FormulaWinnerSum += day.F5FormulaWinnerPer;
+            F5SeriesWinnerSum += day.F5SeriesWinnerPer;
+            F5NextWinnerSum += day.F5NextWinnerPer; 
+            F5OverallWinnerSum += day.F5OverallWinnerPer; 
 
             FinalFormulaWinnerSum += day.FinalFormulaWinnerPer;  
             FinalSeriesWinnerSum += day.FinalSeriesWinnerPer; 
@@ -959,19 +990,31 @@ async function GetResultsSummary(){
                 handicapLostSum += day.handicap;
                 handicapLost++;
             }
+
+            if(day.handicapF5 > 0 )
+            {
+                handicapF5Sum += day.handicapF5;
+                handicapF5Wins++;
+            }
+            else{
+                handicapF5LostSum += day.handicapF5;
+                handicapF5Lost++;
+            }
             
         }
         var summary = {
-                // F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
-                // F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
-                // F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
-                // F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
+                F5FormulaWinnerPer : (F5FormulaWinnerSum)/stats.length,
+                F5SeriesWinnerPer : (F5SeriesWinnerSum)/stats.length,
+                F5NextWinnerPer : (F5NextWinnerSum)/stats.length, 
+                F5OverallWinnerPer : (F5OverallWinnerSum)/stats.length, 
                 FinalFormulaWinnerPer : (FinalFormulaWinnerSum)/stats.length,
                 FinalSeriesWinnerPer : (FinalSeriesWinnerSum)/stats.length,
                 FinalNextWinnerPer : (FinalNextWinnerSum)/stats.length, 
                 FinalOverallWinnerPer : (FinalOverallWinnerSum)/stats.length, 
                 handicapAvg : (handicapSum)/handicapWins, 
                 handicapLostAvg : (handicapLostSum)/handicapLost, 
+                handicapF5Avg : (handicapF5Sum)/handicapF5Wins, 
+                handicapF5LostAvg : (handicapF5LostSum)/handicapF5Lost, 
                 DaysInScope : stats.length
         }
         console.log(summary);
@@ -3752,13 +3795,13 @@ async function getAllPitchersData(date)
         for (let i = 0; i < gams.length; i++) {
             var game = gams[i];
             //
-            if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
-            {
+            //if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
+            //{
                 var stopHere = "";
                 game = await getPitcherData(game, "away", date);
                 game = await getPitcherData(game, "home", date);
                 save(date, data, function(){}, "replace")
-            }
+            //}
         }
         
     }
