@@ -1,6 +1,7 @@
 [
     {
         "date": "April8th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -16,6 +17,7 @@
     },
     {
         "date": "April9th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -31,6 +33,7 @@
     },
     {
         "date": "April10th",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -46,6 +49,7 @@
     },
     {
         "date": "April11th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -61,6 +65,7 @@
     },
     {
         "date": "April12th",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -76,6 +81,7 @@
     },
     {
         "date": "April13th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -91,6 +97,7 @@
     },
     {
         "date": "April14th",
+        "dayOfWeek": "Sun",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -106,6 +113,7 @@
     },
     {
         "date": "April15th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -121,6 +129,7 @@
     },
     {
         "date": "April16th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -136,6 +145,7 @@
     },
     {
         "date": "April17th",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -151,6 +161,7 @@
     },
     {
         "date": "April18th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -166,6 +177,7 @@
     },
     {
         "date": "April19th",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -181,6 +193,7 @@
     },
     {
         "date": "April20th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -196,6 +209,7 @@
     },
     {
         "date": "April21th",
+        "dayOfWeek": "Sun",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -211,6 +225,7 @@
     },
     {
         "date": "April22th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -226,6 +241,7 @@
     },
     {
         "date": "April23th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -241,6 +257,7 @@
     },
     {
         "date": "April24th",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -256,6 +273,7 @@
     },
     {
         "date": "April25th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -271,6 +289,7 @@
     },
     {
         "date": "April26th",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -286,6 +305,7 @@
     },
     {
         "date": "April27th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 100,
@@ -301,6 +321,7 @@
     },
     {
         "date": "April28th",
+        "dayOfWeek": "Sun",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -316,6 +337,7 @@
     },
     {
         "date": "April29th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -331,6 +353,7 @@
     },
     {
         "date": "April30th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -346,6 +369,7 @@
     },
     {
         "date": "May1st",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -361,6 +385,7 @@
     },
     {
         "date": "May2th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -376,6 +401,7 @@
     },
     {
         "date": "May3rd",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -391,6 +417,7 @@
     },
     {
         "date": "May4th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -406,6 +433,7 @@
     },
     {
         "date": "May5th",
+        "dayOfWeek": "Sun",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -421,6 +449,7 @@
     },
     {
         "date": "May6th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -436,6 +465,7 @@
     },
     {
         "date": "May7th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -451,6 +481,7 @@
     },
     {
         "date": "May8th",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -466,6 +497,7 @@
     },
     {
         "date": "May9th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -481,6 +513,7 @@
     },
     {
         "date": "May10th",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -496,6 +529,7 @@
     },
     {
         "date": "May11th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 0,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -511,6 +545,7 @@
     },
     {
         "date": "May12th",
+        "dayOfWeek": "Sun",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 0,
@@ -526,6 +561,7 @@
     },
     {
         "date": "May13th",
+        "dayOfWeek": "Mon",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -541,6 +577,7 @@
     },
     {
         "date": "May14th",
+        "dayOfWeek": "Tue",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -556,6 +593,7 @@
     },
     {
         "date": "May15th",
+        "dayOfWeek": "Wed",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -571,6 +609,7 @@
     },
     {
         "date": "May16th",
+        "dayOfWeek": "Thu",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 0,
         "F5NextWinnerPer": 0,
@@ -586,6 +625,7 @@
     },
     {
         "date": "May17th",
+        "dayOfWeek": "Fri",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -601,6 +641,7 @@
     },
     {
         "date": "May18th",
+        "dayOfWeek": "Sat",
         "F5FormulaWinnerPer": 100,
         "F5SeriesWinnerPer": 100,
         "F5NextWinnerPer": 100,
@@ -613,5 +654,21 @@
         "formulaWinner": "BALOrioles",
         "handicap": -1,
         "handicapF5": 2
+    },
+    {
+        "date": "May19th",
+        "dayOfWeek": "Sun",
+        "F5FormulaWinnerPer": 100,
+        "F5SeriesWinnerPer": 100,
+        "F5NextWinnerPer": 100,
+        "F5OverallWinnerPer": 100,
+        "FinalFormulaWinnerPer": 100,
+        "FinalSeriesWinnerPer": 100,
+        "FinalNextWinnerPer": 100,
+        "FinalOverallWinnerPer": 100,
+        "NumberOGames": 1,
+        "formulaWinner": "BALOrioles",
+        "handicap": 3,
+        "handicapF5": 4
     }
 ]

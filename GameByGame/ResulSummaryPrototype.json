@@ -1,15 +1,15 @@
 {
-    "F5FormulaWinnerPer": 75.60975609756098,
-    "F5SeriesWinnerPer": 73.17073170731707,
-    "F5NextWinnerPer": 51.21951219512195,
-    "F5OverallWinnerPer": 68.29268292682927,
-    "FinalFormulaWinnerPer": 73.17073170731707,
-    "FinalSeriesWinnerPer": 63.41463414634146,
-    "FinalNextWinnerPer": 51.21951219512195,
-    "FinalOverallWinnerPer": 63.41463414634146,
-    "handicapAvg": 4,
+    "F5FormulaWinnerPer": 76.19047619047619,
+    "F5SeriesWinnerPer": 73.80952380952381,
+    "F5NextWinnerPer": 52.38095238095238,
+    "F5OverallWinnerPer": 69.04761904761905,
+    "FinalFormulaWinnerPer": 73.80952380952381,
+    "FinalSeriesWinnerPer": 64.28571428571429,
+    "FinalNextWinnerPer": 52.38095238095238,
+    "FinalOverallWinnerPer": 64.28571428571429,
+    "handicapAvg": 3.967741935483871,
     "handicapLostAvg": -1.7272727272727273,
-    "handicapF5Avg": 3.193548387096774,
+    "handicapF5Avg": 3.21875,
     "handicapF5LostAvg": -1.6,
-    "DaysInScope": 41
+    "DaysInScope": 42
 }
