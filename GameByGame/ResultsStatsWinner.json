@@ -670,5 +670,21 @@
         "seriesWinner": "SFGiants",
         "handicap": 3,
         "handicapF5": 2
+    },
+    {
+        "date": "May20th",
+        "dayOfWeek": "Mon",
+        "F5FormulaWinnerPer": 0,
+        "F5SeriesWinnerPer": 0,
+        "F5NextWinnerPer": 0,
+        "F5OverallWinnerPer": 0,
+        "FinalFormulaWinnerPer": 0,
+        "FinalSeriesWinnerPer": 0,
+        "FinalNextWinnerPer": 0,
+        "FinalOverallWinnerPer": 0,
+        "NumberOGames": 1,
+        "seriesWinner": "NYYankees",
+        "handicap": "Pending Game",
+        "handicapF5": 0
     }
 ]

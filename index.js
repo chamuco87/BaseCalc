@@ -51,8 +51,8 @@ var teams = [
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
 var datesAnalysis = [
-    //{month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:19, to:19, monthNumber:"05"}];
+    {month:"April", from:8, to:30, monthNumber:"04"}, 
+    {month:"May", from:1, to:20, monthNumber:"05"}];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
     const mmonth = datesAnalysis[te];
@@ -80,46 +80,46 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             else{
                 var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
             }
-            await getESPNData(selectedDate);
-            await getScheduleData(selectedDate);
-            await ProcessGameByGame(selectedDate);
-            await getPitcherGameByGame(selectedDate);
-            await getBatterGameByGame(selectedDate);
-            await getBattersData(selectedDate);
-            await getBestScoringTeamsByBatting(selectedDate);
-            await getBestHittingTeamsByBatting(selectedDate);
-            await getAllPitchersData(selectedDate);
-            await getBestStartingPitchersTeams(selectedDate);
-            await getBestRelievingPitchersTeams(selectedDate);
-            await getBestOverallPitchersTeams(selectedDate);
-            
-            await getMoreWininigTeams(selectedDate);
-            await getMoreScoringTeams(selectedDate);
-            await getMoreReceivingTeams(selectedDate);
-            await evaluateGames(selectedDate);
-            await sortBetterAvgs(selectedDate);
-            await filterConsistentPicks(selectedDate)
-            
-            await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-            await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-            await getCoversWinPercentages(selectedDate, descriptiveDate);
-            await consolidateAlgorithmResults(selectedDate)
-            await getPitcherGameByGame(selectedDate);
-            await getBatterGameByGame(selectedDate)
-            await CalculateWinnersViaFormula(selectedDate)
+            //await getESPNData(selectedDate);
+            //await getScheduleData(selectedDate);
+            //await ProcessGameByGame(selectedDate);
+            //await getPitcherGameByGame(selectedDate);
+            //await getBatterGameByGame(selectedDate);
+            //await getBattersData(selectedDate);
+            //await getBestScoringTeamsByBatting(selectedDate);
+            //await getBestHittingTeamsByBatting(selectedDate);
+            //await getAllPitchersData(selectedDate);
+            //await getBestStartingPitchersTeams(selectedDate);
+            //await getBestRelievingPitchersTeams(selectedDate);
+            //await getBestOverallPitchersTeams(selectedDate);
+            //
+            //await getMoreWininigTeams(selectedDate);
+            //await getMoreScoringTeams(selectedDate);
+            //await getMoreReceivingTeams(selectedDate);
+            //await evaluateGames(selectedDate);
+            //await sortBetterAvgs(selectedDate);
+            //await filterConsistentPicks(selectedDate)
+            //
+            //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+            //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+            //await getCoversWinPercentages(selectedDate, descriptiveDate);
+            //await consolidateAlgorithmResults(selectedDate)
+            //await getPitcherGameByGame(selectedDate);
+            //await getBatterGameByGame(selectedDate)
+            //await CalculateWinnersViaFormula(selectedDate)
     
             //Algo Evaluation for Past Games
             //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
             //await getESPNData(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
     
-            await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
-            await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
+            //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
+            //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
 
             }
         }
-            await GetResultsSummary();
-            await GetResultsSummaryPrototype()
+            //await GetResultsSummary();
+            //await GetResultsSummaryPrototype()
             await ConsolidateSelectionsResults();
         
     } 
@@ -169,7 +169,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             var selection2 = sel2.filter(function(item){
                 return day.date == item.date
             });
-            var result = {day:day.date, wins:0, result1:"", result2:"", budget:null};
+            var result = {day:day.date, dayOfWeek: day.dayOfWeek, wins:0, result1:"", result2:"", budget:null};
             if(index == 0)
             {
                 result.budget = budget;
@@ -349,6 +349,47 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         }
         console.log(allResults);
         await save("DayByDayResults", allResults, function(){}, "replace", "GameByGame");
+
+        var days = {Mon:{wins:0, loses:0, pushes:0},Tue:{wins:0, loses:0, pushes:0}, Wed:{wins:0, loses:0, pushes:0},
+                    Thu:{wins:0, loses:0, pushes:0},Fri:{wins:0, loses:0, pushes:0}, Sat:{wins:0, loses:0, pushes:0}, 
+                    Sun:{wins:0, loses:0, pushes:0}};
+
+        var winninigTeams = [];
+        var losingTeams = [];
+
+        for (let as = 0; as < allResults.length; as++) {
+            const day = allResults[as];
+
+            if(day.wins == 1)
+            {
+                days[day.dayOfWeek].pushes++;
+            }
+            else if(day.wins == 2){
+                days[day.dayOfWeek].wins++;
+            }
+            else{
+                days[day.dayOfWeek].loses++;
+            }
+
+            if(day.result1.indexOf("L-") >= 0)
+            {
+                losingTeams.push(day.result1.split("/")[0].split("-")[1]);
+            }
+            else{
+                winninigTeams.push(day.result1.split("/")[0].split("-")[1]);
+            }
+        }          
+        
+        const winninigTeamsCounts = {};
+        winninigTeams.forEach(function (x) { winninigTeamsCounts[x] = (winninigTeamsCounts[x] || 0) + 1; });
+
+        const losingTeamsCounts = {};
+        losingTeams.forEach(function (x) { losingTeamsCounts[x] = (losingTeamsCounts[x] || 0) + 1; });
+
+        var resultsStats = {daysResult: days, winninigTeams: winninigTeamsCounts, losingTeams:losingTeamsCounts};
+       
+        await save("DayByDayResultsSumary", resultsStats, function(){}, "replace", "GameByGame");
+
     }
 
     async function EvaluateResultsPrototype(date, stringDate)
@@ -486,6 +527,20 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
             const game = games[index];
             // if(game.formulaWinner == game.seriesWinner)
             // {
+                    if(game.away.indexOf("TOR") >= 0 ||game.home.indexOf("TOR") >= 0)
+                    {
+                        if(game.away.indexOf("TOR") >= 0)
+                        {
+                            game.away = "TORBlue Jays";
+                        }
+
+                        if(game.home.indexOf("TOR") >= 0)
+                        {
+                            game.home = "TORBlue Jays";
+                        }
+
+                        var stopHere = "";
+                    }
                     selectionGamesCount++;
                     var gamesDet =[];
                     var isHomeOrAway = "";
