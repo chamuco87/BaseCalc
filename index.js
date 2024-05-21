@@ -52,7 +52,8 @@ var teams = [
     try {
 var datesAnalysis = [
     {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:20, monthNumber:"05"}];
+    {month:"May", from:1, to:20, monthNumber:"05"}
+];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
     const mmonth = datesAnalysis[te];
@@ -113,13 +114,13 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await getESPNData(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
     
-            //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
-            //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
+            await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
+            await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
 
             }
         }
-            //await GetResultsSummary();
-            //await GetResultsSummaryPrototype()
+            await GetResultsSummary();
+            await GetResultsSummaryPrototype()
             await ConsolidateSelectionsResults();
         
     } 
@@ -672,6 +673,11 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         var dayOfWeek = d.toDateString().split(" ")[0];
         var games = await load(date+"FinalSelections");
 
+        var teamsSchedule = await load(date+"TeamSchedules");
+        var scheduleScope = teamsSchedule.filter(function(item){
+            return item.period == 0;         
+            });
+
         if(date == "April18th")
         {
             var stopHere = "";
@@ -703,6 +709,28 @@ var games = games.filter(function(item){
 });
 
 gameSelected = await sorting(games,"overallDiff", "desc");
+
+// var inf = 0;
+// var selIndex = 0;
+// while (selIndex == 0 && inf < gameSelected.length) {
+//     const gameSel = gameSelected[inf];
+
+//     var scheduleSelected = scheduleScope.filter(function(item){
+//         return item.teamName.indexOf(gameSel.seriesWinner) >=0;
+//     })[0].scheduleData;
+
+//     var latestRecord = scheduleSelected[scheduleSelected.length-1]["W-L"];
+
+//     var wins = parseInt(latestRecord.split("-")[0]);
+//     var loses = parseInt(latestRecord.split("-")[1]);
+
+//     if(wins > loses)
+//     {
+//         selIndex = inf;
+//     }
+
+//     inf++;
+// }
 
 
 ///Just this filter 73% 
