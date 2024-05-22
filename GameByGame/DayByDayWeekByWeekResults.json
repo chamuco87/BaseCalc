@@ -1,0 +1,51 @@
+[
+    {
+        "from": "April8th",
+        "to": "April14th",
+        "wins": 5,
+        "pushes": 2,
+        "loses": 0
+    },
+    {
+        "from": "April15th",
+        "to": "April21th",
+        "wins": 4,
+        "pushes": 2,
+        "loses": 1
+    },
+    {
+        "from": "April22th",
+        "to": "April28th",
+        "wins": 2,
+        "pushes": 3,
+        "loses": 2
+    },
+    {
+        "from": "April29th",
+        "to": "May5th",
+        "wins": 6,
+        "pushes": 1,
+        "loses": 0
+    },
+    {
+        "from": "May6th",
+        "to": "May12th",
+        "wins": 4,
+        "pushes": 3,
+        "loses": 0
+    },
+    {
+        "from": "May13th",
+        "to": "May19th",
+        "wins": 5,
+        "pushes": 1,
+        "loses": 1
+    },
+    {
+        "from": "May20th",
+        "to": "May21th",
+        "wins": 1,
+        "pushes": 1,
+        "loses": 0
+    }
+]

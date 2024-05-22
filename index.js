@@ -51,8 +51,8 @@ var teams = [
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
 var datesAnalysis = [
-    {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:20, monthNumber:"05"}
+    //{month:"April", from:8, to:30, monthNumber:"04"}, 
+    {month:"May", from:21, to:21, monthNumber:"05"}
 ];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
@@ -82,8 +82,8 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                 var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
             }
             //await getESPNData(selectedDate);
-            //await getScheduleData(selectedDate);
-            //await ProcessGameByGame(selectedDate);
+            await getScheduleData(selectedDate);
+            await ProcessGameByGame(selectedDate);
             //await getPitcherGameByGame(selectedDate);
             //await getBatterGameByGame(selectedDate);
             //await getBattersData(selectedDate);
@@ -108,12 +108,11 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await getPitcherGameByGame(selectedDate);
             //await getBatterGameByGame(selectedDate)
             //await CalculateWinnersViaFormula(selectedDate)
-    
-            //Algo Evaluation for Past Games
+            ////Algo Evaluation for Past Games
             //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
             //await getESPNData(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
-    
+    //
             await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
             await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
 
@@ -132,8 +131,8 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
     async function ConsolidateSelectionsResults()
     {
-        var sel1 = await load("ResultsStatsWinner", "GameByGame");
-        var sel2 = await load("ResultsStatsWinnerPrototype", "GameByGame");
+        var sel1 = await load("ResultsSeriesWinner", "GameByGame");
+        var sel2 = await load("ResultsFoRmulaWinner", "GameByGame");
 
         // sel1 = sel1.filter(function(item){
         //     return item.handicap != "Pending Game";
@@ -179,7 +178,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                 result.budget = allResults[allResults.length-1].budget;
             }
 
-            var individualBetAmount = result.budget/4;//500;
+            var individualBetAmount = 500;//result.budget/4;
             if(selection1.length >= 1 && selection2.length >= 1)
             {
                 result.budget = result.budget - (individualBetAmount * 2);
@@ -357,19 +356,36 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
         var winninigTeams = [];
         var losingTeams = [];
-
+        var weekResults = {from:"", to:"",wins:0, pushes:0, loses:0};
+        var counter = 0;
+        var weekByWeekResults = [];
         for (let as = 0; as < allResults.length; as++) {
             const day = allResults[as];
-
+            
+            
+            if(day.dayOfWeek == "Mon")
+            {
+                counter = 0;
+                weekResults = {from:day.day, to:"", wins:0, pushes:0, loses:0};
+            }
             if(day.wins == 1)
             {
                 days[day.dayOfWeek].pushes++;
+                weekResults.pushes++;
             }
             else if(day.wins == 2){
                 days[day.dayOfWeek].wins++;
+                weekResults.wins++;
             }
             else{
                 days[day.dayOfWeek].loses++;
+                weekResults.loses++;
+            }
+            counter++;
+            if(day.dayOfWeek == "Sun" || as == (allResults.length-1))
+            {
+                weekResults.to = day.day
+                weekByWeekResults.push(weekResults);
             }
 
             if(day.result1.indexOf("L-") >= 0)
@@ -391,6 +407,10 @@ for (let te = 0; te < datesAnalysis.length; te++) {
        
         await save("DayByDayResultsSumary", resultsStats, function(){}, "replace", "GameByGame");
 
+        await save("DayByDayWeekByWeekResults", weekByWeekResults, function(){}, "replace", "GameByGame");
+        
+
+
     }
 
     async function EvaluateResultsPrototype(date, stringDate)
@@ -399,7 +419,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         var dayOfWeek = d.toDateString().split(" ")[0];
         var games = await load(date+"FinalSelections");
 
-        if(date == "April22th")
+        if(date == "May20th")
         {
             var stopHere = "";
         }
@@ -512,7 +532,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         var handicapF5 = 0;
 
         try{
-            var stats = await load("ResultsStatsWinnerPrototype","GameByGame");
+            var stats = await load("ResultsFormulaWinner","GameByGame");
             var exists = stats.findIndex(x => x.date == date);
             if(exists >=0)
             {
@@ -539,9 +559,33 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         {
                             game.home = "TORBlue Jays";
                         }
-
-                        var stopHere = "";
                     }
+
+                    if(game.away.indexOf("White") >= 0 ||game.home.indexOf("White") >= 0)
+                    {
+                        if(game.away.indexOf("White") >= 0)
+                        {
+                            game.away = "CHIWhite Sox";
+                        }
+
+                        if(game.home.indexOf("White") >= 0)
+                        {
+                            game.home = "CHIWhite Sox";
+                        }
+                    }
+                    if(game.away.indexOf("BOSRed") >= 0 ||game.home.indexOf("BOSRed") >= 0)
+                    {
+                        if(game.away.indexOf("BOSRed") >= 0)
+                        {
+                            game.away = "BOSRed Sox";
+                        }
+
+                        if(game.home.indexOf("BOSRed") >= 0)
+                        {
+                            game.home = "BOSRed Sox";
+                        }
+                    }
+
                     selectionGamesCount++;
                     var gamesDet =[];
                     var isHomeOrAway = "";
@@ -586,7 +630,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
                     game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
-                    if(game.formulaWinner == game.F5Winner)
+                    if(game.F5Winner.indexOf(game.formulaWinner) >= 0)
                     {
                         handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
                     }
@@ -594,7 +638,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
                     }
 
-                    if(game.formulaWinner == game.finalWinner)
+                    if(game.finalWinner.indexOf(game.formulaWinner) >= 0)
                     {
                         handicap += awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
                     }
@@ -602,17 +646,17 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         handicap += awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
                     }
 
-                    game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
-                    game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
-                    game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
-                    game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+                    game.F5FormulaWinner = game.F5Winner.indexOf(game.formulaWinner) >= 0 ? 1 : 0;
+                    game.F5SeriesWinner = game.F5Winner.indexOf(game.seriesWinner) >= 0 ? 1 : 0;
+                    game.F5NextWinner = game.F5Winner.indexOf(game.nextWinners) >= 0 ? 1 : 0;
+                    game.F5OverallWinner = game.F5Winner.indexOf(game.overallWinner) >= 0 ? 1 : 0;
 
-                    game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
-                    game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
-                    game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
-                    game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
+                    game.FinalFormulaWinner = game.finalWinner.indexOf(game.formulaWinner) >= 0 ? 1 : 0;
+                    game.FinalSeriesWinner = game.finalWinner.indexOf(game.seriesWinner) >= 0 ? 1 : 0;
+                    game.FinalNextWinner = game.finalWinner.indexOf(game.nextWinners) >= 0 ? 1 : 0;
+                    game.FinalOverallWinner = game.finalWinner.indexOf(game.overallWinner) >= 0 ? 1 : 0;
 
-                    formulaWinner += game.formulaWinner;
+                    formulaWinner = game.formulaWinner;
                     
                     F5FormulaWinnerSum += game.F5FormulaWinner;
                     F5SeriesWinnerSum += game.F5SeriesWinner;
@@ -661,7 +705,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
         stats.push(stat);
         console.log(stats);
-        await save("ResultsStatsWinnerPrototype", stats, function(){}, "replace", "GameByGame");
+        await save("ResultsFormulaWinner", stats, function(){}, "replace", "GameByGame");
         
         
     }
@@ -678,7 +722,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
             return item.period == 0;         
             });
 
-        if(date == "April18th")
+        if(date == "May20th")
         {
             var stopHere = "";
         }
@@ -811,7 +855,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
         var handicapF5 = 0;
 
         try{
-            var stats = await load("ResultsStatsWinner","GameByGame");
+            var stats = await load("ResultsSeriesWinner","GameByGame");
             var exists = stats.findIndex(x => x.date == date);
             if(exists >=0)
             {
@@ -828,6 +872,44 @@ gameSelected = await sorting(games,"overallDiff", "desc");
             const game = games[index];
             // if(game.formulaWinner == game.seriesWinner)
             // {
+                if(game.away.indexOf("TOR") >= 0 ||game.home.indexOf("TOR") >= 0)
+                {
+                    if(game.away.indexOf("TOR") >= 0)
+                    {
+                        game.away = "TORBlue Jays";
+                    }
+
+                    if(game.home.indexOf("TOR") >= 0)
+                    {
+                        game.home = "TORBlue Jays";
+                    }
+                }
+
+                if(game.away.indexOf("White") >= 0 ||game.home.indexOf("White") >= 0)
+                {
+                    if(game.away.indexOf("White") >= 0)
+                    {
+                        game.away = "CHIWhite Sox";
+                    }
+
+                    if(game.home.indexOf("White") >= 0)
+                    {
+                        game.home = "CHIWhite Sox";
+                    }
+                }
+                if(game.away.indexOf("BOSRed") >= 0 ||game.home.indexOf("BOSRed") >= 0)
+                {
+                    if(game.away.indexOf("BOSRed") >= 0)
+                    {
+                        game.away = "BOSRed Sox";
+                    }
+
+                    if(game.home.indexOf("BOSRed") >= 0)
+                    {
+                        game.home = "BOSRed Sox";
+                    }
+                }
+
                     selectionGamesCount++;
                     var gamesDet =[];
                     var isHomeOrAway = "";
@@ -872,7 +954,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
 
                         game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
-                        if(game.seriesWinner == game.F5Winner)
+                        if(game.seriesWinner.indexOf(game.F5Winner) >= 0)
                         {
                             handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
                         }
@@ -880,7 +962,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                             handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
                         }
 
-                        if(game.seriesWinner == game.finalWinner)
+                        if(game.seriesWinner.indexOf(game.finalWinner) >= 0)
                         {
                             handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
                         }
@@ -888,15 +970,15 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                             handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
                         }
 
-                        game.F5FormulaWinner = game.F5Winner == game.formulaWinner ? 1 : 0;
-                        game.F5SeriesWinner = game.F5Winner == game.seriesWinner ? 1 : 0;
-                        game.F5NextWinner = game.F5Winner == game.nextWinners ? 1 : 0;
-                        game.F5OverallWinner = game.F5Winner == game.overallWinner ? 1 : 0;
+                        game.F5FormulaWinner = game.F5Winner.indexOf(game.formulaWinner) >= 0 ? 1 : 0;
+                        game.F5SeriesWinner = game.F5Winner.indexOf(game.seriesWinner) >= 0  ? 1 : 0;
+                        game.F5NextWinner = game.F5Winner.indexOf(game.nextWinners) >= 0  ? 1 : 0;
+                        game.F5OverallWinner = game.F5Winner.indexOf(game.overallWinner) >= 0  ? 1 : 0;
 
-                        game.FinalFormulaWinner = game.finalWinner == game.formulaWinner ? 1 : 0;
-                        game.FinalSeriesWinner = game.finalWinner == game.seriesWinner ? 1 : 0;
-                        game.FinalNextWinner = game.finalWinner == game.nextWinners ? 1 : 0;
-                        game.FinalOverallWinner = game.finalWinner == game.overallWinner ? 1 : 0;
+                        game.FinalFormulaWinner = game.finalWinner.indexOf(game.formulaWinner) >= 0  ? 1 : 0;
+                        game.FinalSeriesWinner = game.finalWinner.indexOf(game.seriesWinner) >= 0  ? 1 : 0;
+                        game.FinalNextWinner = game.finalWinner.indexOf(game.nextWinners) >= 0  ? 1 : 0;
+                        game.FinalOverallWinner = game.finalWinner.indexOf(game.overallWinner) >= 0  ? 1 : 0;
 
                         seriesWinner = game.seriesWinner;
                         
@@ -947,7 +1029,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
 
         stats.push(stat);
         console.log(stats);
-        await save("ResultsStatsWinner", stats, function(){}, "replace", "GameByGame");
+        await save("ResultsSeriesWinner", stats, function(){}, "replace", "GameByGame");
         
         
     }
@@ -955,7 +1037,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
 
     async function GetResultsSummaryPrototype(){
 
-        var stats = await load("ResultsStatsWinnerPrototype", "GameByGame");
+        var stats = await load("ResultsFormulaWinner", "GameByGame");
         
         stats = stats.filter(function(item){
             return item.handicap != "Pending Game";
@@ -1028,12 +1110,12 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                     DaysInScope : stats.length
             }
             console.log(summary);
-            await save("ResulSummaryPrototype", summary, function(){}, "replace", "GameByGame");
+            await save("ResultsFormulaSummary", summary, function(){}, "replace", "GameByGame");
     }
 
 async function GetResultsSummary(){
 
-    var stats = await load("ResultsStatsWinner", "GameByGame");
+    var stats = await load("ResultsSeriesWinner", "GameByGame");
 
     stats = stats.filter(function(item){
         return item.handicap != "Pending Game";
@@ -1107,7 +1189,7 @@ async function GetResultsSummary(){
                 DaysInScope : stats.length
         }
         console.log(summary);
-        await save("ResulSummary", summary, function(){}, "replace", "GameByGame");
+        await save("ResultSeriesSummary", summary, function(){}, "replace", "GameByGame");
 }
 async function CalculateWinnersViaFormula(date)
 {
