@@ -52,7 +52,7 @@ var teams = [
     try {
 var datesAnalysis = [
     //{month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:21, to:21, monthNumber:"05"}
+    {month:"May", from:22, to:22, monthNumber:"05"}
 ];
 
 for (let te = 0; te < datesAnalysis.length; te++) {
@@ -82,8 +82,8 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                 var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
             }
             //await getESPNData(selectedDate);
-            await getScheduleData(selectedDate);
-            await ProcessGameByGame(selectedDate);
+            //await getScheduleData(selectedDate);
+            //await ProcessGameByGame(selectedDate);
             //await getPitcherGameByGame(selectedDate);
             //await getBatterGameByGame(selectedDate);
             //await getBattersData(selectedDate);
@@ -1073,7 +1073,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                 FinalNextWinnerSum += day.FinalNextWinnerPer; 
                 FinalOverallWinnerSum += day.FinalOverallWinnerPer; 
                 
-                if(day.handicap > 0 )
+                if(day.handicap > 1.5 )
                 {
                     handicapSum += day.handicap;
                     handicapWins++;
@@ -1083,7 +1083,7 @@ gameSelected = await sorting(games,"overallDiff", "desc");
                     handicapLost++;
                 }
 
-                if(day.handicapF5 > 0 )
+                if(day.handicapF5 > 1.5 )
                 {
                     handicapF5Sum += day.handicapF5;
                     handicapF5Wins++;
@@ -1152,7 +1152,7 @@ async function GetResultsSummary(){
             FinalNextWinnerSum += day.FinalNextWinnerPer; 
             FinalOverallWinnerSum += day.FinalOverallWinnerPer; 
             
-            if(day.handicap > 0 )
+            if(day.handicap > 1.5 )
             {
                 handicapSum += day.handicap;
                 handicapWins++;
@@ -1162,7 +1162,7 @@ async function GetResultsSummary(){
                 handicapLost++;
             }
 
-            if(day.handicapF5 > 0 )
+            if(day.handicapF5 > 1.5 )
             {
                 handicapF5Sum += day.handicapF5;
                 handicapF5Wins++;

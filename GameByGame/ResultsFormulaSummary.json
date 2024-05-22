@@ -1,15 +1,1 @@
-{
-    "F5FormulaWinnerPer": 75,
-    "F5SeriesWinnerPer": 72.72727272727273,
-    "F5NextWinnerPer": 52.27272727272727,
-    "F5OverallWinnerPer": 68.18181818181819,
-    "FinalFormulaWinnerPer": 75,
-    "FinalSeriesWinnerPer": 65.9090909090909,
-    "FinalNextWinnerPer": 54.54545454545455,
-    "FinalOverallWinnerPer": 65.9090909090909,
-    "handicapAvg": 3.9393939393939394,
-    "handicapLostAvg": -1.7272727272727273,
-    "handicapF5Avg": 3.1818181818181817,
-    "handicapF5LostAvg": -1.6363636363636365,
-    "DaysInScope": 44
-}
+{"F5FormulaWinnerPer":75,"F5SeriesWinnerPer":72.72727272727273,"F5NextWinnerPer":52.27272727272727,"F5OverallWinnerPer":68.18181818181819,"FinalFormulaWinnerPer":75,"FinalSeriesWinnerPer":65.9090909090909,"FinalNextWinnerPer":54.54545454545455,"FinalOverallWinnerPer":65.9090909090909,"handicapAvg":5.409090909090909,"handicapLostAvg":-0.36363636363636365,"handicapF5Avg":3.769230769230769,"handicapF5LostAvg":-0.6111111111111112,"DaysInScope":44}
