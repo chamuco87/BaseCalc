@@ -53,8 +53,8 @@ var teams = [
     //let driver = await new Builder().forBrowser(Browser.CHROME).build();
     try {
 var datesAnalysis = [
-    {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:24, monthNumber:"05"}
+    //{month:"April", from:8, to:30, monthNumber:"04"}, 
+    {month:"May", from:25, to:25, monthNumber:"05"}
 ];
 
 //await CleanUpGeneralStats("May15th")
@@ -153,9 +153,6 @@ for (let te = 0; te < datesAnalysis.length; te++) {
     //
             //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
             //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
-            //await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
-            //await ProcessGeneralStats(selectedDate);
-            //await GetBetterPatterns(selectedDate);
             await GetPicks(selectedDate);
 
             }
@@ -246,7 +243,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
             var record = {date: date, maxProperty:pattern.maxProperty, selectedWinner:selectedWinner, chances: pattern.maxValue, handicapF5: pattern.handicapF5, handicap: pattern.handicap };
             dayResults.push(record);
-            //console.log(pattern.maxProperty+ ": " + selectedWinner + " " + pattern.maxValue+"%, handicapF5: " +pattern.handicapF5+ " handicap: " +pattern.handicap);
+            console.log(pattern.maxProperty+ ": " + selectedWinner + " " + pattern.maxValue+"%, handicapF5: " +pattern.handicapF5+ " handicap: " +pattern.handicap);
             
         }
 
