@@ -54,7 +54,7 @@ var teams = [
     try {
 var datesAnalysis = [
     //{month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:25, to:25, monthNumber:"05"}
+    {month:"May", from:26, to:26, monthNumber:"05"}
 ];
 
 //await CleanUpGeneralStats("May15th")
@@ -176,7 +176,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
         
         patterns = patterns.filter(function(item){
-            return item.maxValue >= 75;
+            return item.maxValue >= 55;
         });
         try{
             var expectedResults = await load("ExpectedResults","GameByGame");
@@ -243,7 +243,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
             var record = {date: date, maxProperty:pattern.maxProperty, selectedWinner:selectedWinner, chances: pattern.maxValue, handicapF5: pattern.handicapF5, handicap: pattern.handicap };
             dayResults.push(record);
-            console.log(pattern.maxProperty+ ": " + selectedWinner + " " + pattern.maxValue+"%, handicapF5: " +pattern.handicapF5+ " handicap: " +pattern.handicap);
+            //console.log(pattern.maxProperty+ ": " + selectedWinner + " " + pattern.maxValue+"%, handicapF5: " +pattern.handicapF5+ " handicap: " +pattern.handicap);
             
         }
 
