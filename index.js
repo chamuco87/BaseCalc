@@ -54,8 +54,12 @@ var teams = [
     try {
 var datesAnalysis = [
     {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:28, monthNumber:"05"}
+    {month:"May", from:1, to:29, monthNumber:"05"}
 ];
+
+var dayResultsWins = 0;
+var resultsCount = 0;
+
 
 //await CleanUpGeneralStats("May15th")
 
@@ -149,16 +153,17 @@ for (let te = 0; te < datesAnalysis.length; te++) {
             //await getESPNData(selectedDate);
             //await CalculateWinnersViaFormula(selectedDate); 
     //
-            //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
-            //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
+           //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
+           //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
             await GetPicks(selectedDate);
 
             }
         }
             
-            //await GetResultsSummary();
-            //await GetResultsSummaryPrototype()
-            //await ConsolidateSelectionsResults();
+           //await GetResultsSummary();
+           //await GetResultsSummaryPrototype()
+           //await ConsolidateSelectionsResults();
+           //await ProcessFinalPicks();
         
     } 
     catch(Ex){
@@ -167,11 +172,124 @@ for (let te = 0; te < datesAnalysis.length; te++) {
       await driver.quit();
     }
 
+    async function ProcessFinalPicks()
+    {
+        var selections = await load("FinalPicks","GameByGame");
+        var finalStats = [];
+        function countUnique(iterable) {
+            return new Set(iterable);
+          }
+          
+        var uniqueAppearences = countUnique(selections.map(function(item){return item.appearances}));
+
+        for (const value of uniqueAppearences) {
+            const appearance = value;
+            var scope = selections.filter(function(item){
+                return item.appearances == appearance ;
+            });
+            var stopHere = "";
+            var sumWins = 0;
+            var removeCount = 0;
+            for (let index = 0; index < scope.length; index++) {
+                const game = scope[index];
+                if(game.isAWin == 0 || game.isAWin ==1)
+                {
+                    sumWins += game.isAWin;
+                }
+                else{
+                    removeCount++;
+                }
+            }
+            finalStats.push({appearances:appearance, times:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
+        }
+
+        var sortedChances = await sorting(finalStats, "times", "desc");
+
+        var uniqueDates = countUnique(selections.map(function(item){return item.date}));
+
+        for (const value of uniqueDates) {
+            const date = value;
+            var scope = selections.filter(function(item){
+                return item.date == date ;
+            });
+            var stopHere = "";
+            var sumWins = 0;
+            var removeCount = 0;
+            for (let index = 0; index < scope.length; index++) {
+                const game = scope[index];
+                if(game.isAWin == 0 || game.isAWin ==1)
+                {
+                    sumWins += game.isAWin;
+                }
+                else{
+                    removeCount++;
+                }
+            }
+            finalStats.push({date:date, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
+        }
+
+        var sortedByDate = await sorting(finalStats, "date", "desc");
+
+        var uniqueTeams = countUnique(selections.map(function(item){return item.selectedTeam}));
+
+        for (const value of uniqueTeams) {
+            const team = value;
+            var scope = selections.filter(function(item){
+                return item.selectedTeam.indexOf(team) >= 0;
+            });
+            var stopHere = "";
+            var sumWins = 0;
+            var removeCount = 0;
+            for (let index = 0; index < scope.length; index++) {
+                const game = scope[index];
+                if(game.isAWin == 0 || game.isAWin ==1)
+                {
+                    sumWins += game.isAWin;
+                }
+                else{
+                    removeCount++;
+                }
+            }
+            finalStats.push({team:team, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
+        }
+
+        var sortedByTeam = await sorting(finalStats, "team", "desc");
+
+
+        var uniqueCovers = countUnique(selections.map(function(item){return Math.round(item.coversPer)}));
+
+        for (const value of uniqueCovers) {
+            const coverPer = value;
+            var scope = selections.filter(function(item){
+                return Math.round(item.coversPer) == coverPer;
+            });
+            var stopHere = "";
+            var sumWins = 0;
+            var removeCount = 0;
+            for (let index = 0; index < scope.length; index++) {
+                const game = scope[index];
+                if(game.isAWin == 0 || game.isAWin ==1)
+                {
+                    sumWins += game.isAWin;
+                }
+                else{
+                    removeCount++;
+                }
+            }
+            finalStats.push({coverPer:coverPer, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
+        }
+
+        var sortedByCovers = await sorting(finalStats, "coverPer", "desc");
+        await save("FinalPicksPercentages", finalStats, function(){}, "replace", "GameByGame");
+        var stopHere = "";
+    }
+
     async function GetPicks(date)
     {
         var patterns = await load("GeneralStatsPerSummary" ,"GameByGame");
         var games = await load(date+"FinalSelections");
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
+        var finalPicksPercentages = await load("FinalPicksPercentages","GameByGame");
         
         patterns = patterns.filter(function(item){
             return item.maxValue >= 0;
@@ -324,8 +442,38 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                         });
                         if(isProcessed.length == 0)
                         {
-                            console.log("date: "+date +" team: "+ team + " " +averagePer+"% ("+appearances+"), totalC:"+((averagePer+coversPer)/2) +", bet: "+scope[0].maxProperty+" handicapF5: " + handicapF5+ " handicap: "+ handicap + " coversPer: "+coversPer)
-                            dayPicks.push({date: date, selectedTeam: team, algoChances:averagePer, totalChances:((averagePer+coversPer)/2), appearances:appearances, maxBet: scope[0].maxProperty, handicapF5:handicapF5, handicap:handicap, coversPer:coversPer});
+                            var totalSum = 0;
+                            var totalStats = 0;
+                            var appearanceRecord = finalPicksPercentages.filter(function(item){
+                                return item.appearances == appearances;
+                            });
+                            if(appearanceRecord.length > 0)
+                            {
+                                totalSum += appearanceRecord[0].winPercentage;
+                                totalStats++;
+                            } 
+
+                            var teamRecord = finalPicksPercentages.filter(function(item){
+                                return item.team == team;
+                            });
+                            if(teamRecord.length > 0)
+                            {
+                                totalSum += teamRecord[0].winPercentage;
+                                totalStats++;
+                            } 
+
+                            var coversRecord = finalPicksPercentages.filter(function(item){
+                                return item.coverPer == Math.round(coversPer);
+                            });
+                            if(coversRecord.length > 0)
+                            {
+                                totalSum += coversRecord[0].winPercentage;
+                                totalStats++;
+                            } 
+                            var realPercentage = ((totalSum)/totalStats);
+                            var gameResult = await GetResultDetails(date, {away: gameSele.away, home: gameSele.home}, team);
+                            //console.log("date: "+date +" team: ("+ gameResult.FinalWinner+")"+ team + " " +realPercentage+"% ("+appearances+"), totalC:"+((averagePer+coversPer)/2) +", bet: "+scope[0].maxProperty+" handicapF5: " + handicapF5+ " handicap: "+ handicap + " coversPer: "+coversPer);
+                            dayPicks.push({date: date, selectedTeam: team, realPercentage:realPercentage ,algoChances:averagePer, totalChances:((averagePer+coversPer)/2), appearances:appearances, maxBet: scope[0].maxProperty, handicapF5:handicapF5, handicap:handicap, coversPer:coversPer, isAWin:gameResult.FinalWinner, handicap: gameResult.handicap});
                         }
                     }
                     else{
@@ -337,8 +485,27 @@ for (let te = 0; te < datesAnalysis.length; te++) {
 
         if(dayPicks.length > 0)
         {
-            var sortedDayPicks = await sorting(dayPicks, "appearances", "desc")
-            finalPicks = finalPicks.concat(sortedDayPicks);
+            var sortedDayPicks = dayPicks.filter(function(item){
+                return item.realPercentage >=  65;
+            });
+            var dayWins = 0;
+            var numberPicks = 0;
+            sortedDayPicks = await sorting(sortedDayPicks, "realPercentage", "desc");
+            for (let gst = 0; gst < sortedDayPicks.length; gst++) {
+                const pick = sortedDayPicks[gst];
+                dayResultsWins += pick.isAWin == 0 || pick.isAWin == 1 ? pick.isAWin : 0;
+                dayWins += pick.isAWin == 0 || pick.isAWin == 1 ? pick.isAWin : 0;
+                numberPicks++;
+                resultsCount++;
+                //console.log("date: "+pick.date +" team: ("+ pick.isAWin+")"+ pick.selectedTeam + " " +pick.realPercentage+"% ("+pick.appearances+"), totalC:"+pick.totalChances +", bet: "+pick.maxBet+" handicapF5: " + pick.handicapF5+ " handicap: "+ pick.handicap + " coversPer: "+pick.coversPer);
+                
+            }
+            if(sortedDayPicks.length > 0)
+            {
+                console.log("date:"+date+" ,dayPicks: "+numberPicks+" ,dayWins:"+dayWins+" , dayPercentage: "+ ((dayWins*100)/numberPicks)+" ,winPercentageOverall: "+((dayResultsWins*100)/resultsCount));
+                finalPicks = finalPicks.concat(sortedDayPicks);
+            }
+            
             await save("FinalPicks", finalPicks, function(){}, "replace", "GameByGame");
         }
         else{
@@ -758,6 +925,114 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         
 
 
+    }
+
+    async function GetResultDetails(date, game, expectedWinner)
+    {
+
+        if(game.away.indexOf("TOR") >= 0 ||game.home.indexOf("TOR") >= 0)
+            {
+                if(game.away.indexOf("TOR") >= 0)
+                {
+                    game.away = "TORBlue Jays";
+                }
+
+                if(game.home.indexOf("TOR") >= 0)
+                {
+                    game.home = "TORBlue Jays";
+                }
+            }
+
+            if(game.away.indexOf("White") >= 0 ||game.home.indexOf("White") >= 0)
+            {
+                if(game.away.indexOf("White") >= 0)
+                {
+                    game.away = "CHIWhite Sox";
+                }
+
+                if(game.home.indexOf("White") >= 0)
+                {
+                    game.home = "CHIWhite Sox";
+                }
+            }
+            if(game.away.indexOf("BOSRed") >= 0 ||game.home.indexOf("BOSRed") >= 0)
+            {
+                if(game.away.indexOf("BOSRed") >= 0)
+                {
+                    game.away = "BOSRed Sox";
+                }
+
+                if(game.home.indexOf("BOSRed") >= 0)
+                {
+                    game.home = "BOSRed Sox";
+                }
+            }
+
+            var gamesDet =[];
+            var isHomeOrAway = "";
+            try{
+                var gamesDet = await load("Games"+game.away+"Details", "GameByGame");
+                isHomeOrAway = "away";
+            }
+            catch{
+                var gamesDet = await load("Games"+game.home+"Details", "GameByGame");
+                isHomeOrAway = "home";
+            }
+
+            var fullMonth = date.split(/[0-9]/)[0];
+            var targetMonth = fullMonth.substring(0,3);
+            var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+            var datee = targetMonth + " " +targetDate;
+            var targetGame = gamesDet.games.filter(function(item){
+                var dat = item.date.split(" ")[1] + " " + item.date.split(" ")[2];
+                
+                return dat.toLowerCase() == datee.toLocaleLowerCase(); 
+            })[0];
+        if(targetGame)
+        {
+            var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+            var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+            var awayAfter5Runs = awayTotalRuns - awayF5Runs;
+
+            var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+            var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+            var homeAfter5Runs = homeTotalRuns - homeF5Runs;
+
+
+            game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+            game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+            if(game.F5Winner.indexOf(expectedWinner) >= 0)
+            {
+                game.handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
+            }
+            else{
+                game.handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
+            }
+
+            if(game.finalWinner.indexOf(expectedWinner) >= 0)
+            {
+                game.handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+            }
+            else{
+                game.handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
+            }
+
+            game.F5Winner = game.F5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+
+            game.FinalWinner = game.finalWinner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+            
+        }
+        return game;
     }
 
     async function EvaluateResultsPrototype(date, stringDate)
