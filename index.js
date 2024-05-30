@@ -50,120 +50,58 @@ var teams = [
               Options.chrome()
                //.setPageLoadStrategy('none')
           ).build()
-    //let driver = await new Builder().forBrowser(Browser.CHROME).build();
-    try {
-var datesAnalysis = [
-    {month:"April", from:8, to:30, monthNumber:"04"}, 
-    {month:"May", from:1, to:29, monthNumber:"05"}
-];
-
-var dayResultsWins = 0;
-var resultsCount = 0;
 
 
-//await CleanUpGeneralStats("May15th")
 
-for (let te = 0; te < datesAnalysis.length; te++) {
-    const mmonth = datesAnalysis[te];
+try {
+    var fullDatesAnalysis = [
+        {month:"April", from:8, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:29, monthNumber:"05"}
+    ];
+
+    var singleDayAnalysis = [ 
+        {month:"May", from:29, to:29, monthNumber:"05"}
+    ];
+    
+    //Steps
+    /// 1.Daily Updates
+    ///     *    
+                    //await getScheduleData(singleDayAnalysis.month+singleDayAnalysis.to+"th");
+                    //await ProcessGameByGame();
+                    //await getPitcherGameByGame();
+                    //await getBatterGameByGame();
+
+    /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
+    ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
+    ///     *    
+                    //await CleanUpAndGenerateStats(fullDatesAnalysis);
+
+    /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
+    ///     *    
+                    //await ProcessDailyGames(singleDayAnalysis);
+
+    //  4. Calculate Picks(can be individualDate or allDays)
+    ///     *
+                    
+                    await GetPicksGames(fullDatesAnalysis);
+                    await ProcessFinalPicks();
+                    await GetPicksGames(fullDatesAnalysis);
+
+    //  5. Check for results of the selected picks if they already played
+    ///     *
+                    //await GetResultsSummary();
+                    //await GetResultsSummaryPrototype();
+                    //await ConsolidateSelectionsResults();
+
+    //  6. * Optional - Process old date with no json initial data through the algorithm(specify old/passed date)
+    ///     *
+                //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                //await getESPNData(selectedDate);
+                //await CalculateWinnersViaFormula(selectedDate);     
+
     
 
-            for (let index =mmonth.from; index <= mmonth.to; index++)
-            {
-            var selectedDate = mmonth.month+ index;
-            if(index == 1)
-            {
-                selectedDate += "st";
-            }
-            else if(index == 3)
-            {
-                selectedDate += "rd";
-
-            }
-            else{
-                selectedDate += "th";
-            }
-            if(index <10)
-            {
-                var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
-            }
-            else{
-                var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
-            }
-
-            //await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
-            //await ProcessGeneralStats(selectedDate);
-            //await GetBetterPatterns(selectedDate);
-
-            }
-        }
-
-        for (let te = 0; te < datesAnalysis.length; te++) {
-        const mmonth = datesAnalysis[te];
     
-
-            for (let index =mmonth.from; index <= mmonth.to; index++)
-            {
-            var selectedDate = mmonth.month+ index;
-            if(index == 1)
-            {
-                selectedDate += "st";
-            }
-            else if(index == 3)
-            {
-                selectedDate += "rd";
-
-            }
-            else{
-                selectedDate += "th";
-            }
-            if(index <10)
-            {
-                var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
-            }
-            else{
-                var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
-            }
-            //await getESPNData(selectedDate);
-            //await getScheduleData(selectedDate);
-            //await ProcessGameByGame(selectedDate);
-            //await getPitcherGameByGame(selectedDate);
-            //await getBatterGameByGame(selectedDate);
-            //await getBattersData(selectedDate);
-            //await getBestScoringTeamsByBatting(selectedDate);
-            //await getBestHittingTeamsByBatting(selectedDate);
-            //await getAllPitchersData(selectedDate);
-            //await getBestStartingPitchersTeams(selectedDate);
-            //await getBestRelievingPitchersTeams(selectedDate);
-            //await getBestOverallPitchersTeams(selectedDate);
-            //
-            //await getMoreWininigTeams(selectedDate);
-            //await getMoreScoringTeams(selectedDate);
-            //await getMoreReceivingTeams(selectedDate);
-            //await evaluateGames(selectedDate);
-            //await sortBetterAvgs(selectedDate);
-            //await filterConsistentPicks(selectedDate)
-            //
-            //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-            //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-            //await getCoversWinPercentages(selectedDate, descriptiveDate);
-            //await consolidateAlgorithmResults(selectedDate)
-            //await CalculateWinnersViaFormula(selectedDate)
-            ////Algo Evaluation for Past Games
-            //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-            //await getESPNData(selectedDate);
-            //await CalculateWinnersViaFormula(selectedDate); 
-    //
-           //await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
-           //await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
-            await GetPicks(selectedDate);
-
-            }
-        }
-            
-           //await GetResultsSummary();
-           //await GetResultsSummaryPrototype()
-           //await ConsolidateSelectionsResults();
-           //await ProcessFinalPicks();
         
     } 
     catch(Ex){
@@ -172,116 +110,218 @@ for (let te = 0; te < datesAnalysis.length; te++) {
       await driver.quit();
     }
 
+    async function ProcessDailyGames(datesAnalysis){
+        for (let te = 0; te < datesAnalysis.length; te++) {
+            const mmonth = datesAnalysis[te];
+        
+    
+                for (let index =mmonth.from; index <= mmonth.to; index++)
+                {
+                var selectedDate = mmonth.month+ index;
+                if(index == 1)
+                {
+                    selectedDate += "st";
+                }
+                else if(index == 3)
+                {
+                    selectedDate += "rd";
+    
+                }
+                else{
+                    selectedDate += "th";
+                }
+                if(index <10)
+                {
+                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                }
+                else{
+                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
+                }
+                await getESPNData(selectedDate);
+                await getScheduleData(selectedDate);
+                await ProcessGameByGame(selectedDate);
+                await getPitcherGameByGame(selectedDate);
+                await getBatterGameByGame(selectedDate);
+                await getBattersData(selectedDate);
+                await getBestScoringTeamsByBatting(selectedDate);
+                await getBestHittingTeamsByBatting(selectedDate);
+                await getAllPitchersData(selectedDate);
+                await getBestStartingPitchersTeams(selectedDate);
+                await getBestRelievingPitchersTeams(selectedDate);
+                await getBestOverallPitchersTeams(selectedDate);
+                
+                await getMoreWininigTeams(selectedDate);
+                await getMoreScoringTeams(selectedDate);
+                await getMoreReceivingTeams(selectedDate);
+                await evaluateGames(selectedDate);
+                await sortBetterAvgs(selectedDate);
+                await filterConsistentPicks(selectedDate)
+                
+                await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                await getCoversWinPercentages(selectedDate, descriptiveDate);
+                await consolidateAlgorithmResults(selectedDate)
+                await CalculateWinnersViaFormula(selectedDate)
+                
+                }
+            }
+    }
+
+    async function GetPicksGames(datesAnalysis){
+        dayResultsWins = 0;
+        resultsCount = 0;
+        for (let te = 0; te < datesAnalysis.length; te++) {
+            const mmonth = datesAnalysis[te];
+        
+    
+                for (let index =mmonth.from; index <= mmonth.to; index++)
+                {
+                var selectedDate = mmonth.month+ index;
+                if(index == 1)
+                {
+                    selectedDate += "st";
+                }
+                else if(index == 3)
+                {
+                    selectedDate += "rd";
+    
+                }
+                else{
+                    selectedDate += "th";
+                }
+                if(index <10)
+                {
+                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                }
+                else{
+                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
+                }
+
+                await EvaluateResults(selectedDate,mmonth.month+" "+index+", 2024" );
+                await EvaluateResultsPrototype(selectedDate,mmonth.month+" "+index+", 2024" );
+                await GetPicks(selectedDate);
+    
+                }
+            }
+    }
+
     async function ProcessFinalPicks()
     {
         var selections = await load("FinalPicks","GameByGame");
-        var finalStats = [];
-        function countUnique(iterable) {
-            return new Set(iterable);
-          }
-          
-        var uniqueAppearences = countUnique(selections.map(function(item){return item.appearances}));
-
-        for (const value of uniqueAppearences) {
-            const appearance = value;
-            var scope = selections.filter(function(item){
-                return item.appearances == appearance ;
-            });
-            var stopHere = "";
-            var sumWins = 0;
-            var removeCount = 0;
-            for (let index = 0; index < scope.length; index++) {
-                const game = scope[index];
-                if(game.isAWin == 0 || game.isAWin ==1)
-                {
-                    sumWins += game.isAWin;
-                }
-                else{
-                    removeCount++;
-                }
+        if(selections.length > 0)
+        {
+            var finalStats = [];
+            function countUnique(iterable) {
+                return new Set(iterable);
             }
-            finalStats.push({appearances:appearance, times:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
-        }
+            
+            var uniqueAppearences = countUnique(selections.map(function(item){return item.appearances}));
 
-        var sortedChances = await sorting(finalStats, "times", "desc");
-
-        var uniqueDates = countUnique(selections.map(function(item){return item.date}));
-
-        for (const value of uniqueDates) {
-            const date = value;
-            var scope = selections.filter(function(item){
-                return item.date == date ;
-            });
-            var stopHere = "";
-            var sumWins = 0;
-            var removeCount = 0;
-            for (let index = 0; index < scope.length; index++) {
-                const game = scope[index];
-                if(game.isAWin == 0 || game.isAWin ==1)
-                {
-                    sumWins += game.isAWin;
+            for (const value of uniqueAppearences) {
+                const appearance = value;
+                var scope = selections.filter(function(item){
+                    return item.appearances == appearance ;
+                });
+                var stopHere = "";
+                var sumWins = 0;
+                var removeCount = 0;
+                for (let index = 0; index < scope.length; index++) {
+                    const game = scope[index];
+                    if(game.isAWin == 0 || game.isAWin ==1)
+                    {
+                        sumWins += game.isAWin;
+                    }
+                    else{
+                        removeCount++;
+                    }
                 }
-                else{
-                    removeCount++;
-                }
+                finalStats.push({appearances:appearance, times:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
             }
-            finalStats.push({date:date, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
-        }
 
-        var sortedByDate = await sorting(finalStats, "date", "desc");
+            var sortedChances = await sorting(finalStats, "times", "desc");
 
-        var uniqueTeams = countUnique(selections.map(function(item){return item.selectedTeam}));
+            var uniqueDates = countUnique(selections.map(function(item){return item.date}));
 
-        for (const value of uniqueTeams) {
-            const team = value;
-            var scope = selections.filter(function(item){
-                return item.selectedTeam.indexOf(team) >= 0;
-            });
-            var stopHere = "";
-            var sumWins = 0;
-            var removeCount = 0;
-            for (let index = 0; index < scope.length; index++) {
-                const game = scope[index];
-                if(game.isAWin == 0 || game.isAWin ==1)
-                {
-                    sumWins += game.isAWin;
+            for (const value of uniqueDates) {
+                const date = value;
+                var scope = selections.filter(function(item){
+                    return item.date == date ;
+                });
+                var stopHere = "";
+                var sumWins = 0;
+                var removeCount = 0;
+                for (let index = 0; index < scope.length; index++) {
+                    const game = scope[index];
+                    if(game.isAWin == 0 || game.isAWin ==1)
+                    {
+                        sumWins += game.isAWin;
+                    }
+                    else{
+                        removeCount++;
+                    }
                 }
-                else{
-                    removeCount++;
-                }
+                finalStats.push({date:date, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
             }
-            finalStats.push({team:team, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
-        }
 
-        var sortedByTeam = await sorting(finalStats, "team", "desc");
+            var sortedByDate = await sorting(finalStats, "date", "desc");
 
+            var uniqueTeams = countUnique(selections.map(function(item){return item.selectedTeam}));
 
-        var uniqueCovers = countUnique(selections.map(function(item){return Math.round(item.coversPer)}));
-
-        for (const value of uniqueCovers) {
-            const coverPer = value;
-            var scope = selections.filter(function(item){
-                return Math.round(item.coversPer) == coverPer;
-            });
-            var stopHere = "";
-            var sumWins = 0;
-            var removeCount = 0;
-            for (let index = 0; index < scope.length; index++) {
-                const game = scope[index];
-                if(game.isAWin == 0 || game.isAWin ==1)
-                {
-                    sumWins += game.isAWin;
+            for (const value of uniqueTeams) {
+                const team = value;
+                var scope = selections.filter(function(item){
+                    return item.selectedTeam.indexOf(team) >= 0;
+                });
+                var stopHere = "";
+                var sumWins = 0;
+                var removeCount = 0;
+                for (let index = 0; index < scope.length; index++) {
+                    const game = scope[index];
+                    if(game.isAWin == 0 || game.isAWin ==1)
+                    {
+                        sumWins += game.isAWin;
+                    }
+                    else{
+                        removeCount++;
+                    }
                 }
-                else{
-                    removeCount++;
-                }
+                finalStats.push({team:team, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
             }
-            finalStats.push({coverPer:coverPer, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
-        }
 
-        var sortedByCovers = await sorting(finalStats, "coverPer", "desc");
-        await save("FinalPicksPercentages", finalStats, function(){}, "replace", "GameByGame");
-        var stopHere = "";
+            var sortedByTeam = await sorting(finalStats, "team", "desc");
+
+
+            var uniqueCovers = countUnique(selections.map(function(item){return Math.round(item.coversPer)}));
+
+            for (const value of uniqueCovers) {
+                const coverPer = value;
+                var scope = selections.filter(function(item){
+                    return Math.round(item.coversPer) == coverPer;
+                });
+                var stopHere = "";
+                var sumWins = 0;
+                var removeCount = 0;
+                for (let index = 0; index < scope.length; index++) {
+                    const game = scope[index];
+                    if(game.isAWin == 0 || game.isAWin ==1)
+                    {
+                        sumWins += game.isAWin;
+                    }
+                    else{
+                        removeCount++;
+                    }
+                }
+                finalStats.push({coverPer:coverPer, betsAmount:scope.length, winPercentage: ((sumWins*100)/(scope.length - removeCount))});
+            }
+
+            var sortedByCovers = await sorting(finalStats, "coverPer", "desc");
+            await save("FinalPicksPercentages", finalStats, function(){}, "replace", "GameByGame");
+            var stopHere = "";
+        }
+        else{
+
+            throw new Error("No final Selections Found");
+        }
     }
 
     async function GetPicks(date)
@@ -434,8 +474,8 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                             opponentPer = coversPercentagesData[0].coversAwayWinPercentage;
                         }
                     }
-
-                    if(!(homeToWin.length >=1 && awayToWin.length >= 1) && ((appearances > 1 || averagePer > 75) && coversPer > opponentPer))
+                    //!(homeToWin.length >=1 && awayToWin.length >= 1) &&
+                    if( ((appearances > 1 || averagePer > 75) && coversPer > opponentPer))
                     {
                         var isProcessed = finalPicks.filter(function(item){
                             return item.selectedTeam == team && item.date == date;
@@ -486,7 +526,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         if(dayPicks.length > 0)
         {
             var sortedDayPicks = dayPicks.filter(function(item){
-                return item.realPercentage >=  65;
+                return item.realPercentage >=  70;
             });
             var dayWins = 0;
             var numberPicks = 0;
@@ -497,16 +537,19 @@ for (let te = 0; te < datesAnalysis.length; te++) {
                 dayWins += pick.isAWin == 0 || pick.isAWin == 1 ? pick.isAWin : 0;
                 numberPicks++;
                 resultsCount++;
-                //console.log("date: "+pick.date +" team: ("+ pick.isAWin+")"+ pick.selectedTeam + " " +pick.realPercentage+"% ("+pick.appearances+"), totalC:"+pick.totalChances +", bet: "+pick.maxBet+" handicapF5: " + pick.handicapF5+ " handicap: "+ pick.handicap + " coversPer: "+pick.coversPer);
+                console.log("date: "+pick.date +" team: ("+ pick.isAWin+")"+ pick.selectedTeam + " " +pick.realPercentage+"% ("+pick.appearances+"), totalC:"+pick.totalChances +", bet: "+pick.maxBet+" handicapF5: " + pick.handicapF5+ " handicap: "+ pick.handicap + " coversPer: "+pick.coversPer);
                 
             }
             if(sortedDayPicks.length > 0)
             {
                 console.log("date:"+date+" ,dayPicks: "+numberPicks+" ,dayWins:"+dayWins+" , dayPercentage: "+ ((dayWins*100)/numberPicks)+" ,winPercentageOverall: "+((dayResultsWins*100)/resultsCount));
-                finalPicks = finalPicks.concat(sortedDayPicks);
+                
             }
-            
-            await save("FinalPicks", finalPicks, function(){}, "replace", "GameByGame");
+            if(dayPicks.length > 0)
+            {
+                finalPicks = finalPicks.concat(dayPicks);
+                await save("FinalPicks", finalPicks, function(){}, "replace", "GameByGame");
+            }
         }
         else{
             var stopHere = "";
@@ -1045,7 +1088,7 @@ for (let te = 0; te < datesAnalysis.length; te++) {
         {
             var stopHere = "";
         }
-        console.log(date);
+        //console.log(date);
         
         // var homeSortedGames = await sorting(games,"homeNextWinningPercentage", "desc");
         // var awaySortedGames = await sorting(games,"awayNextWinningPercentage", "desc");
@@ -1293,7 +1336,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                     //await save(date+"FinalSelections", games, function(){}, "replace");
                 }
                 else{
-                    console.log(date + "Winner = "+ game.formulaWinner);
+                    //console.log(date + "Winner = "+ game.formulaWinner);
                     formulaWinner = game.formulaWinner;
                     F5FormulaWinnerSum = 0;
                     F5SeriesWinnerSum = 0;
@@ -1326,14 +1369,15 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         }
 
         stats.push(stat);
-        console.log(stats);
+        //console.log(stats);
         await save("ResultsFormulaWinner", stats, function(){}, "replace", "GameByGame");
         
         
     }
 
-    async function CleanUpGeneralStats(date)
+    async function CleanUpAndGenerateStats(datesAnalysis)
     {
+        var date = "May15th";
 
         var games = await load(date+"FinalSelections");
 
@@ -1364,6 +1408,42 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
         }
         await save("ExpectedResults", generalStats, function(){}, "replace", "GameByGame");
         await save("FinalPicks", generalStats, function(){}, "replace", "GameByGame");
+
+        for (let te = 0; te < datesAnalysis.length; te++) {
+            const mmonth = datesAnalysis[te];
+            
+        
+                    for (let index =mmonth.from; index <= mmonth.to; index++)
+                    {
+                    var selectedDate = mmonth.month+ index;
+                    if(index == 1)
+                    {
+                        selectedDate += "st";
+                    }
+                    else if(index == 3)
+                    {
+                        selectedDate += "rd";
+        
+                    }
+                    else{
+                        selectedDate += "th";
+                    }
+                    if(index <10)
+                    {
+                        var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                    }
+                    else{
+                        var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
+                    }
+        
+                    await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
+                    await ProcessGeneralStats(selectedDate);
+                    await GetBetterPatterns(selectedDate);
+        
+                    }
+                }
+
+                
     }
 
     async function EvaluateAllPatterns(date, stringDate)
@@ -1736,7 +1816,7 @@ gameSelected = await sorting(games, selectedProperty, orderByDirection);
         {
             var stopHere = "";
         }
-        console.log(date);
+        //console.log(date);
         
         // var homeSortedGames = await sorting(games,"homeNextWinningPercentage", "desc");
         // var awaySortedGames = await sorting(games,"awayNextWinningPercentage", "desc");
@@ -2005,7 +2085,7 @@ gameSelected = await sorting(games, selectedProperty, orderByDirection);
                         //await save(date+"FinalSelections", games, function(){}, "replace");
                 }
                 else{
-                    console.log(date + "Winner = "+ game.seriesWinner);
+                    //console.log(date + "Winner = "+ game.seriesWinner);
                     seriesWinner = game.seriesWinner;
                     F5FormulaWinnerSum = 0;
                     F5SeriesWinnerSum = 0;
@@ -2038,7 +2118,7 @@ gameSelected = await sorting(games, selectedProperty, orderByDirection);
         }
 
         stats.push(stat);
-        console.log(stats);
+        //console.log(stats);
         await save("ResultsSeriesWinner", stats, function(){}, "replace", "GameByGame");
         
         
@@ -2717,9 +2797,9 @@ async function CalculateFactors(pitcher, batter)
 
 }
 
-async function getPitcherGameByGame(date)
+async function getPitcherGameByGame()
 {
-    var teamsResultsData = await load(date+"TeamSchedules");
+    var teamsResultsData = await GetLatestTeamSchedules();
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
@@ -2801,9 +2881,9 @@ async function getPitcherGameByGame(date)
     }
 }
 
-async function getBatterGameByGame(date)
+async function getBatterGameByGame()
 {
-    var teamsResultsData = await load(date+"TeamSchedules");
+    var teamsResultsData = await GetLatestTeamSchedules();
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
@@ -2911,9 +2991,9 @@ async function getBatterGameByGame(date)
     }
 }
 
-async function ProcessGameByGame(date)
+async function ProcessGameByGame()
 {
-    var teamsResultsData = await load(date+"TeamSchedules");
+    var teamsResultsData = await GetLatestTeamSchedules();
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
@@ -3650,14 +3730,10 @@ async function PopulatePitcherData(date)
         }
 }
 
-async function GetLatestTeamSchedules(date)
+async function GetLatestTeamSchedules(date = null)
 {
     var dateparts = Date().split(" ");
     var today = dateparts[1]+dateparts[2];
-
-    var fullMonth = date.split(/[0-9]/)[0];
-    var targetMonth = fullMonth.substring(0,3);
-    var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
 
     try{
         var teamsSchedule = await load(today+"th"+"TeamSchedules");
@@ -3668,45 +3744,65 @@ async function GetLatestTeamSchedules(date)
         }
         catch{
             try{
-                await getScheduleData(selectedDate);
-                var teamsSchedule = await load(selectedDate+"TeamSchedules");
+                var teamsSchedule = await load(today+"nd"+"TeamSchedules");
             }
             catch{
-                var stopHere = "";
+                try{
+                    var teamsSchedule = await load(today+"st"+"TeamSchedules");
+                }
+                catch{
+                    try{
+                        await getScheduleData(today);
+                        var teamsSchedule = await load(today+"TeamSchedules");
+                    }
+                    catch{
+                        var stopHere = "";
+                    }
+                }
             }
         }
     }
     
-    var scopeSchedule = teamsSchedule.filter(function(item){
-        return item.period == 0;
-    });
-    var schedulesAllData = [];
-    for (let uts = 0; uts < scopeSchedule.length; uts++) {
-        const teamScheduleDet = scopeSchedule[uts].scheduleData;
-        index = -1;
-        var tries = 0;
-        while(index == -1)
-        {
-            index = teamScheduleDet.findIndex(x => x.DATE.indexOf(targetMonth+" "+ (parseInt(targetDate)-tries)) >= 0);
-            tries++;
-        }
-        try{
-            var slicedSchedule = teamScheduleDet.slice(0,(index+1));
+    if(date)
+    {
+        var fullMonth = date.split(/[0-9]/)[0];
+        var targetMonth = fullMonth.substring(0,3);
+        var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
 
-            var data = ProcessScheduleData(slicedSchedule, scopeSchedule[uts].teamName);
-            for (let rd = 0; rd < data.length; rd++) {
-                const periodData = data[rd];
-                schedulesAllData.push(periodData);
+        var scopeSchedule = teamsSchedule.filter(function(item){
+            return item.period == 0;
+        });
+        var schedulesAllData = [];
+        for (let uts = 0; uts < scopeSchedule.length; uts++) {
+            const teamScheduleDet = scopeSchedule[uts].scheduleData;
+            index = -1;
+            var tries = 0;
+            while(index == -1)
+            {
+                index = teamScheduleDet.findIndex(x => x.DATE.indexOf(targetMonth+" "+ (parseInt(targetDate)-tries)) >= 0);
+                tries++;
             }
-            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
-        }
-        catch(ex){
-            console.log(ex);
-            var stopHere = "";
-        }
-    }
+            try{
+                var slicedSchedule = teamScheduleDet.slice(0,(index+1));
 
-    return schedulesAllData;
+                var data = ProcessScheduleData(slicedSchedule, scopeSchedule[uts].teamName);
+                for (let rd = 0; rd < data.length; rd++) {
+                    const periodData = data[rd];
+                    schedulesAllData.push(periodData);
+                }
+                await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+            }
+            catch(ex){
+                console.log(ex);
+                var stopHere = "";
+            }
+        }
+
+        return schedulesAllData;
+    }
+    else{
+        return teamsSchedule;
+    }
 }
 
 async function BuildDayFiles(date)
