@@ -80,7 +80,7 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                    await ProcessDailyGames(fullDatesAnalysis);
+                    //await ProcessDailyGames(singleDayAnalysis);
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -2639,9 +2639,7 @@ async function CalculateWinnersViaFormula(date)
                 const pattern = selectedPatterns[fsfs];
                 var sortedGames = await sorting(games, pattern.selectedProperty, pattern.orderByDirection);
                 var selectedGame = sortedGames[pattern.index];
-                //console.log(sortedGames);
-                //console.log(selectedGame);
-                //console.log(pattern.selectedProperty);
+                
                 
                 if(selectedGame)
                 {
@@ -2653,6 +2651,9 @@ async function CalculateWinnersViaFormula(date)
                     }
                     else if(pattern.maxProperty.toLowerCase().indexOf("next") >=0){
                         var selectedTeam = selectedGame["nextWinner"];
+                    }
+                    else if(pattern.maxProperty.toLowerCase().indexOf("overall") >=0){
+                        var selectedTeam = selectedGame["overallWinner"];
                     }
                     if(selectedTeam == "")
                     {
@@ -2669,69 +2670,50 @@ async function CalculateWinnersViaFormula(date)
                             isConsitent = true;
                         }
                     }
-                    else if(!isConsitent)
+
+                    if(pattern.selectedProperty == "overallDiff" && !isConsitent)
+                        {
+                            var isHome = selectedGame.overallWinner == selectedGame.home ? true : false;
+                            if(isHome){
+                            if((selectedGame.formulaawayWinPercentage < selectedGame.formulahomeWinPercentage))
+                            {
+                                isConsitent = true;
+                            }
+                            }
+                            else{
+                                if((selectedGame.formulaawayWinPercentage > selectedGame.formulahomeWinPercentage))
+                                {
+                                    isConsitent = true;
+                                }
+                            }
+                        }
+                    if(pattern.selectedProperty == "awayNextWinningPercentage" && !isConsitent)
+                    {
+                        if(
+                            (selectedGame.homeSeriesPercentage < selectedGame.awaySeriesPercentage) 
+                        )
+                        {
+                            isConsitent = true;
+                        }
+                    }  
+                    if(pattern.selectedProperty == "formulahomeWinPercentage" && !isConsitent)
+                        {
+                            if((selectedGame.formulahomeWinPercentage > selectedGame.formulaawayWinPercentage)
+                            )
+                            {
+                                isConsitent = true;
+                            }
+                        }
+                    if(!isConsitent)
                     {
                         var matches = (selectedTeam == selectedGame.formulaWinner ? 1 : 0) + 
-                                        //(selectedTeam == selectedGame.nextWinners ? 1 : 0) +
+                                        (selectedTeam == selectedGame.nextWinners ? 1 : 0) +
                                         (selectedTeam == selectedGame.overallWinner ? 1 : 0) +
                                         (selectedTeam == selectedGame.seriesWinner ? 1 : 0) ;
 
-                        isConsitent = matches >=3 ? true : false;
+                        isConsitent = matches >=4 ? true : false;
 
                     }
-                    
-                    // if(pattern.selectedProperty == "formulahomeWinPercentage")
-                    // {
-                    //     if(
-                    //         //
-                    //         (selectedGame.homeNextWinningPercentage > selectedGame.awayNextWinningPercentage) 
-                    //         //||
-                    //         //(selectedGame.homeSeriesPercentage > selectedGame.awaySeriesPercentage) 
-                    //         //&& (selectedGame.formulahomeWinPercentage > selectedGame.formulaawayWinPercentage)
-                    //     )
-                    //     {
-                    //         isConsitent = true;
-                    //     }
-                    // }
-                    //else
-                    // if(pattern.selectedProperty == "awayNextWinningPercentage")
-                    //     {
-                    //         if(
-                    //             (selectedGame.homeNextWinningPercentage < selectedGame.awayNextWinningPercentage) 
-                    //             //&& (selectedGame.homeSeriesPercentage < selectedGame.awaySeriesPercentage) 
-                    //             //&& 
-                    //             //(selectedGame.formulaawayWinPercentage > selectedGame.formulahomeWinPercentage)
-                    //         )
-                    //         {
-                    //             isConsitent = true;
-                    //         }
-                    //     }else 
-                    // if(pattern.selectedProperty == "overallDiff")
-                    //     {
-                    //         if(
-                    //             //
-                    //             //(selectedGame.awayNextWinningPercentage > selectedGame.homeNextWinningPercentage) 
-                    //             //||
-                    //             (selectedGame.awaySeriesPercentage > selectedGame.homeSeriesPercentage) 
-                    //             //&& (selectedGame.formulahomeWinPercentage > selectedGame.formulaawayWinPercentage)
-                    //         )
-                    //         {
-                    //             isConsitent = true;
-                    //         }
-                    //     }else 
-                    // if(pattern.selectedProperty == "awaySeriesPercentage")
-                    //     {
-                    //         if(
-                    //             //
-                    //             //(selectedGame.awayNextWinningPercentage > selectedGame.homeNextWinningPercentage) 
-                    //             //||
-                    //             (selectedGame.awaySeriesPercentage > selectedGame.homeSeriesPercentage) 
-                    //             //&& (selectedGame.formulahomeWinPercentage > selectedGame.formulaawayWinPercentage)
-                    //         )
-                    //         {
-                    //             isConsitent = true;
-                    //         }
-                    //     }
                     
 
                     var coversPercentagesData = coversPercentages.filter(function(item){
@@ -2753,7 +2735,7 @@ async function CalculateWinnersViaFormula(date)
                         }
                     }
 
-                    if(coversPer > opponentPer && isConsitent)
+                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0)
                     {
                         var gameResult = await GetResultDetails(date, {away: selectedGame.away, home: selectedGame.home}, selectedTeam);
                         if(gameResult.finalWinner)
@@ -2766,6 +2748,9 @@ async function CalculateWinnersViaFormula(date)
                             var isSelectionWinner = "Pending Game";
                         }
                         
+                        //console.log(sortedGames);
+                        console.log(selectedGame);
+                        console.log(pattern.selectedProperty);
 
                         var value = {date:date, selectedTeam:selectedTeam, percentage:pattern.maxValue, isAWin: isSelectionWinner, coversPer: coversPer};
 
