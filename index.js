@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:4, monthNumber:"06"}
+        {month:"June", from:1, to:5, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:4, to:4, monthNumber:"06"}
+        {month:"June", from:6, to:6, monthNumber:"06"}
     ];
     
     //Steps
@@ -80,7 +80,7 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                    //await ProcessDailyGames(singleDayAnalysis);
+                    await ProcessDailyGames(fullDatesAnalysis);
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -1474,6 +1474,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         }
             
                         await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
+                        await EvaluateOverUnderPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
                         await ProcessGeneralStats(selectedDate);
                         await GetBetterPatterns(selectedDate);
             
@@ -1486,6 +1487,360 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                 }
 
                 
+    }
+
+    async function EvaluateOverUnderPatterns(date, stringDate)
+    {
+        var d = new Date(stringDate);
+        var dayOfWeek = d.toDateString().split(" ")[0];
+        var games = await load(date+"FinalSelections");
+
+        var keys = Object.keys(games[0]);
+
+        var evaluationKeys = [];
+    for (let sds = 0; sds < keys.length; sds++) {
+        const key = keys[sds];
+        
+        var isNum = parseFloat(games[0][key]);
+        if(!isNaN(isNum))
+        {
+            evaluationKeys.push(key);
+        }
+        
+    }
+
+        if(date == "May20th")
+        {
+            var stopHere = "";
+        }
+        //console.log(date);
+        
+        // var homeSortedGames = await sorting(games,"homeNextWinningPercentage", "desc");
+        // var awaySortedGames = await sorting(games,"awayNextWinningPercentage", "desc");
+//-----------------------------------------33%----------------------------------------------------------
+        // var games = games.filter(function(item){
+        //     return item.home != item.nextWinners;
+        // });
+
+        // gameSelected = await sorting(games,"formulahomeWinPercentage", "asc");
+
+//--------------------------------27%-------------------------------------------------------------------
+
+// var games = games.filter(function(item){
+//     return item.away != item.overallWinner;
+// });
+
+var selectedProperty = "";
+var orderByDirection = "";
+for (let tet = 0; tet < evaluationKeys.length; tet++) {
+    const key = evaluationKeys[tet];
+    selectedProperty = key;
+    orderByDirection = "desc";
+
+
+
+
+
+gameSelected = await sorting(games, selectedProperty, orderByDirection);
+
+//---------------------------------------19%------------------------------------------------------------
+
+// var games = games.filter(function(item){
+//     return item.nextWinners == item.overallWinner && item.formulaWinner == item.overallWinner && item.seriesWinner == item.overallWinner  ;
+// });
+
+//gameSelected = await sorting(games,"homeTotalPercentage", "desc");
+
+        // var homeGamesL = homeGames.filter(function(item){
+        //     return item.homeCurrentStreak.indexOf("L") >= 0;
+        // });
+        // if(homeGamesL.length >= 1)
+        // {
+        //     homeGames = homeGamesL;
+        // }
+
+        // var homeSortedGames = await sorting(homeGames,"homeCurrentStreak", "asc");
+
+        // var homeWorstStreak = homeSortedGames[homeSortedGames.length-1];
+
+        // var homeSortedGames = homeSortedGames.filter(function(item){
+        //     return item.homeCurrentStreak == homeWorstStreak.homeCurrentStreak;
+        // });
+
+        // var awayGames = awaySortedGames.filter(function(item){
+        //     return item.awayNextWinningPercentage == awaySortedGames[0].awayNextWinningPercentage;
+        // });
+
+        // var awayGamesL = awayGames.filter(function(item){
+        //     return item.awayCurrentStreak.indexOf("L") >= 0;
+        // });
+
+        // if(awayGamesL.length >= 1)
+        // {
+        //     awayGames = awayGamesL;
+        // }
+
+        // var awaySortedGames = await sorting(awayGames,"awayCurrentStreak", "asc");
+
+        // var awayWorstStreak = awaySortedGames[awaySortedGames.length-1];
+
+        // var awaySortedGames = awaySortedGames.filter(function(item){
+        //     return item.awayCurrentStreak == awayWorstStreak.awayCurrentStreak;
+        // });
+
+
+
+
+
+        // var homeGamesS = homeSortedGames.map(function(item){
+        //     return {team : item.home, average:  (item.formulahomeWinPercentage + item.homeSeriesPercentage)/2};
+        // });
+
+        // var awayGamesS = awaySortedGames.map(function(item){
+        //     return {team : item.away, average: (item.formulaawayWinPercentage + item.awaySeriesPercentage)/2
+        //     };
+        // });
+
+        // var allGames = homeGamesS.concat(awayGamesS); 
+
+        // var allGamesSorted = await sorting(allGames,"average", "desc");
+
+        // var gameSelected = games.filter(function(item){
+        //     return item.home == allGamesSorted[0].team || item.away == allGamesSorted[0].team;
+        // });
+
+
+        games = gameSelected;
+        // if(gameSelected.length >=1)
+        // {
+        //     games.push(gameSelected[0]);
+        // }
+        // if(gameSelected.length > 1)
+        // {
+        //     games.push(gameSelected[1]);
+        // }
+        var F5FormulaWinnerSum = 0; 
+        var F5SeriesWinnerSum = 0;
+        var F5NextWinnerSum = 0; 
+        var F5OverallWinnerSum = 0; 
+
+        var FinalFormulaWinnerSum = 0;  
+        var FinalSeriesWinnerSum = 0; 
+        var FinalNextWinnerSum = 0; 
+        var FinalOverallWinnerSum = 0; 
+        var formulaWinner = "";
+        var handicap = 0;
+        var handicapF5 = 0;
+
+        try{
+            var generalStats = await load("GeneralStats"+selectedProperty+orderByDirection, "GameByGame");
+        }
+        catch{
+            var generalStats = [];
+        }
+
+        try{
+            var stats = await load("ResultsFormulaWinner","GameByGame");
+            var exists = stats.findIndex(x => x.date == date);
+            if(exists >=0)
+            {
+               stats.splice(exists, 1);
+            }
+        }
+        catch{
+            var stats = [];
+        }
+
+        var selectionGamesCount = 0;
+        for (let index = 0; index < games.length; index++) {
+            const game = games[index];
+            if(games.length > 16)
+            {
+                var stopHere = "";
+            }
+            var indexExists = generalStats.findIndex(x => x.index == index);
+            if(indexExists >=0)
+            {
+               var record = generalStats[indexExists];
+            }
+            else{
+
+               var record = {
+                    index: index,
+                    F5FormulaWinner: 0, 
+                    F5SeriesWinner: 0,
+                    F5NextWinner: 0,
+                    F5OverallWinner: 0,
+                    FinalFormulaWinner: 0,
+                    FinalSeriesWinner: 0,
+                    FinalNextWinner: 0,
+                    FinalOverallWinner: 0,
+                    selectedProperty: "",
+                    orderByDirection: "",
+                    propertyValue :0,
+                    handicapF5:0,
+                    handicap: 0,
+                    count: 0
+               }
+               generalStats.push(record);
+               record = generalStats[index];
+            }
+            // if(game.formulaWinner == game.seriesWinner)
+            // {
+                    if(game.away.indexOf("TOR") >= 0 ||game.home.indexOf("TOR") >= 0)
+                    {
+                        if(game.away.indexOf("TOR") >= 0)
+                        {
+                            game.away = "TORBlue Jays";
+                        }
+
+                        if(game.home.indexOf("TOR") >= 0)
+                        {
+                            game.home = "TORBlue Jays";
+                        }
+                    }
+
+                    if(game.away.indexOf("White") >= 0 ||game.home.indexOf("White") >= 0)
+                    {
+                        if(game.away.indexOf("White") >= 0)
+                        {
+                            game.away = "CHIWhite Sox";
+                        }
+
+                        if(game.home.indexOf("White") >= 0)
+                        {
+                            game.home = "CHIWhite Sox";
+                        }
+                    }
+                    if(game.away.indexOf("BOSRed") >= 0 ||game.home.indexOf("BOSRed") >= 0)
+                    {
+                        if(game.away.indexOf("BOSRed") >= 0)
+                        {
+                            game.away = "BOSRed Sox";
+                        }
+
+                        if(game.home.indexOf("BOSRed") >= 0)
+                        {
+                            game.home = "BOSRed Sox";
+                        }
+                    }
+
+                    selectionGamesCount++;
+                    var gamesDet =[];
+                    var isHomeOrAway = "";
+                    try{
+                        var gamesDet = await load("Games"+game.away+"Details", "GameByGame");
+                        isHomeOrAway = "away";
+                    }
+                    catch{
+                        var gamesDet = await load("Games"+game.home+"Details", "GameByGame");
+                        isHomeOrAway = "home";
+                    }
+
+                    var fullMonth = date.split(/[0-9]/)[0];
+                    var targetMonth = fullMonth.substring(0,3);
+                    var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+                    var datee = targetMonth + " " +targetDate;
+                    var targetGame = gamesDet.games.filter(function(item){
+                        var dat = item.date.split(" ")[1] + " " + item.date.split(" ")[2];
+                        
+                        return dat.toLowerCase() == datee.toLocaleLowerCase(); 
+                    })[0];
+                    if(targetGame)
+                    {
+                    var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+                    var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                        awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+                    var awayAfter5Runs = awayTotalRuns - awayF5Runs;
+
+                    var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+                    var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                        homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+                    var homeAfter5Runs = homeTotalRuns - homeF5Runs;
+
+
+                    game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+                    game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+                    
+                    handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
+                
+
+                    handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+                    
+
+                    game.F5FormulaWinner = game.F5Winner.indexOf(game.formulaWinner) >= 0 ? 1 : 0;
+                    game.F5SeriesWinner = game.F5Winner.indexOf(game.seriesWinner) >= 0 ? 1 : 0;
+                    game.F5NextWinner = game.F5Winner.indexOf(game.nextWinners) >= 0 ? 1 : 0;
+                    game.F5OverallWinner = game.F5Winner.indexOf(game.overallWinner) >= 0 ? 1 : 0;
+
+                    game.FinalFormulaWinner = game.finalWinner.indexOf(game.formulaWinner) >= 0 ? 1 : 0;
+                    game.FinalSeriesWinner = game.finalWinner.indexOf(game.seriesWinner) >= 0 ? 1 : 0;
+                    game.FinalNextWinner = game.finalWinner.indexOf(game.nextWinners) >= 0 ? 1 : 0;
+                    game.FinalOverallWinner = game.finalWinner.indexOf(game.overallWinner) >= 0 ? 1 : 0;
+
+                    
+                    record.F5FormulaWinner+=game.F5FormulaWinner,  
+                    record.F5SeriesWinner+= game.F5SeriesWinner, 
+                    record.F5NextWinner+= game.F5NextWinner, 
+                    record.F5OverallWinner+=game.F5OverallWinner,
+                    record.FinalFormulaWinner+= game.FinalFormulaWinner,
+                    record.FinalSeriesWinner+= game.FinalSeriesWinner,
+                    record.FinalNextWinner+= game.FinalNextWinner,
+                    record.FinalOverallWinner+= game.FinalOverallWinner,
+                    record.selectedProperty = selectedProperty,
+                    record.orderByDirection = orderByDirection,
+                    record.propertyValue += game[selectedProperty];
+                    record.handicapF5 += handicapF5,
+                    record.handicap += handicap,
+                    record.count++
+                        
+
+
+                    formulaWinner = game.formulaWinner;
+                    
+                    F5FormulaWinnerSum += game.F5FormulaWinner;
+                    F5SeriesWinnerSum += game.F5SeriesWinner;
+                    F5NextWinnerSum += game.F5NextWinner; 
+                    F5OverallWinnerSum += game.F5OverallWinner; 
+                    FinalFormulaWinnerSum += game.FinalFormulaWinner;
+                    FinalSeriesWinnerSum += game.FinalSeriesWinner;
+                    FinalNextWinnerSum += game.FinalNextWinner; 
+                    FinalOverallWinnerSum += game.FinalOverallWinner; 
+
+
+                    //await save(date+"FinalSelections", games, function(){}, "replace");
+                }
+        //}
+        }
+
+        var stat = {
+                date: date,
+                dayOfWeek:dayOfWeek,
+                F5FormulaWinnerPer : (F5FormulaWinnerSum*100)/selectionGamesCount,
+                F5SeriesWinnerPer : (F5SeriesWinnerSum*100)/selectionGamesCount,
+                F5NextWinnerPer : (F5NextWinnerSum*100)/selectionGamesCount, 
+                F5OverallWinnerPer : (F5OverallWinnerSum*100)/selectionGamesCount, 
+                FinalFormulaWinnerPer : (FinalFormulaWinnerSum*100)/selectionGamesCount,
+                FinalSeriesWinnerPer : (FinalSeriesWinnerSum*100)/selectionGamesCount,
+                FinalNextWinnerPer : (FinalNextWinnerSum*100)/selectionGamesCount, 
+                FinalOverallWinnerPer : (FinalOverallWinnerSum*100)/selectionGamesCount, 
+                NumberOGames: selectionGamesCount,
+                formulaWinner: formulaWinner,
+                handicap: handicap,
+                handicapF5: handicapF5
+        }
+
+        //stats.push(stat);      
+        await save("GeneralStatsOU"+selectedProperty+orderByDirection, generalStats, function(){}, "replace", "GameByGame");
+    }
     }
 
     async function EvaluateAllPatterns(date, stringDate)
