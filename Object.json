@@ -1,0 +1,152 @@
+{
+    "seasons":[
+        {
+            "year":2022,
+            "seasonGames":[
+                {
+                    "day":1,
+                    "date":{
+                        "year":2024,
+                        "month": 5,
+                        "day": 3,
+                        "stringDate": "May 3rd, 2024",
+                        "formattedDate": "05-03-2024"
+                        
+                    },
+                    "dayGames":[
+                        {
+                            "game":"away @ home",
+                            "F5":{
+                                "homeRuns":0,
+                                "homeHits":0,
+                                "winner":0,
+                                "totalRuns": 0
+                            },
+                            "time": {
+                                "hour": 11,
+                                "min": 15,
+                                "stringTime": "11:15 AM" 
+                            },
+                            "home":{
+                                "homeTeam":"teamName",
+                                "lineUp": [
+                                    {
+                                        "name":"",
+                                        "position":"",
+                                        "AB":0,
+                                        "R":0,
+                                        "H":0,
+                                        "RBI":0,
+                                        "SO":0,
+                                        "AVG":0,
+                                        "OBP":0,
+                                        "SLG":0,
+                                        "OPS":0
+
+                                    }
+                                ],
+                                "pitchers":[
+                                    {
+                                        "name":"",
+                                        "lostOrWin": "L",
+                                        "record": {
+                                            "wins":0,
+                                            "loses":1
+                                        },
+                                        "saves":0,
+                                        "IP":0,
+                                        "H":0,
+                                        "R":0,
+                                        "ER":0,
+                                        "BB":0,
+                                        "SO":0,
+                                        "HR":0,
+                                        "ERA":0
+
+                                    }
+                                ]
+                            },
+                            "away":{
+
+                            }
+                        }
+                    ]
+                }
+            ]
+        },
+        {
+            "year":2023,
+            "seasonGames":[
+                {
+                    "day":1,
+                    "date":{
+                        "year":2024,
+                        "month": 5,
+                        "day": 3,
+                        "stringDate": "May 3rd, 2024",
+                        "formattedDate": "05-03-2024"
+                        
+                    },
+                    "dayGames":[
+                        {
+                            "game":"away @ home",
+                            "F5":{
+                                "homeRuns":0,
+                                "homeHits":0,
+                                "winner":0,
+                                "totalRuns": 0
+                            },
+                            "time": {
+                                "hour": 11,
+                                "min": 15,
+                                "stringTime": "11:15 AM" 
+                            },
+                            "home":{
+                                "homeTeam":"teamName",
+                                "lineUp": [
+                                    {
+                                        "name":"",
+                                        "position":"",
+                                        "AB":0,
+                                        "R":0,
+                                        "H":0,
+                                        "RBI":0,
+                                        "SO":0,
+                                        "AVG":0,
+                                        "OBP":0,
+                                        "SLG":0,
+                                        "OPS":0
+
+                                    }
+                                ],
+                                "pitchers":[
+                                    {
+                                        "name":"",
+                                        "lostOrWin": "L",
+                                        "record": {
+                                            "wins":0,
+                                            "loses":1
+                                        },
+                                        "saves":0,
+                                        "IP":0,
+                                        "H":0,
+                                        "R":0,
+                                        "ER":0,
+                                        "BB":0,
+                                        "SO":0,
+                                        "HR":0,
+                                        "ERA":0
+
+                                    }
+                                ]
+                            },
+                            "away":{
+
+                            }
+                        }
+                    ]
+                }
+            ]
+        }
+    ]
+}

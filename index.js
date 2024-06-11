@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:5, monthNumber:"06"}
+        {month:"June", from:1, to:11, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:6, to:6, monthNumber:"06"}
+        {month:"June", from:11, to:11, monthNumber:"06"}
     ];
     
     //Steps
@@ -80,7 +80,8 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                    await ProcessDailyGames(fullDatesAnalysis);
+                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                    await ProcessDailyGames(fullDatesAnalysis,false);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -113,7 +114,7 @@ try {
       await driver.quit();
     }
 
-    async function ProcessDailyGames(datesAnalysis){
+    async function ProcessDailyGames(datesAnalysis, noSelections){
         numberPicks = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         winsCount = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         for (let te = 0; te < datesAnalysis.length; te++) {
@@ -168,14 +169,15 @@ try {
                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
                 //await consolidateAlgorithmResults(selectedDate)
-                await CalculateWinnersViaFormula(selectedDate)
+
+                await CalculateWinnersViaFormula(selectedDate, noSelections)
                 }
                 catch(ex){
                     //throw ex;
                     // console.log("Generating from scratch:" + selectedDate);
-                    await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                    //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                     // await getESPNData(selectedDate);
-                    await CalculateWinnersViaFormula(selectedDate);  
+                    await CalculateWinnersViaFormula(selectedDate, noSelections);  
                     continue;
                 }
                 
@@ -2678,8 +2680,13 @@ async function GetResultsSummary(){
         console.log(summary);
         await save("ResultSeriesSummary", summary, function(){}, "replace", "GameByGame");
 }
-async function CalculateWinnersViaFormula(date)
+async function CalculateWinnersViaFormula(date, noSelections)
 {
+    try{
+        var finalSelectionsCSV = await load("finalSelectionsCSV", "GameByGame");
+    }catch{
+        var finalSelectionsCSV = [];
+    }
     var pitchersData = await load(date);
     //var battersData = await load(date+"BattersData");
     var seriesData0 = await load(date+"SeriesWinners0");
@@ -2988,26 +2995,30 @@ async function CalculateWinnersViaFormula(date)
         var expectedWinners =[];
         var patterns = await load("GeneralStatsPerSummary","GameByGame");
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
-            var selectedPatterns = patterns.slice(0,5);
+        var selectedPatterns =  patterns.filter(function(item){
+            return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+        });
+            selectedPatterns = patterns.slice(0,5);
 
             for (let fsfs = 0; fsfs < selectedPatterns.length; fsfs++) {
                 const pattern = selectedPatterns[fsfs];
                 var sortedGames = await sorting(games, pattern.selectedProperty, pattern.orderByDirection);
                 var selectedGame = sortedGames[pattern.index];
+                var isConsistentPattern = pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+
                 
-                
-                if(selectedGame)
+                if(selectedGame && isConsistentPattern)
                 {
-                    if(pattern.maxProperty.toLowerCase().indexOf("series") >=0){
+                    if(pattern.selectedProperty.toLowerCase().indexOf("series") >=0){
                         var selectedTeam = selectedGame["seriesWinner"];
                     }
-                    else if(pattern.maxProperty.toLowerCase().indexOf("formula") >=0){
+                    else if(pattern.selectedProperty.toLowerCase().indexOf("formula") >=0){
                         var selectedTeam = selectedGame["formulaWinner"];
                     }
-                    else if(pattern.maxProperty.toLowerCase().indexOf("next") >=0){
+                    else if(pattern.selectedProperty.toLowerCase().indexOf("next") >=0){
                         var selectedTeam = selectedGame["nextWinner"];
                     }
-                    else if(pattern.maxProperty.toLowerCase().indexOf("overall") >=0){
+                    else if(pattern.selectedProperty.toLowerCase().indexOf("overall") >=0){
                         var selectedTeam = selectedGame["overallWinner"];
                     }
                     if(selectedTeam == "")
@@ -3090,33 +3101,22 @@ async function CalculateWinnersViaFormula(date)
                         }
                     }
 
-                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0)
+                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0 && (noSelections == null || noSelections == false))
                     {
-                        var gameResult = await GetResultDetails(date, {away: selectedGame.away, home: selectedGame.home}, selectedTeam);
-                        if(gameResult.finalWinner)
-                        {
-                            var isSelectionWinner = gameResult.finalWinner.indexOf(selectedTeam) >= 0 ? 1 : 0;
-                            winsCount[fsfs] = winsCount[fsfs] + isSelectionWinner;
-                            winsCount[5] = winsCount[5] + isSelectionWinner;
-                        }
-                        else{
-                            var isSelectionWinner = "Pending Game";
-                        }
-                        
-                        //console.log(sortedGames);
-                        console.log(selectedGame);
-                        console.log(pattern.selectedProperty);
-
-                        var value = {date:date, selectedTeam:selectedTeam, percentage:pattern.maxValue, isAWin: isSelectionWinner, coversPer: coversPer};
-
-                        numberPicks[fsfs]++;
-                        numberPicks[5]++;
-                        expectedWinners.push(value);
-                            console.log(value);
-                            console.log("date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+((winsCount[fsfs]*100)/numberPicks[fsfs])+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+((winsCount[5]*100)/numberPicks[5])+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);
-                        
-                        
+                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        winsCount = detail.winsCount;
+                        numberPicks = detail.numberPicks;
+                        expectedWinners = detail.expectedWinners;
+                        finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
+                    else if((noSelections != null && noSelections != false)){
+                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        winsCount = detail.winsCount;
+                        numberPicks = detail.numberPicks;
+                        expectedWinners = detail.expectedWinners;
+                        finalSelectionsCSV = detail.finalSelectionsCSV;
+                    }
+                    await save("finalSelectionsCSV", finalSelectionsCSV, function(){}, "replace" ,"GameByGame");
                 }
             }
 
@@ -3129,6 +3129,54 @@ function getStandardDeviation (array) {
     return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
   }
 
+
+
+async function ShowSelectionDetails(date, selectedGame, selectedTeam, selectedProperty, maxValue , winsCount, numberPicks, fsfs, coversPer, expectedWinners, finalSelectionsCSV)
+{
+    var gameResult = await GetResultDetails(date, {away: selectedGame.away, home: selectedGame.home}, selectedTeam);
+                        if(gameResult.finalWinner)
+                        {
+                            var isSelectionWinner = gameResult.finalWinner.indexOf(selectedTeam) >= 0 ? 1 : 0;
+                            winsCount[fsfs] = winsCount[fsfs] + isSelectionWinner;
+                            winsCount[5] = winsCount[5] + isSelectionWinner;
+                        }
+                        else{
+                            var isSelectionWinner = "Pending Game";
+                        }
+                        
+                        //console.log(sortedGames);
+                        console.log(selectedGame);
+                        console.log(selectedProperty);
+
+                        var value = {date:date, selectedTeam:selectedTeam, percentage:maxValue, isAWin: isSelectionWinner, coversPer: coversPer};
+
+                        if(isSelectionWinner != "Pending Game")
+                        {
+                            numberPicks[fsfs]++;
+                            numberPicks[5]++;
+                            
+                        }
+                        var winPercentageTotal = ((winsCount[5]*100)/numberPicks[5]);
+                        var winPercentageOverall = ((winsCount[fsfs]*100)/numberPicks[fsfs]);
+                        expectedWinners.push(value);
+                        if(!isSelectionWinner){
+                            console.log("\u001b[1;31m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;31m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);
+                        }
+                        else if(isSelectionWinner == "Pending Game")
+                        {
+                            console.log("\u001b[1;33m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;33m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);                            
+                        }
+                        else{
+                            console.log("\u001b[1;32m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;32m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);
+                        }
+
+                        finalSelectionsCSV.push(value);
+
+                        return {expectedWinners: expectedWinners, winsCount: winsCount, numberPicks:numberPicks, finalSelectionsCSV:finalSelectionsCSV};
+}
 
 async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
 {

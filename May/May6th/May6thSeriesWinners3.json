@@ -1,1 +1,1512 @@
-[{"game":"TEXRangers @ OAKAthletics","seriesExpectedWinner":"OAKAthletics","isConsistent":false,"confidenceRanking":3,"analysisData":{"winningExpectedWinner":"OAKAthletics","runsExpectedWinner":"OAKAthletics","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"OAKAthletics","totalWins":2,"totalLoses":1,"totalRunsScored":26,"totalRunsReceived":17,"avgRunsScored":8.666666666666666,"avgRunsReceived":5.666666666666667,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nMiami","RESULT":"W3-1","W-L":"16-17","WIN":"Sears 2-2","LOSS":"Weathers 2-3","SAVE":"Erceg 2","ATT":"8,533","WINS":"16","LOSES":"17","RUNSSCORED":"3","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568953/marlins-athletics"},{"DATE":"Sat, May 4","OPPONENT":"vs\nMiami","RESULT":"W20-4","W-L":"17-17","WIN":"Blackburn 3-1","LOSS":"Rogers 0-5","SAVE":"","ATT":"7,809","WINS":"17","LOSES":"17","RUNSSCORED":"20","RUNSRECEIVED":"4","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568968/marlins-athletics"},{"DATE":"Sun, May 5","OPPONENT":"vs\nMiami","RESULT":"L12-3","W-L":"17-18","WIN":"Smith 2-0","LOSS":"Boyle 2-5","SAVE":"","ATT":"12,212","WINS":"17","LOSES":"18","RUNSSCORED":"3","RUNSRECEIVED":"12","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568983/marlins-athletics"}]},"teamAwayResultsData":{"period":3,"teamName":"TEXRangers","totalWins":2,"totalLoses":1,"totalRunsScored":19,"totalRunsReceived":13,"avgRunsScored":6.333333333333333,"avgRunsReceived":4.333333333333333,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nKansas City","RESULT":"L7-1","W-L":"17-16","WIN":"Schreiber 3-0","LOSS":"Winn 0-1","SAVE":"","ATT":"25,690","WINS":"17","LOSES":"16","RUNSSCORED":"1","RUNSRECEIVED":"7","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568959/rangers-royals"},{"DATE":"Sat, May 4","OPPONENT":"@\nKansas City","RESULT":"W15-4","W-L":"18-16","WIN":"Sborz 1-0","LOSS":"Wacha 1-4","SAVE":"","ATT":"26,002","WINS":"18","LOSES":"16","RUNSSCORED":"15","RUNSRECEIVED":"4","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568974/rangers-royals"},{"DATE":"Sun, May 5","OPPONENT":"@\nKansas City","RESULT":"W3-2 F/10","W-L":"19-16","WIN":"Yates 3-0","LOSS":"McArthur 1-1","SAVE":"Robertson 1","ATT":"20,613","WINS":"19","LOSES":"16","RUNSSCORED":"3","RUNSRECEIVED":"2","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568989/rangers-royals"}]},"WinningRankingWithDiff":{"WinningRankingBest":"TEXRangers","WinningRankingDiff":7,"WinningGamesCountDiff":0},"ScoringRankingWithDiff":{"ScoringRankingBest":"OAKAthletics","ScoringRankingDiff":5,"ScoringGamesCountDiff":7},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"TEXRangers","ReceivingRankingDiff":5,"ReceivingGamesCountDiff":4}}},"expectedTotalScore":14.333333333333332,"expectedWinnerRuns":8.666666666666666,"expectedLoserRuns":5.666666666666667,"expectedHandicap":2.999999999999999},{"game":"SDPadres @ CHICubs","seriesExpectedWinner":"SDPadres","isConsistent":false,"confidenceRanking":7,"analysisData":{"winningExpectedWinner":"SDPadres","runsExpectedWinner":"SDPadres","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"CHICubs","totalWins":2,"totalLoses":1,"totalRunsScored":12,"totalRunsReceived":8,"avgRunsScored":4,"avgRunsReceived":2.6666666666666665,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nMilwaukee","RESULT":"L3-1","W-L":"19-14","WIN":"Peguero 4-0","LOSS":"Alzolay 1-4","SAVE":"Megill 2","ATT":"33,557","WINS":"19","LOSES":"14","RUNSSCORED":"1","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568954/brewers-cubs"},{"DATE":"Sat, May 4","OPPONENT":"vs\nMilwaukee","RESULT":"W6-5","W-L":"20-14","WIN":"Taillon 3-0","LOSS":"Myers 0-2","SAVE":"Neris 6","ATT":"40,505","WINS":"20","LOSES":"14","RUNSSCORED":"6","RUNSRECEIVED":"5","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568969/brewers-cubs"},{"DATE":"Sun, May 5","OPPONENT":"vs\nMilwaukee","RESULT":"W5-0","W-L":"21-14","WIN":"Assad 3-0","LOSS":"Peralta 3-1","SAVE":"","ATT":"39,299","WINS":"21","LOSES":"14","RUNSSCORED":"5","RUNSRECEIVED":"0","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568984/brewers-cubs"}]},"teamAwayResultsData":{"period":3,"teamName":"SDPadres","totalWins":2,"totalLoses":1,"totalRunsScored":24,"totalRunsReceived":13,"avgRunsScored":8,"avgRunsReceived":4.333333333333333,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nArizona","RESULT":"W7-1","W-L":"17-18","WIN":"Cease 4-2","LOSS":"Cecconi 1-2","SAVE":"","ATT":"31,976","WINS":"17","LOSES":"18","RUNSSCORED":"7","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568956/padres-diamondbacks"},{"DATE":"Sat, May 4","OPPONENT":"@\nArizona","RESULT":"W13-1","W-L":"18-18","WIN":"King 3-3","LOSS":"Pfaadt 1-2","SAVE":"","ATT":"39,661","WINS":"18","LOSES":"18","RUNSSCORED":"13","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568971/padres-diamondbacks"},{"DATE":"Sun, May 5","OPPONENT":"@\nArizona","RESULT":"L11-4","W-L":"18-19","WIN":"Nelson 2-2","LOSS":"Waldron 1-4","SAVE":"","ATT":"30,968","WINS":"18","LOSES":"19","RUNSSCORED":"4","RUNSRECEIVED":"11","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568986/padres-diamondbacks"}]},"WinningRankingWithDiff":{"WinningRankingBest":"CHICubs","WinningRankingDiff":9,"WinningGamesCountDiff":0},"ScoringRankingWithDiff":{"ScoringRankingBest":"SDPadres","ScoringRankingDiff":10,"ScoringGamesCountDiff":12},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"CHICubs","ReceivingRankingDiff":16,"ReceivingGamesCountDiff":5}}},"expectedTotalScore":12,"expectedWinnerRuns":8,"expectedLoserRuns":4,"expectedHandicap":4},{"game":"SFGiants @ PHIPhillies","seriesExpectedWinner":"PHIPhillies","isConsistent":true,"confidenceRanking":3,"analysisData":{"winningExpectedWinner":"PHIPhillies","runsExpectedWinner":"PHIPhillies","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"PHIPhillies","totalWins":3,"totalLoses":0,"totalRunsScored":23,"totalRunsReceived":10,"avgRunsScored":7.666666666666667,"avgRunsReceived":3.3333333333333335,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nSan Francisco","RESULT":"W4-3","W-L":"22-11","WIN":"Strahm 2-0","LOSS":"Hicks 2-1","SAVE":"Alvarado 6","ATT":"40,888","WINS":"22","LOSES":"11","RUNSSCORED":"4","RUNSRECEIVED":"3","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568958/giants-phillies"},{"DATE":"Sat, May 4","OPPONENT":"vs\nSan Francisco","RESULT":"W14-3","W-L":"23-11","WIN":"Suarez 6-0","LOSS":"Winn 3-4","SAVE":"","ATT":"42,610","WINS":"23","LOSES":"11","RUNSSCORED":"14","RUNSRECEIVED":"3","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568973/giants-phillies"},{"DATE":"Sun, May 5","OPPONENT":"vs\nSan Francisco","RESULT":"W5-4","W-L":"24-11","WIN":"Walker 2-0","LOSS":"Webb 3-3","SAVE":"Alvarado 7","ATT":"41,058","WINS":"24","LOSES":"11","RUNSSCORED":"5","RUNSRECEIVED":"4","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568988/giants-phillies"}]},"teamAwayResultsData":{"period":3,"teamName":"SFGiants","totalWins":0,"totalLoses":3,"totalRunsScored":10,"totalRunsReceived":23,"avgRunsScored":3.3333333333333335,"avgRunsReceived":7.666666666666667,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nPhiladelphia","RESULT":"L4-3","W-L":"15-18","WIN":"Strahm 2-0","LOSS":"Hicks 2-1","SAVE":"Alvarado 6","ATT":"40,888","WINS":"15","LOSES":"18","RUNSSCORED":"3","RUNSRECEIVED":"4","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568958/giants-phillies"},{"DATE":"Sat, May 4","OPPONENT":"@\nPhiladelphia","RESULT":"L14-3","W-L":"15-19","WIN":"Suarez 6-0","LOSS":"Winn 3-4","SAVE":"","ATT":"42,610","WINS":"15","LOSES":"19","RUNSSCORED":"3","RUNSRECEIVED":"14","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568973/giants-phillies"},{"DATE":"Sun, May 5","OPPONENT":"@\nPhiladelphia","RESULT":"L5-4","W-L":"15-20","WIN":"Walker 2-0","LOSS":"Webb 3-3","SAVE":"Alvarado 7","ATT":"41,058","WINS":"15","LOSES":"20","RUNSSCORED":"4","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568988/giants-phillies"}]},"WinningRankingWithDiff":{"WinningRankingBest":"PHIPhillies","WinningRankingDiff":27,"WinningGamesCountDiff":3},"ScoringRankingWithDiff":{"ScoringRankingBest":"PHIPhillies","ScoringRankingDiff":17,"ScoringGamesCountDiff":13},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"PHIPhillies","ReceivingRankingDiff":18,"ReceivingGamesCountDiff":13}}},"expectedTotalScore":11,"expectedWinnerRuns":7.666666666666667,"expectedLoserRuns":3.3333333333333335,"expectedHandicap":4.333333333333334},{"game":"MIAMarlins @ LADodgers","seriesExpectedWinner":"LADodgers","isConsistent":true,"confidenceRanking":25,"analysisData":{"winningExpectedWinner":"LADodgers","runsExpectedWinner":"LADodgers","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"LADodgers","totalWins":3,"totalLoses":0,"totalRunsScored":20,"totalRunsReceived":6,"avgRunsScored":6.666666666666667,"avgRunsReceived":2,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nAtlanta","RESULT":"W4-3 F/11","W-L":"21-13","WIN":"Grove 1-1","LOSS":"Chavez 1-1","SAVE":"","ATT":"50,859","WINS":"21","LOSES":"13","RUNSSCORED":"4","RUNSRECEIVED":"3","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568947/braves-dodgers"},{"DATE":"Sat, May 4","OPPONENT":"vs\nAtlanta","RESULT":"W11-2","W-L":"22-13","WIN":"Glasnow 6-1","LOSS":"Elder 1-1","SAVE":"","ATT":"44,474","WINS":"22","LOSES":"13","RUNSSCORED":"11","RUNSRECEIVED":"2","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568962/braves-dodgers"},{"DATE":"Sun, May 5","OPPONENT":"vs\nAtlanta","RESULT":"W5-1","W-L":"23-13","WIN":"Paxton 4-0","LOSS":"Fried 2-1","SAVE":"","ATT":"52,733","WINS":"23","LOSES":"13","RUNSSCORED":"5","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568977/braves-dodgers"}]},"teamAwayResultsData":{"period":3,"teamName":"MIAMarlins","totalWins":1,"totalLoses":2,"totalRunsScored":17,"totalRunsReceived":26,"avgRunsScored":5.666666666666667,"avgRunsReceived":8.666666666666666,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nOakland","RESULT":"L3-1","W-L":"9-25","WIN":"Sears 2-2","LOSS":"Weathers 2-3","SAVE":"Erceg 2","ATT":"8,533","WINS":"9","LOSES":"25","RUNSSCORED":"1","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568953/marlins-athletics"},{"DATE":"Sat, May 4","OPPONENT":"@\nOakland","RESULT":"L20-4","W-L":"9-26","WIN":"Blackburn 3-1","LOSS":"Rogers 0-5","SAVE":"","ATT":"7,809","WINS":"9","LOSES":"26","RUNSSCORED":"4","RUNSRECEIVED":"20","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568968/marlins-athletics"},{"DATE":"Sun, May 5","OPPONENT":"@\nOakland","RESULT":"W12-3","W-L":"10-26","WIN":"Smith 2-0","LOSS":"Boyle 2-5","SAVE":"","ATT":"12,212","WINS":"10","LOSES":"26","RUNSSCORED":"12","RUNSRECEIVED":"3","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568983/marlins-athletics"}]},"WinningRankingWithDiff":{"WinningRankingBest":"LADodgers","WinningRankingDiff":19,"WinningGamesCountDiff":2},"ScoringRankingWithDiff":{"ScoringRankingBest":"LADodgers","ScoringRankingDiff":2,"ScoringGamesCountDiff":3},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"LADodgers","ReceivingRankingDiff":26,"ReceivingGamesCountDiff":20}}},"expectedTotalScore":10.666666666666666,"expectedWinnerRuns":8.666666666666666,"expectedLoserRuns":2,"expectedHandicap":6.666666666666666},{"game":"NYMets @ STLCardinals","seriesExpectedWinner":"STLCardinals","isConsistent":true,"confidenceRanking":4,"analysisData":{"winningExpectedWinner":"STLCardinals","runsExpectedWinner":"STLCardinals","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"STLCardinals","totalWins":1,"totalLoses":2,"totalRunsScored":9,"totalRunsReceived":11,"avgRunsScored":3,"avgRunsReceived":3.6666666666666665,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nChicago","RESULT":"W3-0","W-L":"15-17","WIN":"Gray 4-1","LOSS":"Keller 0-1","SAVE":"Helsley 11","ATT":"34,010","WINS":"15","LOSES":"17","RUNSSCORED":"3","RUNSRECEIVED":"0","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568950/white-sox-cardinals"},{"DATE":"Sat, May 4","OPPONENT":"vs\nChicago","RESULT":"L6-5 F/10","W-L":"15-18","WIN":"Kopech 1-3","LOSS":"Fernandez 0-1","SAVE":"Banks 1","ATT":"38,559","WINS":"15","LOSES":"18","RUNSSCORED":"5","RUNSRECEIVED":"6","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568965/white-sox-cardinals"},{"DATE":"Sun, May 5","OPPONENT":"vs\nChicago","RESULT":"L5-1","W-L":"15-19","WIN":"Crochet 2-4","LOSS":"Gallegos 2-1","SAVE":"","ATT":"43,046","WINS":"15","LOSES":"19","RUNSSCORED":"1","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568980/white-sox-cardinals"}]},"teamAwayResultsData":{"period":3,"teamName":"NYMets","totalWins":0,"totalLoses":3,"totalRunsScored":15,"totalRunsReceived":20,"avgRunsScored":5,"avgRunsReceived":6.666666666666667,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nTampa Bay","RESULT":"L10-8","W-L":"16-16","WIN":"Armstrong 1-1","LOSS":"Quintana 1-3","SAVE":"Adam 2","ATT":"19,077","WINS":"16","LOSES":"16","RUNSSCORED":"8","RUNSRECEIVED":"10","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568955/mets-rays"},{"DATE":"Sat, May 4","OPPONENT":"@\nTampa Bay","RESULT":"L3-1","W-L":"16-17","WIN":"Adam 2-0","LOSS":"Ottavino 1-1","SAVE":"Maton 1","ATT":"18,968","WINS":"16","LOSES":"17","RUNSSCORED":"1","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568970/mets-rays"},{"DATE":"Sun, May 5","OPPONENT":"@\nTampa Bay","RESULT":"L7-6 F/10","W-L":"16-18","WIN":"Ramirez 1-0","LOSS":"Diekman 1-1","SAVE":"","ATT":"19,310","WINS":"16","LOSES":"18","RUNSSCORED":"6","RUNSRECEIVED":"7","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568985/mets-rays"}]},"WinningRankingWithDiff":{"WinningRankingBest":"STLCardinals","WinningRankingDiff":2,"WinningGamesCountDiff":1},"ScoringRankingWithDiff":{"ScoringRankingBest":"NYMets","ScoringRankingDiff":14,"ScoringGamesCountDiff":6},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"STLCardinals","ReceivingRankingDiff":12,"ReceivingGamesCountDiff":9}}},"expectedTotalScore":10.333333333333334,"expectedWinnerRuns":6.666666666666667,"expectedLoserRuns":3.6666666666666665,"expectedHandicap":3.0000000000000004},{"game":"CHIWhite Sox @ TBRays","seriesExpectedWinner":"TBRays","isConsistent":true,"confidenceRanking":4,"analysisData":{"winningExpectedWinner":"TBRays","runsExpectedWinner":"TBRays","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"TBRays","totalWins":3,"totalLoses":0,"totalRunsScored":20,"totalRunsReceived":15,"avgRunsScored":6.666666666666667,"avgRunsReceived":5,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nNew York","RESULT":"W10-8","W-L":"15-18","WIN":"Armstrong 1-1","LOSS":"Quintana 1-3","SAVE":"Adam 2","ATT":"19,077","WINS":"15","LOSES":"18","RUNSSCORED":"10","RUNSRECEIVED":"8","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568955/mets-rays"},{"DATE":"Sat, May 4","OPPONENT":"vs\nNew York","RESULT":"W3-1","W-L":"16-18","WIN":"Adam 2-0","LOSS":"Ottavino 1-1","SAVE":"Maton 1","ATT":"18,968","WINS":"16","LOSES":"18","RUNSSCORED":"3","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568970/mets-rays"},{"DATE":"Sun, May 5","OPPONENT":"vs\nNew York","RESULT":"W7-6 F/10","W-L":"17-18","WIN":"Ramirez 1-0","LOSS":"Diekman 1-1","SAVE":"","ATT":"19,310","WINS":"17","LOSES":"18","RUNSSCORED":"7","RUNSRECEIVED":"6","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568985/mets-rays"}]},"teamAwayResultsData":{"period":3,"teamName":"CHIWhite Sox","totalWins":2,"totalLoses":1,"totalRunsScored":11,"totalRunsReceived":9,"avgRunsScored":3.6666666666666665,"avgRunsReceived":3,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nSt. Louis","RESULT":"L3-0","W-L":"6-26","WIN":"Gray 4-1","LOSS":"Keller 0-1","SAVE":"Helsley 11","ATT":"34,010","WINS":"6","LOSES":"26","RUNSSCORED":"0","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568950/white-sox-cardinals"},{"DATE":"Sat, May 4","OPPONENT":"@\nSt. Louis","RESULT":"W6-5 F/10","W-L":"7-26","WIN":"Kopech 1-3","LOSS":"Fernandez 0-1","SAVE":"Banks 1","ATT":"38,559","WINS":"7","LOSES":"26","RUNSSCORED":"6","RUNSRECEIVED":"5","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568965/white-sox-cardinals"},{"DATE":"Sun, May 5","OPPONENT":"@\nSt. Louis","RESULT":"W5-1","W-L":"8-26","WIN":"Crochet 2-4","LOSS":"Gallegos 2-1","SAVE":"","ATT":"43,046","WINS":"8","LOSES":"26","RUNSSCORED":"5","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568980/white-sox-cardinals"}]},"WinningRankingWithDiff":{"WinningRankingBest":"TBRays","WinningRankingDiff":9,"WinningGamesCountDiff":1},"ScoringRankingWithDiff":{"ScoringRankingBest":"TBRays","ScoringRankingDiff":11,"ScoringGamesCountDiff":9},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"CHIWhite Sox","ReceivingRankingDiff":14,"ReceivingGamesCountDiff":6}}},"expectedTotalScore":10.333333333333334,"expectedWinnerRuns":6.666666666666667,"expectedLoserRuns":3.6666666666666665,"expectedHandicap":3.0000000000000004},{"game":"MILBrewers @ KCRoyals","seriesExpectedWinner":"MILBrewers","isConsistent":false,"confidenceRanking":2,"analysisData":{"winningExpectedWinner":"MILBrewers","runsExpectedWinner":"MILBrewers","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"KCRoyals","totalWins":1,"totalLoses":2,"totalRunsScored":13,"totalRunsReceived":19,"avgRunsScored":4.333333333333333,"avgRunsReceived":6.333333333333333,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nTexas","RESULT":"W7-1","W-L":"20-13","WIN":"Schreiber 3-0","LOSS":"Winn 0-1","SAVE":"","ATT":"25,690","WINS":"20","LOSES":"13","RUNSSCORED":"7","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568959/rangers-royals"},{"DATE":"Sat, May 4","OPPONENT":"vs\nTexas","RESULT":"L15-4","W-L":"20-14","WIN":"Sborz 1-0","LOSS":"Wacha 1-4","SAVE":"","ATT":"26,002","WINS":"20","LOSES":"14","RUNSSCORED":"4","RUNSRECEIVED":"15","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568974/rangers-royals"},{"DATE":"Sun, May 5","OPPONENT":"vs\nTexas","RESULT":"L3-2 F/10","W-L":"20-15","WIN":"Yates 3-0","LOSS":"McArthur 1-1","SAVE":"Robertson 1","ATT":"20,613","WINS":"20","LOSES":"15","RUNSSCORED":"2","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568989/rangers-royals"}]},"teamAwayResultsData":{"period":3,"teamName":"MILBrewers","totalWins":1,"totalLoses":2,"totalRunsScored":8,"totalRunsReceived":12,"avgRunsScored":2.6666666666666665,"avgRunsReceived":4,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nChicago","RESULT":"W3-1","W-L":"20-11","WIN":"Peguero 4-0","LOSS":"Alzolay 1-4","SAVE":"Megill 2","ATT":"33,557","WINS":"20","LOSES":"11","RUNSSCORED":"3","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568954/brewers-cubs"},{"DATE":"Sat, May 4","OPPONENT":"@\nChicago","RESULT":"L6-5","W-L":"20-12","WIN":"Taillon 3-0","LOSS":"Myers 0-2","SAVE":"Neris 6","ATT":"40,505","WINS":"20","LOSES":"12","RUNSSCORED":"5","RUNSRECEIVED":"6","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568969/brewers-cubs"},{"DATE":"Sun, May 5","OPPONENT":"@\nChicago","RESULT":"L5-0","W-L":"20-13","WIN":"Assad 3-0","LOSS":"Peralta 3-1","SAVE":"","ATT":"39,299","WINS":"20","LOSES":"13","RUNSSCORED":"0","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568984/brewers-cubs"}]},"WinningRankingWithDiff":{"WinningRankingBest":"KCRoyals","WinningRankingDiff":1,"WinningGamesCountDiff":0},"ScoringRankingWithDiff":{"ScoringRankingBest":"KCRoyals","ScoringRankingDiff":14,"ScoringGamesCountDiff":5},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"MILBrewers","ReceivingRankingDiff":9,"ReceivingGamesCountDiff":7}}},"expectedTotalScore":10.333333333333332,"expectedWinnerRuns":6.333333333333333,"expectedLoserRuns":4,"expectedHandicap":2.333333333333333},{"game":"SEAMariners @ MINTwins","seriesExpectedWinner":"No clear winner","isConsistent":false,"confidenceRanking":0,"analysisData":{"winningExpectedWinner":"No clear winner","runsExpectedWinner":"No clear winner","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"MINTwins","totalWins":2,"totalLoses":1,"totalRunsScored":10,"totalRunsReceived":12,"avgRunsScored":3.3333333333333335,"avgRunsReceived":4,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nBoston","RESULT":"W5-2","W-L":"18-13","WIN":"Paddack 3-1","LOSS":"Houck 3-3","SAVE":"Duran 2","ATT":"24,488","WINS":"18","LOSES":"13","RUNSSCORED":"5","RUNSRECEIVED":"2","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568949/red-sox-twins"},{"DATE":"Sat, May 4","OPPONENT":"vs\nBoston","RESULT":"W3-1","W-L":"19-13","WIN":"Lopez 3-2","LOSS":"Booser 0-1","SAVE":"Sands 2","ATT":"23,587","WINS":"19","LOSES":"13","RUNSSCORED":"3","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568964/red-sox-twins"},{"DATE":"Sun, May 5","OPPONENT":"vs\nBoston","RESULT":"L9-2","W-L":"19-14","WIN":"Bernardino 1-1","LOSS":"Ryan 1-2","SAVE":"","ATT":"29,638","WINS":"19","LOSES":"14","RUNSSCORED":"2","RUNSRECEIVED":"9","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568979/red-sox-twins"}]},"teamAwayResultsData":{"period":3,"teamName":"SEAMariners","totalWins":2,"totalLoses":1,"totalRunsScored":13,"totalRunsReceived":9,"avgRunsScored":4.333333333333333,"avgRunsReceived":3,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nHouston","RESULT":"L5-3","W-L":"17-15","WIN":"Martinez 2-2","LOSS":"Speier 0-1","SAVE":"Hader 3","ATT":"33,796","WINS":"17","LOSES":"15","RUNSSCORED":"3","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568957/mariners-astros"},{"DATE":"Sat, May 4","OPPONENT":"@\nHouston","RESULT":"W5-0","W-L":"18-15","WIN":"Gilbert 3-0","LOSS":"Valdez 1-1","SAVE":"","ATT":"34,205","WINS":"18","LOSES":"15","RUNSSCORED":"5","RUNSRECEIVED":"0","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568972/mariners-astros"},{"DATE":"Sun, May 5","OPPONENT":"@\nHouston","RESULT":"W5-4","W-L":"19-15","WIN":"Munoz 2-2","LOSS":"Hader 1-3","SAVE":"","ATT":"36,280","WINS":"19","LOSES":"15","RUNSSCORED":"5","RUNSRECEIVED":"4","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568987/mariners-astros"}]},"WinningRankingWithDiff":{"WinningRankingBest":"MINTwins","WinningRankingDiff":2,"WinningGamesCountDiff":0},"ScoringRankingWithDiff":{"ScoringRankingBest":"SEAMariners","ScoringRankingDiff":7,"ScoringGamesCountDiff":3},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"SEAMariners","ReceivingRankingDiff":8,"ReceivingGamesCountDiff":3}}},"expectedTotalScore":7.333333333333333,"expectedWinnerRuns":4.333333333333333,"expectedLoserRuns":3,"expectedHandicap":1.333333333333333},{"game":"DETTigers @ CLEGuardians","seriesExpectedWinner":"CLEGuardians","isConsistent":true,"confidenceRanking":11,"analysisData":{"winningExpectedWinner":"CLEGuardians","runsExpectedWinner":"CLEGuardians","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"CLEGuardians","totalWins":2,"totalLoses":1,"totalRunsScored":11,"totalRunsReceived":8,"avgRunsScored":3.6666666666666665,"avgRunsReceived":2.6666666666666665,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nLos Angeles","RESULT":"L6-0","W-L":"20-12","WIN":"Soriano 1-4","LOSS":"Bibee 2-1","SAVE":"","ATT":"19,698","WINS":"20","LOSES":"12","RUNSSCORED":"0","RUNSRECEIVED":"6","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568946/angels-guardians"},{"DATE":"Sat, May 4","OPPONENT":"vs\nLos Angeles","RESULT":"W7-1","W-L":"21-12","WIN":"Lively 1-1","LOSS":"Detmers 3-3","SAVE":"","ATT":"26,292","WINS":"21","LOSES":"12","RUNSSCORED":"7","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568961/angels-guardians"},{"DATE":"Sun, May 5","OPPONENT":"vs\nLos Angeles","RESULT":"W4-1","W-L":"22-12","WIN":"Carrasco 2-2","LOSS":"Canning 1-4","SAVE":"Clase 10","ATT":"19,579","WINS":"22","LOSES":"12","RUNSSCORED":"4","RUNSRECEIVED":"1","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568976/angels-guardians"}]},"teamAwayResultsData":{"period":3,"teamName":"DETTigers","totalWins":0,"totalLoses":3,"totalRunsScored":6,"totalRunsReceived":12,"avgRunsScored":2,"avgRunsReceived":4,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nNew York","RESULT":"L2-1","W-L":"18-14","WIN":"Santana 2-0","LOSS":"Foley 2-1","SAVE":"","ATT":"37,386","WINS":"18","LOSES":"14","RUNSSCORED":"1","RUNSRECEIVED":"2","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568952/tigers-yankees"},{"DATE":"Sat, May 4","OPPONENT":"@\nNew York","RESULT":"L5-3","W-L":"18-15","WIN":"Schmidt 3-1","LOSS":"Mize 1-1","SAVE":"Holmes 11","ATT":"45,017","WINS":"18","LOSES":"15","RUNSSCORED":"3","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568967/tigers-yankees"},{"DATE":"Sun, May 5","OPPONENT":"@\nNew York","RESULT":"L5-2 F/8","W-L":"18-16","WIN":"Gonzalez 2-1","LOSS":"Miller 3-4","SAVE":"Santana 2","ATT":"35,119","WINS":"18","LOSES":"16","RUNSSCORED":"2","RUNSRECEIVED":"5","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568982/tigers-yankees"}]},"WinningRankingWithDiff":{"WinningRankingBest":"CLEGuardians","WinningRankingDiff":14,"WinningGamesCountDiff":2},"ScoringRankingWithDiff":{"ScoringRankingBest":"CLEGuardians","ScoringRankingDiff":11,"ScoringGamesCountDiff":5},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"CLEGuardians","ReceivingRankingDiff":12,"ReceivingGamesCountDiff":4}}},"expectedTotalScore":6,"expectedWinnerRuns":4,"expectedLoserRuns":2,"expectedHandicap":2},{"game":"LAAngels @ PITPirates","seriesExpectedWinner":"PITPirates","isConsistent":true,"confidenceRanking":6,"analysisData":{"winningExpectedWinner":"PITPirates","runsExpectedWinner":"PITPirates","teamsData":{"teamHomeResultsData":{"period":3,"teamName":"PITPirates","totalWins":2,"totalLoses":1,"totalRunsScored":8,"totalRunsReceived":6,"avgRunsScored":2.6666666666666665,"avgRunsReceived":2,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"vs\nColorado","RESULT":"L3-2","W-L":"14-19","WIN":"Quantrill 1-3","LOSS":"Perez 1-2","SAVE":"Beeks 1","ATT":"20,646","WINS":"14","LOSES":"19","RUNSSCORED":"2","RUNSRECEIVED":"3","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568951/rockies-pirates"},{"DATE":"Sat, May 4","OPPONENT":"vs\nColorado","RESULT":"W1-0","W-L":"15-19","WIN":"Bednar 2-2","LOSS":"Mears 0-3","SAVE":"","ATT":"24,149","WINS":"15","LOSES":"19","RUNSSCORED":"1","RUNSRECEIVED":"0","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568966/rockies-pirates"},{"DATE":"Sun, May 5","OPPONENT":"vs\nColorado","RESULT":"W5-3","W-L":"16-19","WIN":"Ortiz 2-1","LOSS":"Feltner 1-3","SAVE":"Bednar 6","ATT":"12,912","WINS":"16","LOSES":"19","RUNSSCORED":"5","RUNSRECEIVED":"3","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568981/rockies-pirates"}]},"teamAwayResultsData":{"period":3,"teamName":"LAAngels","totalWins":1,"totalLoses":2,"totalRunsScored":8,"totalRunsReceived":11,"avgRunsScored":2.6666666666666665,"avgRunsReceived":3.6666666666666665,"scheduleData":[{"DATE":"Fri, May 3","OPPONENT":"@\nCleveland","RESULT":"W6-0","W-L":"12-20","WIN":"Soriano 1-4","LOSS":"Bibee 2-1","SAVE":"","ATT":"19,698","WINS":"12","LOSES":"20","RUNSSCORED":"6","RUNSRECEIVED":"0","ISWIN":"Win","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568946/angels-guardians"},{"DATE":"Sat, May 4","OPPONENT":"@\nCleveland","RESULT":"L7-1","W-L":"12-21","WIN":"Lively 1-1","LOSS":"Detmers 3-3","SAVE":"","ATT":"26,292","WINS":"12","LOSES":"21","RUNSSCORED":"1","RUNSRECEIVED":"7","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568961/angels-guardians"},{"DATE":"Sun, May 5","OPPONENT":"@\nCleveland","RESULT":"L4-1","W-L":"12-22","WIN":"Carrasco 2-2","LOSS":"Canning 1-4","SAVE":"Clase 10","ATT":"19,579","WINS":"12","LOSES":"22","RUNSSCORED":"1","RUNSRECEIVED":"4","ISWIN":"Lost","GAMELINK":"https://www.espn.com/mlb/game/_/gameId/401568976/angels-guardians"}]},"WinningRankingWithDiff":{"WinningRankingBest":"PITPirates","WinningRankingDiff":4,"WinningGamesCountDiff":1},"ScoringRankingWithDiff":{"ScoringRankingBest":"LAAngels","ScoringRankingDiff":2,"ScoringGamesCountDiff":0},"ReceivingRankingWithDiff":{"ReceivingRankingBest":"PITPirates","ReceivingRankingDiff":10,"ReceivingGamesCountDiff":5}}},"expectedTotalScore":5.666666666666666,"expectedWinnerRuns":3.6666666666666665,"expectedLoserRuns":2,"expectedHandicap":1.6666666666666665}]
+[
+    {
+        "game": "TEXRangers @ OAKAthletics",
+        "seriesExpectedWinner": "OAKAthletics",
+        "isConsistent": false,
+        "confidenceRanking": 3,
+        "analysisData": {
+            "winningExpectedWinner": "OAKAthletics",
+            "runsExpectedWinner": "OAKAthletics",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "OAKAthletics",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 26,
+                    "totalRunsReceived": 17,
+                    "avgRunsScored": 8.666666666666666,
+                    "avgRunsReceived": 5.666666666666667,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nMiami",
+                            "RESULT": "W3-1",
+                            "W-L": "16-17",
+                            "WIN": "Sears 2-2",
+                            "LOSS": "Weathers 2-3",
+                            "SAVE": "Erceg 2",
+                            "ATT": "8,533",
+                            "WINS": "16",
+                            "LOSES": "17",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568953/marlins-athletics"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nMiami",
+                            "RESULT": "W20-4",
+                            "W-L": "17-17",
+                            "WIN": "Blackburn 3-1",
+                            "LOSS": "Rogers 0-5",
+                            "SAVE": "",
+                            "ATT": "7,809",
+                            "WINS": "17",
+                            "LOSES": "17",
+                            "RUNSSCORED": "20",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568968/marlins-athletics"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nMiami",
+                            "RESULT": "L12-3",
+                            "W-L": "17-18",
+                            "WIN": "Smith 2-0",
+                            "LOSS": "Boyle 2-5",
+                            "SAVE": "",
+                            "ATT": "12,212",
+                            "WINS": "17",
+                            "LOSES": "18",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "12",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568983/marlins-athletics"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "TEXRangers",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 19,
+                    "totalRunsReceived": 13,
+                    "avgRunsScored": 6.333333333333333,
+                    "avgRunsReceived": 4.333333333333333,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nKansas City",
+                            "RESULT": "L7-1",
+                            "W-L": "17-16",
+                            "WIN": "Schreiber 3-0",
+                            "LOSS": "Winn 0-1",
+                            "SAVE": "",
+                            "ATT": "25,690",
+                            "WINS": "17",
+                            "LOSES": "16",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "7",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568959/rangers-royals"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nKansas City",
+                            "RESULT": "W15-4",
+                            "W-L": "18-16",
+                            "WIN": "Sborz 1-0",
+                            "LOSS": "Wacha 1-4",
+                            "SAVE": "",
+                            "ATT": "26,002",
+                            "WINS": "18",
+                            "LOSES": "16",
+                            "RUNSSCORED": "15",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568974/rangers-royals"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nKansas City",
+                            "RESULT": "W3-2 F/10",
+                            "W-L": "19-16",
+                            "WIN": "Yates 3-0",
+                            "LOSS": "McArthur 1-1",
+                            "SAVE": "Robertson 1",
+                            "ATT": "20,613",
+                            "WINS": "19",
+                            "LOSES": "16",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "2",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568989/rangers-royals"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "TEXRangers",
+                    "WinningRankingDiff": 7,
+                    "WinningGamesCountDiff": 0
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "OAKAthletics",
+                    "ScoringRankingDiff": 5,
+                    "ScoringGamesCountDiff": 7
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "TEXRangers",
+                    "ReceivingRankingDiff": 5,
+                    "ReceivingGamesCountDiff": 4
+                }
+            }
+        },
+        "expectedTotalScore": 14.333333333333332,
+        "expectedWinnerRuns": 8.666666666666666,
+        "expectedLoserRuns": 5.666666666666667,
+        "expectedHandicap": 2.999999999999999
+    },
+    {
+        "game": "SDPadres @ CHICubs",
+        "seriesExpectedWinner": "SDPadres",
+        "isConsistent": false,
+        "confidenceRanking": 7,
+        "analysisData": {
+            "winningExpectedWinner": "SDPadres",
+            "runsExpectedWinner": "SDPadres",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "CHICubs",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 12,
+                    "totalRunsReceived": 8,
+                    "avgRunsScored": 4,
+                    "avgRunsReceived": 2.6666666666666665,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nMilwaukee",
+                            "RESULT": "L3-1",
+                            "W-L": "19-14",
+                            "WIN": "Peguero 4-0",
+                            "LOSS": "Alzolay 1-4",
+                            "SAVE": "Megill 2",
+                            "ATT": "33,557",
+                            "WINS": "19",
+                            "LOSES": "14",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568954/brewers-cubs"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nMilwaukee",
+                            "RESULT": "W6-5",
+                            "W-L": "20-14",
+                            "WIN": "Taillon 3-0",
+                            "LOSS": "Myers 0-2",
+                            "SAVE": "Neris 6",
+                            "ATT": "40,505",
+                            "WINS": "20",
+                            "LOSES": "14",
+                            "RUNSSCORED": "6",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568969/brewers-cubs"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nMilwaukee",
+                            "RESULT": "W5-0",
+                            "W-L": "21-14",
+                            "WIN": "Assad 3-0",
+                            "LOSS": "Peralta 3-1",
+                            "SAVE": "",
+                            "ATT": "39,299",
+                            "WINS": "21",
+                            "LOSES": "14",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "0",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568984/brewers-cubs"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "SDPadres",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 24,
+                    "totalRunsReceived": 13,
+                    "avgRunsScored": 8,
+                    "avgRunsReceived": 4.333333333333333,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nArizona",
+                            "RESULT": "W7-1",
+                            "W-L": "17-18",
+                            "WIN": "Cease 4-2",
+                            "LOSS": "Cecconi 1-2",
+                            "SAVE": "",
+                            "ATT": "31,976",
+                            "WINS": "17",
+                            "LOSES": "18",
+                            "RUNSSCORED": "7",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568956/padres-diamondbacks"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nArizona",
+                            "RESULT": "W13-1",
+                            "W-L": "18-18",
+                            "WIN": "King 3-3",
+                            "LOSS": "Pfaadt 1-2",
+                            "SAVE": "",
+                            "ATT": "39,661",
+                            "WINS": "18",
+                            "LOSES": "18",
+                            "RUNSSCORED": "13",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568971/padres-diamondbacks"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nArizona",
+                            "RESULT": "L11-4",
+                            "W-L": "18-19",
+                            "WIN": "Nelson 2-2",
+                            "LOSS": "Waldron 1-4",
+                            "SAVE": "",
+                            "ATT": "30,968",
+                            "WINS": "18",
+                            "LOSES": "19",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "11",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568986/padres-diamondbacks"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "CHICubs",
+                    "WinningRankingDiff": 9,
+                    "WinningGamesCountDiff": 0
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "SDPadres",
+                    "ScoringRankingDiff": 10,
+                    "ScoringGamesCountDiff": 12
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "CHICubs",
+                    "ReceivingRankingDiff": 16,
+                    "ReceivingGamesCountDiff": 5
+                }
+            }
+        },
+        "expectedTotalScore": 12,
+        "expectedWinnerRuns": 8,
+        "expectedLoserRuns": 4,
+        "expectedHandicap": 4
+    },
+    {
+        "game": "SFGiants @ PHIPhillies",
+        "seriesExpectedWinner": "PHIPhillies",
+        "isConsistent": true,
+        "confidenceRanking": 3,
+        "analysisData": {
+            "winningExpectedWinner": "PHIPhillies",
+            "runsExpectedWinner": "PHIPhillies",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "PHIPhillies",
+                    "totalWins": 3,
+                    "totalLoses": 0,
+                    "totalRunsScored": 23,
+                    "totalRunsReceived": 10,
+                    "avgRunsScored": 7.666666666666667,
+                    "avgRunsReceived": 3.3333333333333335,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nSan Francisco",
+                            "RESULT": "W4-3",
+                            "W-L": "22-11",
+                            "WIN": "Strahm 2-0",
+                            "LOSS": "Hicks 2-1",
+                            "SAVE": "Alvarado 6",
+                            "ATT": "40,888",
+                            "WINS": "22",
+                            "LOSES": "11",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568958/giants-phillies"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nSan Francisco",
+                            "RESULT": "W14-3",
+                            "W-L": "23-11",
+                            "WIN": "Suarez 6-0",
+                            "LOSS": "Winn 3-4",
+                            "SAVE": "",
+                            "ATT": "42,610",
+                            "WINS": "23",
+                            "LOSES": "11",
+                            "RUNSSCORED": "14",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568973/giants-phillies"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nSan Francisco",
+                            "RESULT": "W5-4",
+                            "W-L": "24-11",
+                            "WIN": "Walker 2-0",
+                            "LOSS": "Webb 3-3",
+                            "SAVE": "Alvarado 7",
+                            "ATT": "41,058",
+                            "WINS": "24",
+                            "LOSES": "11",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568988/giants-phillies"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "SFGiants",
+                    "totalWins": 0,
+                    "totalLoses": 3,
+                    "totalRunsScored": 10,
+                    "totalRunsReceived": 23,
+                    "avgRunsScored": 3.3333333333333335,
+                    "avgRunsReceived": 7.666666666666667,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nPhiladelphia",
+                            "RESULT": "L4-3",
+                            "W-L": "15-18",
+                            "WIN": "Strahm 2-0",
+                            "LOSS": "Hicks 2-1",
+                            "SAVE": "Alvarado 6",
+                            "ATT": "40,888",
+                            "WINS": "15",
+                            "LOSES": "18",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568958/giants-phillies"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nPhiladelphia",
+                            "RESULT": "L14-3",
+                            "W-L": "15-19",
+                            "WIN": "Suarez 6-0",
+                            "LOSS": "Winn 3-4",
+                            "SAVE": "",
+                            "ATT": "42,610",
+                            "WINS": "15",
+                            "LOSES": "19",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "14",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568973/giants-phillies"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nPhiladelphia",
+                            "RESULT": "L5-4",
+                            "W-L": "15-20",
+                            "WIN": "Walker 2-0",
+                            "LOSS": "Webb 3-3",
+                            "SAVE": "Alvarado 7",
+                            "ATT": "41,058",
+                            "WINS": "15",
+                            "LOSES": "20",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568988/giants-phillies"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "PHIPhillies",
+                    "WinningRankingDiff": 27,
+                    "WinningGamesCountDiff": 3
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "PHIPhillies",
+                    "ScoringRankingDiff": 17,
+                    "ScoringGamesCountDiff": 13
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "PHIPhillies",
+                    "ReceivingRankingDiff": 18,
+                    "ReceivingGamesCountDiff": 13
+                }
+            }
+        },
+        "expectedTotalScore": 11,
+        "expectedWinnerRuns": 7.666666666666667,
+        "expectedLoserRuns": 3.3333333333333335,
+        "expectedHandicap": 4.333333333333334
+    },
+    {
+        "game": "MIAMarlins @ LADodgers",
+        "seriesExpectedWinner": "LADodgers",
+        "isConsistent": true,
+        "confidenceRanking": 25,
+        "analysisData": {
+            "winningExpectedWinner": "LADodgers",
+            "runsExpectedWinner": "LADodgers",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "LADodgers",
+                    "totalWins": 3,
+                    "totalLoses": 0,
+                    "totalRunsScored": 20,
+                    "totalRunsReceived": 6,
+                    "avgRunsScored": 6.666666666666667,
+                    "avgRunsReceived": 2,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nAtlanta",
+                            "RESULT": "W4-3 F/11",
+                            "W-L": "21-13",
+                            "WIN": "Grove 1-1",
+                            "LOSS": "Chavez 1-1",
+                            "SAVE": "",
+                            "ATT": "50,859",
+                            "WINS": "21",
+                            "LOSES": "13",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568947/braves-dodgers"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nAtlanta",
+                            "RESULT": "W11-2",
+                            "W-L": "22-13",
+                            "WIN": "Glasnow 6-1",
+                            "LOSS": "Elder 1-1",
+                            "SAVE": "",
+                            "ATT": "44,474",
+                            "WINS": "22",
+                            "LOSES": "13",
+                            "RUNSSCORED": "11",
+                            "RUNSRECEIVED": "2",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568962/braves-dodgers"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nAtlanta",
+                            "RESULT": "W5-1",
+                            "W-L": "23-13",
+                            "WIN": "Paxton 4-0",
+                            "LOSS": "Fried 2-1",
+                            "SAVE": "",
+                            "ATT": "52,733",
+                            "WINS": "23",
+                            "LOSES": "13",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568977/braves-dodgers"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "MIAMarlins",
+                    "totalWins": 1,
+                    "totalLoses": 2,
+                    "totalRunsScored": 17,
+                    "totalRunsReceived": 26,
+                    "avgRunsScored": 5.666666666666667,
+                    "avgRunsReceived": 8.666666666666666,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nOakland",
+                            "RESULT": "L3-1",
+                            "W-L": "9-25",
+                            "WIN": "Sears 2-2",
+                            "LOSS": "Weathers 2-3",
+                            "SAVE": "Erceg 2",
+                            "ATT": "8,533",
+                            "WINS": "9",
+                            "LOSES": "25",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568953/marlins-athletics"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nOakland",
+                            "RESULT": "L20-4",
+                            "W-L": "9-26",
+                            "WIN": "Blackburn 3-1",
+                            "LOSS": "Rogers 0-5",
+                            "SAVE": "",
+                            "ATT": "7,809",
+                            "WINS": "9",
+                            "LOSES": "26",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "20",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568968/marlins-athletics"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nOakland",
+                            "RESULT": "W12-3",
+                            "W-L": "10-26",
+                            "WIN": "Smith 2-0",
+                            "LOSS": "Boyle 2-5",
+                            "SAVE": "",
+                            "ATT": "12,212",
+                            "WINS": "10",
+                            "LOSES": "26",
+                            "RUNSSCORED": "12",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568983/marlins-athletics"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "LADodgers",
+                    "WinningRankingDiff": 19,
+                    "WinningGamesCountDiff": 2
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "LADodgers",
+                    "ScoringRankingDiff": 2,
+                    "ScoringGamesCountDiff": 3
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "LADodgers",
+                    "ReceivingRankingDiff": 26,
+                    "ReceivingGamesCountDiff": 20
+                }
+            }
+        },
+        "expectedTotalScore": 10.666666666666666,
+        "expectedWinnerRuns": 8.666666666666666,
+        "expectedLoserRuns": 2,
+        "expectedHandicap": 6.666666666666666
+    },
+    {
+        "game": "NYMets @ STLCardinals",
+        "seriesExpectedWinner": "STLCardinals",
+        "isConsistent": true,
+        "confidenceRanking": 4,
+        "analysisData": {
+            "winningExpectedWinner": "STLCardinals",
+            "runsExpectedWinner": "STLCardinals",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "STLCardinals",
+                    "totalWins": 1,
+                    "totalLoses": 2,
+                    "totalRunsScored": 9,
+                    "totalRunsReceived": 11,
+                    "avgRunsScored": 3,
+                    "avgRunsReceived": 3.6666666666666665,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nChicago",
+                            "RESULT": "W3-0",
+                            "W-L": "15-17",
+                            "WIN": "Gray 4-1",
+                            "LOSS": "Keller 0-1",
+                            "SAVE": "Helsley 11",
+                            "ATT": "34,010",
+                            "WINS": "15",
+                            "LOSES": "17",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "0",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568950/white-sox-cardinals"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nChicago",
+                            "RESULT": "L6-5 F/10",
+                            "W-L": "15-18",
+                            "WIN": "Kopech 1-3",
+                            "LOSS": "Fernandez 0-1",
+                            "SAVE": "Banks 1",
+                            "ATT": "38,559",
+                            "WINS": "15",
+                            "LOSES": "18",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "6",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568965/white-sox-cardinals"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nChicago",
+                            "RESULT": "L5-1",
+                            "W-L": "15-19",
+                            "WIN": "Crochet 2-4",
+                            "LOSS": "Gallegos 2-1",
+                            "SAVE": "",
+                            "ATT": "43,046",
+                            "WINS": "15",
+                            "LOSES": "19",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568980/white-sox-cardinals"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "NYMets",
+                    "totalWins": 0,
+                    "totalLoses": 3,
+                    "totalRunsScored": 15,
+                    "totalRunsReceived": 20,
+                    "avgRunsScored": 5,
+                    "avgRunsReceived": 6.666666666666667,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nTampa Bay",
+                            "RESULT": "L10-8",
+                            "W-L": "16-16",
+                            "WIN": "Armstrong 1-1",
+                            "LOSS": "Quintana 1-3",
+                            "SAVE": "Adam 2",
+                            "ATT": "19,077",
+                            "WINS": "16",
+                            "LOSES": "16",
+                            "RUNSSCORED": "8",
+                            "RUNSRECEIVED": "10",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568955/mets-rays"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nTampa Bay",
+                            "RESULT": "L3-1",
+                            "W-L": "16-17",
+                            "WIN": "Adam 2-0",
+                            "LOSS": "Ottavino 1-1",
+                            "SAVE": "Maton 1",
+                            "ATT": "18,968",
+                            "WINS": "16",
+                            "LOSES": "17",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568970/mets-rays"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nTampa Bay",
+                            "RESULT": "L7-6 F/10",
+                            "W-L": "16-18",
+                            "WIN": "Ramirez 1-0",
+                            "LOSS": "Diekman 1-1",
+                            "SAVE": "",
+                            "ATT": "19,310",
+                            "WINS": "16",
+                            "LOSES": "18",
+                            "RUNSSCORED": "6",
+                            "RUNSRECEIVED": "7",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568985/mets-rays"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "STLCardinals",
+                    "WinningRankingDiff": 2,
+                    "WinningGamesCountDiff": 1
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "NYMets",
+                    "ScoringRankingDiff": 14,
+                    "ScoringGamesCountDiff": 6
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "STLCardinals",
+                    "ReceivingRankingDiff": 12,
+                    "ReceivingGamesCountDiff": 9
+                }
+            }
+        },
+        "expectedTotalScore": 10.333333333333334,
+        "expectedWinnerRuns": 6.666666666666667,
+        "expectedLoserRuns": 3.6666666666666665,
+        "expectedHandicap": 3.0000000000000004
+    },
+    {
+        "game": "CHIWhite Sox @ TBRays",
+        "seriesExpectedWinner": "TBRays",
+        "isConsistent": true,
+        "confidenceRanking": 4,
+        "analysisData": {
+            "winningExpectedWinner": "TBRays",
+            "runsExpectedWinner": "TBRays",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "TBRays",
+                    "totalWins": 3,
+                    "totalLoses": 0,
+                    "totalRunsScored": 20,
+                    "totalRunsReceived": 15,
+                    "avgRunsScored": 6.666666666666667,
+                    "avgRunsReceived": 5,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nNew York",
+                            "RESULT": "W10-8",
+                            "W-L": "15-18",
+                            "WIN": "Armstrong 1-1",
+                            "LOSS": "Quintana 1-3",
+                            "SAVE": "Adam 2",
+                            "ATT": "19,077",
+                            "WINS": "15",
+                            "LOSES": "18",
+                            "RUNSSCORED": "10",
+                            "RUNSRECEIVED": "8",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568955/mets-rays"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nNew York",
+                            "RESULT": "W3-1",
+                            "W-L": "16-18",
+                            "WIN": "Adam 2-0",
+                            "LOSS": "Ottavino 1-1",
+                            "SAVE": "Maton 1",
+                            "ATT": "18,968",
+                            "WINS": "16",
+                            "LOSES": "18",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568970/mets-rays"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nNew York",
+                            "RESULT": "W7-6 F/10",
+                            "W-L": "17-18",
+                            "WIN": "Ramirez 1-0",
+                            "LOSS": "Diekman 1-1",
+                            "SAVE": "",
+                            "ATT": "19,310",
+                            "WINS": "17",
+                            "LOSES": "18",
+                            "RUNSSCORED": "7",
+                            "RUNSRECEIVED": "6",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568985/mets-rays"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "CHIWhite Sox",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 11,
+                    "totalRunsReceived": 9,
+                    "avgRunsScored": 3.6666666666666665,
+                    "avgRunsReceived": 3,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nSt. Louis",
+                            "RESULT": "L3-0",
+                            "W-L": "6-26",
+                            "WIN": "Gray 4-1",
+                            "LOSS": "Keller 0-1",
+                            "SAVE": "Helsley 11",
+                            "ATT": "34,010",
+                            "WINS": "6",
+                            "LOSES": "26",
+                            "RUNSSCORED": "0",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568950/white-sox-cardinals"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nSt. Louis",
+                            "RESULT": "W6-5 F/10",
+                            "W-L": "7-26",
+                            "WIN": "Kopech 1-3",
+                            "LOSS": "Fernandez 0-1",
+                            "SAVE": "Banks 1",
+                            "ATT": "38,559",
+                            "WINS": "7",
+                            "LOSES": "26",
+                            "RUNSSCORED": "6",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568965/white-sox-cardinals"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nSt. Louis",
+                            "RESULT": "W5-1",
+                            "W-L": "8-26",
+                            "WIN": "Crochet 2-4",
+                            "LOSS": "Gallegos 2-1",
+                            "SAVE": "",
+                            "ATT": "43,046",
+                            "WINS": "8",
+                            "LOSES": "26",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568980/white-sox-cardinals"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "TBRays",
+                    "WinningRankingDiff": 9,
+                    "WinningGamesCountDiff": 1
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "TBRays",
+                    "ScoringRankingDiff": 11,
+                    "ScoringGamesCountDiff": 9
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "CHIWhite Sox",
+                    "ReceivingRankingDiff": 14,
+                    "ReceivingGamesCountDiff": 6
+                }
+            }
+        },
+        "expectedTotalScore": 10.333333333333334,
+        "expectedWinnerRuns": 6.666666666666667,
+        "expectedLoserRuns": 3.6666666666666665,
+        "expectedHandicap": 3.0000000000000004
+    },
+    {
+        "game": "MILBrewers @ KCRoyals",
+        "seriesExpectedWinner": "MILBrewers",
+        "isConsistent": false,
+        "confidenceRanking": 2,
+        "analysisData": {
+            "winningExpectedWinner": "MILBrewers",
+            "runsExpectedWinner": "MILBrewers",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "KCRoyals",
+                    "totalWins": 1,
+                    "totalLoses": 2,
+                    "totalRunsScored": 13,
+                    "totalRunsReceived": 19,
+                    "avgRunsScored": 4.333333333333333,
+                    "avgRunsReceived": 6.333333333333333,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nTexas",
+                            "RESULT": "W7-1",
+                            "W-L": "20-13",
+                            "WIN": "Schreiber 3-0",
+                            "LOSS": "Winn 0-1",
+                            "SAVE": "",
+                            "ATT": "25,690",
+                            "WINS": "20",
+                            "LOSES": "13",
+                            "RUNSSCORED": "7",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568959/rangers-royals"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nTexas",
+                            "RESULT": "L15-4",
+                            "W-L": "20-14",
+                            "WIN": "Sborz 1-0",
+                            "LOSS": "Wacha 1-4",
+                            "SAVE": "",
+                            "ATT": "26,002",
+                            "WINS": "20",
+                            "LOSES": "14",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "15",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568974/rangers-royals"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nTexas",
+                            "RESULT": "L3-2 F/10",
+                            "W-L": "20-15",
+                            "WIN": "Yates 3-0",
+                            "LOSS": "McArthur 1-1",
+                            "SAVE": "Robertson 1",
+                            "ATT": "20,613",
+                            "WINS": "20",
+                            "LOSES": "15",
+                            "RUNSSCORED": "2",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568989/rangers-royals"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "MILBrewers",
+                    "totalWins": 1,
+                    "totalLoses": 2,
+                    "totalRunsScored": 8,
+                    "totalRunsReceived": 12,
+                    "avgRunsScored": 2.6666666666666665,
+                    "avgRunsReceived": 4,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nChicago",
+                            "RESULT": "W3-1",
+                            "W-L": "20-11",
+                            "WIN": "Peguero 4-0",
+                            "LOSS": "Alzolay 1-4",
+                            "SAVE": "Megill 2",
+                            "ATT": "33,557",
+                            "WINS": "20",
+                            "LOSES": "11",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568954/brewers-cubs"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nChicago",
+                            "RESULT": "L6-5",
+                            "W-L": "20-12",
+                            "WIN": "Taillon 3-0",
+                            "LOSS": "Myers 0-2",
+                            "SAVE": "Neris 6",
+                            "ATT": "40,505",
+                            "WINS": "20",
+                            "LOSES": "12",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "6",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568969/brewers-cubs"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nChicago",
+                            "RESULT": "L5-0",
+                            "W-L": "20-13",
+                            "WIN": "Assad 3-0",
+                            "LOSS": "Peralta 3-1",
+                            "SAVE": "",
+                            "ATT": "39,299",
+                            "WINS": "20",
+                            "LOSES": "13",
+                            "RUNSSCORED": "0",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568984/brewers-cubs"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "KCRoyals",
+                    "WinningRankingDiff": 1,
+                    "WinningGamesCountDiff": 0
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "KCRoyals",
+                    "ScoringRankingDiff": 14,
+                    "ScoringGamesCountDiff": 5
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "MILBrewers",
+                    "ReceivingRankingDiff": 9,
+                    "ReceivingGamesCountDiff": 7
+                }
+            }
+        },
+        "expectedTotalScore": 10.333333333333332,
+        "expectedWinnerRuns": 6.333333333333333,
+        "expectedLoserRuns": 4,
+        "expectedHandicap": 2.333333333333333
+    },
+    {
+        "game": "SEAMariners @ MINTwins",
+        "seriesExpectedWinner": "No clear winner",
+        "isConsistent": false,
+        "confidenceRanking": 0,
+        "analysisData": {
+            "winningExpectedWinner": "No clear winner",
+            "runsExpectedWinner": "No clear winner",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "MINTwins",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 10,
+                    "totalRunsReceived": 12,
+                    "avgRunsScored": 3.3333333333333335,
+                    "avgRunsReceived": 4,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nBoston",
+                            "RESULT": "W5-2",
+                            "W-L": "18-13",
+                            "WIN": "Paddack 3-1",
+                            "LOSS": "Houck 3-3",
+                            "SAVE": "Duran 2",
+                            "ATT": "24,488",
+                            "WINS": "18",
+                            "LOSES": "13",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "2",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568949/red-sox-twins"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nBoston",
+                            "RESULT": "W3-1",
+                            "W-L": "19-13",
+                            "WIN": "Lopez 3-2",
+                            "LOSS": "Booser 0-1",
+                            "SAVE": "Sands 2",
+                            "ATT": "23,587",
+                            "WINS": "19",
+                            "LOSES": "13",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568964/red-sox-twins"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nBoston",
+                            "RESULT": "L9-2",
+                            "W-L": "19-14",
+                            "WIN": "Bernardino 1-1",
+                            "LOSS": "Ryan 1-2",
+                            "SAVE": "",
+                            "ATT": "29,638",
+                            "WINS": "19",
+                            "LOSES": "14",
+                            "RUNSSCORED": "2",
+                            "RUNSRECEIVED": "9",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568979/red-sox-twins"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "SEAMariners",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 13,
+                    "totalRunsReceived": 9,
+                    "avgRunsScored": 4.333333333333333,
+                    "avgRunsReceived": 3,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nHouston",
+                            "RESULT": "L5-3",
+                            "W-L": "17-15",
+                            "WIN": "Martinez 2-2",
+                            "LOSS": "Speier 0-1",
+                            "SAVE": "Hader 3",
+                            "ATT": "33,796",
+                            "WINS": "17",
+                            "LOSES": "15",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568957/mariners-astros"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nHouston",
+                            "RESULT": "W5-0",
+                            "W-L": "18-15",
+                            "WIN": "Gilbert 3-0",
+                            "LOSS": "Valdez 1-1",
+                            "SAVE": "",
+                            "ATT": "34,205",
+                            "WINS": "18",
+                            "LOSES": "15",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "0",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568972/mariners-astros"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nHouston",
+                            "RESULT": "W5-4",
+                            "W-L": "19-15",
+                            "WIN": "Munoz 2-2",
+                            "LOSS": "Hader 1-3",
+                            "SAVE": "",
+                            "ATT": "36,280",
+                            "WINS": "19",
+                            "LOSES": "15",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568987/mariners-astros"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "MINTwins",
+                    "WinningRankingDiff": 2,
+                    "WinningGamesCountDiff": 0
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "SEAMariners",
+                    "ScoringRankingDiff": 7,
+                    "ScoringGamesCountDiff": 3
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "SEAMariners",
+                    "ReceivingRankingDiff": 8,
+                    "ReceivingGamesCountDiff": 3
+                }
+            }
+        },
+        "expectedTotalScore": 7.333333333333333,
+        "expectedWinnerRuns": 4.333333333333333,
+        "expectedLoserRuns": 3,
+        "expectedHandicap": 1.333333333333333
+    },
+    {
+        "game": "DETTigers @ CLEGuardians",
+        "seriesExpectedWinner": "CLEGuardians",
+        "isConsistent": true,
+        "confidenceRanking": 11,
+        "analysisData": {
+            "winningExpectedWinner": "CLEGuardians",
+            "runsExpectedWinner": "CLEGuardians",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "CLEGuardians",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 11,
+                    "totalRunsReceived": 8,
+                    "avgRunsScored": 3.6666666666666665,
+                    "avgRunsReceived": 2.6666666666666665,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nLos Angeles",
+                            "RESULT": "L6-0",
+                            "W-L": "20-12",
+                            "WIN": "Soriano 1-4",
+                            "LOSS": "Bibee 2-1",
+                            "SAVE": "",
+                            "ATT": "19,698",
+                            "WINS": "20",
+                            "LOSES": "12",
+                            "RUNSSCORED": "0",
+                            "RUNSRECEIVED": "6",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568946/angels-guardians"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nLos Angeles",
+                            "RESULT": "W7-1",
+                            "W-L": "21-12",
+                            "WIN": "Lively 1-1",
+                            "LOSS": "Detmers 3-3",
+                            "SAVE": "",
+                            "ATT": "26,292",
+                            "WINS": "21",
+                            "LOSES": "12",
+                            "RUNSSCORED": "7",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568961/angels-guardians"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nLos Angeles",
+                            "RESULT": "W4-1",
+                            "W-L": "22-12",
+                            "WIN": "Carrasco 2-2",
+                            "LOSS": "Canning 1-4",
+                            "SAVE": "Clase 10",
+                            "ATT": "19,579",
+                            "WINS": "22",
+                            "LOSES": "12",
+                            "RUNSSCORED": "4",
+                            "RUNSRECEIVED": "1",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568976/angels-guardians"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "DETTigers",
+                    "totalWins": 0,
+                    "totalLoses": 3,
+                    "totalRunsScored": 6,
+                    "totalRunsReceived": 12,
+                    "avgRunsScored": 2,
+                    "avgRunsReceived": 4,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nNew York",
+                            "RESULT": "L2-1",
+                            "W-L": "18-14",
+                            "WIN": "Santana 2-0",
+                            "LOSS": "Foley 2-1",
+                            "SAVE": "",
+                            "ATT": "37,386",
+                            "WINS": "18",
+                            "LOSES": "14",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "2",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568952/tigers-yankees"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nNew York",
+                            "RESULT": "L5-3",
+                            "W-L": "18-15",
+                            "WIN": "Schmidt 3-1",
+                            "LOSS": "Mize 1-1",
+                            "SAVE": "Holmes 11",
+                            "ATT": "45,017",
+                            "WINS": "18",
+                            "LOSES": "15",
+                            "RUNSSCORED": "3",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568967/tigers-yankees"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nNew York",
+                            "RESULT": "L5-2 F/8",
+                            "W-L": "18-16",
+                            "WIN": "Gonzalez 2-1",
+                            "LOSS": "Miller 3-4",
+                            "SAVE": "Santana 2",
+                            "ATT": "35,119",
+                            "WINS": "18",
+                            "LOSES": "16",
+                            "RUNSSCORED": "2",
+                            "RUNSRECEIVED": "5",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568982/tigers-yankees"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "CLEGuardians",
+                    "WinningRankingDiff": 14,
+                    "WinningGamesCountDiff": 2
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "CLEGuardians",
+                    "ScoringRankingDiff": 11,
+                    "ScoringGamesCountDiff": 5
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "CLEGuardians",
+                    "ReceivingRankingDiff": 12,
+                    "ReceivingGamesCountDiff": 4
+                }
+            }
+        },
+        "expectedTotalScore": 6,
+        "expectedWinnerRuns": 4,
+        "expectedLoserRuns": 2,
+        "expectedHandicap": 2
+    },
+    {
+        "game": "LAAngels @ PITPirates",
+        "seriesExpectedWinner": "PITPirates",
+        "isConsistent": true,
+        "confidenceRanking": 6,
+        "analysisData": {
+            "winningExpectedWinner": "PITPirates",
+            "runsExpectedWinner": "PITPirates",
+            "teamsData": {
+                "teamHomeResultsData": {
+                    "period": 3,
+                    "teamName": "PITPirates",
+                    "totalWins": 2,
+                    "totalLoses": 1,
+                    "totalRunsScored": 8,
+                    "totalRunsReceived": 6,
+                    "avgRunsScored": 2.6666666666666665,
+                    "avgRunsReceived": 2,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "vs\nColorado",
+                            "RESULT": "L3-2",
+                            "W-L": "14-19",
+                            "WIN": "Quantrill 1-3",
+                            "LOSS": "Perez 1-2",
+                            "SAVE": "Beeks 1",
+                            "ATT": "20,646",
+                            "WINS": "14",
+                            "LOSES": "19",
+                            "RUNSSCORED": "2",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568951/rockies-pirates"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "vs\nColorado",
+                            "RESULT": "W1-0",
+                            "W-L": "15-19",
+                            "WIN": "Bednar 2-2",
+                            "LOSS": "Mears 0-3",
+                            "SAVE": "",
+                            "ATT": "24,149",
+                            "WINS": "15",
+                            "LOSES": "19",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "0",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568966/rockies-pirates"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "vs\nColorado",
+                            "RESULT": "W5-3",
+                            "W-L": "16-19",
+                            "WIN": "Ortiz 2-1",
+                            "LOSS": "Feltner 1-3",
+                            "SAVE": "Bednar 6",
+                            "ATT": "12,912",
+                            "WINS": "16",
+                            "LOSES": "19",
+                            "RUNSSCORED": "5",
+                            "RUNSRECEIVED": "3",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568981/rockies-pirates"
+                        }
+                    ]
+                },
+                "teamAwayResultsData": {
+                    "period": 3,
+                    "teamName": "LAAngels",
+                    "totalWins": 1,
+                    "totalLoses": 2,
+                    "totalRunsScored": 8,
+                    "totalRunsReceived": 11,
+                    "avgRunsScored": 2.6666666666666665,
+                    "avgRunsReceived": 3.6666666666666665,
+                    "scheduleData": [
+                        {
+                            "DATE": "Fri, May 3",
+                            "OPPONENT": "@\nCleveland",
+                            "RESULT": "W6-0",
+                            "W-L": "12-20",
+                            "WIN": "Soriano 1-4",
+                            "LOSS": "Bibee 2-1",
+                            "SAVE": "",
+                            "ATT": "19,698",
+                            "WINS": "12",
+                            "LOSES": "20",
+                            "RUNSSCORED": "6",
+                            "RUNSRECEIVED": "0",
+                            "ISWIN": "Win",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568946/angels-guardians"
+                        },
+                        {
+                            "DATE": "Sat, May 4",
+                            "OPPONENT": "@\nCleveland",
+                            "RESULT": "L7-1",
+                            "W-L": "12-21",
+                            "WIN": "Lively 1-1",
+                            "LOSS": "Detmers 3-3",
+                            "SAVE": "",
+                            "ATT": "26,292",
+                            "WINS": "12",
+                            "LOSES": "21",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "7",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568961/angels-guardians"
+                        },
+                        {
+                            "DATE": "Sun, May 5",
+                            "OPPONENT": "@\nCleveland",
+                            "RESULT": "L4-1",
+                            "W-L": "12-22",
+                            "WIN": "Carrasco 2-2",
+                            "LOSS": "Canning 1-4",
+                            "SAVE": "Clase 10",
+                            "ATT": "19,579",
+                            "WINS": "12",
+                            "LOSES": "22",
+                            "RUNSSCORED": "1",
+                            "RUNSRECEIVED": "4",
+                            "ISWIN": "Lost",
+                            "GAMELINK": "https://www.espn.com/mlb/game/_/gameId/401568976/angels-guardians"
+                        }
+                    ]
+                },
+                "WinningRankingWithDiff": {
+                    "WinningRankingBest": "PITPirates",
+                    "WinningRankingDiff": 4,
+                    "WinningGamesCountDiff": 1
+                },
+                "ScoringRankingWithDiff": {
+                    "ScoringRankingBest": "LAAngels",
+                    "ScoringRankingDiff": 2,
+                    "ScoringGamesCountDiff": 0
+                },
+                "ReceivingRankingWithDiff": {
+                    "ReceivingRankingBest": "PITPirates",
+                    "ReceivingRankingDiff": 10,
+                    "ReceivingGamesCountDiff": 5
+                }
+            }
+        },
+        "expectedTotalScore": 5.666666666666666,
+        "expectedWinnerRuns": 3.6666666666666665,
+        "expectedLoserRuns": 2,
+        "expectedHandicap": 1.6666666666666665
+    }
+]
