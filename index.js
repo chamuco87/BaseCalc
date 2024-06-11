@@ -80,6 +80,7 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
+                    await save("AllGamesConsolidated", [], function(){}, "replace" ,"GameByGame");
                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                     await ProcessDailyGames(fullDatesAnalysis,false);//true for noselections to be shown/included
 
@@ -117,6 +118,7 @@ try {
     async function ProcessDailyGames(datesAnalysis, noSelections){
         numberPicks = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         winsCount = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
+        allConsolidatedGames = [];
         for (let te = 0; te < datesAnalysis.length; te++) {
             const mmonth = datesAnalysis[te];
         
@@ -2976,11 +2978,34 @@ async function CalculateWinnersViaFormula(date, noSelections)
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
-            
+            gameData.awayPitcher = game.awayTeam.awayPitcher;
+            gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
+            gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
+            gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
+            gameData.awayAVG = completeAwayBatter.totalsData[0].value;
+            gameData.awayOPS = completeAwayBatter.totalsData[1].value;
+            gameData.awayOBP = completeAwayBatter.totalsData[2].value;
+            gameData.awaySLG = completeAwayBatter.totalsData[3].value;
+            gameData.homePitcher = game.homeTeam.homePitcher;
+            gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
+            gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
+            gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
+            gameData.homeAVG = completeHomeBatter.totalsData[0].value;
+            gameData.homeOPS = completeHomeBatter.totalsData[1].value;
+            gameData.homeOBP = completeHomeBatter.totalsData[2].value;
+            gameData.homeSLG = completeHomeBatter.totalsData[3].value;
+            var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
+            gameData.finalWinner = winnerData.finalWinner;
+            gameData.isHomeWin = winnerData.finalWinner == gameData.home ? 1 : 0;
+            gameData.isAwayWin = winnerData.finalWinner == gameData.away ? 1 : 0;
+            gameData.date = date;
             
             games.push(gameData);
+            allConsolidatedGames.push(gameData);
 
             await save(date+"FinalSelections", games, function(){}, "replace");
+
+            await save("AllGamesConsolidated", allConsolidatedGames, function(){}, "replace", "GameByGame");
 
             
 
@@ -2991,7 +3016,7 @@ async function CalculateWinnersViaFormula(date, noSelections)
     }
     
 }
-        //console.log(games);
+        console.log(games);
         var expectedWinners =[];
         var patterns = await load("GeneralStatsPerSummary","GameByGame");
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
