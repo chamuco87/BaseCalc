@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:11, monthNumber:"06"}
+        {month:"June", from:1, to:12, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:11, to:11, monthNumber:"06"}
+        {month:"June", from:12, to:12, monthNumber:"06"}
     ];
     
     //Steps
@@ -80,9 +80,10 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
+                    //await save("NewGamesConsolidated", [], function(){}, "replace" ,"GameByGame");
                     await save("AllGamesConsolidated", [], function(){}, "replace" ,"GameByGame");
                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(fullDatesAnalysis,false);//true for noselections to be shown/included
+                    await ProcessDailyGames(fullDatesAnalysis,true);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -1089,7 +1090,9 @@ try {
                 homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
                 homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
             var homeAfter5Runs = homeTotalRuns - homeF5Runs;
-
+            
+            game.homeTotalRuns = homeTotalRuns;
+            game.awayTotalRuns = awayTotalRuns;
 
             game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
 
@@ -2996,8 +2999,8 @@ async function CalculateWinnersViaFormula(date, noSelections)
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
             gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWin = winnerData.finalWinner == gameData.home ? 1 : 0;
-            gameData.isAwayWin = winnerData.finalWinner == gameData.away ? 1 : 0;
+            gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:0;
             gameData.date = date;
             
             games.push(gameData);
