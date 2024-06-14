@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:12, monthNumber:"06"}
+        {month:"June", from:1, to:13, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:12, to:12, monthNumber:"06"}
+        {month:"June", from:14, to:14, monthNumber:"06"}
     ];
     
     //Steps
@@ -80,10 +80,15 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                    //await save("NewGamesConsolidated", [], function(){}, "replace" ,"GameByGame");
-                    await save("AllGamesConsolidated", [], function(){}, "replace" ,"GameByGame");
+                    var type = "AllGamesConsolidated";
+                    await save(type, [], function(){}, "replace" ,"GameByGame");
                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(fullDatesAnalysis,true);//true for noselections to be shown/included
+                    await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+
+                    var type = "NewGamesConsolidated";
+                    await save(type, [], function(){}, "replace" ,"GameByGame");
+                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                    await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -116,7 +121,7 @@ try {
       await driver.quit();
     }
 
-    async function ProcessDailyGames(datesAnalysis, noSelections){
+    async function ProcessDailyGames(datesAnalysis, noSelections, type){
         numberPicks = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         winsCount = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         allConsolidatedGames = [];
@@ -173,14 +178,14 @@ try {
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
                 //await consolidateAlgorithmResults(selectedDate)
 
-                await CalculateWinnersViaFormula(selectedDate, noSelections)
+                await CalculateWinnersViaFormula(selectedDate, noSelections, type)
                 }
                 catch(ex){
                     //throw ex;
                     // console.log("Generating from scratch:" + selectedDate);
                     //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                     // await getESPNData(selectedDate);
-                    await CalculateWinnersViaFormula(selectedDate, noSelections);  
+                    await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
                     continue;
                 }
                 
@@ -2685,7 +2690,7 @@ async function GetResultsSummary(){
         console.log(summary);
         await save("ResultSeriesSummary", summary, function(){}, "replace", "GameByGame");
 }
-async function CalculateWinnersViaFormula(date, noSelections)
+async function CalculateWinnersViaFormula(date, noSelections, type)
 {
     try{
         var finalSelectionsCSV = await load("finalSelectionsCSV", "GameByGame");
@@ -3000,7 +3005,7 @@ async function CalculateWinnersViaFormula(date, noSelections)
             var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
             gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
-            gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:0;
+            gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
             games.push(gameData);
@@ -3008,7 +3013,7 @@ async function CalculateWinnersViaFormula(date, noSelections)
 
             await save(date+"FinalSelections", games, function(){}, "replace");
 
-            await save("AllGamesConsolidated", allConsolidatedGames, function(){}, "replace", "GameByGame");
+            await save(type, allConsolidatedGames, function(){}, "replace", "GameByGame");
 
             
 
