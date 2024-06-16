@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:13, monthNumber:"06"}
+        {month:"June", from:1, to:14, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:14, to:14, monthNumber:"06"}
+        {month:"June", from:15, to:15, monthNumber:"06"}
     ];
     
     //Steps
@@ -5641,7 +5641,7 @@ function ProcessScheduleData(scheduleData, teamName)
             return schedulesAllData;
 }
 
-async function getScheduleData(date)
+async function getScheduleData(date, year = null)
 {
     var schedulesAllData = [];
     for (let index = 0; index < teams.length; index++) {
@@ -5660,7 +5660,14 @@ async function getScheduleData(date)
             }
                       
         });
-        await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+        if(!year)
+        {   
+            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+        }
+        else{
+            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace", year);
+        }
+        
     }
 }
 
