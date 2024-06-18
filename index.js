@@ -9,6 +9,7 @@ var statsURL = "https://www.espn.com/mlb/player/stats/_/";
 var battersURL = "https://www.espn.com/mlb/team/stats/_/name/";
 var schedulesURL = "https://www.espn.com/mlb/team/schedule/_/name/";
 var pitchersURL = "https://www.espn.com/mlb/team/stats/_/type/pitching/name/";
+var pitcherPreviousURL = "https://www.espn.com/mlb/team/stats/_/type/pitching/name/{team}/season/{year}/seasontype/2";
 
 var teams = [
     {team:"TEX Rangers", url:"tex/texas-rangers"},
@@ -44,6 +45,11 @@ var teams = [
 
 ];
 
+//var previousYears = ["2022", "2023"];
+var previousYears = ["2021", "2020","2019","2018"];
+
+var previousScheduleUrl = "https://www.espn.com/mlb/team/schedule/_/name/{team}/season/{year}/seasontype/2/half/{order}";
+
 (async function example() {
     let driver =await new Builder()
           .withCapabilities(
@@ -54,16 +60,66 @@ var teams = [
 
 
 try {
+
+        // for (let ater = 0; ater < previousYears.length; ater++) {
+        //     const year = previousYears[ater];
+        //     await getPreviousScheduleData(year);
+        //     await ProcessPreviousGameByGame(year);
+        //     await getPreviousPitcherGameByGame(year);
+        //     await getPreviousBatterGameByGame(year);
+        //     await getPreviousAllPitchersData(year);
+        // }
+    
+
+    var full2023DatesAnalysis = [
+        {month:"April", from:8, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:31, monthNumber:"05"},
+        {month:"June", from:1, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:1, monthNumber:"10"}
+    ];
+    
+    var full2022DatesAnalysis = [
+        {month:"April", from:16, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:31, monthNumber:"05"},
+        {month:"June", from:1, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:5, monthNumber:"10"}
+    ];
+
+    var full2021DatesAnalysis = [
+        {month:"April", from:9, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:31, monthNumber:"05"},
+        {month:"June", from:1, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:3, monthNumber:"10"}
+    ];
+        
+    
+        // var type = "AllGamesConsolidated";
+        // await save(type, [], function(){}, "replace" ,previousYears[0]);
+        // await save("finalSelectionsCSV", [], function(){}, "replace" ,previousYears[0]);
+        // await ProcessDailyGames(full2021DatesAnalysis,false, type, previousYears[0]);//true for noselections to be shown/included
+
+
+    
+  //----------------------------------------  
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:14, monthNumber:"06"}
+        {month:"June", from:1, to:16, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:15, to:15, monthNumber:"06"}
+        {month:"June", from:17, to:17, monthNumber:"06"}
     ];
     
     //Steps
@@ -80,15 +136,15 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                    var type = "AllGamesConsolidated";
-                    await save(type, [], function(){}, "replace" ,"GameByGame");
-                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-
-                    var type = "NewGamesConsolidated";
-                    await save(type, [], function(){}, "replace" ,"GameByGame");
-                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        //var type = "AllGamesConsolidated";
+                        //await save(type, [], function(){}, "replace" ,"GameByGame");
+                        //await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        //await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+// //
+                        var type = "NewGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -112,16 +168,17 @@ try {
 
     
 
-    
         
     } 
     catch(Ex){
-      console.log(Ex);
+        console.log(Ex);
+        await driver.quit();
+        await example();
     } finally {
-      await driver.quit();
+        await driver.quit();
     }
 
-    async function ProcessDailyGames(datesAnalysis, noSelections, type){
+    async function ProcessDailyGames(datesAnalysis, noSelections, type, year = null){
         numberPicks = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         winsCount = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         allConsolidatedGames = [];
@@ -147,13 +204,36 @@ try {
                 }
                 if(index <10)
                 {
-                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                    if(year){
+                    var descriptiveDate = year+"-"+mmonth.monthNumber+"-0"+index;
+                    }
+                    else{
+                        var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                    }
                 }
                 else{
-                    var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
+                    if(year){
+                            var descriptiveDate = year +"-"+mmonth.monthNumber+"-"+index;
+                        }
+                        else{
+                            var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
+                        }
                 }
+                
+
+                if(year)
+                {
+                    //await AlgoPreviousSeriesWinnerBasedOnResultAndPattern(selectedDate, year);
+                    //await getPreviousESPNData(selectedDate, year);
+                    //await getPreviousCoversWinPercentages(selectedDate, descriptiveDate, year);
+                    //await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year)
+                }
+                else{   
+                //-----------------------------    
                 try{
                 //await getScheduleData(selectedDate);
+
+
                 //await ProcessGameByGame(selectedDate);
                 //await getPitcherGameByGame(selectedDate);
                 //await getBatterGameByGame(selectedDate);
@@ -180,15 +260,16 @@ try {
 
                 await CalculateWinnersViaFormula(selectedDate, noSelections, type)
                 }
+                
                 catch(ex){
                     //throw ex;
                     // console.log("Generating from scratch:" + selectedDate);
                     //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                     // await getESPNData(selectedDate);
-                    await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
-                    continue;
+                    //await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
+                    //continue;
                 }
-                
+            }
                 }
             }
     }
@@ -1066,6 +1147,116 @@ try {
             }
             catch{
                 var gamesDet = await load("Games"+game.home+"Details", "GameByGame");
+                isHomeOrAway = "home";
+            }
+
+            var fullMonth = date.split(/[0-9]/)[0];
+            var targetMonth = fullMonth.substring(0,3);
+            var targetDate = date.replace(fullMonth, "").replace("th","").replace("rd","").replace("nd","").replace("st","");
+            var datee = targetMonth + " " +targetDate;
+            var targetGame = gamesDet.games.filter(function(item){
+                var dat = item.date.split(" ")[1] + " " + item.date.split(" ")[2];
+                
+                return dat.toLowerCase() == datee.toLocaleLowerCase(); 
+            })[0];
+        if(targetGame)
+        {
+            var awayTotalRuns = parseInt(targetGame.awayDetails.runsHitsDeatils[0].R);
+            var awayF5Runs =  parseInt(targetGame.awayDetails.runsHitsDeatils[0]["1"]);
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["2"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["3"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["4"])
+                awayF5Runs += parseInt(targetGame.awayDetails.runsHitsDeatils[0]["5"])
+            var awayAfter5Runs = awayTotalRuns - awayF5Runs;
+
+            var homeTotalRuns = parseInt(targetGame.homeDetails.runsHitsDeatils[0].R);
+            var homeF5Runs =  parseInt(targetGame.homeDetails.runsHitsDeatils[0]["1"]);
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["2"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["3"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["4"])
+                homeF5Runs += parseInt(targetGame.homeDetails.runsHitsDeatils[0]["5"])
+            var homeAfter5Runs = homeTotalRuns - homeF5Runs;
+            
+            game.homeTotalRuns = homeTotalRuns;
+            game.awayTotalRuns = awayTotalRuns;
+
+            game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+
+            game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
+
+            if(game.F5Winner.indexOf(expectedWinner) >= 0)
+            {
+                game.handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
+            }
+            else{
+                game.handicapF5 = awayF5Runs > homeF5Runs ? homeF5Runs - awayF5Runs : awayF5Runs - homeF5Runs;
+            }
+
+            if(game.finalWinner.indexOf(expectedWinner) >= 0)
+            {
+                game.handicap = awayTotalRuns > homeTotalRuns ? awayTotalRuns - homeTotalRuns :  homeTotalRuns - awayTotalRuns;
+            }
+            else{
+                game.handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
+            }
+
+            game.F5Winner = game.F5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+
+            game.FinalWinner = game.finalWinner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+            
+        }
+        return game;
+    }
+
+    async function GetPreviousResultDetails(date, game, expectedWinner, year)
+    {
+
+        if(game.away.indexOf("TOR") >= 0 ||game.home.indexOf("TOR") >= 0)
+            {
+                if(game.away.indexOf("TOR") >= 0)
+                {
+                    game.away = "TORBlue Jays";
+                }
+
+                if(game.home.indexOf("TOR") >= 0)
+                {
+                    game.home = "TORBlue Jays";
+                }
+            }
+
+            if(game.away.indexOf("White") >= 0 ||game.home.indexOf("White") >= 0)
+            {
+                if(game.away.indexOf("White") >= 0)
+                {
+                    game.away = "CHIWhite Sox";
+                }
+
+                if(game.home.indexOf("White") >= 0)
+                {
+                    game.home = "CHIWhite Sox";
+                }
+            }
+            if(game.away.indexOf("BOSRed") >= 0 ||game.home.indexOf("BOSRed") >= 0)
+            {
+                if(game.away.indexOf("BOSRed") >= 0)
+                {
+                    game.away = "BOSRed Sox";
+                }
+
+                if(game.home.indexOf("BOSRed") >= 0)
+                {
+                    game.home = "BOSRed Sox";
+                }
+            }
+
+            var gamesDet =[];
+            var isHomeOrAway = "";
+            try{
+                var gamesDet = await load("Games"+game.away+"Details", year);
+                isHomeOrAway = "away";
+            }
+            catch{
+                var gamesDet = await load("Games"+game.home+"Details", year);
                 isHomeOrAway = "home";
             }
 
@@ -2832,6 +3023,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
 
             var completeStdDev = await getStandardDeviation(eras);
 
+            completeStdDev  = completeStdDev == 0 ? 1 : completeStdDev;
             var completeCalcs = await CalculateDiffsAndPercentages(completeAwayFactors, completeHomeFactors, completeStdDev);
 
         
@@ -3150,6 +3342,422 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
                     await save("finalSelectionsCSV", finalSelectionsCSV, function(){}, "replace" ,"GameByGame");
+                }
+            }
+
+
+}
+
+
+async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year)
+{
+    try{
+        var finalSelectionsCSV = await load("finalSelectionsCSV", year);
+    }catch{
+        var finalSelectionsCSV = [];
+    }
+    var pitchersData = await load(date, year+"/"+date);
+    //var battersData = await load(date+"BattersData");
+    var seriesData0 = await load(date+"SeriesWinners0", year+"/"+date);
+    var seriesData7 = await load(date+"SeriesWinners7", year+"/"+date);
+    var seriesData3 = await load(date+"SeriesWinners3", year+"/"+date);
+    var teamsSchedule = await load(year+"TeamSchedules", year);
+    var pitchersDataByGame = await load("PitchersByTeamByGame", year);
+    var battersDataByGame = await load("BattersByTeamByGame", year);
+
+    var games = [];
+    var gams = [];
+    if(pitchersData.length == 1)
+    {
+        gams = pitchersData[0].games;
+    }
+    else{
+        gams = pitchersData;
+    }
+    for (let index = 0; index < gams.length; index++) {
+        var gameData = {};
+        const game = gams[index];
+        if(game.homeTeam.homePitcherDataNew && game.awayTeam.awayPitcherDataNew)
+        {
+        // var homePitcher = game.homeTeam.homePitcherDataNew[0];
+        // var homeBatter = battersData.filter(function(item){
+        //     return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
+        // })[0];
+        // var awayPitcher = game.awayTeam.awayPitcherDataNew[0];
+        // var awayBatter = battersData.filter(function(item){
+        //     return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;
+        // })[0];
+
+        // var awayFactors = await CalculateFactors(awayPitcher, awayBatter);
+        // var homeFactors = await CalculateFactors(homePitcher, homeBatter);
+
+        // var stdDev = await getStandardDeviation([awayPitcher.currentEra, awayPitcher.carrerEra, homePitcher.currentEra, homePitcher.carrerEra]);
+        // var calcs = await CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev);
+
+        var homePitchersComplete = pitchersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+        })[0];
+
+        var homePitcher = "";
+        var homePitcherParts = game.homeTeam.homePitcher.split(" ");
+        if(homePitcherParts.length > 1)
+        {
+            homePitcher = game.homeTeam.homePitcher.split(" ")[1];
+        }
+        else{
+            homePitcher = game.homeTeam.homePitcher;
+        }
+
+        var homePitcherComplete = homePitchersComplete.pitchersData.filter(function(item){
+            return item.pitcher.indexOf(homePitcher)>=0;
+        });
+
+        var homeIndexPitcher = homePitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0) ;
+
+        var homePitcherCompleteSliced = [];
+        if(homeIndexPitcher != -1)
+        {
+            homePitcherCompleteSliced = homePitcherComplete.slice(0,(homeIndexPitcher));
+        }
+        else{
+            homePitcherCompleteSliced = homePitcherComplete;
+        }
+
+        var homeBattersComplete = battersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+        })[0];
+
+        var homeBatterComplete = homeBattersComplete.battersData.games[homeBattersComplete.battersData.games.length-1];
+
+        var awayPitcher = "";
+        var awayPitcherParts = game.awayTeam.awayPitcher.split(" ");
+        if(awayPitcherParts.length > 1)
+        {
+            awayPitcher = game.awayTeam.awayPitcher.split(" ")[1];
+        }
+        else{
+            awayPitcher = game.awayTeam.awayPitcher;
+        }
+
+        var awayPitchersComplete = pitchersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+
+        var awayPitcherComplete = awayPitchersComplete.pitchersData.filter(function(item){
+            return item.pitcher.indexOf(awayPitcher)>=0;
+        });
+        
+        var awayIndexPitcher = awayPitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0);
+
+        var awayPitcherCompleteSliced = [];
+        if(awayIndexPitcher != -1)
+        {
+            awayPitcherCompleteSliced = awayPitcherComplete.slice(0,(awayIndexPitcher));
+        }
+        else{
+            awayPitcherCompleteSliced = awayPitcherComplete;
+        }
+
+        var awayBattersComplete = battersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+
+        var awayBatterComplete = awayBattersComplete.battersData.games[awayBattersComplete.battersData.games.length-1];
+        if(homePitcherCompleteSliced.length > 0 && awayPitcherCompleteSliced.length > 0){
+            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra};
+            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra}
+            var completeAwayBatter = {totalsData:[]};
+            completeAwayBatter.totalsData.push({stat:"AVG",value:awayBatterComplete.avgAvg});
+            completeAwayBatter.totalsData.push({stat:"OPS",value:awayBatterComplete.avgRunsHitsFactor});
+            completeAwayBatter.totalsData.push({stat:"OBP",value:awayBatterComplete.battingAvg});
+            completeAwayBatter.totalsData.push({stat:"SLG",value:awayBatterComplete.hitsRunsFactor});
+
+            var completeHomeBatter = {totalsData:[]};
+            completeHomeBatter.totalsData.push({stat:"AVG",value:homeBatterComplete.avgAvg});
+            completeHomeBatter.totalsData.push({stat:"OPS",value:homeBatterComplete.avgRunsHitsFactor});
+            completeHomeBatter.totalsData.push({stat:"OBP",value:homeBatterComplete.battingAvg});
+            completeHomeBatter.totalsData.push({stat:"SLG",value:homeBatterComplete.hitsRunsFactor});
+
+            var completeAwayFactors = await CalculateFactors(completeAwayPitcher, completeAwayBatter);
+            var completeHomeFactors = await CalculateFactors(completeHomePitcher, completeHomeBatter);
+
+            var allData = homePitcherComplete.concat(awayPitcherComplete);
+
+            var eras = allData.map(function(item){
+                return parseFloat(item.eraGame);
+            });
+
+            
+
+            var completeStdDev = await getStandardDeviation(eras);
+
+            var completeCalcs = await CalculateDiffsAndPercentages(completeAwayFactors, completeHomeFactors, completeStdDev);
+
+        
+
+            var serie0 = seriesData0.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var serie3 = seriesData3.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var serie7 = seriesData7.filter(function(item){
+                return item.game.replace(" ","") == game.game.replace(" ","");
+            })[0];
+
+            var seriesIsConsistent = "";
+            var seriesWinner = "";
+            var seriesWinnerPercentage = 0;
+            var confidenceRanking = 0;
+            seriesIsConsistent =  serie0.seriesExpectedWinner == serie7.seriesExpectedWinner && serie0.seriesExpectedWinner == serie3.seriesExpectedWinner ? true:false;
+            if(seriesIsConsistent)
+            {
+                seriesWinner = serie0.seriesExpectedWinner;
+                seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns + serie3.expectedWinnerRuns)/3)*10);
+                seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking + serie3.confidenceRanking)/3)*((serie0.expectedHandicap + serie3.expectedHandicap + serie7.expectedHandicap)/3);
+            }
+            else{
+                if(serie0.seriesExpectedWinner == serie7.seriesExpectedWinner)
+                {
+                    seriesWinner = serie0.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking + serie7.confidenceRanking)/2)*((serie0.expectedHandicap + serie7.expectedHandicap)/2);
+                }
+                else if(serie3.seriesExpectedWinner == serie7.seriesExpectedWinner)
+                {
+                    seriesWinner = serie3.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie3.expectedWinnerRuns + serie7.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    seriesWinnerPercentage += serie7.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie7.confidenceRanking + serie3.confidenceRanking)/2)*((serie3.expectedHandicap + serie7.expectedHandicap)/2);
+                }
+                else if(serie0.seriesExpectedWinner == serie3.seriesExpectedWinner){
+                    seriesWinner = serie3.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns + serie3.expectedWinnerRuns)/2)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
+                }
+            }
+
+            var homeSeriesPercentage = seriesWinner == game.homeTeam.homeTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
+            var awaySeriesPercentage = seriesWinner == game.awayTeam.awayTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
+
+            var awayResults = teamsSchedule.filter(function(item){
+                return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+            })[0];
+
+            var homeResults = teamsSchedule.filter(function(item){
+                return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
+            })[0];
+
+
+            var awayMostProbaleNextResult = awayResults.mostProbaleNextResult;
+            var awayMostProbablePercentage = awayResults.mostProbablePercentage == 100 ? 85 : awayResults.mostProbablePercentage;
+            var awayNextWinningPercentage = 0;
+            var awayNextlosingPercentage = 0;
+            if(awayMostProbaleNextResult == "Win")
+            {
+                if(awayMostProbablePercentage > 50)
+                {
+                    awayNextWinningPercentage = awayMostProbablePercentage;
+                    awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                }
+                else{
+                    awayNextWinningPercentage = 60;
+                    awayNextlosingPercentage = (100 - awayNextWinningPercentage);
+                }
+            }
+            else{
+                if(awayMostProbablePercentage > 50)
+                {
+                    awayNextlosingPercentage = awayMostProbablePercentage;
+                    awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+                }
+                else{
+                    awayNextlosingPercentage = 60;
+                    awayNextWinningPercentage = (100 - awayNextlosingPercentage);
+                }
+            }
+
+            var homeMostProbaleNextResult = homeResults.mostProbaleNextResult;
+            var homeMostProbablePercentage = homeResults.mostProbablePercentage == 100 ? 85 : homeResults.mostProbablePercentage;
+            var homeNextWinningPercentage = 0;
+            var homeNextlosingPercentage = 0;
+            if(homeMostProbaleNextResult == "Win")
+            {
+                if(homeMostProbablePercentage > 50)
+                {
+                    homeNextWinningPercentage = homeMostProbablePercentage;
+                    homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+                }
+                else{
+                    homeNextWinningPercentage = 60;
+                    homeNextlosingPercentage = (100 - homeNextWinningPercentage);
+                }
+            }
+            else{
+                if(homeMostProbablePercentage > 50)
+                {
+                    homeNextlosingPercentage = homeMostProbablePercentage;
+                    homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+                }
+                else{
+                    homeNextlosingPercentage = 60;
+                    homeNextWinningPercentage = (100 - homeNextlosingPercentage);
+                }
+            }
+
+
+            gameData.game = game.game;
+            gameData.time = game.gameTime;
+            gameData.away = game.awayTeam.awayTeam;
+            gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
+            gameData.awaySeriesPercentage = awaySeriesPercentage;
+            gameData.awayNextWinningPercentage = awayNextWinningPercentage;
+            gameData.awayCurrentStreak = awayResults.currentStreak;
+
+            gameData.home = game.homeTeam.homeTeam;
+            gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
+            gameData.homeSeriesPercentage = homeSeriesPercentage;
+            gameData.homeNextWinningPercentage = homeNextWinningPercentage;
+            gameData.homeCurrentStreak = homeResults.currentStreak;
+            
+            
+            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            gameData.seriesWinner = seriesWinner;
+            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+
+            var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
+            var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
+
+            gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+            gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
+            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            // gameData.formulaWin = completeCalcs.winner;
+            
+            gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
+            gameData.stdDev = completeCalcs.stdDev;
+            gameData.awayPitcher = game.awayTeam.awayPitcher;
+            gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
+            gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
+            gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
+            gameData.awayAVG = completeAwayBatter.totalsData[0].value;
+            gameData.awayOPS = completeAwayBatter.totalsData[1].value;
+            gameData.awayOBP = completeAwayBatter.totalsData[2].value;
+            gameData.awaySLG = completeAwayBatter.totalsData[3].value;
+            gameData.homePitcher = game.homeTeam.homePitcher;
+            gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
+            gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
+            gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
+            gameData.homeAVG = completeHomeBatter.totalsData[0].value;
+            gameData.homeOPS = completeHomeBatter.totalsData[1].value;
+            gameData.homeOBP = completeHomeBatter.totalsData[2].value;
+            gameData.homeSLG = completeHomeBatter.totalsData[3].value;
+            var winnerData = await GetPreviousResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home, year);
+            gameData.finalWinner = winnerData.finalWinner;
+            gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
+            gameData.date = date;
+            
+            games.push(gameData);
+            allConsolidatedGames.push(gameData);
+
+            await save(date+"FinalSelections", games, function(){}, "replace", year+"/"+date);
+
+            await save(type, allConsolidatedGames, function(){}, "replace", year);
+
+            
+
+        }
+        else{
+            var stopHere = "";
+        }
+    }
+    
+}
+        console.log(games);
+        var expectedWinners =[];
+        //var patterns = await load("GeneralStatsPerSummary",year);
+        var coversPercentages = await load("CoversPercentagesP",year);
+        // var selectedPatterns =  patterns.filter(function(item){
+        //     return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+        // });
+        //     selectedPatterns = patterns.slice(0,5);
+
+            for (let fsfs = 0; fsfs < games.length; fsfs++) {
+                //const pattern = selectedPatterns[fsfs];
+                //var sortedGames = await sorting(games, pattern.selectedProperty, pattern.orderByDirection);
+                var selectedGame = games[fsfs];
+                //var isConsistentPattern = pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+
+                
+                if(selectedGame)
+                {
+                    
+
+                    var selectedTeam = selectedGame.home;
+                    var isConsitent = false;
+                    if(!isConsitent)
+                    {
+                        var matches = (selectedGame.nextWinners == selectedGame.formulaWinner ? 1 : 0) + 
+                                        (selectedGame.overallWinner == selectedGame.nextWinners ? 1 : 0) +
+                                        (selectedGame.seriesWinner  == selectedGame.overallWinner ? 1 : 0);
+
+                        isConsitent = matches >=3 ? true : false;
+                        if(isConsitent)
+                        {
+                            selectedTeam = selectedGame.formulaWinner;
+                        }
+                        else if(selectedGame.seriesWinner == selectedGame.formulaWinner){
+                            selectedTeam = selectedGame.formulaWinner;
+                        }
+                        
+                    }
+                    
+
+                    var coversPercentagesData = coversPercentages.filter(function(item){
+                        return item.date == date && (item.homeTeam.indexOf(selectedTeam) >= 0 || item.awayTeam.indexOf(selectedTeam) >= 0);
+                    });
+
+                    var coversPer = 100;
+                    var opponentPer = 0;
+                    if(coversPercentagesData.length > 0)
+                    {
+                        if(coversPercentagesData[0].awayTeam == selectedTeam)
+                        {
+                            coversPer = coversPercentagesData[0].coversAwayWinPercentage;
+                            opponentPer = coversPercentagesData[0].coversHomeWinPercentage;
+                        }
+                        else{
+                            coversPer = coversPercentagesData[0].coversHomeWinPercentage;
+                            opponentPer = coversPercentagesData[0].coversAwayWinPercentage;
+                        }
+                    }
+
+                    if(coversPer > opponentPer && isConsitent &&  (noSelections == null || noSelections == false))
+                    {
+                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        winsCount = detail.winsCount;
+                        numberPicks = detail.numberPicks;
+                        expectedWinners = detail.expectedWinners;
+                        finalSelectionsCSV = detail.finalSelectionsCSV;
+                    }
+                    else if((noSelections != null && noSelections != false)){
+                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        winsCount = detail.winsCount;
+                        numberPicks = detail.numberPicks;
+                        expectedWinners = detail.expectedWinners;
+                        finalSelectionsCSV = detail.finalSelectionsCSV;
+                    }
+                    await save("finalSelectionsCSV", finalSelectionsCSV, function(){}, "replace" ,year);
                 }
             }
 
@@ -3499,6 +4107,90 @@ async function getPitcherGameByGame()
     }
 }
 
+async function getPreviousPitcherGameByGame(year)
+{
+    var teamsResultsData = await load(year+"TeamSchedules", year);
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+        try{
+            var pitchersByTeam = await load("PitchersByTeamByGame",year);
+        }
+        catch{
+            var pitchersByTeam = [];
+        }
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        
+        var pitchersTeam = [];
+        var uniquePitchers = [];
+        var allGamesDetails = await load("Games"+team.teamName+"Details", year);
+        var teamDetails = {teamName: team.teamName, pitchers:[]}
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+          var scope = [];
+            if(game.game.indexOf(team.teamName + " @") >= 0)
+            {
+                scope = game.homeDetails.pitchersDeatils;
+            }
+            else{
+                scope = game.awayDetails.pitchersDeatils;
+            }
+            
+            for (let re = 0; re < scope.length; re++) {
+                const pitcher = scope[re];
+                var pitcherData = { 
+                    team: team.teamName,
+                    date: game.date, 
+                    pitcher: pitcher.PITCHERS, 
+                    eraGame: pitcher.ERA
+                };
+                pitchersTeam.push(pitcherData);
+                var isPitcherInList = uniquePitchers.filter(function(item){
+                    return item == pitcherData.pitcher;
+                });
+                if(isPitcherInList == 0)
+                {
+                    uniquePitchers.push(pitcherData.pitcher);
+                }
+                else{
+                    var stopHere = "";
+                }
+            }
+            var stopHere = "";
+        }
+        
+        for (let pt = 0; pt < uniquePitchers.length; pt++) {
+            const pitcher = uniquePitchers[pt];
+            var pitcherGames = pitchersTeam.filter(function(item){
+                return item.pitcher == pitcher
+            });
+            var stopHere = "";
+            var sumEra = 0;
+            var eraValues = [];
+            var avgCount = 0;
+            for (let rr = 0; rr < pitcherGames.length; rr++) {
+                const game = pitcherGames[rr];
+                var era = parseFloat(game.eraGame);
+                if(!isNaN(era))
+                {
+                    avgCount++;
+                    sumEra += era;
+                    game.eraAvg = sumEra/(avgCount);
+                    eraValues.push(parseFloat(game.eraGame));
+                    game.stdDev= getStandardDeviation(eraValues);
+                    //console.log(game);
+                }
+            }
+            var stopHere = "";
+        }
+
+        pitchersByTeam.push({teamName: team.teamName, pitchersData:pitchersTeam});
+        console.log(pitchersByTeam);
+        await save("PitchersByTeamByGame", pitchersByTeam, function(){}, "replace", year);
+    }
+}
+
 async function getBatterGameByGame()
 {
     var teamsResultsData = await GetLatestTeamSchedules();
@@ -3609,6 +4301,200 @@ async function getBatterGameByGame()
     }
 }
 
+async function getPreviousBatterGameByGame(year)
+{
+    var teamsResultsData = await load(year+"TeamSchedules", year);
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+        try{
+            var battersByTeam = await load("BattersByTeamByGame", year);
+        }
+        catch{
+            var battersByTeam = [];
+        }
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        
+        var battersTeam = [];
+        var uniqueBatters = [];
+        var allGamesDetails = await load("Games"+team.teamName+"Details", year);
+        var teamDetails = {teamName: team.teamName, games:[]}
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+          var scope = [];
+            if(game.game.indexOf(team.teamName + " @") >= 0)
+            {
+                scope = game.homeDetails.battersDeatils;
+            }
+            else{
+                scope = game.awayDetails.battersDeatils;
+            }
+            var avgSum = 0;
+            var avgCount = 0;
+            var hitsSum = 0;
+            var runsSum = 0;
+            for (let re = 0; re < scope.length; re++) {
+                const player = scope[re];
+                var isValidPlayer = isNaN(parseFloat(player["H-AB"].split("-")[0])) ? false : true;
+                if( isValidPlayer)
+                {
+                    var playerData = { 
+                        team: team.teamName,
+                        date: game.date, 
+                        player: player.HITTERS.split("\n")[0], 
+                        position: player.HITTERS.split("\n")[1],
+                        avg: player.AVG,
+                        ab: player["H-AB"].split("-")[1],
+                        runs: player.R,
+                        hits: player["H-AB"].split("-")[0],
+                        homeRuns: player.HR,
+                        rbi: player.RBI
+                    };
+                    avgSum += parseFloat(player.AVG);
+                    avgCount++;
+                    runsSum += parseFloat(player.R);
+                    hitsSum += parseFloat(player["H-AB"].split("-")[0]);
+                    battersTeam.push(playerData);
+                    var isPlayerInList = uniqueBatters.filter(function(item){
+                        return item == playerData.player;
+                    });
+                    if(isPlayerInList == 0)
+                    {
+                        uniqueBatters.push(playerData.player);
+                    }
+                    else{
+                        var stopHere = "";
+                    }
+                }
+            }
+            var gameAvg = avgSum/avgCount;
+            hitsSum = hitsSum == 0 ? 1 : hitsSum;
+            var hitsRunsFactor = runsSum/hitsSum;
+            if(isNaN(hitsRunsFactor))
+            {
+                var stopHere = "";
+            }
+            teamDetails.games.push({date: game.date, battingAvg: gameAvg, hitsRunsFactor:hitsRunsFactor, hits: hitsSum, runs:runsSum});
+        }
+
+            var sumAvg = 0;
+            var sumRunHitFactor = 0;
+            var avgValues = [];
+            var runHitFactorValues = [];
+            var avgCount = 0;
+            for (let rr = 0; rr < teamDetails.games.length; rr++) {
+                const game = teamDetails.games[rr];
+                var avg = parseFloat(game.battingAvg);
+                if(!isNaN(avg))
+                {
+                    avgCount++;
+                    sumAvg += avg;
+                    sumRunHitFactor += game.hitsRunsFactor;
+                    game.avgAvg = sumAvg/(avgCount);
+                    avgValues.push(parseFloat(avg));
+                    game.avgStdDev= getStandardDeviation(avgValues);
+                    game.avgRunsHitsFactor = sumRunHitFactor/avgCount;
+                    runHitFactorValues.push(parseFloat(game.hitsRunsFactor));
+                    game.runsHitsStdDev= getStandardDeviation(runHitFactorValues);
+
+                    //console.log(game);
+                }
+            
+            var stopHere = +"";
+        }
+        
+
+        battersByTeam.push({teamName: team.teamName, battersData:teamDetails});
+        console.log(battersByTeam);
+        await save("BattersByTeamByGame", battersByTeam, function(){}, "replace", year);
+    }
+}
+
+async function ProcessPreviousGameByGame(year)
+{
+    var teamsResultsData = await load(year+"TeamSchedules", year);
+    var dataScope = teamsResultsData.filter(function(item){
+        return item.period == 0;         
+        });
+    
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        var processedDates = [];
+        try{
+        var allGamesDetails = await load("Games"+team.teamName+"Details",year);
+        for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
+            const game = allGamesDetails.games[tr];
+            processedDates.push(game.date);
+            
+        }
+    }
+    catch{
+        var allGamesDetails = {teamName : team.teamName, games:[]};
+    }
+    
+    for (let index = 0; index < team.scheduleData.length; index++) {
+        const game = team.scheduleData[index];
+        var isProcessed = processedDates.filter(function(item){
+            return item == game.DATE;
+        });
+        if(isProcessed.length ==0)
+            {
+            var gameDetails = {game:"",date:game.DATE, homeTeam:"", awayTeam:"" , resultDetails:game, homeDetails:{}, awayDetails:{}};
+            var homeTeam = "";
+            var awayTeam = "";
+            if(game.OPPONENT.indexOf("vs") >= 0)
+            {
+                var opponent = game.OPPONENT.replace("vs\n","");
+                homeTeam = team.teamName;
+                awayTeam = opponent;
+                
+            }
+            else{
+                var opponent = game.OPPONENT.replace("@\n","");
+                homeTeam = opponent;
+                awayTeam = team.teamName;
+            }
+
+            gameDetails.awayTeam = awayTeam;
+            gameDetails.homeTeam = homeTeam;
+            gameDetails.game = awayTeam + " @ " + homeTeam;
+            
+            await driver.get(game.GAMELINK);
+            await driver.manage().setTimeouts({ implicit: 1000 });
+
+            await driver.executeScript(await ProcessRunsHitsGameData()).then(function(return_value) {
+                console.log(return_value);
+                var hitsRunsData = JSON.parse(return_value);
+                gameDetails.awayDetails.runsHitsDeatils = hitsRunsData.away;
+                gameDetails.homeDetails.runsHitsDeatils = hitsRunsData.home;
+            });
+
+            await driver.executeScript(await ProcessPitcherGameData()).then(function(return_value) {
+                console.log(return_value);
+                var pitchersData = JSON.parse(return_value);
+                gameDetails.awayDetails.pitchersDeatils = pitchersData.away;
+                gameDetails.homeDetails.pitchersDeatils = pitchersData.home;
+            });
+
+            await driver.executeScript(await ProcessBatterGameData()).then(function(return_value) {
+                console.log(return_value);
+                var battersData = JSON.parse(return_value);
+                gameDetails.awayDetails.battersDeatils = battersData.away;
+                gameDetails.homeDetails.battersDeatils = battersData.home;
+            });
+            
+            allGamesDetails.games.push(gameDetails);
+            console.log(allGamesDetails);
+            await save("Games"+team.teamName+"Details", allGamesDetails, function(){}, "replace", year);
+        }
+    }
+
+        var stopHere = "";
+        
+    }
+}
+
 async function ProcessGameByGame()
 {
     var teamsResultsData = await GetLatestTeamSchedules();
@@ -3692,6 +4578,180 @@ async function ProcessGameByGame()
         
     }
 }
+
+async function getPreviousCoversWinPercentages(date, descDate, year)
+{
+    var winPercentages = {};
+    var teamWinPercentages = [];
+    var links = [];
+    try{
+    var coversPercentages = await load("CoversPercentagesP",year);
+        var exists = coversPercentages.findIndex(x => x.date == date);
+    }
+    catch{
+        var coversPercentages = [];
+        var exists = -1;
+    }
+    if(exists == -1)
+    {
+        await driver.get("https://www.covers.com/sports/mlb/matchups?selectedDate="+descDate);
+        await driver.manage().setTimeouts({ implicit: 1000 });
+        await driver.executeScript(await GetCoversConsensusLinks()).then(function(return_value) {
+            console.log(return_value);
+            links = JSON.parse(return_value);
+        });
+
+        for (let sdf = 0; sdf < links.length; sdf++) {
+            const link = links[sdf];
+            await driver.get(link);
+
+            await driver.executeScript(await GetConsesunsData()).then(function(return_value) {
+                console.log(return_value);
+                var homeTeamName = "";
+                var awayTeamName = "";
+                var consensusData = JSON.parse(return_value);
+                if(consensusData.awayTeam != "no data")
+                {
+                var homeParts = consensusData.homeTeam.replace(".","").split(" ");
+                if(homeParts.length > 1)
+                { 
+                    if(homeParts[0] == "ST")
+                    {
+                        homeParts[0] = "STL";
+                    }
+
+                    if(homeParts[1] == "DIEGO")
+                        {
+                            homeParts[0] = "SD";
+                        }
+                        if(homeParts[1] == "FRANCISCO")
+                        {
+                            homeParts[0] = "SF";
+                        }
+
+                    if(homeParts[0] == "KANSAS")
+                    {
+                        homeParts[0] = "KC";
+                    }
+                    if(homeParts[0] == "TAMPA")
+                    {
+                        homeParts[0] = "TB";
+                    }
+                    var homeTeam = teams.filter(function(item){
+                        return item.team.toLowerCase().indexOf(homeParts[0].toLowerCase())>=0;
+                    });
+                    if(homeTeam.length > 1)
+                    {
+                        var homeTeam = homeTeam.filter(function(item){
+                            return item.team.toLowerCase().indexOf(homeParts[1].toLowerCase())>=0;
+                        });
+                    }
+                    if(homeTeam.length == 1)
+                    {
+                        homeTeamName = homeTeam[0].team.replace(" ","");
+                    }
+                    else{
+                        var stopHere = "";
+                    }
+                }
+                else{
+                    var homeParts = consensusData.homeTeam.substring(0,3);
+                    var homeTeam = teams.filter(function(item){
+                        return item.team.indexOf(homeParts)>=0;
+                    });
+                    if(homeTeam.length == 1)
+                    {
+                        homeTeamName = homeTeam[0].team.replace(" ","");
+                    }
+                    else{
+                        var homeTeam = teams.filter(function(item){
+                            return item.url.indexOf(homeParts)>=0;
+                        });
+                        if(homeTeam.length == 1)
+                            {
+                                homeTeamName = homeTeam[0].team.replace(" ","");
+                            }
+                            else{
+                                var stopHere = "";
+                            }
+                    }
+                }
+
+                var awayParts = consensusData.awayTeam.replace(".","").split(" ");
+                if(awayParts.length > 1)
+                { 
+                    if(awayParts[0] == "ST")
+                    {
+                        awayParts[0] = "STL";
+                    }
+                    if(awayParts[1] == "DIEGO")
+                    {
+                        awayParts[0] = "SD";
+                    }
+                    if(awayParts[1] == "FRANCISCO")
+                    {
+                        awayParts[0] = "SF";
+                    }
+                    if(awayParts[0] == "KANSAS")
+                    {
+                        awayParts[0] = "KC";
+                    }
+                    if(awayParts[0] == "TAMPA")
+                    {
+                        awayParts[0] = "TB";
+                    }
+                    var awayTeam = teams.filter(function(item){
+                        return item.team.toLowerCase().indexOf(awayParts[0].toLowerCase())>=0;
+                    });
+                    if(awayTeam.length > 1)
+                    {
+                        var awayTeam = awayTeam.filter(function(item){
+                            return item.team.toLowerCase().indexOf(awayParts[1].toLowerCase())>=0;
+                        });
+                    }
+                    if(awayTeam.length == 1)
+                    {
+                        awayTeamName = awayTeam[0].team.replace(" ","");
+                    }
+                    else{
+                        var stopHere = "";
+                    }
+                }
+                else{
+                    var awayParts = consensusData.awayTeam.substring(0,3);
+                    var awayTeam = teams.filter(function(item){
+                        return item.team.indexOf(awayParts)>=0;
+                    });
+                    if(awayTeam.length == 1)
+                    {
+                        awayTeamName = awayTeam[0].team.replace(" ","");
+                    }
+                    else{
+                        var awayTeam = teams.filter(function(item){
+                            return item.url.indexOf(awayParts)>=0;
+                        });
+                        if(awayTeam.length == 1)
+                            {
+                                awayTeamName = awayTeam[0].team.replace(" ","");
+                            }
+                            else{
+                                var stopHere = "";
+                            }
+                    }
+                }
+                var record = {date: date, awayTeam: awayTeamName, coversAwayWinPercentage: consensusData.awayPercentage, homeTeam: homeTeamName, coversHomeWinPercentage: consensusData.homePercentage,}
+                console.log("date: "+date + " away: "+ awayTeamName +" home: "+ homeTeamName);
+                coversPercentages.push(record);
+                }
+            });
+
+            
+            await save("CoversPercentagesP",coversPercentages,function(){},"replace",year);
+        
+        }
+    }
+}
+
 
 async function getCoversWinPercentages(date, descDate)
 {
@@ -4505,6 +5565,80 @@ async function BuildDayFiles(date)
     return gamesInADay;
 }
 
+async function BuildPreviousDayFiles(date, year)
+{
+    try{
+        var teamsSchedule = await load(year+"TeamSchedules", year);
+    }
+    catch{
+        //var teamsSchedule = await GetLatestTeamSchedules(date);
+    }
+    var dataScope = teamsSchedule.filter(function(item){
+        return item.period == 0; 
+        });
+    
+    var gamesInADay = [];
+    var targetMonth = date.split(/[0-9]/)[0].substring(0,3);
+    var targetDay = date.replace(/\D/g, "");
+    var datee = targetMonth+" "+targetDay; 
+    for (let index = 0; index < dataScope.length; index++) {
+        const team = dataScope[index];
+        var teamName = team.teamName;
+        var games = team.scheduleData.filter(function(item){
+            var dat = item.DATE.split(" ")[1] + " " + item.DATE.split(" ")[2];
+            console.log(dat);
+            console.log(datee);
+            return dat.toLowerCase() == datee.toLocaleLowerCase();         
+        });
+        for (let wa = 0; wa < games.length; wa++) {
+            const game = games[wa];
+            if(game.OPPONENT.indexOf("@")>=0)
+            {
+                
+                var gameDet = {
+                    game:"", 
+                    awayTeam: {
+                        awayTeam: "",
+                        awayId: "",
+                        awayPitcher: ""
+                    },
+                    homeTeam: {
+                        homeTeam: "",
+                        homeId: "",
+                        homePitcher: ""
+                    },
+                };
+
+                
+                gameDet.awayTeam.awayTeam = teamName;
+                if(game.OPPONENT.indexOf("Los Angeles") >= 0 || game.OPPONENT.indexOf("St.") >= 0 || game.OPPONENT.indexOf("New York") >= 0 || game.OPPONENT.indexOf("Chicago") >= 0 || game.OPPONENT.indexOf("Boston") >= 0 )
+                {
+                    var potentialTeam = game.GAMELINK.split("-")[(game.GAMELINK.split("-")).length-1];
+                    if(potentialTeam == "sox")
+                    {
+                        potentialTeam = game.GAMELINK.split("-")[(game.GAMELINK.split("-")).length-2];
+                    }
+                    gameDet.homeTeam.homeTeam = getTeam(potentialTeam);
+                }
+                else{
+                    gameDet.homeTeam.homeTeam = getTeam(game.OPPONENT);
+                }
+                gameDet.date = game.DATE;
+                gameDet.game = gameDet.awayTeam.awayTeam + " @ "+ gameDet.homeTeam.homeTeam;
+
+                gameDet.awayTeam.awayPitcher = game.ISWIN == "Lost" ? game.LOSS.split(" ")[0] : game.WIN.split(" ")[0];
+                gameDet.homeTeam.homePitcher = game.ISWIN == "Lost" ? game.WIN.split(" ")[0] : game.LOSS.split(" ")[0];
+
+                gamesInADay.push(gameDet);
+            }
+            
+        }
+    }
+
+    await save(date, gamesInADay, function(){}, "replace", year+"/"+date);
+    return gamesInADay;
+}
+
 function getTeam(originalTeam)
 {
     var homeTeam = originalTeam.replace("@\n","");
@@ -4788,6 +5922,235 @@ async function AlgoSeriesWinnerBasedOnResultAndPattern(date)
 
 }
 
+async function AlgoPreviousSeriesWinnerBasedOnResultAndPattern(date, year)
+{
+    try{
+        var allGames = await load(date, year);
+    }
+    catch{
+        var allGames = await BuildPreviousDayFiles(date,year);
+    }
+
+    
+    var dataPeriod = [0,7,3];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        try{
+            var teamsResultsData = await load(year+"TeamSchedules", year);
+        }
+        catch{
+            //var teamsResultsData = await GetLatestTeamSchedules(date);
+        }
+        var dataScope = teamsResultsData.filter(function(item){
+            return item.period == period;         
+            });
+
+        await getPreviousMoreWininigTeams(date, year);
+        await getPreviousMoreScoringTeams(date, year);
+        await getPreviousMoreReceivingTeams(date, year);
+        var teamsReceivingRuns = await load(date+"TeamSchedulesByReceiving"+period, year+"/"+date);
+        var teamsScoringRuns = await load(date+"TeamSchedulesByScoring"+period, year+"/"+date);
+        var teamsWinningResults = await load(date+"TeamSchedulesByWinning"+period, year+"/"+date);
+
+        var noDataGames = [];
+        var winnersByResults = [];
+        var gams = [];
+        if(allGames.length == 1)
+        {
+            gams = allGames[0].games
+        }
+        else{
+            gams = allGames
+        }
+        for (let index = 0; index < gams.length; index++) {
+            const game = gams[index];
+            
+
+            /// Comparing Results
+            
+            var teamHomeResultsData = dataScope.filter(function(item){
+                return item.teamName.indexOf(game.homeTeam.homeTeam)>=0;         
+                })[0];
+            
+            var homeReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+            var homeScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+            var homeWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.homeTeam.homeTeam)>=0);
+
+            var teamAwayResultsData = dataScope.filter(function(item){
+                return item.teamName.indexOf(game.awayTeam.awayTeam)>=0;         
+                })[0];
+            
+            var awayReceivingRanking = teamsReceivingRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+            var awayScoringRanking = teamsScoringRuns.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+            var awayWinningRanking = teamsWinningResults.findIndex((team) => team.teamName.indexOf(game.awayTeam.awayTeam)>=0);
+
+            var WinningRankingWithDiff = (awayWinningRanking>=homeWinningRanking) ? 
+                                            {WinningRankingBest: game.homeTeam.homeTeam,
+                                            WinningRankingDiff:(awayWinningRanking - homeWinningRanking), 
+                                            WinningGamesCountDiff: (teamHomeResultsData.totalWins - teamAwayResultsData.totalWins )} 
+                                            : 
+                                            {WinningRankingBest: game.awayTeam.awayTeam,
+                                                WinningRankingDiff:(homeWinningRanking - awayWinningRanking), 
+                                                WinningGamesCountDiff: (teamAwayResultsData.totalWins - teamHomeResultsData.totalWins )};
+
+            var ScoringRankingWithDiff = (awayScoringRanking>=homeScoringRanking) ? 
+            {ScoringRankingBest: game.homeTeam.homeTeam,
+                ScoringRankingDiff:(awayScoringRanking - homeScoringRanking), 
+                ScoringGamesCountDiff: (teamHomeResultsData.totalRunsScored - teamAwayResultsData.totalRunsScored )} 
+                : 
+                {ScoringRankingBest: game.awayTeam.awayTeam,
+                ScoringRankingDiff:(homeScoringRanking - awayScoringRanking), 
+                ScoringGamesCountDiff: (teamAwayResultsData.totalRunsScored - teamHomeResultsData.totalRunsScored )};
+
+
+            var ReceivingRankingWithDiff = (awayReceivingRanking<=homeReceivingRanking) ? 
+            {ReceivingRankingBest: game.awayTeam.awayTeam,
+                ReceivingRankingDiff:(homeReceivingRanking - awayReceivingRanking), 
+                ReceivingGamesCountDiff: (teamHomeResultsData.totalRunsReceived - teamAwayResultsData.totalRunsReceived )} 
+                : 
+                {ReceivingRankingBest: game.homeTeam.homeTeam,
+                ReceivingRankingDiff:(awayReceivingRanking - homeReceivingRanking), 
+                ReceivingGamesCountDiff: (teamAwayResultsData.totalRunsReceived - teamHomeResultsData.totalRunsReceived )};
+
+
+            var winningExpectedWinner = "";
+            var runsExpectedWinner = "";
+            var confidenceRanking = 0;
+
+            if(WinningRankingWithDiff.WinningGamesCountDiff > 0)
+            {
+                winningExpectedWinner = WinningRankingWithDiff.WinningRankingBest;
+                confidenceRanking += WinningRankingWithDiff.WinningGamesCountDiff;
+
+                if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
+                    
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                }
+                else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
+                    
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
+                    }
+
+                }
+                else{
+                    runsExpectedWinner = winningExpectedWinner;
+                }
+
+            }
+            else{
+
+                if(ScoringRankingWithDiff.ScoringGamesCountDiff > ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ScoringRankingWithDiff.ScoringRankingBest;
+
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff - ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                }
+                else if(ScoringRankingWithDiff.ScoringGamesCountDiff < ReceivingRankingWithDiff.ReceivingGamesCountDiff)
+                {
+                    runsExpectedWinner = ReceivingRankingWithDiff.ReceivingRankingBest;
+
+                    if(ScoringRankingWithDiff.ScoringRankingBest == ReceivingRankingWithDiff.ReceivingRankingBest)
+                    {
+                        confidenceRanking += (ScoringRankingWithDiff.ScoringGamesCountDiff + ReceivingRankingWithDiff.ReceivingGamesCountDiff);
+                    }
+                    else{
+                        confidenceRanking += (ReceivingRankingWithDiff.ReceivingGamesCountDiff - ScoringRankingWithDiff.ScoringGamesCountDiff);
+                    }
+                }
+                else{
+                    runsExpectedWinner = "No clear winner";
+                }
+
+                winningExpectedWinner = runsExpectedWinner;
+            }
+
+            
+            var winsAndRunsCalcResult = (winningExpectedWinner == runsExpectedWinner && WinningRankingWithDiff.WinningRankingBest == winningExpectedWinner) ? 
+            {   game: game.game,
+                seriesExpectedWinner: runsExpectedWinner, isConsistent: true, confidenceRanking: confidenceRanking,
+            analysisData: {winningExpectedWinner:winningExpectedWinner, 
+                            runsExpectedWinner:runsExpectedWinner,
+                            teamsData: { 
+                                    teamHomeResultsData:teamHomeResultsData, 
+                                    teamAwayResultsData: teamAwayResultsData,
+                                    WinningRankingWithDiff: WinningRankingWithDiff,
+                                    ScoringRankingWithDiff:ScoringRankingWithDiff,
+                                    ReceivingRankingWithDiff: ReceivingRankingWithDiff
+                                        }} } 
+            : 
+            {   game: game.game,
+                seriesExpectedWinner: runsExpectedWinner, isConsistent: false, confidenceRanking: confidenceRanking,
+                analysisData: {winningExpectedWinner:winningExpectedWinner, 
+                                runsExpectedWinner:runsExpectedWinner,
+                                teamsData: { 
+                                        teamHomeResultsData:teamHomeResultsData, 
+                                        teamAwayResultsData: teamAwayResultsData,
+                                        WinningRankingWithDiff: WinningRankingWithDiff,
+                                        ScoringRankingWithDiff:ScoringRankingWithDiff,
+                                        ReceivingRankingWithDiff: ReceivingRankingWithDiff
+                                            }} } 
+
+
+            winsAndRunsCalcResult.expectedTotalScore = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                                ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) + 
+                                ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
+                                : 
+                                ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) + 
+                                ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
+                            );
+            
+            winsAndRunsCalcResult.expectedWinnerRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                ((teamHomeResultsData.avgRunsScored >= teamAwayResultsData.avgRunsReceived) ? teamHomeResultsData.avgRunsScored:teamAwayResultsData.avgRunsReceived) 
+                : 
+                ((teamAwayResultsData.avgRunsScored >= teamHomeResultsData.avgRunsReceived) ? teamAwayResultsData.avgRunsScored:teamHomeResultsData.avgRunsReceived) 
+            );
+
+            winsAndRunsCalcResult.expectedLoserRuns = ((winsAndRunsCalcResult.seriesExpectedWinner == teamHomeResultsData.teamName) ? 
+                                ((teamHomeResultsData.avgRunsReceived <= teamAwayResultsData.avgRunsScored) ? teamHomeResultsData.avgRunsReceived:teamAwayResultsData.avgRunsScored)
+                                : 
+                                ((teamAwayResultsData.avgRunsReceived <= teamHomeResultsData.avgRunsScored) ? teamAwayResultsData.avgRunsReceived:teamHomeResultsData.avgRunsScored)
+                            );
+
+            winsAndRunsCalcResult.expectedHandicap = winsAndRunsCalcResult.expectedWinnerRuns - winsAndRunsCalcResult.expectedLoserRuns;
+                                            
+            winnersByResults.push(winsAndRunsCalcResult);
+        }
+        var highestConfidence = await sorting(winnersByResults, "confidenceRanking", "DESC");
+        highestConfidence = highestConfidence.filter(function(item){
+            return item.isConsistent == true;         
+            });
+
+        var highestHandicap = await sorting(highestConfidence, "expectedHandicap", "DESC");
+
+        var highestScore = await sorting(winnersByResults, "expectedTotalScore", "DESC");
+
+        await save(date+"SeriesWinners"+period, winnersByResults, function(){},"replace", year+"/"+date);
+    }
+    
+
+}
+
 async function getBestScoringTeamsByBatting(date)
 {
     var battersData = await load(date+"BattersData");
@@ -5007,6 +6370,23 @@ async function getMoreWininigTeams(date)
     
 }
 
+
+async function getPreviousMoreWininigTeams(date, year)
+{
+    var teamsData = await load(year+"TeamSchedules", year);
+    var dataPeriod = [0,7,3];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        var dataScope = teamsData;
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreWininngTeams = await sorting(teamsInScope, "totalWins", "DESC");
+        await save(date+"TeamSchedulesByWinning"+period, moreWininngTeams, function(){}, "replace", year+"/"+date);
+    }
+    
+}
+
 async function getMoreScoringTeams(date)
 {
     var teamsData = await load(date+"TeamSchedules");
@@ -5018,6 +6398,35 @@ async function getMoreScoringTeams(date)
             });
         var moreScoringTeams = await sorting(teamsInScope, "avgRunsScored", "DESC");
         await save(date+"TeamSchedulesByScoring"+period, moreScoringTeams, function(){}, "replace");
+        }
+}
+
+async function getPreviousMoreScoringTeams(date, year)
+{
+    var teamsData = await load(year+"TeamSchedules", year);
+    var dataPeriod = [0,7,3];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];    
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreScoringTeams = await sorting(teamsInScope, "avgRunsScored", "DESC");
+        await save(date+"TeamSchedulesByScoring"+period, moreScoringTeams, function(){}, "replace", year+"/"+date);
+        }
+}
+
+async function getPreviousMoreReceivingTeams(date, year)
+{
+    var teamsData = await load(year+"TeamSchedules", year);
+    var dataPeriod = [0,7,3];
+    for (let a = 0; a < dataPeriod.length; a++) {
+        const period = dataPeriod[a];
+        
+        var teamsInScope = teamsData.filter(function(item){
+            return item.period == period;         
+            });
+        var moreReceivingTeams = await sorting(teamsInScope, "avgRunsReceived", "ASC");
+        await save(date+"TeamSchedulesByReceiving"+period, moreReceivingTeams, function(){}, "replace", year+"/"+date);
         }
 }
 
@@ -5641,7 +7050,7 @@ function ProcessScheduleData(scheduleData, teamName)
             return schedulesAllData;
 }
 
-async function getScheduleData(date, year = null)
+async function getScheduleData(date)
 {
     var schedulesAllData = [];
     for (let index = 0; index < teams.length; index++) {
@@ -5659,18 +7068,56 @@ async function getScheduleData(date, year = null)
                 schedulesAllData.push(schedule);  
             }
                       
-        });
-        if(!year)
-        {   
-            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
-        }
-        else{
-            await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace", year);
-        }
+        });  
+        
+        await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+        
         
     }
 }
 
+
+async function getPreviousScheduleData(year = null)
+{
+    var schedulesAllData = [];
+    for (let index = 0; index < teams.length; index++) {
+        const team = teams[index];
+        var teamName = team.team.replace(" ","");
+        var integratedUrl = previousScheduleUrl.replace("{team}", team.url.split('/')[0]).replace("{year}", year).replace("{order}", 1);
+        await driver.get(integratedUrl);
+        await driver.manage().setTimeouts({ implicit: 1000 });
+        var scheduleData = [];
+        await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            console.log(return_value);
+            scheduleData = JSON.parse(return_value);
+            // var data = ProcessScheduleData(scheduleData,teamName);
+            // for (let ar = 0; ar < data.length; ar++) {
+            //     const schedule = data[ar];
+            //     schedulesAllData.push(schedule);  
+            // }
+                      
+        });
+
+        var integratedUrl = previousScheduleUrl.replace("{team}", team.url.split('/')[0]).replace("{year}", year).replace("{order}", 2);
+        await driver.get(integratedUrl);
+        await driver.manage().setTimeouts({ implicit: 1000 });
+        await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            console.log(return_value);
+            var scheduleData2 = JSON.parse(return_value);
+            scheduleData = scheduleData.concat(scheduleData2);
+            var data = ProcessScheduleData(scheduleData,teamName);
+            for (let ar = 0; ar < data.length; ar++) {
+                const schedule = data[ar];
+                schedulesAllData.push(schedule);  
+            }
+                      
+        });
+
+        await save(year+"TeamSchedules", schedulesAllData, function(){}, "replace", year);
+        
+        
+    }
+}
 
 async function getAllPitchersData(date)
     {
@@ -5747,6 +7194,91 @@ async function getAllPitchersData(date)
             
         }
     }
+
+
+    async function getPreviousAllPitchersData(year)
+    {
+        var pitchersAllData = [];
+        var allPitchersInfo = [];
+        for (let index = 0; index < teams.length; index++) {
+            const team = teams[index];
+            var teamName = team.team.replace(" ","");
+            var integratedUrl = pitcherPreviousURL.replace("{team}", team.url.split('/')[0]).replace("{year}", year).replace("{order}", 1);
+            await driver.get(integratedUrl);
+            await driver.manage().setTimeouts({ implicit: 1000 });
+            var pitchersData = [];
+            var starterSumAvg = 0;
+            var relevingSumAvg = 0;
+            var starterPitchersCount = 0;
+            var relevingPitchersCount = 0
+            await driver.executeScript(await GetAllPitchersStats()).then(function(return_value) {
+                console.log(return_value);
+               pitchersData = JSON.parse(return_value);
+                for (let ele = 0; ele < pitchersData.length; ele++) {
+                    const pitcher = pitchersData[ele];
+                    var pitcherType = pitcher.name.split(" ");
+                    pitcherType = pitcherType[pitcherType.length-1];
+                    var er =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "ER";         
+                      });
+
+                    var ip =  pitcher.playerStats.filter(function(item){
+                    return item.stat == "IP";         
+                    });
+
+                    var h =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "H";         
+                        });
+
+                    var hr =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "HR";         
+                        });
+
+                    var bb =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "BB";         
+                        });
+
+                    var k =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "K";         
+                        });
+
+                    var whip =  pitcher.playerStats.filter(function(item){
+                        return item.stat == "WHIP";         
+                        });
+
+                    var era =  pitcher.playerStats.filter(function(item){
+                    return item.stat == "ERA";         
+                    }); 
+
+                    if(pitcherType == "SP")
+                    {
+                        starterSumAvg += parseFloat(er[0].value);  
+                        starterPitchersCount++;
+                    }  
+                    else{
+                        if(er && er[0] && er[0].value)
+                        {
+                            relevingSumAvg += parseFloat(er[0].value);  
+                            relevingPitchersCount++;
+                        }
+                        else{
+                            var stopHere ='';
+                        }
+                    }
+                    allPitchersInfo.push({teamName: teamName, name: pitcher.name, era:parseFloat(era[0].value), ip:parseFloat(ip[0].value), h:parseFloat(h[0].value), hr:parseFloat(hr[0].value), bb:parseFloat(bb[0].value), k:parseFloat(k[0].value), whip:parseFloat(whip[0].value), era:parseFloat(era[0].value)});                
+                }
+                var starterPitchingAvg = starterSumAvg/starterPitchersCount;
+                var relevingPitchingAvg = relevingSumAvg/relevingPitchersCount;
+                pitchersAllData.push({teamName: teamName, starterPitchingAvg: starterPitchingAvg, relevingPitchingAvg:relevingPitchingAvg , totalPitchingAvgRuns:relevingPitchingAvg + starterPitchingAvg ,pitchersData: pitchersData});
+                
+            });
+
+            await save("PitchersData",pitchersAllData, function(){}, "replace", year);
+            await save("AllPitchersInfo",allPitchersInfo, function(){}, "replace", year);
+            
+        }
+    }
+
     async function getBattersData(date)
     {
         var battersAllData = [];
@@ -5847,6 +7379,33 @@ async function getAllPitchersData(date)
                 game = await getPitcherData(game, "away", date);
                 game = await getPitcherData(game, "home", date);
                 save(date, data, function(){}, "replace")
+            }
+        }
+        
+    }
+
+    async function getPreviousESPNData(date, year)
+    {
+        
+        var data = await load(date, year+"/"+date);
+        var gams = [];
+        if(data.length == 1)
+        {
+            gams = data[0].games;
+        }
+        else{
+            gams = data;
+        }
+
+        for (let i = 0; i < gams.length; i++) {
+            var game = gams[i];
+            //
+            if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
+            {
+                var stopHere = "";
+                game = await getPreviousPitcherData(game, "away", date, year);
+                game = await getPreviousPitcherData(game, "home", date, year);
+                save(date, data, function(){}, "replace", year+"/"+date);
             }
         }
         
@@ -6041,6 +7600,334 @@ async function getAllPitchersData(date)
         return game;
     }
 
+
+    async function getPreviousPitcherData(game, homeOrAway, date, year)
+    {
+        var pitchersData = await load("PitchersData",year);
+        try{
+            var pitchersUrlResponses = await load("PitchersUrlResponses",year);
+        }
+        catch{
+            var pitchersUrlResponses = [];
+        }
+        var team = "";
+        var pitcherFullName = "";
+        if(homeOrAway == "home"){
+            team = game.homeTeam.homeTeam;
+            pitcherFullName = game.homeTeam.homePitcher;
+        }
+        else{
+            team = game.awayTeam.awayTeam;
+            pitcherFullName = game.awayTeam.awayPitcher;
+        }
+
+        var homePitchers = pitchersData.filter(function(item){
+            return item.teamName.indexOf(team) >= 0;
+        })[0].pitchersData;
+        
+        var pitcherNameParts = pitcherFullName.split(" ");
+        var pitcherName = "";
+        if(pitcherNameParts.length > 1)
+        {
+            pitcherName = pitcherNameParts[1];
+        }
+        else{ 
+            pitcherName = pitcherFullName;
+        }
+
+        var pitcher = homePitchers.filter(function(item){
+            return item.name.indexOf(pitcherName) >=0;
+        });
+        var pitcherUrl = "";
+        if(pitcher.length == 1)
+        {
+            pitcherUrl = pitcher[0].playerUrl;
+        }
+        else{
+            var pitcher = pitcher.filter(function(item){
+                return item.name.indexOf("SP") >=0;
+            });
+            if(pitcher.length == 1)
+            {
+                pitcherUrl = pitcher[0].playerUrl;
+            }
+            else{
+                var stopHere = "";
+            }
+        }
+        
+        var isPitcherDataAvailable = pitchersUrlResponses.filter(function(item){
+            return item.pitcherUrl == pitcherUrl;
+        });
+
+        if(pitcherUrl && isPitcherDataAvailable.length <= 0)
+        {
+            //await driver.get();
+            //var espnId = (await driver.getCurrentUrl()).split("_/")[1];
+            await driver.get(statsURL+pitcherUrl.split("_/")[1]);
+            try{
+                var dataR = {team: team, pitcherFullName:pitcherFullName ,pitcherUrl:pitcherUrl, GetPitcherData:{},GetPitcherDataWithFinalERA: {} };
+                await driver.executeScript(await GetPitcherData()).then(function(return_value) {
+                    dataR.GetPitcherData = return_value;
+                    console.log(return_value);
+    
+                if(homeOrAway == "away")
+                {
+                    game.awayTeam.awayPitcherData = JSON.parse(return_value);
+                }
+                else{
+                    game.homeTeam.homePitcherData = JSON.parse(return_value);
+                }
+                });
+    
+                await driver.executeScript(await GetPitcherDataWithFinalERA()).then(function(return_value) {
+                    dataR.GetPitcherDataWithFinalERA = return_value;
+                    console.log(return_value);
+                    pitchersUrlResponses.push(dataR);
+                    if(homeOrAway == "away")
+                    {
+                        game.awayTeam.awayPitcherDataNew = JSON.parse(return_value);
+                    }
+                    else{
+                        game.homeTeam.homePitcherDataNew = JSON.parse(return_value);
+                    }
+                    });
+    
+                    await save("PitchersUrlResponses", pitchersUrlResponses, function(){} , "replace" ,year);
+            }
+            catch(Ex)
+            {
+                var pitcherData = [
+                    {
+                        "dataField": "GP",
+                        "description": "Games Played",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "GS",
+                        "description": "Games Started",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "W",
+                        "description": "Wins",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "L",
+                        "description": "Losses",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "W%",
+                        "description": "Win Percentage",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "WAR",
+                        "description": "Wins Above Replacement",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "ERA",
+                        "description": "Earned Run Average",
+                        "value": "5"
+                    },
+                    {
+                        "dataField": "WHIP",
+                        "description": "Walks Plus Hits Per Inning Pitched",
+                        "value": "2.0"
+                    },
+                    {
+                        "dataField": "IP",
+                        "description": "Innings pitched",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "K",
+                        "description": "Strikeouts",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "BB",
+                        "description": "Walks",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "K/BB",
+                        "description": "Strikeout To Walk Ratio",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "H",
+                        "description": "Hits",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "R",
+                        "description": "Runs",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "ER",
+                        "description": "Earned runs",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "SV",
+                        "description": "Saves",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "HLD",
+                        "description": "Holds",
+                        "value": "0"
+                    },
+                    {
+                        "dataField": "BLSV",
+                        "description": "Blown Saves",
+                        "value": "0"
+                    }
+                ];
+                if(homeOrAway == "away")
+                {
+                    game.awayTeam.awayPitcherData = pitcherData;
+                }
+                else{
+                    game.homeTeam.homePitcherData = pitcherData;
+                }
+                
+            }
+        }
+        else if(pitcherUrl){
+                
+                var return_value = isPitcherDataAvailable[0].GetPitcherData;
+                if(homeOrAway == "away")
+                {
+                    game.awayTeam.awayPitcherData = JSON.parse(return_value);
+                }
+                else{
+                    game.homeTeam.homePitcherData = JSON.parse(return_value);
+                }
+                
+    
+                var return_value = isPitcherDataAvailable[0].GetPitcherDataWithFinalERA;
+                    console.log(return_value);
+                    if(homeOrAway == "away")
+                    {
+                        game.awayTeam.awayPitcherDataNew = JSON.parse(return_value);
+                    }
+                    else{
+                        game.homeTeam.homePitcherDataNew = JSON.parse(return_value);
+                    }
+                
+        }
+        else{
+            var pitcherData = [
+                {
+                    "dataField": "GP",
+                    "description": "Games Played",
+                    "value": "0"
+                },
+                {
+                    "dataField": "GS",
+                    "description": "Games Started",
+                    "value": "0"
+                },
+                {
+                    "dataField": "W",
+                    "description": "Wins",
+                    "value": "0"
+                },
+                {
+                    "dataField": "L",
+                    "description": "Losses",
+                    "value": "0"
+                },
+                {
+                    "dataField": "W%",
+                    "description": "Win Percentage",
+                    "value": "0"
+                },
+                {
+                    "dataField": "WAR",
+                    "description": "Wins Above Replacement",
+                    "value": "0"
+                },
+                {
+                    "dataField": "ERA",
+                    "description": "Earned Run Average",
+                    "value": "5"
+                },
+                {
+                    "dataField": "WHIP",
+                    "description": "Walks Plus Hits Per Inning Pitched",
+                    "value": "2.0"
+                },
+                {
+                    "dataField": "IP",
+                    "description": "Innings pitched",
+                    "value": "0"
+                },
+                {
+                    "dataField": "K",
+                    "description": "Strikeouts",
+                    "value": "0"
+                },
+                {
+                    "dataField": "BB",
+                    "description": "Walks",
+                    "value": "0"
+                },
+                {
+                    "dataField": "K/BB",
+                    "description": "Strikeout To Walk Ratio",
+                    "value": "0"
+                },
+                {
+                    "dataField": "H",
+                    "description": "Hits",
+                    "value": "0"
+                },
+                {
+                    "dataField": "R",
+                    "description": "Runs",
+                    "value": "0"
+                },
+                {
+                    "dataField": "ER",
+                    "description": "Earned runs",
+                    "value": "0"
+                },
+                {
+                    "dataField": "SV",
+                    "description": "Saves",
+                    "value": "0"
+                },
+                {
+                    "dataField": "HLD",
+                    "description": "Holds",
+                    "value": "0"
+                },
+                {
+                    "dataField": "BLSV",
+                    "description": "Blown Saves",
+                    "value": "0"
+                }
+            ];
+            if(homeOrAway == "away")
+            {
+                game.awayTeam.awayPitcherData = pitcherData;
+            }
+            else{
+                game.homeTeam.homePitcherData = pitcherData;
+            }
+        }
+            
+        
+        return game;
+    }
+
 })();
 
 async function GetAllPitchersStats()
@@ -6066,13 +7953,13 @@ script += 'for (var index = 0; index < players.length - 1; index++) {';
     script += '}';
     script += 'var d = 0;';
     script += 'for (var b = a; d < statsCatalog.length; b++) {';
-        script += 'var stat = statsCatalog[d].innerText;';
+        script += 'try{var stat = statsCatalog[d].innerText;';
         script += 'var value = playersData[b].innerText;';
         script += 'd++;';
         script += 'playersStats.push({';
             script += 'stat: stat,';
             script += 'value: value';
-        script += '});';
+        script += '});}catch{d++;}';
     script += '}';
     script += 'playersInfo.playerStats = playersStats;';
     script += 'playersDat.push(playersInfo);';
@@ -6243,9 +8130,9 @@ async function GetCoversConsensusLinks()
     var script = 'var games = document.getElementsByClassName("cmg_l_row cmg_matchup_list_gamebox");';
     script += 'var consensusLinks = [];';
     script += 'for (let game of games) {';
-    script += 'var index = game.getElementsByTagName("a")[2].innerText == "Concensus" ? 2 : 3;';           
+    script += 'if((game.getElementsByTagName("a")).length >2){var index = game.getElementsByTagName("a")[2].innerText == "Concensus" || game.getElementsByTagName("a")[2].innerText == "Consensus"? 2 : 3;';           
     script += 'consensusLinks.push(game.getElementsByTagName("a")[index].href);';
-    script += '}';
+    script += '}}';
     script += 'return JSON.stringify(consensusLinks);';
     return script;
 }
