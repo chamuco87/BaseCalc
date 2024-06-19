@@ -1,3 +1,4 @@
+import warnings
 import json
 import pandas as pd
 import numpy as np
@@ -5,11 +6,28 @@ from sklearn.preprocessing import StandardScaler
 from sklearn.model_selection import train_test_split
 from sklearn.ensemble import RandomForestClassifier
 from sklearn.metrics import accuracy_score
+import glob
+from google.colab import files
+# Suppress specific warnings
+warnings.filterwarnings("ignore", category=pd.errors.PerformanceWarning)
 
-# Load training data
-with open('AllGamesConsolidated.json', 'r') as f:
-    data = json.load(f)
-df = pd.DataFrame(data)
+# Upload files
+#uploaded = files.upload()
+
+# Verify that files have been uploaded
+#print("Uploaded files:", uploaded.keys())
+
+# Save file paths for uploaded files
+file_paths = glob.glob('/content/Files/*.json')
+
+# Load training data from multiple JSON files
+dataframes = []
+for file_path in file_paths:
+    with open(file_path, 'r') as f:
+        data = json.load(f)
+    dataframes.append(pd.DataFrame(data))
+
+df = pd.concat(dataframes, ignore_index=True)
 
 # Check for missing values
 print(df.isnull().sum())
@@ -64,7 +82,7 @@ isHomeWinner_column = new_df['isHomeWinner'].copy()
 isOver_column = new_df['isOver'].copy()
 
 # Ensure the columns exist in new_df before applying get_dummies
-categorical_cols = ['game', 'time', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isHomeWinner', 'isOver' ,'date']
+categorical_cols = ['game', 'time', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isHomeWinner', 'isOver', 'date']
 categorical_cols_existing = [col for col in categorical_cols if col in new_df.columns]
 
 # Get dummy variables for categorical columns in new_df
@@ -90,11 +108,22 @@ most_confident_predictions = np.argmax(new_predictions_probs, axis=1)
 # Get the top 3 most confident predictions
 top_3_indices = np.argsort(new_predictions_probs[:, 1])[-15:][::-1]
 
-# Print the top 3 most confident predictions and the corresponding values
+# Collect the results in a list of dictionaries
+results = []
 for i in top_3_indices:
-    print("Most confident prediction:", most_confident_predictions[i])
-    print("Probability:", new_predictions_probs[i][most_confident_predictions[i]])
-    print("Value of 'game' column:", game_column.iloc[i])
-    print("Value of 'isHomeWinner' column:", isHomeWinner_column.iloc[i])
-    print("Value of 'isOver' column:", isOver_column.iloc[i])
-    print()
+    result = {
+        "prediction": int(most_confident_predictions[i]),  # Convert NumPy int64 to Python int
+        "Probability": float(new_predictions_probs[i][most_confident_predictions[i]]),
+        "game": game_column.iloc[i],
+    }
+    results.append(result)
+
+# Convert NumPy types to native Python types before serializing
+# Iterate through the results and convert any NumPy types to native Python types
+for result in results:
+    for key, value in result.items():
+        if isinstance(value, (np.int64, np.float64)):
+            result[key] = value.item()  # Convert NumPy types to native Python types
+
+# Print results as JSON
+print(json.dumps(results, indent=4))

@@ -1,0 +1,988 @@
+{
+    "HomeWinners":[
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.68,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.61,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.51,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.56,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.59,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.6,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.61,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.65,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.66,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.7,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.72,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.67,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.64,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.57,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.62,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.64,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.66,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.69,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.7,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.78,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.85,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.78,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.75,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.7,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.7,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.65,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.63,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.68,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.65,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.64,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.59,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.54,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.54,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.54,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.54,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.5,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.58,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.58,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.85,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.79,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.73,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.7,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.67,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.62,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.52,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.65,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.61,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.52,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.56,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.59,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.63,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.63,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.65,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.66,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.89,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.87,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.86,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.85,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.85,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.8,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.8,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.8,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.8,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.79,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.77,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.69,
+            "game": "HOU Astros @ CHI White"
+        }
+    
+    ],
+
+    "IsOver":[
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.52,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.5,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.52,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.51,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.41,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.57,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.58,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.61,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.57,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.53,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.52,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.52,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.52,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.47,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.47,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.51,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.49,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.55,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.59,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.62,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.61,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.54,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.51,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.5,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.5,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.49,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.49,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.52,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.48,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.59,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.64,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.58,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.64,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.58,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.56,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.53,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.53,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.51,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.5,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.49,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.47,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.51,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.56,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.56,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.54,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.88,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.83,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.81,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.79,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.79,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.78,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.76,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.73,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.78,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.74,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.73,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.72,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.69,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.64,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.64,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.57,
+            "game": "BAL Orioles @ NY Yankees"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.48,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.48,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.71,
+            "game": "ARI Diamondbacks @ WAS Nationals"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.6,
+            "game": "SF Giants @ CHI Cubs"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.59,
+            "game": "LA Dodgers @ COL Rockies"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.58,
+            "game": "MIL Brewers @ LA Angels"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.55,
+            "game": "SEA Mariners @ CLE Guardians"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.53,
+            "game": "HOU Astros @ CHI White"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.52,
+            "game": "CIN Reds @ PIT Pirates"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.51,
+            "game": "KC Royals @ OAK Athletics"
+        },
+        {
+            "prediction": 1,
+            "Probability": 0.5,
+            "game": "TB Rays @ MIN Twins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.51,
+            "game": "NY Mets @ TEX Rangers"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.52,
+            "game": "STL Cardinals @ MIA Marlins"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.53,
+            "game": "BOS Red @ TOR Blue"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.5,
+            "game": "SD Padres @ PHI Phillies"
+        },
+        {
+            "prediction": 0,
+            "Probability": 0.61,
+            "game": "BAL Orioles @ NY Yankees"
+        }
+    ]
+}

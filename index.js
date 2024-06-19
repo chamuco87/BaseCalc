@@ -45,8 +45,8 @@ var teams = [
 
 ];
 
-//var previousYears = ["2022", "2023"];
-var previousYears = ["2021", "2020","2019","2018"];
+
+
 
 var previousScheduleUrl = "https://www.espn.com/mlb/team/schedule/_/name/{team}/season/{year}/seasontype/2/half/{order}";
 
@@ -60,35 +60,23 @@ var previousScheduleUrl = "https://www.espn.com/mlb/team/schedule/_/name/{team}/
 
 
 try {
-
-        // for (let ater = 0; ater < previousYears.length; ater++) {
-        //     const year = previousYears[ater];
-        //     await getPreviousScheduleData(year);
-        //     await ProcessPreviousGameByGame(year);
-        //     await getPreviousPitcherGameByGame(year);
-        //     await getPreviousBatterGameByGame(year);
-        //     await getPreviousAllPitchersData(year);
-        // }
-    
-
-    var full2023DatesAnalysis = [
+    var full2018DatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
         {month:"June", from:1, to:30, monthNumber:"06"},
-        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"July", from:11, to:31, monthNumber:"07"},
         {month:"August", from:1, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:30, monthNumber:"09"},
-        {month:"October", from:1, to:1, monthNumber:"10"}
+        {month:"September", from:1, to:30, monthNumber:"09"}
     ];
-    
-    var full2022DatesAnalysis = [
-        {month:"April", from:16, to:30, monthNumber:"04"}, 
-        {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:30, monthNumber:"06"},
-        {month:"July", from:1, to:31, monthNumber:"07"},
+    var full2019DatesAnalysis = [
+        {month:"July", from:11, to:31, monthNumber:"07"},
         {month:"August", from:1, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:30, monthNumber:"09"},
-        {month:"October", from:1, to:5, monthNumber:"10"}
+        {month:"September", from:1, to:29, monthNumber:"09"}
+    ];
+
+    var full2020DatesAnalysis = [
+        {month:"August", from:2, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:27, monthNumber:"09"},
     ];
 
     var full2021DatesAnalysis = [
@@ -100,32 +88,72 @@ try {
         {month:"September", from:1, to:30, monthNumber:"09"},
         {month:"October", from:1, to:3, monthNumber:"10"}
     ];
-        
-    
-        // var type = "AllGamesConsolidated";
-        // await save(type, [], function(){}, "replace" ,previousYears[0]);
-        // await save("finalSelectionsCSV", [], function(){}, "replace" ,previousYears[0]);
-        // await ProcessDailyGames(full2021DatesAnalysis,false, type, previousYears[0]);//true for noselections to be shown/included
 
+    var full2022DatesAnalysis = [
+        {month:"April", from:16, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:31, monthNumber:"05"},
+        {month:"June", from:1, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:5, monthNumber:"10"}
+    ];
+
+    var full2023DatesAnalysis = [
+        {month:"April", from:8, to:30, monthNumber:"04"}, 
+        {month:"May", from:1, to:31, monthNumber:"05"},
+        {month:"June", from:1, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:1, monthNumber:"10"}
+    ];
+    
+    
+    var previousYears = [{year: "2023", dates:full2023DatesAnalysis},{year: "2022", dates:full2022DatesAnalysis},{year: "2021", dates:full2021DatesAnalysis},{year: "2020", dates:full2020DatesAnalysis},{year: "2019", dates:full2019DatesAnalysis},{year: "2018", dates:full2018DatesAnalysis}];
+    
+
+
+        var allYearsPredictions = [];
+
+        for (let ater = 0; ater < previousYears.length; ater++) {
+             const yearData = previousYears[ater];
+            //await getPreviousScheduleData(yearData.year);
+            //await ProcessPreviousGameByGame(yearData.year);
+            // await getPreviousPitcherGameByGame(yearData.year);
+            // await getPreviousBatterGameByGame(yearData.year);
+            // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
+
+            //var type = "AllGamesConsolidated";
+            // await save(yearData.year+type, [], function(){}, "replace" ,yearData.year);
+            // await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
+            //await ProcessDailyGames(yearData.dates,false, type, yearData.year);
+
+            //var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", yearData.year);
+            //allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
+
+        }
+    
+        //await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
 
     
   //----------------------------------------  
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:16, monthNumber:"06"}
+        {month:"June", from:1, to:18, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:17, to:17, monthNumber:"06"}
+        {month:"June", from:19, to:19, monthNumber:"06"}
     ];
     
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    //await ProcessGameByGame();
+                    // await ProcessGameByGame();
                     //await getPitcherGameByGame();
                     //await getBatterGameByGame();
 
@@ -136,15 +164,22 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                        //var type = "AllGamesConsolidated";
-                        //await save(type, [], function(){}, "replace" ,"GameByGame");
-                        //await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        //await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-// //
+                        // var type = "AllGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        // var allYearsPredictions = await load("allYearsPredictions", "GameByGame");
+                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        // allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
+                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
+
+
                         var type = "NewGamesConsolidated";
                         await save(type, [], function(){}, "replace" ,"GameByGame");
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                         await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+
+                            
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -226,7 +261,7 @@ try {
                     //await AlgoPreviousSeriesWinnerBasedOnResultAndPattern(selectedDate, year);
                     //await getPreviousESPNData(selectedDate, year);
                     //await getPreviousCoversWinPercentages(selectedDate, descriptiveDate, year);
-                    //await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year)
+                    //await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year);
                 }
                 else{   
                 //-----------------------------    
@@ -257,8 +292,10 @@ try {
                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
                 //await consolidateAlgorithmResults(selectedDate)
+//
+                await CalculateWinnersViaFormula(selectedDate, noSelections, type);
 
-                await CalculateWinnersViaFormula(selectedDate, noSelections, type)
+                //await ConsolidateMachineLearningResults(selectedDate);
                 }
                 
                 catch(ex){
@@ -272,6 +309,122 @@ try {
             }
                 }
             }
+    }
+
+    async function ConsolidateMachineLearningResults(date)
+    {
+
+        var consolidatedPredictions = {winners:[], isOver:[]};
+        var MLResults = await load(date+"MachineLearningResults");
+        var games = await load(date);
+
+        for (let index = 0; index < games[0].games.length; index++) {
+            const game = games[0].games[index];
+            var winnerResults = MLResults.HomeWinners.filter(function(item){
+                return item.game == game.game;
+            });
+
+            var isOverResults = MLResults.IsOver.filter(function(item){
+                return item.game == game.game;
+            });
+
+            if(winnerResults.length > 0)
+            {
+                var homeWinners = winnerResults.filter(function(item){
+                    return item.prediction == 1;
+                });
+
+                var awayWinners = winnerResults.filter(function(item){
+                    return item.prediction == 0;
+                });
+
+                var homeCount = homeWinners.length;
+                var homeProbabilitySum = 0;
+                for (let sd = 0; sd < homeWinners.length; sd++) {
+                    const prediction = homeWinners[sd];
+                    homeProbabilitySum += parseFloat(prediction.Probability);
+                }
+                var homeProbAvg = homeProbabilitySum/(homeCount != 0 ? homeCount : 1);
+
+                var awayCount = awayWinners.length;
+                var awayProbabilitySum = 0;
+                for (let sd = 0; sd < awayWinners.length; sd++) {
+                    const prediction = awayWinners[sd];
+                    awayProbabilitySum += parseFloat(prediction.Probability);
+                }
+                var awayProbAvg = awayProbabilitySum/(awayCount != 0 ? awayCount : 1);
+
+                var selectionDiff = homeCount >= awayCount ? homeCount - awayCount : awayCount - homeCount;
+
+                var probDiff = homeProbAvg >= awayProbAvg ? homeProbAvg - awayProbAvg : awayProbAvg - homeProbAvg;
+
+                var totalProbSum = (homeProbAvg + homeCount +  awayProbAvg + awayCount)                        
+                var finalHomeProb = ((homeProbAvg + homeCount)*100) / totalProbSum;
+                var finaAwayProb = ((awayProbAvg + awayCount)*100) / totalProbSum;
+
+                var finalProbDiff = finalHomeProb >= finaAwayProb ? finalHomeProb - finaAwayProb : finaAwayProb - finalHomeProb;
+
+                var expectedWinner = finalHomeProb >= finaAwayProb ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+
+                var prediction = {game: game.game, home: game.homeTeam.homeTeam, homeSelCount:homeCount, homeProbAvg: homeProbAvg, away: game.awayTeam.awayTeam, awaySelCount:awayCount, awayProbAvg: awayProbAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalHomeProb:finalHomeProb, finaAwayProb:finaAwayProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
+
+                consolidatedPredictions.winners.push(prediction);
+                
+                if(isOverResults.length > 0)
+                {
+                    var isOverGame = isOverResults.filter(function(item){
+                        return item.prediction == 1;
+                    });
+
+                    var isUnderGame = isOverResults.filter(function(item){
+                        return item.prediction == 0;
+                    });
+
+                    var isOverCount = isOverGame.length;
+                    var isOverProbabilitySum = 0;
+                    for (let sid = 0; sid < isOverGame.length; sid++) {
+                        const prediction = isOverGame[sid];
+                        isOverProbabilitySum += parseFloat(prediction.Probability);
+                    }
+                    var isOverAvg = isOverProbabilitySum/(isOverCount != 0 ? isOverCount : 1);
+
+                    var isUnderCount = isUnderGame.length;
+                    var isUnderProbabilitySum = 0;
+                    for (let sid = 0; sid < isUnderGame.length; sid++) {
+                        const prediction = isUnderGame[sid];
+                        isUnderProbabilitySum += parseFloat(prediction.Probability);
+                    }
+                    var isUnderAvg = isUnderProbabilitySum/(isUnderCount != 0 ? isUnderCount : 1);
+
+                    var selectionDiff = isOverCount >= isUnderCount ? isOverCount - isUnderCount : isUnderCount - isOverCount;
+
+                    var probDiff = isOverAvg >= isUnderAvg ? isOverAvg - isUnderAvg : isUnderAvg - isOverAvg;
+
+                    var totalProbSum = (isOverAvg + isOverCount +  isUnderAvg + isUnderCount)                        
+                    var finalIsOverProb = ((isOverAvg + isOverCount)*100) / totalProbSum;
+                    var finaIsUnderProb = ((isUnderAvg + isUnderCount)*100) / totalProbSum;
+
+                    var finalProbDiff = finalIsOverProb >= finaIsUnderProb ? finalIsOverProb - finaIsUnderProb : finaIsUnderProb - finalIsOverProb;
+
+                    var expectedWinner = finalIsOverProb >= finaIsUnderProb ? "Over": "Under";
+
+                    var prediction = {game: game.game, IsOverSelCount:isOverCount, isOverAvg: isOverAvg, isUnderSelCount:isUnderCount, isUnderAvg: isUnderAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalIsOverProb:finalIsOverProb, finaIsUnderProb:finaIsUnderProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
+
+                    consolidatedPredictions.isOver.push(prediction);
+                }
+            }
+            
+        }
+
+        var sortedWinnerPredictions = await sorting(consolidatedPredictions.winners,"finalProbDiff", "desc");
+        var sortedOverPredictions = await sorting(consolidatedPredictions.isOver,"finalProbDiff", "desc");
+
+        consolidatedPredictions.winners = sortedWinnerPredictions;
+        consolidatedPredictions.isOver = sortedOverPredictions;
+
+        await save(date+"ConsolidatedPredictions", consolidatedPredictions, function(){}, "replace");
+
+        var stopHere = "";
     }
 
     async function GetPicksGames(datesAnalysis, GetStats, patternPercentage ,pickPercentage){
@@ -1180,11 +1333,11 @@ try {
             game.homeTotalRuns = homeTotalRuns;
             game.awayTotalRuns = awayTotalRuns;
 
-            game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+            game.f5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
 
             game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
-            if(game.F5Winner.indexOf(expectedWinner) >= 0)
+            if(game.f5Winner.indexOf(expectedWinner) >= 0)
             {
                 game.handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
             }
@@ -1200,7 +1353,7 @@ try {
                 game.handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
             }
 
-            game.F5Winner = game.F5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+            game.F5Winner = game.f5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
 
             game.FinalWinner = game.finalWinner.indexOf(expectedWinner) >= 0 ? 1 : 0;
             
@@ -1289,12 +1442,13 @@ try {
             
             game.homeTotalRuns = homeTotalRuns;
             game.awayTotalRuns = awayTotalRuns;
-
-            game.F5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
+            game.awayF5Runs = awayF5Runs;
+            game.homeF5Runs = homeF5Runs;
+            game.f5Winner = awayF5Runs > homeF5Runs ? game.away : homeF5Runs > awayF5Runs ? game.home : "Draw";
 
             game.finalWinner = awayTotalRuns > homeTotalRuns ? game.away : homeTotalRuns > awayTotalRuns ? game.home: "Draw";
 
-            if(game.F5Winner.indexOf(expectedWinner) >= 0)
+            if(game.f5Winner.indexOf(expectedWinner) >= 0)
             {
                 game.handicapF5 = awayF5Runs > homeF5Runs ? awayF5Runs - homeF5Runs :  homeF5Runs - awayF5Runs;
             }
@@ -1310,7 +1464,7 @@ try {
                 game.handicap = awayTotalRuns > homeTotalRuns ? homeTotalRuns - awayTotalRuns : awayTotalRuns - homeTotalRuns;
             }
 
-            game.F5Winner = game.F5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
+            game.F5Winner = game.f5Winner.indexOf(expectedWinner) >= 0 ? 1 : 0;
 
             game.FinalWinner = game.finalWinner.indexOf(expectedWinner) >= 0 ? 1 : 0;
             
@@ -3195,8 +3349,12 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
+            //gameData.f5Winner = winnerData.f5Winner;
+            //gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
+            //gameData.f5Diff = winnerData.homeF5Runs - winnerData.awayF5Runs;
             gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            //gameData.totalDiff = winnerData.homeTotalRuns - winnerData.awayTotalRuns;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
@@ -3367,18 +3525,19 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 
     var games = [];
     var gams = [];
-    if(pitchersData.length == 1)
-    {
-        gams = pitchersData[0].games;
-    }
-    else{
+    //if(pitchersData.length == 1)
+    //{
+        //gams = pitchersData[0].games;
+    //}
+    //else{
         gams = pitchersData;
-    }
+    //}
     for (let index = 0; index < gams.length; index++) {
         var gameData = {};
         const game = gams[index];
         if(game.homeTeam.homePitcherDataNew && game.awayTeam.awayPitcherDataNew)
         {
+            
         // var homePitcher = game.homeTeam.homePitcherDataNew[0];
         // var homeBatter = battersData.filter(function(item){
         //     return item.teamName.indexOf(game.homeTeam.homeTeam) >=0;
@@ -3397,6 +3556,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
         var homePitchersComplete = pitchersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
+        
 
         var homePitcher = "";
         var homePitcherParts = game.homeTeam.homePitcher.split(" ");
@@ -3420,14 +3580,30 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             homePitcherCompleteSliced = homePitcherComplete.slice(0,(homeIndexPitcher));
         }
         else{
-            homePitcherCompleteSliced = homePitcherComplete;
+        var homePitcherCompleteSliced = homePitcherComplete;
         }
 
         var homeBattersComplete = battersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.homeTeam.homeTeam) >= 0;
         })[0];
 
-        var homeBatterComplete = homeBattersComplete.battersData.games[homeBattersComplete.battersData.games.length-1];
+        var homeIndexBatter = homeBattersComplete.battersData.games.findIndex(x => x.date.indexOf(game.date) >= 0) ;
+
+        var homeBatterCompleteSliced = [];
+        if(homeIndexBatter != -1)
+        {
+            homeBatterCompleteSliced = homeBattersComplete.battersData.games.slice(0,(homeIndexBatter));
+        }
+        else{
+            homeBatterCompleteSliced = homeBattersComplete.battersData.games;
+        }
+
+        
+
+        var awayPitchersComplete = pitchersDataByGame.filter(function(item){
+            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
+        })[0];
+        
 
         var awayPitcher = "";
         var awayPitcherParts = game.awayTeam.awayPitcher.split(" ");
@@ -3439,15 +3615,11 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             awayPitcher = game.awayTeam.awayPitcher;
         }
 
-        var awayPitchersComplete = pitchersDataByGame.filter(function(item){
-            return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
-        })[0];
-
         var awayPitcherComplete = awayPitchersComplete.pitchersData.filter(function(item){
             return item.pitcher.indexOf(awayPitcher)>=0;
         });
-        
-        var awayIndexPitcher = awayPitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0);
+
+        var awayIndexPitcher = awayPitcherComplete.findIndex(x => x.date.indexOf(game.date) >= 0) ;
 
         var awayPitcherCompleteSliced = [];
         if(awayIndexPitcher != -1)
@@ -3455,14 +3627,27 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             awayPitcherCompleteSliced = awayPitcherComplete.slice(0,(awayIndexPitcher));
         }
         else{
-            awayPitcherCompleteSliced = awayPitcherComplete;
+        var awayPitcherCompleteSliced = awayPitcherComplete;
         }
 
         var awayBattersComplete = battersDataByGame.filter(function(item){
             return item.teamName.indexOf(game.awayTeam.awayTeam) >= 0;
         })[0];
 
-        var awayBatterComplete = awayBattersComplete.battersData.games[awayBattersComplete.battersData.games.length-1];
+        var awayIndexBatter = awayBattersComplete.battersData.games.findIndex(x => x.date.indexOf(game.date) >= 0) ;
+
+        var awayBatterCompleteSliced = [];
+        if(awayIndexBatter != -1)
+        {
+            awayBatterCompleteSliced = awayBattersComplete.battersData.games.slice(0,(awayIndexBatter));
+        }
+        else{
+            awayBatterCompleteSliced = awayBattersComplete.battersData.games;
+        }
+
+        var homeBatterComplete = homeBatterCompleteSliced[homeBatterCompleteSliced.length-1];
+        var awayBatterComplete = awayBatterCompleteSliced[awayBatterCompleteSliced.length-1];
+
         if(homePitcherCompleteSliced.length > 0 && awayPitcherCompleteSliced.length > 0){
             var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra};
             var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra}
@@ -3662,8 +3847,12 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetPreviousResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home, year);
+            //gameData.f5Winner = winnerData.f5Winner;
+            //gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
+            //gameData.f5Diff = winnerData.homeF5Runs - winnerData.awayF5Runs;
             gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            //gameData.totalDiff = winnerData.homeTotalRuns - winnerData.awayTotalRuns;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
@@ -3672,9 +3861,8 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 
             await save(date+"FinalSelections", games, function(){}, "replace", year+"/"+date);
 
-            await save(type, allConsolidatedGames, function(){}, "replace", year);
+            await save(year+type, allConsolidatedGames, function(){}, "replace", year);
 
-            
 
         }
         else{
@@ -3744,14 +3932,14 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 
                     if(coversPer > opponentPer && isConsitent &&  (noSelections == null || noSelections == false))
                     {
-                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        var detail = await ShowPreviousSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV, year);
                         winsCount = detail.winsCount;
                         numberPicks = detail.numberPicks;
                         expectedWinners = detail.expectedWinners;
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
                     else if((noSelections != null && noSelections != false)){
-                        var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
+                        var detail = await ShowPreviousSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV, year);
                         winsCount = detail.winsCount;
                         numberPicks = detail.numberPicks;
                         expectedWinners = detail.expectedWinners;
@@ -3775,6 +3963,53 @@ function getStandardDeviation (array) {
 async function ShowSelectionDetails(date, selectedGame, selectedTeam, selectedProperty, maxValue , winsCount, numberPicks, fsfs, coversPer, expectedWinners, finalSelectionsCSV)
 {
     var gameResult = await GetResultDetails(date, {away: selectedGame.away, home: selectedGame.home}, selectedTeam);
+                        if(gameResult.finalWinner)
+                        {
+                            var isSelectionWinner = gameResult.finalWinner.indexOf(selectedTeam) >= 0 ? 1 : 0;
+                            winsCount[fsfs] = winsCount[fsfs] + isSelectionWinner;
+                            winsCount[5] = winsCount[5] + isSelectionWinner;
+                        }
+                        else{
+                            var isSelectionWinner = "Pending Game";
+                        }
+                        
+                        //console.log(sortedGames);
+                        console.log(selectedGame);
+                        console.log(selectedProperty);
+
+                        var value = {date:date, selectedTeam:selectedTeam, percentage:maxValue, isAWin: isSelectionWinner, coversPer: coversPer};
+
+                        if(isSelectionWinner != "Pending Game")
+                        {
+                            numberPicks[fsfs]++;
+                            numberPicks[5]++;
+                            
+                        }
+                        var winPercentageTotal = ((winsCount[5]*100)/numberPicks[5]);
+                        var winPercentageOverall = ((winsCount[fsfs]*100)/numberPicks[fsfs]);
+                        expectedWinners.push(value);
+                        if(!isSelectionWinner){
+                            console.log("\u001b[1;31m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;31m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);
+                        }
+                        else if(isSelectionWinner == "Pending Game")
+                        {
+                            console.log("\u001b[1;33m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;33m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);                            
+                        }
+                        else{
+                            console.log("\u001b[1;32m date: "+ value.date+", selectedTeam: "+ value.selectedTeam+ ", percentage:"  + value.percentage+", isAWin: "+ value.isAWin+", coversPer: "+ value.coversPer);
+                            console.log("\u001b[1;32m "+"date:"+date+" , index: "+ fsfs +" ,winPercentageOverall: "+winPercentageOverall+ ", wins:"+winsCount[fsfs]+" , totalPicks:"+numberPicks[fsfs]+" ,winPercentageTotal: "+winPercentageTotal+ ", winsTotal:"+winsCount[5]+" , totalPicksTotal:"+numberPicks[5]);
+                        }
+
+                        finalSelectionsCSV.push(value);
+
+                        return {expectedWinners: expectedWinners, winsCount: winsCount, numberPicks:numberPicks, finalSelectionsCSV:finalSelectionsCSV};
+}
+
+async function ShowPreviousSelectionDetails(date, selectedGame, selectedTeam, selectedProperty, maxValue , winsCount, numberPicks, fsfs, coversPer, expectedWinners, finalSelectionsCSV, year)
+{
+    var gameResult = await GetPreviousResultDetails(date, {away: selectedGame.away, home: selectedGame.home}, selectedTeam, year);
                         if(gameResult.finalWinner)
                         {
                             var isSelectionWinner = gameResult.finalWinner.indexOf(selectedTeam) >= 0 ? 1 : 0;
@@ -4029,12 +4264,12 @@ async function getPitcherGameByGame()
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
-        try{
-            var pitchersByTeam = await load("PitchersByTeamByGame","GameByGame");
-        }
-        catch{
+        // try{
+        //     var pitchersByTeam = await load("PitchersByTeamByGame","GameByGame");
+        // }
+        // catch{
             var pitchersByTeam = [];
-        }
+        //}
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
         
@@ -4045,7 +4280,7 @@ async function getPitcherGameByGame()
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+            if(game.game.indexOf(" @ " + team.teamName) >= 0)
             {
                 scope = game.homeDetails.pitchersDeatils;
             }
@@ -4129,7 +4364,7 @@ async function getPreviousPitcherGameByGame(year)
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+            if(game.game.indexOf(" @ "+ team.teamName ) >= 0)
             {
                 scope = game.homeDetails.pitchersDeatils;
             }
@@ -4197,12 +4432,12 @@ async function getBatterGameByGame()
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
-        try{
-            var battersByTeam = await load("BattersByTeamByGame", "GameByGame");
-        }
-        catch{
+        // try{
+        //     var battersByTeam = await load("BattersByTeamByGame", "GameByGame");
+        // }
+        // catch{
             var battersByTeam = [];
-        }
+        //}
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
         
@@ -4213,7 +4448,7 @@ async function getBatterGameByGame()
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+            if(game.game.indexOf(" @ " + team.teamName) >= 0)
             {
                 scope = game.homeDetails.battersDeatils;
             }
@@ -4323,7 +4558,7 @@ async function getPreviousBatterGameByGame(year)
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+            if(game.game.indexOf( "@ "+ team.teamName) >= 0)
             {
                 scope = game.homeDetails.battersDeatils;
             }
@@ -5955,13 +6190,13 @@ async function AlgoPreviousSeriesWinnerBasedOnResultAndPattern(date, year)
         var noDataGames = [];
         var winnersByResults = [];
         var gams = [];
-        if(allGames.length == 1)
-        {
-            gams = allGames[0].games
-        }
-        else{
+        // if(allGames.length == 1)
+        // {
+        //     gams = allGames[0].games
+        // }
+        //else{
             gams = allGames
-        }
+        //}
         for (let index = 0; index < gams.length; index++) {
             const game = gams[index];
             
@@ -7389,13 +7624,13 @@ async function getAllPitchersData(date)
         
         var data = await load(date, year+"/"+date);
         var gams = [];
-        if(data.length == 1)
-        {
-            gams = data[0].games;
-        }
-        else{
+        //if(data.length == 1)
+        //{
+            //gams = data[0].games;
+        //}
+        //else{
             gams = data;
-        }
+        //}
 
         for (let i = 0; i < gams.length; i++) {
             var game = gams[i];
