@@ -78,11 +78,11 @@ new_df = pd.DataFrame(new_data)
 
 # Save the 'game', 'isHomeWinner', and 'isOver' columns for later use
 game_column = new_df['game'].copy()
-isHomeWinner_column = new_df['isHomeWinner'].copy()
-isOver_column = new_df['isOver'].copy()
+#isHomeWinner_column = new_df['isHomeWinner'].copy()
+#isOver_column = new_df['isOver'].copy()
 
 # Ensure the columns exist in new_df before applying get_dummies
-categorical_cols = ['game', 'time', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isF5HomeWinner' ,'isHomeWinner', 'isOver', 'date']
+categorical_cols = ['game', 'time', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isF5HomeWinner' ,'isHomeWinner' ,'isOver', 'date']
 categorical_cols_existing = [col for col in categorical_cols if col in new_df.columns]
 
 # Get dummy variables for categorical columns in new_df

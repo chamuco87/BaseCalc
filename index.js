@@ -124,10 +124,10 @@ try {
             // await getPreviousBatterGameByGame(yearData.year);
             // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
 
-            // var type = "AllGamesConsolidated";
-            // await save(yearData.year+type, [], function(){}, "replace" ,yearData.year);
-            // await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
-            // await ProcessDailyGames(yearData.dates,false, type, yearData.year);
+            var type = "AllGamesConsolidated";
+            await save(yearData.year+type, [], function(){}, "replace" ,yearData.year);
+            await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
+            await ProcessDailyGames(yearData.dates,false, type, yearData.year);
 
             var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", yearData.year);
             allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
@@ -164,20 +164,20 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     ///     *    
-                        // var type = "AllGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        var type = "AllGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
                         var allYearsPredictions = await load("allYearsPredictions", "GameByGame");
                         var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
                         allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
                         await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
 
 
-                        // var type = "NewGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        var type = "NewGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
                             
 
@@ -3349,12 +3349,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
-            //gameData.f5Winner = winnerData.f5Winner;
             gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
-            //gameData.f5Diff = winnerData.homeF5Runs - winnerData.awayF5Runs;
             gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
-            //gameData.totalDiff = winnerData.homeTotalRuns - winnerData.awayTotalRuns;
+            //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
@@ -3847,12 +3845,10 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetPreviousResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home, year);
-            //gameData.f5Winner = winnerData.f5Winner;
             gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
-            //gameData.f5Diff = winnerData.homeF5Runs - winnerData.awayF5Runs;
             gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
-            //gameData.totalDiff = winnerData.homeTotalRuns - winnerData.awayTotalRuns;
+            //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
