@@ -1,0 +1,512 @@
+[
+    {
+        "game": "NY Yankees @ BOS Red",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.76
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.75
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.58
+            }
+        }
+    },
+    {
+        "game": "PIT Pirates @ COL Rockies",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.65
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.73
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.52
+            }
+        }
+    },
+    {
+        "game": "TB Rays @ ATL Braves",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.7
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.63
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.66
+            }
+        }
+    },
+    {
+        "game": "CLE Guardians @ TOR Blue",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.61
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.69
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.54
+            }
+        }
+    },
+    {
+        "game": "OAK Athletics @ MIN Twins",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.7
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.58
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.57
+            }
+        }
+    },
+    {
+        "game": "LA Angels @ SF Giants",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.58
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.63
+            }
+        }
+    },
+    {
+        "game": "PHI Phillies @ BAL Orioles",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.6
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.64
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.5
+            }
+        }
+    },
+    {
+        "game": "KC Royals @ LA Dodgers",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.57
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.53
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.49
+            }
+        }
+    },
+    {
+        "game": "SD Padres @ NY Mets",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.55
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.53
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.52
+            }
+        }
+    },
+    {
+        "game": "STL Cardinals @ CHI Cubs",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.69
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.59
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.62
+            }
+        }
+    },
+    {
+        "game": "MIA Marlins @ WAS Nationals",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.58
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.62
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.66
+            }
+        }
+    },
+    {
+        "game": "CIN Reds @ MIL Brewers",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.68
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.69
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.54
+            }
+        }
+    },
+    {
+        "game": "DET Tigers @ HOU Astros",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.62
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.69
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.58
+            }
+        }
+    },
+    {
+        "game": "TEX Rangers @ SEA Mariners",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.51
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.57
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.56
+            }
+        }
+    },
+    {
+        "game": "CHI White @ ARI Diamondbacks",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.57
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.74
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.63
+            }
+        }
+    },
+    {
+        "game": "NY Yankees @ BOS Red",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.9449595220577298
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.966944627691724
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.6657378979657687
+            }
+        }
+    },
+    {
+        "game": "CHI White @ ARI Diamondbacks",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.8532701663168986
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.9554797878006003
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.6629081997339429
+            }
+        }
+    },
+    {
+        "game": "OAK Athletics @ MIN Twins",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.8444623910728829
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.8851321384137435
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.758443544601441
+            }
+        }
+    },
+    {
+        "game": "CLE Guardians @ TOR Blue",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.8566470932123853
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7480548426600061
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.7723456642532224
+            }
+        }
+    },
+    {
+        "game": "LA Angels @ SF Giants",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.6811272708536451
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.8916251213752419
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.7545554956968075
+            }
+        }
+    },
+    {
+        "game": "PIT Pirates @ COL Rockies",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.7150358484770102
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7572157141471235
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.8538865175906704
+            }
+        }
+    },
+    {
+        "game": "TB Rays @ ATL Braves",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.7250054544612105
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7292852752289376
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.6627328425165332
+            }
+        }
+    },
+    {
+        "game": "MIA Marlins @ WAS Nationals",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.5894274179289488
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.8344557959279454
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.5801914332799409
+            }
+        }
+    },
+    {
+        "game": "PHI Phillies @ BAL Orioles",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.6390352692104974
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.7725191833346999
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.5912032160885593
+            }
+        }
+    },
+    {
+        "game": "KC Royals @ LA Dodgers",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.7370588897019984
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.6514464498286814
+            },
+            "isOver": {
+                "prediction": 1,
+                "probability": 0.6032038628094236
+            }
+        }
+    },
+    {
+        "game": "CIN Reds @ MIL Brewers",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.6385271640977247
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7005539200851103
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.7025432236301613
+            }
+        }
+    },
+    {
+        "game": "STL Cardinals @ CHI Cubs",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.5554693561451931
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.7337778285235179
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.9468438455266079
+            }
+        }
+    },
+    {
+        "game": "DET Tigers @ HOU Astros",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.7152318630445339
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.8823642671179578
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.8816380386288619
+            }
+        }
+    },
+    {
+        "game": "SD Padres @ NY Mets",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 0,
+                "probability": 0.5738442752201236
+            },
+            "isF5HomeWinner": {
+                "prediction": 1,
+                "probability": 0.6323690946482105
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.9655672764024322
+            }
+        }
+    },
+    {
+        "game": "TEX Rangers @ SEA Mariners",
+        "predictions": {
+            "isHomeWinner": {
+                "prediction": 1,
+                "probability": 0.9435342174211799
+            },
+            "isF5HomeWinner": {
+                "prediction": 0,
+                "probability": 0.5420293211712124
+            },
+            "isOver": {
+                "prediction": 0,
+                "probability": 0.7708784668470783
+            }
+        }
+    }
+]

@@ -1,0 +1,16 @@
+[
+    {
+        "game": "BOS Red @ TOR Blue",
+        "isHomeWinner": {
+            "prediction": 0,
+            "probability": 0.9314765929424866
+        }
+    },
+    {
+        "game": "BOS Red @ TOR Blue",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.9413220782991916
+        }
+    }
+]

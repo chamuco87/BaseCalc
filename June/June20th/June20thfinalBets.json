@@ -1,0 +1,114 @@
+[
+    {
+        "game": "ARI Diamondbacks @ WAS Nationals",
+        "isHomeWinner": {
+            "prediction": 1,
+            "probability": 0.5735398770280857
+        }
+    },
+    {
+        "game": "ARI Diamondbacks @ WAS Nationals",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.5158826875930997
+        }
+    },
+    {
+        "game": "ARI Diamondbacks @ WAS Nationals",
+        "isOver": {
+            "prediction": 1,
+            "probability": 0.5829608632155269
+        }
+    },
+    {
+        "game": "SEA Mariners @ CLE Guardians",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.622009611672802
+        }
+    },
+    {
+        "game": "TB Rays @ MIN Twins",
+        "isHomeWinner": {
+            "prediction": 1,
+            "probability": 0.5126325124643099
+        }
+    },
+    {
+        "game": "HOU Astros @ CHI White",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.7344751529025879
+        }
+    },
+    {
+        "game": "LA Dodgers @ COL Rockies",
+        "isOver": {
+            "prediction": 1,
+            "probability": 0.6925824262415928
+        }
+    },
+    {
+        "game": "KC Royals @ OAK Athletics",
+        "isHomeWinner": {
+            "prediction": 0,
+            "probability": 0.5887300161285446
+        }
+    },
+    {
+        "game": "KC Royals @ OAK Athletics",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.8097162032351534
+        }
+    },
+    {
+        "game": "KC Royals @ OAK Athletics",
+        "isOver": {
+            "prediction": 0,
+            "probability": 0.5039797160927744
+        }
+    },
+    {
+        "game": "BAL Orioles @ NY Yankees",
+        "isHomeWinner": {
+            "prediction": 1,
+            "probability": 0.7169594498296363
+        }
+    },
+    {
+        "game": "SF Giants @ STL Cardinals",
+        "isHomeWinner": {
+            "prediction": 1,
+            "probability": 0.7621588576175854
+        }
+    },
+    {
+        "game": "SF Giants @ STL Cardinals",
+        "isF5HomeWinner": {
+            "prediction": 1,
+            "probability": 0.6535178081285099
+        }
+    },
+    {
+        "game": "SF Giants @ STL Cardinals",
+        "isOver": {
+            "prediction": 0,
+            "probability": 0.5283683870448461
+        }
+    },
+    {
+        "game": "MIL Brewers @ SD Padres",
+        "isHomeWinner": {
+            "prediction": 0,
+            "probability": 0.8247401966287173
+        }
+    },
+    {
+        "game": "MIL Brewers @ SD Padres",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.8104222942729038
+        }
+    }
+]

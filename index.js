@@ -124,38 +124,74 @@ try {
             // await getPreviousBatterGameByGame(yearData.year);
             // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
 
-            var type = "AllGamesConsolidated";
-            await save(yearData.year+type, [], function(){}, "replace" ,yearData.year);
-            await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
-            await ProcessDailyGames(yearData.dates,false, type, yearData.year);
+        //     var type = "AllGamesConsolidated";
+        //     await save(yearData.year+type, [], function(){}, "replace" ,"allConsolidatedGames");
+        //     await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
+        //     await ProcessDailyGames(yearData.dates,false, type, yearData.year);
 
-            var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", yearData.year);
-            allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
+        //     var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", "allConsolidatedGames");
+        //     allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
 
         }
     
-        await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
+        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
+        async function getAllCombinations(array) {
+            const results = [];
+            async function combine(tempArray, remainingArray) {
+              for (let i = 0; i < remainingArray.length; i++) {
+                const newCombination = tempArray.concat(remainingArray[i]);
+                results.push(newCombination);
+                combine(newCombination, remainingArray.slice(i + 1));
+              }
+            }
+          
+            await combine([], array);
+            
+            for (let index = 0; index < results.length; index++) {
+                const array = results[index];
+                await save("combination"+index, array, function(){}, "replace", "allConsolidatedGames");
+                
+            }
+            
+            return results;
+
+
+          }
+          
+          var results2018 = await load("2018AllGamesConsolidated", "allConsolidatedGames");
+          var results2019 = await load("2019AllGamesConsolidated", "allConsolidatedGames");
+          var results2020 = await load("2020AllGamesConsolidated", "allConsolidatedGames");
+          var results2021 = await load("2021AllGamesConsolidated", "allConsolidatedGames");
+          var results2022 = await load("2022AllGamesConsolidated", "allConsolidatedGames");
+          var results2023 = await load("2023AllGamesConsolidated", "allConsolidatedGames");
+          //var allYears = await load("allYearsPredictions", "allConsolidatedGames");
+
+          // Example usage:
+          const array = [results2018, results2019, results2020, results2021, results2022, results2023];
+          //const combinations = await getAllCombinations(array);
     
   //----------------------------------------  
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:18, monthNumber:"06"}
+        {month:"June", from:1, to:21, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:19, to:19, monthNumber:"06"}
+        {month:"June", from:21, to:21, monthNumber:"06"}
     ];
     
+    await CheckMLResults();
+
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
                     // await ProcessGameByGame();
-                    //await getPitcherGameByGame();
-                    //await getBatterGameByGame();
+                    // await getPitcherGameByGame();
+                    // await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -163,21 +199,21 @@ try {
                     //await CleanUpAndGenerateStats(fullDatesAnalysis);
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
-    ///     *    
-                        var type = "AllGamesConsolidated";
-                        await save(type, [], function(){}, "replace" ,"GameByGame");
-                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        var allYearsPredictions = await load("allYearsPredictions", "GameByGame");
-                        var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-                        allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
-                        await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
+    // ///     *    
+                        // var type = "AllGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        // var allYearsPredictions = await load("allYearsPredictions", "GameByGame");
+                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        // allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
+                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
 
 
-                        var type = "NewGamesConsolidated";
-                        await save(type, [], function(){}, "replace" ,"GameByGame");
-                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        // var type = "NewGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
                             
 
@@ -211,6 +247,59 @@ try {
         await example();
     } finally {
         await driver.quit();
+    }
+
+    async function CheckMLResults()
+    {
+        var finalResults = {wins:[], loses:[]};
+        var selections = await load("MLSelectionsAllValues", "GameByGame");
+        const keys = Object.keys(selections);
+
+        for (let index = 0; index < keys.length; index++) {
+            const key = keys[index];
+
+            var day = key.split("/")[3].split("New")[0];
+            var selDay = selections[key];
+            selDay = selDay.filter(function(item){
+                return item.target == "isF5HomeWinner";
+            });
+            selDay = await sorting(selDay,"probability", "desc");
+            var length = selDay.length >=3 ? 3:  selDay.length;
+            for (let re = 0; re < 1; re++) {
+                const game = selDay[re];
+                var away = game.game.split(" @ ")[0].trim().replace(" ","");
+                var home = game.game.split(" @ ")[1].trim().replace(" ","");
+                var expectedWinner = game.prediction == 1 ? home : away;
+                var results = await GetResultDetails(day, {away: away, home: home}, expectedWinner);
+                game.isPredictionTrue = false;
+                switch (game.target) {
+                    case 'isHomeWinner':
+                      game.isPredictionTrue =  results.finalWinner == expectedWinner;
+                      break;
+                    case 'isF5HomeWinner':
+                      game.isPredictionTrue =  results.f5Winner == expectedWinner;
+                      // Expected output: "Mangoes and papayas are $2.79 a pound."
+                      break;
+                    case 'isOver':
+                      game.isPredictionTrue =  (results.homeTotalRuns + results.awayTotalRuns) >= 8;
+                    // Expected output: "Mangoes and papayas are $2.79 a pound."
+                    break;
+                  }
+
+                  if(game.isPredictionTrue)
+                  {
+                    finalResults.wins.push(game);
+                  }
+                  else{
+                    finalResults.loses.push(game);
+                  }
+                var stopHere = "";
+            }
+            
+        }
+
+        await save("MLSelectionsAllValues", selections ,function(){} ,"GameByGame");
+        await save("MLSelectionsEvaluated", finalResults ,function(){} ,"GameByGame");
     }
 
     async function ProcessDailyGames(datesAnalysis, noSelections, type, year = null){
@@ -265,47 +354,48 @@ try {
                 }
                 else{   
                 //-----------------------------    
-                try{
-                //await getScheduleData(selectedDate);
+                //try{
+                // await getScheduleData(selectedDate);
 
 
-                //await ProcessGameByGame(selectedDate);
-                //await getPitcherGameByGame(selectedDate);
-                //await getBatterGameByGame(selectedDate);
-                //await getESPNData(selectedDate);
-                //await getBattersData(selectedDate);
-                //await getBestScoringTeamsByBatting(selectedDate);
-                //await getBestHittingTeamsByBatting(selectedDate);
-                //await getAllPitchersData(selectedDate);
-                //await getBestStartingPitchersTeams(selectedDate);
-                //await getBestRelievingPitchersTeams(selectedDate);
-                //await getBestOverallPitchersTeams(selectedDate);
-                //    
-                //await getMoreWininigTeams(selectedDate);
-                //await getMoreScoringTeams(selectedDate);
-                //await getMoreReceivingTeams(selectedDate);
-                //await evaluateGames(selectedDate);
-                //await sortBetterAvgs(selectedDate);
-                //await filterConsistentPicks(selectedDate)
-                //
-                //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                //await getCoversWinPercentages(selectedDate, descriptiveDate);
-                //await consolidateAlgorithmResults(selectedDate)
-//
+                // await ProcessGameByGame(selectedDate);
+                // await getPitcherGameByGame(selectedDate);
+                // await getBatterGameByGame(selectedDate);
+                 //await getESPNData(selectedDate);
+                 //await getBattersData(selectedDate);
+                 //await getBestScoringTeamsByBatting(selectedDate);
+                 //await getBestHittingTeamsByBatting(selectedDate);
+                 //await getAllPitchersData(selectedDate);
+                 //await getBestStartingPitchersTeams(selectedDate);
+                 //await getBestRelievingPitchersTeams(selectedDate);
+                 //await getBestOverallPitchersTeams(selectedDate);
+                 // 
+                 //await getMoreWininigTeams(selectedDate);
+                 //await getMoreScoringTeams(selectedDate);
+                 //await getMoreReceivingTeams(selectedDate);
+                 //await evaluateGames(selectedDate);
+                 //await sortBetterAvgs(selectedDate);
+                 //await filterConsistentPicks(selectedDate)
+            //
+                 //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
+                 //await consolidateAlgorithmResults(selectedDate);
+
                 await CalculateWinnersViaFormula(selectedDate, noSelections, type);
-
-                //await ConsolidateMachineLearningResults(selectedDate);
-                }
                 
-                catch(ex){
+                // After running ML
+                //await ConsolidateMachineLearningResults(selectedDate);
+                //}
+                
+                //catch(ex){
                     //throw ex;
                     // console.log("Generating from scratch:" + selectedDate);
                     //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                     // await getESPNData(selectedDate);
                     //await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
                     //continue;
-                }
+                //}
             }
                 }
             }
@@ -313,117 +403,167 @@ try {
 
     async function ConsolidateMachineLearningResults(date)
     {
-
+        var finalPredictions = [];
+        var finalBets = [];
         var consolidatedPredictions = {winners:[], isOver:[]};
-        var MLResults = await load(date+"MachineLearningResults");
+        //var MLResults = await load(date+"MachineLearningResults");
+        var MLPredictions = await load(date+"ForestLinear");
         var games = await load(date);
+        var minumalPercentage = .80;
 
         for (let index = 0; index < games[0].games.length; index++) {
             const game = games[0].games[index];
-            var winnerResults = MLResults.HomeWinners.filter(function(item){
+
+            var gamePredictions = MLPredictions.filter(function(item){
                 return item.game == game.game;
             });
 
-            var isOverResults = MLResults.IsOver.filter(function(item){
-                return item.game == game.game;
+            var predictions = gamePredictions.map(function(item){
+                return item.predictions;
             });
-
-            if(winnerResults.length > 0)
+            if(predictions.length > 0)
             {
-                var homeWinners = winnerResults.filter(function(item){
-                    return item.prediction == 1;
-                });
-
-                var awayWinners = winnerResults.filter(function(item){
-                    return item.prediction == 0;
-                });
-
-                var homeCount = homeWinners.length;
-                var homeProbabilitySum = 0;
-                for (let sd = 0; sd < homeWinners.length; sd++) {
-                    const prediction = homeWinners[sd];
-                    homeProbabilitySum += parseFloat(prediction.Probability);
-                }
-                var homeProbAvg = homeProbabilitySum/(homeCount != 0 ? homeCount : 1);
-
-                var awayCount = awayWinners.length;
-                var awayProbabilitySum = 0;
-                for (let sd = 0; sd < awayWinners.length; sd++) {
-                    const prediction = awayWinners[sd];
-                    awayProbabilitySum += parseFloat(prediction.Probability);
-                }
-                var awayProbAvg = awayProbabilitySum/(awayCount != 0 ? awayCount : 1);
-
-                var selectionDiff = homeCount >= awayCount ? homeCount - awayCount : awayCount - homeCount;
-
-                var probDiff = homeProbAvg >= awayProbAvg ? homeProbAvg - awayProbAvg : awayProbAvg - homeProbAvg;
-
-                var totalProbSum = (homeProbAvg + homeCount +  awayProbAvg + awayCount)                        
-                var finalHomeProb = ((homeProbAvg + homeCount)*100) / totalProbSum;
-                var finaAwayProb = ((awayProbAvg + awayCount)*100) / totalProbSum;
-
-                var finalProbDiff = finalHomeProb >= finaAwayProb ? finalHomeProb - finaAwayProb : finaAwayProb - finalHomeProb;
-
-                var expectedWinner = finalHomeProb >= finaAwayProb ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-
-                var prediction = {game: game.game, home: game.homeTeam.homeTeam, homeSelCount:homeCount, homeProbAvg: homeProbAvg, away: game.awayTeam.awayTeam, awaySelCount:awayCount, awayProbAvg: awayProbAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalHomeProb:finalHomeProb, finaAwayProb:finaAwayProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
-
-                consolidatedPredictions.winners.push(prediction);
-                
-                if(isOverResults.length > 0)
-                {
-                    var isOverGame = isOverResults.filter(function(item){
-                        return item.prediction == 1;
-                    });
-
-                    var isUnderGame = isOverResults.filter(function(item){
-                        return item.prediction == 0;
-                    });
-
-                    var isOverCount = isOverGame.length;
-                    var isOverProbabilitySum = 0;
-                    for (let sid = 0; sid < isOverGame.length; sid++) {
-                        const prediction = isOverGame[sid];
-                        isOverProbabilitySum += parseFloat(prediction.Probability);
-                    }
-                    var isOverAvg = isOverProbabilitySum/(isOverCount != 0 ? isOverCount : 1);
-
-                    var isUnderCount = isUnderGame.length;
-                    var isUnderProbabilitySum = 0;
-                    for (let sid = 0; sid < isUnderGame.length; sid++) {
-                        const prediction = isUnderGame[sid];
-                        isUnderProbabilitySum += parseFloat(prediction.Probability);
-                    }
-                    var isUnderAvg = isUnderProbabilitySum/(isUnderCount != 0 ? isUnderCount : 1);
-
-                    var selectionDiff = isOverCount >= isUnderCount ? isOverCount - isUnderCount : isUnderCount - isOverCount;
-
-                    var probDiff = isOverAvg >= isUnderAvg ? isOverAvg - isUnderAvg : isUnderAvg - isOverAvg;
-
-                    var totalProbSum = (isOverAvg + isOverCount +  isUnderAvg + isUnderCount)                        
-                    var finalIsOverProb = ((isOverAvg + isOverCount)*100) / totalProbSum;
-                    var finaIsUnderProb = ((isUnderAvg + isUnderCount)*100) / totalProbSum;
-
-                    var finalProbDiff = finalIsOverProb >= finaIsUnderProb ? finalIsOverProb - finaIsUnderProb : finaIsUnderProb - finalIsOverProb;
-
-                    var expectedWinner = finalIsOverProb >= finaIsUnderProb ? "Over": "Under";
-
-                    var prediction = {game: game.game, IsOverSelCount:isOverCount, isOverAvg: isOverAvg, isUnderSelCount:isUnderCount, isUnderAvg: isUnderAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalIsOverProb:finalIsOverProb, finaIsUnderProb:finaIsUnderProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
-
-                    consolidatedPredictions.isOver.push(prediction);
-                }
+            var pred = {game:game.game ,isHomeWinner:{prediction:null, probability:null}, isF5HomeWinner:{prediction:null, probability:null}, isOver:{prediction:null, probability:null}};
+            if(predictions[0].isHomeWinner.prediction == predictions[1].isHomeWinner.prediction)
+            {
+                pred.isHomeWinner.prediction = predictions[0].isHomeWinner.prediction;
+                pred.isHomeWinner.probability = (predictions[0].isHomeWinner.probability + predictions[1].isHomeWinner.probability)/2;
+                // if(pred.isHomeWinner.probability >= minumalPercentage)
+                // {
+                    finalBets.push({game:game.game, isHomeWinner:{prediction:pred.isHomeWinner.prediction, probability:pred.isHomeWinner.probability}});
+                //}
             }
+
+            if(predictions[0].isF5HomeWinner.prediction == predictions[1].isF5HomeWinner.prediction)
+            {
+                pred.isF5HomeWinner.prediction = predictions[0].isF5HomeWinner.prediction;
+                pred.isF5HomeWinner.probability = (predictions[0].isF5HomeWinner.probability + predictions[1].isF5HomeWinner.probability)/2;
+                //if(pred.isF5HomeWinner.probability >= minumalPercentage)
+                //{
+                    finalBets.push({game:game.game, isF5HomeWinner:{prediction:pred.isF5HomeWinner.prediction, probability:pred.isF5HomeWinner.probability}});
+                //}
+            }
+
+            if(predictions[0].isOver.prediction == predictions[1].isOver.prediction)
+            {
+                pred.isOver.prediction = predictions[0].isOver.prediction;
+                pred.isOver.probability = (predictions[0].isOver.probability + predictions[1].isOver.probability)/2;
+                //if(pred.isOver.probability >= minumalPercentage)
+                    //{
+                        finalBets.push({game:game.game, isOver:{prediction:pred.isOver.prediction, probability:pred.isOver.probability}});
+                    //}
+            }
+
+            finalPredictions.push(pred);
             
         }
 
-        var sortedWinnerPredictions = await sorting(consolidatedPredictions.winners,"finalProbDiff", "desc");
-        var sortedOverPredictions = await sorting(consolidatedPredictions.isOver,"finalProbDiff", "desc");
+        //     var winnerResults = MLResults.filter(function(item){
+        //         return item.game == game.game;
+        //     });
 
-        consolidatedPredictions.winners = sortedWinnerPredictions;
-        consolidatedPredictions.isOver = sortedOverPredictions;
+        //     // var isOverResults = MLResults.IsOver.filter(function(item){
+        //     //     return item.game == game.game;
+        //     // });
 
-        await save(date+"ConsolidatedPredictions", consolidatedPredictions, function(){}, "replace");
+        //     if(winnerResults.length > 0)
+        //     {
+        //         var homeWinners = winnerResults.filter(function(item){
+        //             return item.prediction == 1;
+        //         });
 
+        //         var awayWinners = winnerResults.filter(function(item){
+        //             return item.prediction == 0;
+        //         });
+
+        //         var homeCount = homeWinners.length;
+        //         var homeProbabilitySum = 0;
+        //         for (let sd = 0; sd < homeWinners.length; sd++) {
+        //             const prediction = homeWinners[sd];
+        //             homeProbabilitySum += parseFloat(prediction.Probability);
+        //         }
+        //         var homeProbAvg = homeProbabilitySum/(homeCount != 0 ? homeCount : 1);
+
+        //         var awayCount = awayWinners.length;
+        //         var awayProbabilitySum = 0;
+        //         for (let sd = 0; sd < awayWinners.length; sd++) {
+        //             const prediction = awayWinners[sd];
+        //             awayProbabilitySum += parseFloat(prediction.Probability);
+        //         }
+        //         var awayProbAvg = awayProbabilitySum/(awayCount != 0 ? awayCount : 1);
+
+        //         var selectionDiff = homeCount >= awayCount ? homeCount - awayCount : awayCount - homeCount;
+
+        //         var probDiff = homeProbAvg >= awayProbAvg ? homeProbAvg - awayProbAvg : awayProbAvg - homeProbAvg;
+
+        //         var totalProbSum = (homeProbAvg + homeCount +  awayProbAvg + awayCount)                        
+        //         var finalHomeProb = ((homeProbAvg + homeCount)*100) / totalProbSum;
+        //         var finaAwayProb = ((awayProbAvg + awayCount)*100) / totalProbSum;
+
+        //         var finalProbDiff = finalHomeProb >= finaAwayProb ? finalHomeProb - finaAwayProb : finaAwayProb - finalHomeProb;
+
+        //         var expectedWinner = finalHomeProb >= finaAwayProb ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+
+        //         var prediction = {game: game.game, home: game.homeTeam.homeTeam, homeSelCount:homeCount, homeProbAvg: homeProbAvg, away: game.awayTeam.awayTeam, awaySelCount:awayCount, awayProbAvg: awayProbAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalHomeProb:finalHomeProb, finaAwayProb:finaAwayProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
+
+        //         consolidatedPredictions.winners.push(prediction);
+                
+        //         // if(isOverResults.length > 0)
+        //         // {
+        //         //     var isOverGame = isOverResults.filter(function(item){
+        //         //         return item.prediction == 1;
+        //         //     });
+
+        //         //     var isUnderGame = isOverResults.filter(function(item){
+        //         //         return item.prediction == 0;
+        //         //     });
+
+        //         //     var isOverCount = isOverGame.length;
+        //         //     var isOverProbabilitySum = 0;
+        //         //     for (let sid = 0; sid < isOverGame.length; sid++) {
+        //         //         const prediction = isOverGame[sid];
+        //         //         isOverProbabilitySum += parseFloat(prediction.Probability);
+        //         //     }
+        //         //     var isOverAvg = isOverProbabilitySum/(isOverCount != 0 ? isOverCount : 1);
+
+        //         //     var isUnderCount = isUnderGame.length;
+        //         //     var isUnderProbabilitySum = 0;
+        //         //     for (let sid = 0; sid < isUnderGame.length; sid++) {
+        //         //         const prediction = isUnderGame[sid];
+        //         //         isUnderProbabilitySum += parseFloat(prediction.Probability);
+        //         //     }
+        //         //     var isUnderAvg = isUnderProbabilitySum/(isUnderCount != 0 ? isUnderCount : 1);
+
+        //         //     var selectionDiff = isOverCount >= isUnderCount ? isOverCount - isUnderCount : isUnderCount - isOverCount;
+
+        //         //     var probDiff = isOverAvg >= isUnderAvg ? isOverAvg - isUnderAvg : isUnderAvg - isOverAvg;
+
+        //         //     var totalProbSum = (isOverAvg + isOverCount +  isUnderAvg + isUnderCount)                        
+        //         //     var finalIsOverProb = ((isOverAvg + isOverCount)*100) / totalProbSum;
+        //         //     var finaIsUnderProb = ((isUnderAvg + isUnderCount)*100) / totalProbSum;
+
+        //         //     var finalProbDiff = finalIsOverProb >= finaIsUnderProb ? finalIsOverProb - finaIsUnderProb : finaIsUnderProb - finalIsOverProb;
+
+        //         //     var expectedWinner = finalIsOverProb >= finaIsUnderProb ? "Over": "Under";
+
+        //         //     var prediction = {game: game.game, IsOverSelCount:isOverCount, isOverAvg: isOverAvg, isUnderSelCount:isUnderCount, isUnderAvg: isUnderAvg, selectionDiff: selectionDiff, probDiff:probDiff, finalIsOverProb:finalIsOverProb, finaIsUnderProb:finaIsUnderProb, finalProbDiff:finalProbDiff, expectedWinner:expectedWinner };
+
+        //         //     consolidatedPredictions.isOver.push(prediction);
+        //         // }
+        //     }
+            
+         }
+
+        // var sortedWinnerPredictions = await sorting(consolidatedPredictions.winners,"finalProbDiff", "desc");
+        // //var sortedOverPredictions = await sorting(consolidatedPredictions.isOver,"finalProbDiff", "desc");
+
+        // consolidatedPredictions.winners = sortedWinnerPredictions;
+        // //consolidatedPredictions.isOver = sortedOverPredictions;
+
+        // await save(date+"ConsolidatedPredictions", consolidatedPredictions, function(){}, "replace");
+
+        await save(date+"finalPredictions", finalPredictions, function(){}, "replace");
+        await save(date+"finalBets", finalBets, function(){}, "replace");
         var stopHere = "";
     }
 
@@ -3037,6 +3177,10 @@ async function GetResultsSummary(){
 }
 async function CalculateWinnersViaFormula(date, noSelections, type)
 {
+    if(type.toLowerCase().indexOf("new") >= 0)
+    {
+        allConsolidatedGames = [];
+    }
     try{
         var finalSelectionsCSV = await load("finalSelectionsCSV", "GameByGame");
     }catch{
@@ -3304,35 +3448,35 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
 
 
             gameData.game = game.game;
-            gameData.time = game.gameTime;
-            gameData.away = game.awayTeam.awayTeam;
+            // gameData.time = game.gameTime;
+            // gameData.away = game.awayTeam.awayTeam;
             gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
             gameData.awaySeriesPercentage = awaySeriesPercentage;
             gameData.awayNextWinningPercentage = awayNextWinningPercentage;
-            gameData.awayCurrentStreak = awayResults.currentStreak;
+            // gameData.awayCurrentStreak = awayResults.currentStreak;
 
-            gameData.home = game.homeTeam.homeTeam;
+            // gameData.home = game.homeTeam.homeTeam;
             gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
             gameData.homeSeriesPercentage = homeSeriesPercentage;
             gameData.homeNextWinningPercentage = homeNextWinningPercentage;
-            gameData.homeCurrentStreak = homeResults.currentStreak;
+            // gameData.homeCurrentStreak = homeResults.currentStreak;
             
             
-            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-            gameData.seriesWinner = seriesWinner;
-            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            // gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            // gameData.seriesWinner = seriesWinner;
+            // gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
 
             var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
             var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
 
             gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-            // gameData.formulaWin = completeCalcs.winner;
+            // gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
-            gameData.awayPitcher = game.awayTeam.awayPitcher;
+            //gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
@@ -3340,7 +3484,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
             gameData.awayOBP = completeAwayBatter.totalsData[2].value;
             gameData.awaySLG = completeAwayBatter.totalsData[3].value;
-            gameData.homePitcher = game.homeTeam.homePitcher;
+            //gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
@@ -3348,20 +3492,31 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homeOPS = completeHomeBatter.totalsData[1].value;
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
-            var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
-            gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
-            gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            var winnerData = await GetResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam);
+            gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
+            //gameData.finalWinner = winnerData.finalWinner;
+            gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
             //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
-            gameData.date = date;
+            //gameData.date = date;
             
             games.push(gameData);
-            allConsolidatedGames.push(gameData);
+            if(!isNaN(gameData.formulaawayWinPercentage) && !isNaN(gameData.formulaawayWinPercentage)){
+                allConsolidatedGames.push(gameData);
+                if(type.indexOf("New")>=0){
+                    await save(date+type, allConsolidatedGames, function(){}, "replace", "NewGames");
+                }
+                else{
+                    await save(type, allConsolidatedGames, function(){}, "replace", "GameByGame");
+                }
+                
+            }
+            
 
             await save(date+"FinalSelections", games, function(){}, "replace");
 
-            await save(type, allConsolidatedGames, function(){}, "replace", "GameByGame");
+            
+            
 
             
 
@@ -3375,9 +3530,11 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
         console.log(games);
         var expectedWinners =[];
         var patterns = await load("GeneralStatsPerSummary","GameByGame");
+        patterns = await sorting(patterns, "propertyValue", "desc");
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
         var selectedPatterns =  patterns.filter(function(item){
-            return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+            //return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+            return item;
         });
             selectedPatterns = patterns.slice(0,5);
 
@@ -3385,7 +3542,8 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                 const pattern = selectedPatterns[fsfs];
                 var sortedGames = await sorting(games, pattern.selectedProperty, pattern.orderByDirection);
                 var selectedGame = sortedGames[pattern.index];
-                var isConsistentPattern = pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+                var isConsistentPattern = true;
+                //pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
 
                 
                 if(selectedGame && isConsistentPattern)
@@ -3482,7 +3640,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         }
                     }
 
-                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0 && (noSelections == null || noSelections == false))
+                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0 && (noSelections == null || noSelections == false) && false)
                     {
                         var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
                         winsCount = detail.winsCount;
@@ -3490,7 +3648,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         expectedWinners = detail.expectedWinners;
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
-                    else if((noSelections != null && noSelections != false)){
+                    else if((noSelections != null && noSelections != false) && false){
                         var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
                         winsCount = detail.winsCount;
                         numberPicks = detail.numberPicks;
@@ -3800,35 +3958,35 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 
 
             gameData.game = game.game;
-            gameData.time = game.gameTime;
-            gameData.away = game.awayTeam.awayTeam;
+            //gameData.time = game.gameTime;
+            //gameData.away = game.awayTeam.awayTeam;
             gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
             gameData.awaySeriesPercentage = awaySeriesPercentage;
             gameData.awayNextWinningPercentage = awayNextWinningPercentage;
-            gameData.awayCurrentStreak = awayResults.currentStreak;
+            //gameData.awayCurrentStreak = awayResults.currentStreak;
 
-            gameData.home = game.homeTeam.homeTeam;
+            // gameData.home = game.homeTeam.homeTeam;
             gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
             gameData.homeSeriesPercentage = homeSeriesPercentage;
             gameData.homeNextWinningPercentage = homeNextWinningPercentage;
-            gameData.homeCurrentStreak = homeResults.currentStreak;
+            // gameData.homeCurrentStreak = homeResults.currentStreak;
             
             
-            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-            gameData.seriesWinner = seriesWinner;
-            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            // gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            // gameData.seriesWinner = seriesWinner;
+            // gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
 
             var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
             var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
 
             gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-            // gameData.formulaWin = completeCalcs.winner;
+            // gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+          
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
-            gameData.awayPitcher = game.awayTeam.awayPitcher;
+            //gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
@@ -3836,7 +3994,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
             gameData.awayOBP = completeAwayBatter.totalsData[2].value;
             gameData.awaySLG = completeAwayBatter.totalsData[3].value;
-            gameData.homePitcher = game.homeTeam.homePitcher;
+            //gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
@@ -3844,20 +4002,20 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.homeOPS = completeHomeBatter.totalsData[1].value;
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
-            var winnerData = await GetPreviousResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home, year);
-            gameData.isF5HomeWinner = winnerData.f5Winner == gameData.home ? 1 : 0;
-            gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            var winnerData = await GetPreviousResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam, year);
+            gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
+            //gameData.finalWinner = winnerData.finalWinner;
+            gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
             //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
-            gameData.date = date;
+            //gameData.date = date;
             
             games.push(gameData);
             allConsolidatedGames.push(gameData);
 
             await save(date+"FinalSelections", games, function(){}, "replace", year+"/"+date);
 
-            await save(year+type, allConsolidatedGames, function(){}, "replace", year);
+            await save(year+type, allConsolidatedGames, function(){}, "replace", "allConsolidatedGames");
 
 
         }
@@ -3926,7 +4084,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
                         }
                     }
 
-                    if(coversPer > opponentPer && isConsitent &&  (noSelections == null || noSelections == false))
+                    if(coversPer > opponentPer && isConsitent &&  (noSelections == null || noSelections == false) && false)
                     {
                         var detail = await ShowPreviousSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV, year);
                         winsCount = detail.winsCount;
@@ -3934,7 +4092,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
                         expectedWinners = detail.expectedWinners;
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
-                    else if((noSelections != null && noSelections != false)){
+                    else if((noSelections != null && noSelections != false)&& false){
                         var detail = await ShowPreviousSelectionDetails(date, selectedGame, selectedTeam, null,null , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV, year);
                         winsCount = detail.winsCount;
                         numberPicks = detail.numberPicks;
@@ -7290,6 +7448,20 @@ async function getScheduleData(date)
         await driver.get(schedulesURL+team.url);
         await driver.manage().setTimeouts({ implicit: 1000 });
         var scheduleData = [];
+        await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+            console.log(return_value);
+            scheduleData = JSON.parse(return_value);
+            var data = ProcessScheduleData(scheduleData,teamName);
+            for (let ar = 0; ar < data.length; ar++) {
+                const schedule = data[ar];
+                schedulesAllData.push(schedule);  
+            }
+                      
+        });  
+
+
+        await driver.get(schedulesURL+team.url+"/half/2");
+        await driver.manage().setTimeouts({ implicit: 1000 });
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
             console.log(return_value);
             scheduleData = JSON.parse(return_value);

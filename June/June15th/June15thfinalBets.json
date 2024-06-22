@@ -1,0 +1,16 @@
+[
+    {
+        "game": "NY Yankees @ BOS Red",
+        "isHomeWinner": {
+            "prediction": 0,
+            "probability": 0.8524797610288649
+        }
+    },
+    {
+        "game": "NY Yankees @ BOS Red",
+        "isF5HomeWinner": {
+            "prediction": 0,
+            "probability": 0.858472313845862
+        }
+    }
+]
