@@ -57,13 +57,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:13, monthNumber:"06"}
+        {month:"June", from:1, to:25, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:14, to:14, monthNumber:"06"}
+        {month:"June", from:25, to:25, monthNumber:"06"}
     ];
     
     //Steps
@@ -79,16 +79,16 @@ try {
                     //await CleanUpAndGenerateStats(fullDatesAnalysis);
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
-    ///     *    
+    // ///     *    
                     var type = "AllGamesConsolidated";
                     await save(type, [], function(){}, "replace" ,"GameByGame");
                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                     await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
 
-                    var type = "NewGamesConsolidated";
-                    await save(type, [], function(){}, "replace" ,"GameByGame");
-                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                    // var type = "NewGamesConsolidated";
+                    // await save(type, [], function(){}, "replace" ,"GameByGame");
+                    // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                    // await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -157,26 +157,26 @@ try {
                 //await ProcessGameByGame(selectedDate);
                 //await getPitcherGameByGame(selectedDate);
                 //await getBatterGameByGame(selectedDate);
-                //await getESPNData(selectedDate);
-                //await getBattersData(selectedDate);
-                //await getBestScoringTeamsByBatting(selectedDate);
-                //await getBestHittingTeamsByBatting(selectedDate);
-                //await getAllPitchersData(selectedDate);
-                //await getBestStartingPitchersTeams(selectedDate);
-                //await getBestRelievingPitchersTeams(selectedDate);
-                //await getBestOverallPitchersTeams(selectedDate);
-                //    
-                //await getMoreWininigTeams(selectedDate);
-                //await getMoreScoringTeams(selectedDate);
-                //await getMoreReceivingTeams(selectedDate);
-                //await evaluateGames(selectedDate);
-                //await sortBetterAvgs(selectedDate);
-                //await filterConsistentPicks(selectedDate)
-                //
-                //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                //await getCoversWinPercentages(selectedDate, descriptiveDate);
-                //await consolidateAlgorithmResults(selectedDate)
+                //  await getESPNData(selectedDate);
+                //  await getBattersData(selectedDate);
+                //  await getBestScoringTeamsByBatting(selectedDate);
+                //  await getBestHittingTeamsByBatting(selectedDate);
+                //  await getAllPitchersData(selectedDate);
+                //  await getBestStartingPitchersTeams(selectedDate);
+                //  await getBestRelievingPitchersTeams(selectedDate);
+                //  await getBestOverallPitchersTeams(selectedDate);
+                 
+                //  await getMoreWininigTeams(selectedDate);
+                //  await getMoreScoringTeams(selectedDate);
+                //  await getMoreReceivingTeams(selectedDate);
+                //  await evaluateGames(selectedDate);
+                //  await sortBetterAvgs(selectedDate);
+                //  await filterConsistentPicks(selectedDate)
+                 
+                //  await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                //  await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                //  await getCoversWinPercentages(selectedDate, descriptiveDate);
+                //  await consolidateAlgorithmResults(selectedDate)
 
                 await CalculateWinnersViaFormula(selectedDate, noSelections, type)
                 }
@@ -185,7 +185,7 @@ try {
                     // console.log("Generating from scratch:" + selectedDate);
                     //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                     // await getESPNData(selectedDate);
-                    await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
+                    //await CalculateWinnersViaFormula(selectedDate, noSelections, type);  
                     continue;
                 }
                 
@@ -3037,7 +3037,8 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                 const pattern = selectedPatterns[fsfs];
                 var sortedGames = await sorting(games, pattern.selectedProperty, pattern.orderByDirection);
                 var selectedGame = sortedGames[pattern.index];
-                var isConsistentPattern = pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+                var isConsistentPattern = true;
+                //pattern.maxProperty.toLowerCase().indexOf("series") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : pattern.maxProperty.toLowerCase().indexOf("formula") >= 0 && pattern.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
 
                 
                 if(selectedGame && isConsistentPattern)
@@ -5659,8 +5660,25 @@ async function getScheduleData(date)
                 schedulesAllData.push(schedule);  
             }
                       
-        });
+        });  
+
+
+        // await driver.get(schedulesURL+team.url+"/half/2");
+        // await driver.manage().setTimeouts({ implicit: 1000 });
+        // await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+        //     console.log(return_value);
+        //     scheduleData = JSON.parse(return_value);
+        //     var data = ProcessScheduleData(scheduleData,teamName);
+        //     for (let ar = 0; ar < data.length; ar++) {
+        //         const schedule = data[ar];
+        //         schedulesAllData.push(schedule);  
+        //     }
+                      
+        // });  
+        
         await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
+        
+        
     }
 }
 
@@ -6236,9 +6254,9 @@ async function GetCoversConsensusLinks()
     var script = 'var games = document.getElementsByClassName("cmg_l_row cmg_matchup_list_gamebox");';
     script += 'var consensusLinks = [];';
     script += 'for (let game of games) {';
-    script += 'var index = game.getElementsByTagName("a")[2].innerText == "Concensus" ? 2 : 3;';           
+    script += 'if((game.getElementsByTagName("a")).length >2){var index = game.getElementsByTagName("a")[2].innerText == "Concensus" || game.getElementsByTagName("a")[2].innerText == "Consensus"? 2 : 3;';           
     script += 'consensusLinks.push(game.getElementsByTagName("a")[index].href);';
-    script += '}';
+    script += '}}';
     script += 'return JSON.stringify(consensusLinks);';
     return script;
 }
