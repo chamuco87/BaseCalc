@@ -124,17 +124,17 @@ try {
             // await getPreviousBatterGameByGame(yearData.year);
             // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
 
-        //     var type = "AllGamesConsolidated";
-        //     await save(yearData.year+type, [], function(){}, "replace" ,"allConsolidatedGames");
-        //     await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
-        //     await ProcessDailyGames(yearData.dates,false, type, yearData.year);
+            // var type = "AllGamesConsolidated";
+            // await save(yearData.year+type, [], function(){}, "replace" ,"allConsolidatedGames");
+            // await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
+            // await ProcessDailyGames(yearData.dates,false, type, yearData.year);
 
-        //     var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", "allConsolidatedGames");
-        //     allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
+            // var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", "allConsolidatedGames");
+            // allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
 
         }
     
-        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+        //await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
         async function getAllCombinations(array) {
             const results = [];
@@ -175,16 +175,16 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:21, monthNumber:"06"}
+        {month:"June", from:1, to:24, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:21, to:21, monthNumber:"06"}
+        {month:"June", from:25, to:25, monthNumber:"06"}
     ];
     
-    await CheckMLResults();
+    //await CheckMLResults();
 
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
@@ -204,16 +204,16 @@ try {
                         // await save(type, [], function(){}, "replace" ,"GameByGame");
                         // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                         // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        // var allYearsPredictions = await load("allYearsPredictions", "GameByGame");
+                        // var allYearsPredictions = await load("allYearsPredictions", "allConsolidatedGames");
                         // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
                         // allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
-                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "GameByGame");
+                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
 
-                        // var type = "NewGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        var type = "NewGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
                             
 
@@ -244,7 +244,7 @@ try {
     catch(Ex){
         console.log(Ex);
         await driver.quit();
-        await example();
+        //await example();
     } finally {
         await driver.quit();
     }
@@ -355,32 +355,32 @@ try {
                 else{   
                 //-----------------------------    
                 //try{
-                // await getScheduleData(selectedDate);
+                //await getScheduleData(selectedDate);
 
 
-                // await ProcessGameByGame(selectedDate);
-                // await getPitcherGameByGame(selectedDate);
-                // await getBatterGameByGame(selectedDate);
-                 //await getESPNData(selectedDate);
-                 //await getBattersData(selectedDate);
-                 //await getBestScoringTeamsByBatting(selectedDate);
-                 //await getBestHittingTeamsByBatting(selectedDate);
-                 //await getAllPitchersData(selectedDate);
-                 //await getBestStartingPitchersTeams(selectedDate);
-                 //await getBestRelievingPitchersTeams(selectedDate);
-                 //await getBestOverallPitchersTeams(selectedDate);
-                 // 
-                 //await getMoreWininigTeams(selectedDate);
-                 //await getMoreScoringTeams(selectedDate);
-                 //await getMoreReceivingTeams(selectedDate);
-                 //await evaluateGames(selectedDate);
-                 //await sortBetterAvgs(selectedDate);
-                 //await filterConsistentPicks(selectedDate)
-            //
-                 //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
-                 //await consolidateAlgorithmResults(selectedDate);
+                //await ProcessGameByGame(selectedDate);
+                //await getPitcherGameByGame(selectedDate);
+                //await getBatterGameByGame(selectedDate);
+                //await getESPNData(selectedDate);
+                //await getBattersData(selectedDate);
+                //await getBestScoringTeamsByBatting(selectedDate);
+                //await getBestHittingTeamsByBatting(selectedDate);
+                //await getAllPitchersData(selectedDate);
+                //await getBestStartingPitchersTeams(selectedDate);
+                //await getBestRelievingPitchersTeams(selectedDate);
+                //await getBestOverallPitchersTeams(selectedDate);
+                // 
+                //await getMoreWininigTeams(selectedDate);
+                //await getMoreScoringTeams(selectedDate);
+                //await getMoreReceivingTeams(selectedDate);
+                //await evaluateGames(selectedDate);
+                //await sortBetterAvgs(selectedDate);
+                //await filterConsistentPicks(selectedDate)
+            ////
+                //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                //await getCoversWinPercentages(selectedDate, descriptiveDate);
+                //await consolidateAlgorithmResults(selectedDate);
 
                 await CalculateWinnersViaFormula(selectedDate, noSelections, type);
                 
@@ -3376,6 +3376,13 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                     seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
                     confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
                 }
+                else{
+                    seriesWinner = serie0.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns)/1)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking)/1)*((serie0.expectedHandicap)/1);
+                }
             }
 
             var homeSeriesPercentage = seriesWinner == game.homeTeam.homeTeam ? seriesWinnerPercentage : (100-seriesWinnerPercentage);
@@ -3448,35 +3455,35 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
 
 
             gameData.game = game.game;
-            // gameData.time = game.gameTime;
-            // gameData.away = game.awayTeam.awayTeam;
+            gameData.time = game.gameTime;
+            gameData.away = game.awayTeam.awayTeam;
             gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
             gameData.awaySeriesPercentage = awaySeriesPercentage;
             gameData.awayNextWinningPercentage = awayNextWinningPercentage;
-            // gameData.awayCurrentStreak = awayResults.currentStreak;
+            gameData.awayCurrentStreak = awayResults.currentStreak;
 
-            // gameData.home = game.homeTeam.homeTeam;
+            gameData.home = game.homeTeam.homeTeam;
             gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
             gameData.homeSeriesPercentage = homeSeriesPercentage;
             gameData.homeNextWinningPercentage = homeNextWinningPercentage;
-            // gameData.homeCurrentStreak = homeResults.currentStreak;
+            gameData.homeCurrentStreak = homeResults.currentStreak;
             
             
-            // gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-            // gameData.seriesWinner = seriesWinner;
-            // gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            gameData.seriesWinner = seriesWinner;
+            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
 
             var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
             var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
 
             gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-            // gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
             
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
-            //gameData.awayPitcher = game.awayTeam.awayPitcher;
+            gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
@@ -3484,7 +3491,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
             gameData.awayOBP = completeAwayBatter.totalsData[2].value;
             gameData.awaySLG = completeAwayBatter.totalsData[3].value;
-            //gameData.homePitcher = game.homeTeam.homePitcher;
+            gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
@@ -3494,11 +3501,11 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam);
             gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.finalWinner = winnerData.finalWinner;
+            gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
+            gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
-            //gameData.date = date;
+            gameData.date = date;
             
             games.push(gameData);
             if(!isNaN(gameData.formulaawayWinPercentage) && !isNaN(gameData.formulaawayWinPercentage)){
@@ -3548,24 +3555,25 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                 
                 if(selectedGame && isConsistentPattern)
                 {
+                    var selectedTeam = "";
                     if(pattern.selectedProperty.toLowerCase().indexOf("series") >=0){
-                        var selectedTeam = selectedGame["seriesWinner"];
+                        selectedTeam = selectedGame["seriesWinner"];
                     }
                     else if(pattern.selectedProperty.toLowerCase().indexOf("formula") >=0){
-                        var selectedTeam = selectedGame["formulaWinner"];
+                        selectedTeam = selectedGame["formulaWinner"];
                     }
                     else if(pattern.selectedProperty.toLowerCase().indexOf("next") >=0){
-                        var selectedTeam = selectedGame["nextWinner"];
+                        selectedTeam = selectedGame["nextWinners"];
                     }
                     else if(pattern.selectedProperty.toLowerCase().indexOf("overall") >=0){
-                        var selectedTeam = selectedGame["overallWinner"];
+                        selectedTeam = selectedGame["overallWinner"];
                     }
-                    if(selectedTeam == "")
+                    if(selectedTeam == "" || typeof selectedTeam == "undefined")
                     {
                         selectedTeam = selectedGame["home"];
                     }
                     //console.log(selectedTeam);
-                    var isConsitent = false;
+                    var isConsitent = true;
                     if(pattern.selectedProperty == "homeSeriesPercentage")
                     {
                         if(
@@ -3640,7 +3648,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         }
                     }
 
-                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0 && (noSelections == null || noSelections == false) && false)
+                    if(coversPer > opponentPer && isConsitent && date.indexOf("April") <0 && (noSelections == null || noSelections == false))
                     {
                         var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
                         winsCount = detail.winsCount;
@@ -3648,7 +3656,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         expectedWinners = detail.expectedWinners;
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
-                    else if((noSelections != null && noSelections != false) && false){
+                    else if((noSelections != null && noSelections != false)){
                         var detail = await ShowSelectionDetails(date, selectedGame, selectedTeam, pattern.selectedProperty,pattern.maxValue , winsCount, numberPicks, fsfs, coversPer , expectedWinners, finalSelectionsCSV);
                         winsCount = detail.winsCount;
                         numberPicks = detail.numberPicks;
@@ -3958,35 +3966,35 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 
 
             gameData.game = game.game;
-            //gameData.time = game.gameTime;
-            //gameData.away = game.awayTeam.awayTeam;
+            gameData.time = game.gameTime;
+            gameData.away = game.awayTeam.awayTeam;
             gameData.formulaawayWinPercentage = completeCalcs.totalAwayPercenatge;
             gameData.awaySeriesPercentage = awaySeriesPercentage;
             gameData.awayNextWinningPercentage = awayNextWinningPercentage;
-            //gameData.awayCurrentStreak = awayResults.currentStreak;
+            gameData.awayCurrentStreak = awayResults.currentStreak;
 
-            // gameData.home = game.homeTeam.homeTeam;
+            gameData.home = game.homeTeam.homeTeam;
             gameData.formulahomeWinPercentage = completeCalcs.totalHomePercentage;
             gameData.homeSeriesPercentage = homeSeriesPercentage;
             gameData.homeNextWinningPercentage = homeNextWinningPercentage;
-            // gameData.homeCurrentStreak = homeResults.currentStreak;
+            gameData.homeCurrentStreak = homeResults.currentStreak;
             
             
-            // gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
-            // gameData.seriesWinner = seriesWinner;
-            // gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            gameData.formulaWinner = completeCalcs.winner == "away" ? game.awayTeam.awayTeam : game.homeTeam.homeTeam;
+            gameData.seriesWinner = seriesWinner;
+            gameData.nextWinners = homeNextWinningPercentage > awayNextWinningPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
 
             var awayTotalPercentage = (gameData.formulaawayWinPercentage + gameData.awaySeriesPercentage +gameData.awayNextWinningPercentage)/3;
             var homeTotalPercentage = (gameData.formulahomeWinPercentage + gameData.homeSeriesPercentage +gameData.homeNextWinningPercentage)/3;
 
             gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
-            // gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
+            gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
           
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
-            //gameData.awayPitcher = game.awayTeam.awayPitcher;
+            gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
@@ -3994,7 +4002,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
             gameData.awayOBP = completeAwayBatter.totalsData[2].value;
             gameData.awaySLG = completeAwayBatter.totalsData[3].value;
-            //gameData.homePitcher = game.homeTeam.homePitcher;
+            gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
@@ -4004,11 +4012,11 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
             var winnerData = await GetPreviousResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam, year);
             gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.finalWinner = winnerData.finalWinner;
+            gameData.finalWinner = winnerData.finalWinner;
             gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
+            gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
-            //gameData.date = date;
+            gameData.date = date;
             
             games.push(gameData);
             allConsolidatedGames.push(gameData);
@@ -4133,6 +4141,10 @@ async function ShowSelectionDetails(date, selectedGame, selectedTeam, selectedPr
 
                         var value = {date:date, selectedTeam:selectedTeam, percentage:maxValue, isAWin: isSelectionWinner, coversPer: coversPer};
 
+                        if(typeof value.selectedTeam == "undefined")
+                        {
+                            var stopHere ="";
+                        }
                         if(isSelectionWinner != "Pending Game")
                         {
                             numberPicks[fsfs]++;

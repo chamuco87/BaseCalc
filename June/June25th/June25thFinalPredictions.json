@@ -1,0 +1,506 @@
+[
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "CLE Guardians @ BAL Orioles",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.62
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.978543001168816
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.71
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9797840532721002
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.49
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9647827016632202
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "PHI Phillies @ DET Tigers",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.73
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9892893189549855
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.67
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.7056729740274836
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.54
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.5196980507145799
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "SEA Mariners @ TB Rays",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.62
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.5665263009034879
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.68
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.5261938882581066
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.57
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.8028264273336757
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "NY Yankees @ NY Mets",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.55
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.5671737051812034
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.61
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.6236118320643019
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.53
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.7650905675148526
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "PIT Pirates @ CIN Reds",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.52
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9941248841467916
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.69
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.8670731653660039
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.52
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.5605153105831029
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "TOR Blue @ BOS Red",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.56
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9998517008060674
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.62
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9795777368451961
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.56
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.8910813889778143
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "ATL Braves @ STL Cardinals",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.85
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9882550520575849
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.84
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.8239215817641319
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.47
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9086311895095863
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "COL Rockies @ HOU Astros",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.54
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.965933131775526
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.64
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9933732153740009
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.54
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.9587448168133369
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "LA Dodgers @ CHI White",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.7
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.998649852146448
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.76
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9935719871241345
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.65
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.8919853311785859
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "MIA Marlins @ KC Royals",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.56
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9508121148979164
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.52
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.973403535889141
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.59
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.985159988783206
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "TEX Rangers @ MIL Brewers",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.55
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.5565729229183389
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.76
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.5306294614231069
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.64
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9728270195564451
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "OAK Athletics @ LA Angels",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.57
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.596015493834469
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.57
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9956639191882993
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.54
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.8962902197283154
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "MIN Twins @ ARI Diamondbacks",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.69
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.5770021682217021
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.82
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9667834686824253
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.58
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.9081364218840059
+                }
+            }
+        }
+    },
+    {
+        "file": "/content/NewGames/June25thNewGamesConsolidated.json",
+        "game": "WAS Nationals @ SD Padres",
+        "predictions": {
+            "isHomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.53
+                },
+                "LogisticRegression": {
+                    "prediction": 1,
+                    "probability": 0.7875290070036751
+                }
+            },
+            "isF5HomeWinner": {
+                "RandomForest": {
+                    "prediction": 0,
+                    "probability": 0.66
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.830150794108443
+                }
+            },
+            "isOver": {
+                "RandomForest": {
+                    "prediction": 1,
+                    "probability": 0.5
+                },
+                "LogisticRegression": {
+                    "prediction": 0,
+                    "probability": 0.6897154595329725
+                }
+            }
+        }
+    }
+]

@@ -70,7 +70,7 @@ for target in targets:
     # Define a RandomForest model
     model_rf = RandomForestClassifier(n_estimators=100, random_state=42)
     model_rf.fit(X_train, y_train)
-    
+
     # Define a Logistic Regression model
     model_lr = LogisticRegression(max_iter=1000, random_state=42)
     model_lr.fit(X_train, y_train)
@@ -130,11 +130,11 @@ for file_path in new_game_files:
         for target in targets:
             model_rf = models_rf[target]
             model_lr = models_lr[target]
-            
+
             # Get prediction probabilities from both models
             prediction_prob_rf = model_rf.predict_proba(new_X.iloc[[i]])[0]
             prediction_prob_lr = model_lr.predict_proba(new_X.iloc[[i]])[0]
-            
+
             # Store both models' predictions
             result["predictions"][target] = {
                 "RandomForest": {
@@ -150,6 +150,7 @@ for file_path in new_game_files:
             # Check if predictions match and add to selections if they do
             if np.argmax(prediction_prob_rf) == np.argmax(prediction_prob_lr):
                 average_probability = (float(max(prediction_prob_rf)) + float(max(prediction_prob_lr))) / 2
+                standard_deviation = np.std([float(max(prediction_prob_rf)), float(max(prediction_prob_lr))])
                 selection = {
                     "file": file_path,
                     "game": game_column.iloc[i],
@@ -157,10 +158,11 @@ for file_path in new_game_files:
                     "prediction": int(np.argmax(prediction_prob_rf)),
                     "probability_rf": float(max(prediction_prob_rf)),
                     "probability_lr": float(max(prediction_prob_lr)),
-                    "average_probability": average_probability
+                    "average_probability": average_probability,
+                    "standard_deviation": standard_deviation
                 }
                 selections[file_path].append(selection)
-                
+
         results.append(result)
 
     # Append results of the current file to all_results
