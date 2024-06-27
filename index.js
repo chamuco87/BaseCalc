@@ -70,8 +70,8 @@ try {
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
                     // await ProcessGameByGame();
-                    // await getPitcherGameByGame();
-                    // await getBatterGameByGame();
+                    await getPitcherGameByGame();
+                    await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -80,10 +80,10 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // ///     *    
-                    var type = "AllGamesConsolidated";
-                    await save(type, [], function(){}, "replace" ,"GameByGame");
-                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                    // var type = "AllGamesConsolidated";
+                    // await save(type, [], function(){}, "replace" ,"GameByGame");
+                    // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                    // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
 
                     var type = "NewGamesConsolidated";
                     await save(type, [], function(){}, "replace" ,"GameByGame");
@@ -2692,6 +2692,10 @@ async function GetResultsSummary(){
 }
 async function CalculateWinnersViaFormula(date, noSelections, type)
 {
+    if(type.toLowerCase().indexOf("new") >= 0)
+    {
+        allConsolidatedGames = [];
+    }
     try{
         var finalSelectionsCSV = await load("finalSelectionsCSV", "GameByGame");
     }catch{
@@ -2831,7 +2835,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             
 
             var completeStdDev = await getStandardDeviation(eras);
-
+            completeStdDev  = completeStdDev == 0 ? 1 : completeStdDev;
             var completeCalcs = await CalculateDiffsAndPercentages(completeAwayFactors, completeHomeFactors, completeStdDev);
 
         
@@ -2885,6 +2889,13 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                     seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
                     seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
                     confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
+                }
+                else{
+                    seriesWinner = serie0.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns)/1)*10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
+                    confidenceRanking = ((serie0.confidenceRanking)/1)*((serie0.expectedHandicap)/1);
                 }
             }
 
@@ -2982,7 +2993,6 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.awayTotalPercentage = (awayTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.homeTotalPercentage = (homeTotalPercentage*100)/(awayTotalPercentage + homeTotalPercentage);
             gameData.overallWinner = gameData.homeTotalPercentage > gameData.awayTotalPercentage ? game.homeTeam.homeTeam : game.awayTeam.awayTeam;
-            // gameData.formulaWin = completeCalcs.winner;
             
             gameData.overallDiff = Math.abs(gameData.awayTotalPercentage - gameData.homeTotalPercentage);
             gameData.stdDev = completeCalcs.stdDev;
@@ -3002,18 +3012,28 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homeOPS = completeHomeBatter.totalsData[1].value;
             gameData.homeOBP = completeHomeBatter.totalsData[2].value;
             gameData.homeSLG = completeHomeBatter.totalsData[3].value;
-            var winnerData = await GetResultDetails(date, {away: gameData.away, home: gameData.home}, gameData.home);
+            var winnerData = await GetResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam);
+            gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
             gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWinner = winnerData.finalWinner == gameData.home ? 1 : 0;
+            gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
+            gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;
             
             games.push(gameData);
-            allConsolidatedGames.push(gameData);
+            if(!isNaN(gameData.formulaawayWinPercentage) && !isNaN(gameData.formulaawayWinPercentage)){
+                allConsolidatedGames.push(gameData);
+                if(type.indexOf("New")>=0){
+                    await save(date+type, allConsolidatedGames, function(){}, "replace", "NewGames");
+                }
+                else{
+                    await save(type, allConsolidatedGames, function(){}, "replace", "GameByGame");
+                }
+                
+            }
+
 
             await save(date+"FinalSelections", games, function(){}, "replace");
-
-            await save(type, allConsolidatedGames, function(){}, "replace", "GameByGame");
 
             
 
@@ -3029,7 +3049,8 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
         var patterns = await load("GeneralStatsPerSummary","GameByGame");
         var coversPercentages = await load("CoversPercentagesP","GameByGame");
         var selectedPatterns =  patterns.filter(function(item){
-            return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+            //return item.maxProperty.toLowerCase().indexOf("series") >= 0 && item.selectedProperty.toLowerCase().indexOf("series") >= 0 ? 1 : item.maxProperty.toLowerCase().indexOf("formula") >= 0 && item.selectedProperty.toLowerCase().indexOf("formula") >= 0 ? 1:0;
+            return item;
         });
             selectedPatterns = patterns.slice(0,5);
 
@@ -3050,17 +3071,17 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         var selectedTeam = selectedGame["formulaWinner"];
                     }
                     else if(pattern.selectedProperty.toLowerCase().indexOf("next") >=0){
-                        var selectedTeam = selectedGame["nextWinner"];
+                        var selectedTeam = selectedGame["nextWinners"];
                     }
                     else if(pattern.selectedProperty.toLowerCase().indexOf("overall") >=0){
                         var selectedTeam = selectedGame["overallWinner"];
                     }
-                    if(selectedTeam == "")
+                    if(selectedTeam == "" || typeof selectedTeam == "undefined")
                     {
                         selectedTeam = selectedGame["home"];
                     }
                     //console.log(selectedTeam);
-                    var isConsitent = false;
+                    var isConsitent = true;
                     if(pattern.selectedProperty == "homeSeriesPercentage")
                     {
                         if(
@@ -3422,12 +3443,12 @@ async function getPitcherGameByGame()
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
-        try{
-            var pitchersByTeam = await load("PitchersByTeamByGame","GameByGame");
-        }
-        catch{
-            var pitchersByTeam = [];
-        }
+        // try{
+        //     var pitchersByTeam = await load("PitchersByTeamByGame","GameByGame");
+        // }
+        // catch{
+             var pitchersByTeam = [];
+        // }
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
         
@@ -3438,7 +3459,7 @@ async function getPitcherGameByGame()
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+            if(game.game.indexOf(" @ " + team.teamName) >= 0)
             {
                 scope = game.homeDetails.pitchersDeatils;
             }
@@ -3506,12 +3527,12 @@ async function getBatterGameByGame()
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
-        try{
-            var battersByTeam = await load("BattersByTeamByGame", "GameByGame");
-        }
-        catch{
-            var battersByTeam = [];
-        }
+        // try{
+        //     var battersByTeam = await load("BattersByTeamByGame", "GameByGame");
+        // }
+        // catch{
+             var battersByTeam = [];
+        // }
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
         
@@ -3522,7 +3543,7 @@ async function getBatterGameByGame()
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
-            if(game.game.indexOf(team.teamName + " @") >= 0)
+          if(game.game.indexOf(" @ " + team.teamName) >= 0)
             {
                 scope = game.homeDetails.battersDeatils;
             }
