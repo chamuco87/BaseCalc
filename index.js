@@ -175,13 +175,13 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:24, monthNumber:"06"}
+        {month:"June", from:1, to:25, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:25, to:25, monthNumber:"06"}
+        {month:"June", from:26, to:26, monthNumber:"06"}
     ];
     
     //await CheckMLResults();
@@ -200,14 +200,14 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // ///     *    
-                        // var type = "AllGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        // var allYearsPredictions = await load("allYearsPredictions", "allConsolidatedGames");
-                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-                        // allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
-                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+                        var type = "AllGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        var allYearsPredictions = await load("allYearsPredictions", "allConsolidatedGames");
+                        var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
+                        await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
 
                         var type = "NewGamesConsolidated";
@@ -376,7 +376,7 @@ try {
                 //await evaluateGames(selectedDate);
                 //await sortBetterAvgs(selectedDate);
                 //await filterConsistentPicks(selectedDate)
-            ////
+            /////
                 //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
@@ -7788,13 +7788,13 @@ async function getAllPitchersData(date)
         for (let i = 0; i < gams.length; i++) {
             var game = gams[i];
             //
-            if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
-            {
+            //if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
+            //{
                 var stopHere = "";
                 game = await getPitcherData(game, "away", date);
                 game = await getPitcherData(game, "home", date);
                 save(date, data, function(){}, "replace")
-            }
+            //}
         }
         
     }
