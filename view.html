@@ -1,0 +1,527 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Statistics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .highlight {
+            background-color: lightgreen; /* Highlights the most repeated value or highest values */
+        }
+        .highlight-lowest {
+            background-color: lightgreen; /* Highlights the lowest values for ERA stats */
+        }
+        .custom-container {
+            margin: 10px;
+            max-width: 98%;
+        }
+        .table-container {
+            border: 3px solid black; /* Bold border for each table container */
+            padding: 10px;
+            margin-bottom: 20px; /* Adds bottom margin for spacing between each game's tables */
+        }
+    </style>
+</head>
+<body>
+    <div class="container custom-container">
+        <h1>Game Statistics</h1>
+        <!-- Dynamic game tables will be added here -->
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const data = [
+    {
+        "common": {
+            "game": "CHI Cubs @ SF Giants",
+            "formulaWinner": "CHICubs",
+            "seriesWinner": "SFGiants",
+            "nextWinners": "CHICubs",
+            "overallWinner": "CHICubs",
+            "overallDiff": 28.77381667582179,
+            "stdDev": 0.9609495304124978,
+            "isF5HomeWinner": "CHICubs",
+            "isF5HomeWinnerProb": 0.6762285093031826,
+            "isHomeWinner": "CHICubs",
+            "isHomeWinnerProb": 0.5198918984447064,
+            "isOver": "No consistent",
+            "isOverProb": 0,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "CHICubs",
+                "formulaWinPercentage": 77.20834406135174,
+                "SeriesPercentage": 30.95238095238095,
+                "NextWinningPercentage": 85,
+                "CurrentStreak": "L4-0",
+                "TotalPercentage": 64.3869083379109,
+                "Pitcher": "S Imanaga",
+                "CarrerEra": 2.96,
+                "CurrentEra": 2.96,
+                "FinalEra": 2.96,
+                "AVG": 0.23596576160465052,
+                "OPS": 0.5099661312624276,
+                "OBP": 0.242,
+                "SLG": 0,
+                "CoversPer": 42
+            },
+            "homeRow": {
+                "team": "SFGiants",
+                "formulaWinPercentage": 22.791655938648262,
+                "SeriesPercentage": 69.04761904761905,
+                "NextWinningPercentage": 15,
+                "CurrentStreak": "W3-0",
+                "TotalPercentage": 35.613091662089104,
+                "Pitcher": "J Hicks",
+                "CarrerEra": 3.69,
+                "CurrentEra": 3.24,
+                "FinalEra": 3.465,
+                "AVG": 0.24899399002917522,
+                "OPS": 0.5230877832729685,
+                "OBP": 0.2515555555555556,
+                "SLG": 0.6666666666666666,
+                "CoversPer": 58
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "ATL Braves @ CHI White",
+            "formulaWinner": "ATLBraves",
+            "seriesWinner": "ATLBraves",
+            "nextWinners": "CHIWhite",
+            "overallWinner": "ATLBraves",
+            "overallDiff": 33.52747457270276,
+            "stdDev": 1.5229078904866749,
+            "isF5HomeWinner": "ATLBraves",
+            "isF5HomeWinnerProb": 0.8660677054993495,
+            "isHomeWinner": "ATLBraves",
+            "isHomeWinnerProb": 0.8530808752878187,
+            "isOver": "No consistent",
+            "isOverProb": 0,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "ATLBraves",
+                "formulaWinPercentage": 73.5229316287616,
+                "SeriesPercentage": 73.97599690282618,
+                "NextWinningPercentage": 38.313696895969656,
+                "CurrentStreak": "L1-0",
+                "TotalPercentage": 66.76373728635139,
+                "Pitcher": "C Sale",
+                "CarrerEra": 3.09,
+                "CurrentEra": 2.91,
+                "FinalEra": 3,
+                "AVG": 0.25854150571650575,
+                "OPS": 0.5068110308494924,
+                "OBP": 0.2484285714285714,
+                "SLG": 0,
+                "CoversPer": 72
+            },
+            "homeRow": {
+                "team": "CHIWhite",
+                "formulaWinPercentage": 26.47706837123839,
+                "SeriesPercentage": 26.024003097173818,
+                "NextWinningPercentage": 40,
+                "CurrentStreak": "L4-0",
+                "TotalPercentage": 33.23626271364863,
+                "Pitcher": "D Thorpe",
+                "CarrerEra": 3.09,
+                "CurrentEra": 2.91,
+                "FinalEra": 3,
+                "AVG": 0.2154887777872534,
+                "OPS": 0.3846645224694006,
+                "OBP": 0.22910000000000003,
+                "SLG": 0,
+                "CoversPer": 28
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "MIA Marlins @ PHI Phillies",
+            "formulaWinner": "PHIPhillies",
+            "seriesWinner": "PHIPhillies",
+            "nextWinners": "PHIPhillies",
+            "overallWinner": "PHIPhillies",
+            "overallDiff": 55.34637893214199,
+            "stdDev": 1.8248957656687015,
+            "isF5HomeWinner": "PHIPhillies",
+            "isF5HomeWinnerProb": 0.7430415486899673,
+            "isHomeWinner": "PHIPhillies",
+            "isHomeWinnerProb": 0.8326557923189822,
+            "isOver": "Under",
+            "isOverProb": 0.669380993987378,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "MIAMarlins",
+                "formulaWinPercentage": 8.141145887501285,
+                "SeriesPercentage": 18.839285714285722,
+                "NextWinningPercentage": 40,
+                "CurrentStreak": "L1-0",
+                "TotalPercentage": 22.326810533929002,
+                "Pitcher": "T Rogers",
+                "CarrerEra": 4.28,
+                "CurrentEra": 4.9,
+                "FinalEra": 4.59,
+                "AVG": 0.22231901955683214,
+                "OPS": 0.4263191149128648,
+                "OBP": 0.2386,
+                "SLG": 0,
+                "CoversPer": 22
+            },
+            "homeRow": {
+                "team": "PHIPhillies",
+                "formulaWinPercentage": 91.85885411249872,
+                "SeriesPercentage": 81.16071428571428,
+                "NextWinningPercentage": 60,
+                "CurrentStreak": "W1-0",
+                "TotalPercentage": 77.673189466071,
+                "Pitcher": "Z Wheeler",
+                "CarrerEra": 3.4,
+                "CurrentEra": 2.73,
+                "FinalEra": 3.065,
+                "AVG": 0.24620772182678435,
+                "OPS": 0.5499755452880455,
+                "OBP": 0.2637777777777778,
+                "SLG": 0.5,
+                "CoversPer": 78
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "TEX Rangers @ BAL Orioles",
+            "formulaWinner": "BALOrioles",
+            "seriesWinner": "BALOrioles",
+            "nextWinners": "BALOrioles",
+            "overallWinner": "BALOrioles",
+            "overallDiff": 61.451868209652346,
+            "stdDev": 1.8848433747520013,
+            "isF5HomeWinner": "BALOrioles",
+            "isF5HomeWinnerProb": 0.5921675647981459,
+            "isHomeWinner": "BALOrioles",
+            "isHomeWinnerProb": 0.7360785332006112,
+            "isOver": "Over",
+            "isOverProb": 0.7058521598036047,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "TEXRangers",
+                "formulaWinPercentage": 9.518962358070693,
+                "SeriesPercentage": 28.9375,
+                "NextWinningPercentage": 12.949062013950254,
+                "CurrentStreak": "L3-0",
+                "TotalPercentage": 19.27406589517383,
+                "Pitcher": "J Gray",
+                "CarrerEra": 4.37,
+                "CurrentEra": 3.03,
+                "FinalEra": 3.03,
+                "AVG": 0.25068890224358986,
+                "OPS": 0.4923838641471187,
+                "OBP": 0.2311,
+                "SLG": 0.5,
+                "CoversPer": 46
+            },
+            "homeRow": {
+                "team": "BALOrioles",
+                "formulaWinPercentage": 90.48103764192932,
+                "SeriesPercentage": 71.0625,
+                "NextWinningPercentage": 53.75919067959653,
+                "CurrentStreak": "W1-0",
+                "TotalPercentage": 80.72593410482618,
+                "Pitcher": "C Burnes",
+                "CarrerEra": 3.15,
+                "CurrentEra": 2.35,
+                "FinalEra": 2.75,
+                "AVG": 0.2599759829223065,
+                "OPS": 0.5741282803453857,
+                "OBP": 0.25199999999999995,
+                "SLG": 0.4444444444444444,
+                "CoversPer": 54
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "NY Yankees @ TOR Blue",
+            "formulaWinner": "TORBlue",
+            "seriesWinner": "TORBlue",
+            "nextWinners": "NYYankees",
+            "overallWinner": "TORBlue",
+            "overallDiff": 9.011103429532497,
+            "stdDev": 0.7614049513892066,
+            "isF5HomeWinner": "NYYankees",
+            "isF5HomeWinnerProb": 0.7837128719645724,
+            "isHomeWinner": "No consistent",
+            "isHomeWinnerProb": 0,
+            "isOver": "No consistent",
+            "isOverProb": 0,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "NYYankees",
+                "formulaWinPercentage": 42.25295711467767,
+                "SeriesPercentage": 32.38095238095238,
+                "NextWinningPercentage": 85,
+                "CurrentStreak": "L3-0",
+                "TotalPercentage": 45.49444828523375,
+                "Pitcher": "C Rodon",
+                "CarrerEra": 3.83,
+                "CurrentEra": 3.86,
+                "FinalEra": 3.8449999999999998,
+                "AVG": 0.24482601375589189,
+                "OPS": 0.5807020803330173,
+                "OBP": 0.2503333333333333,
+                "SLG": 1,
+                "CoversPer": 73
+            },
+            "homeRow": {
+                "team": "TORBlue",
+                "formulaWinPercentage": 57.74704288532233,
+                "SeriesPercentage": 67.61904761904762,
+                "NextWinningPercentage": 65.88657080702052,
+                "CurrentStreak": "W1-0",
+                "TotalPercentage": 54.50555171476625,
+                "Pitcher": "J Berrios",
+                "CarrerEra": 4.09,
+                "CurrentEra": 3.43,
+                "FinalEra": 3.76,
+                "AVG": 0.23001974569031536,
+                "OPS": 0.462895192009116,
+                "OBP": 0.24445454545454545,
+                "SLG": 0.8181818181818182,
+                "CoversPer": 27
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "CIN Reds @ STL Cardinals",
+            "formulaWinner": "CINReds",
+            "seriesWinner": "STLCardinals",
+            "nextWinners": "STLCardinals",
+            "overallWinner": "CINReds",
+            "overallDiff": 3.160596252907702,
+            "stdDev": 1.6705445970642139,
+            "isF5HomeWinner": "CINReds",
+            "isF5HomeWinnerProb": 0.7422003686318344,
+            "isHomeWinner": "CINReds",
+            "isHomeWinnerProb": 0.5455091952021969,
+            "isOver": "Over",
+            "isOverProb": 0.48898252051489993,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "CINReds",
+                "formulaWinPercentage": 89.39007885809424,
+                "SeriesPercentage": 22.38095238095238,
+                "NextWinningPercentage": 36.48381492122505,
+                "CurrentStreak": "L2-0",
+                "TotalPercentage": 51.580298126453854,
+                "Pitcher": "A Abbott",
+                "CarrerEra": 3.66,
+                "CurrentEra": 3.4,
+                "FinalEra": 3.5300000000000002,
+                "AVG": 0.2278084602203351,
+                "OPS": 0.5206023837273837,
+                "OBP": 0.19622222222222221,
+                "SLG": 0.25,
+                "CoversPer": 72
+            },
+            "homeRow": {
+                "team": "STLCardinals",
+                "formulaWinPercentage": 10.609921141905748,
+                "SeriesPercentage": 77.61904761904762,
+                "NextWinningPercentage": 50.941522940939414,
+                "CurrentStreak": "W1-0",
+                "TotalPercentage": 48.41970187354615,
+                "Pitcher": "M Mikolas",
+                "CarrerEra": 4,
+                "CurrentEra": 4.68,
+                "FinalEra": 4.34,
+                "AVG": 0.21947731733807677,
+                "OPS": 0.4914383085269162,
+                "OBP": 0.2353,
+                "SLG": 0.5,
+                "CoversPer": 28
+            }
+        }
+    },
+    {
+        "common": {
+            "game": "CLE Guardians @ KC Royals",
+            "formulaWinner": "CLEGuardians",
+            "seriesWinner": "CLEGuardians",
+            "nextWinners": "KCRoyals",
+            "overallWinner": "CLEGuardians",
+            "overallDiff": 7.7187812268333715,
+            "stdDev": 0.9992437140157551,
+            "isF5HomeWinner": "CLEGuardians",
+            "isF5HomeWinnerProb": 0.7581515447106835,
+            "isHomeWinner": "CLEGuardians",
+            "isHomeWinnerProb": 0.6756020335514372,
+            "isOver": "Over",
+            "isOverProb": 0.6772307019129364,
+            "date": "June27th"
+        },
+        "compare": {
+            "awayRow": {
+                "team": "CLEGuardians",
+                "formulaWinPercentage": 58.9315508590853,
+                "SeriesPercentage": 73.82783882783883,
+                "NextWinningPercentage": 15.767078078675453,
+                "CurrentStreak": "L1-0",
+                "TotalPercentage": 53.859390613416686,
+                "Pitcher": "B Lively",
+                "CarrerEra": 4.57,
+                "CurrentEra": 3.03,
+                "FinalEra": 3.03,
+                "AVG": 0.2517091516745362,
+                "OPS": 0.6315921791883331,
+                "OBP": 0.26857142857142857,
+                "SLG": 0.5,
+                "CoversPer": 22
+            },
+            "homeRow": {
+                "team": "KCRoyals",
+                "formulaWinPercentage": 41.06844914091471,
+                "SeriesPercentage": 26.172161172161168,
+                "NextWinningPercentage": 60,
+                "CurrentStreak": "W1-0",
+                "TotalPercentage": 46.140609386583314,
+                "Pitcher": "M Wacha",
+                "CarrerEra": 3.97,
+                "CurrentEra": 4.07,
+                "FinalEra": 4.0200000000000005,
+                "AVG": 0.24006258717569684,
+                "OPS": 0.5269811996946142,
+                "OBP": 0.2511818181818182,
+                "SLG": 0.5,
+                "CoversPer": 78
+            }
+        }
+    }
+];
+
+        function calculateMostRepeatedValue(game) {
+            const keys = ['formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner'];
+            const counts = {};
+
+            keys.forEach(key => {
+                const value = game.common[key];
+                if (!counts[value]) counts[value] = 0;
+                counts[value]++;
+            });
+
+            let maxCount = 0;
+            let mostRepeatedValue = null;
+            Object.entries(counts).forEach(([value, count]) => {
+                if (count > maxCount) {
+                    mostRepeatedValue = value;
+                    maxCount = count;
+                }
+            });
+
+            return mostRepeatedValue;
+        }
+
+        function createCommonTable(game, container) {
+            const mostRepeatedValue = calculateMostRepeatedValue(game);
+            const table = document.createElement('table');
+            table.className = 'table table-bordered';
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+            const headerRow = document.createElement('tr');
+            const valueRow = document.createElement('tr');
+
+            Object.keys(game.common).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+
+                const td = document.createElement('td');
+                td.textContent = isNaN(game.common[key]) ? game.common[key] : parseFloat(game.common[key]).toFixed(2);
+                if (game.common[key] === mostRepeatedValue) {
+                    td.classList.add('highlight');
+                }
+                valueRow.appendChild(td);
+            });
+
+            thead.appendChild(headerRow);
+            tbody.appendChild(valueRow);
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
+
+        function createCompareTable(game, container) {
+            const table = document.createElement('table');
+            table.className = 'table table-bordered';
+            const thead = document.createElement('thead');
+            const tbody = document.createElement('tbody');
+            const headerRow = document.createElement('tr');
+            const awayRow = document.createElement('tr');
+            const homeRow = document.createElement('tr');
+
+            Object.keys(game.compare.awayRow).forEach(key => {
+                const th = document.createElement('th');
+                th.textContent = key;
+                headerRow.appendChild(th);
+
+                const tdAway = document.createElement('td');
+                tdAway.textContent = isNaN(game.compare.awayRow[key]) ? game.compare.awayRow[key] : parseFloat(game.compare.awayRow[key]).toFixed(2);
+                const tdHome = document.createElement('td');
+                tdHome.textContent = isNaN(game.compare.homeRow[key]) ? game.compare.homeRow[key] : parseFloat(game.compare.homeRow[key]).toFixed(2);
+
+                // Highlighting logic for numeric values
+                if (!isNaN(parseFloat(tdAway.textContent)) && !isNaN(parseFloat(tdHome.textContent))) {
+                    const awayValue = parseFloat(tdAway.textContent);
+                    const homeValue = parseFloat(tdHome.textContent);
+                    if (key.toLowerCase().includes('era')) { // ERA stats, lower is better
+                        if (awayValue < homeValue) tdAway.classList.add('highlight-lowest');
+                        else if (homeValue < awayValue) tdHome.classList.add('highlight-lowest');
+                    } else { // Other stats, higher is better
+                        if (awayValue > homeValue) tdAway.classList.add('highlight');
+                        else if (homeValue > awayValue) tdHome.classList.add('highlight');
+                    }
+                }
+
+                awayRow.appendChild(tdAway);
+                homeRow.appendChild(tdHome);
+            });
+
+            thead.appendChild(headerRow);
+            tbody.appendChild(awayRow);
+            tbody.appendChild(homeRow);
+            table.appendChild(thead);
+            table.appendChild(tbody);
+            container.appendChild(table);
+        }
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const mainContainer = document.querySelector('.custom-container');
+            data.forEach(game => {
+                const tableContainer = document.createElement('div');
+                tableContainer.className = 'table-container';
+                createCommonTable(game, tableContainer);
+                createCompareTable(game, tableContainer);
+                mainContainer.appendChild(tableContainer);
+            });
+        });
+    </script>
+</body>
+</html>
