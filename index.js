@@ -63,15 +63,15 @@ try {
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:25, to:25, monthNumber:"06"}
+        {month:"June", from:26, to:26, monthNumber:"06"}
     ];
     
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    //await ProcessGameByGame();
-                    //await getPitcherGameByGame();
-                    //await getBatterGameByGame();
+                    // await ProcessGameByGame();
+                    // await getPitcherGameByGame();
+                    // await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -85,10 +85,10 @@ try {
                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                     await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
 
-                    // var type = "NewGamesConsolidated";
-                    // await save(type, [], function(){}, "replace" ,"GameByGame");
-                    // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                    // await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                    var type = "NewGamesConsolidated";
+                    await save(type, [], function(){}, "replace" ,"GameByGame");
+                    await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                    await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -157,28 +157,28 @@ try {
                 //await ProcessGameByGame(selectedDate);
                 //await getPitcherGameByGame(selectedDate);
                 //await getBatterGameByGame(selectedDate);
-                //  await getESPNData(selectedDate);
-                //  await getBattersData(selectedDate);
-                //  await getBestScoringTeamsByBatting(selectedDate);
-                //  await getBestHittingTeamsByBatting(selectedDate);
-                //  await getAllPitchersData(selectedDate);
-                //  await getBestStartingPitchersTeams(selectedDate);
-                //  await getBestRelievingPitchersTeams(selectedDate);
-                //  await getBestOverallPitchersTeams(selectedDate);
-                 
-                //  await getMoreWininigTeams(selectedDate);
-                //  await getMoreScoringTeams(selectedDate);
-                //  await getMoreReceivingTeams(selectedDate);
-                //  await evaluateGames(selectedDate);
-                //  await sortBetterAvgs(selectedDate);
-                //  await filterConsistentPicks(selectedDate)
-                 
-                //  await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                //  await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                //  await getCoversWinPercentages(selectedDate, descriptiveDate);
-                //  await consolidateAlgorithmResults(selectedDate)
+                  //await getESPNData(selectedDate);
+                  //await getBattersData(selectedDate);
+                  //await getBestScoringTeamsByBatting(selectedDate);
+                  //await getBestHittingTeamsByBatting(selectedDate);
+                  //await getAllPitchersData(selectedDate);
+                  //await getBestStartingPitchersTeams(selectedDate);
+                  //await getBestRelievingPitchersTeams(selectedDate);
+                  //await getBestOverallPitchersTeams(selectedDate);
+                //
+                  //await getMoreWininigTeams(selectedDate);
+                  //await getMoreScoringTeams(selectedDate);
+                  //await getMoreReceivingTeams(selectedDate);
+                  //await evaluateGames(selectedDate);
+                  //await sortBetterAvgs(selectedDate);
+                  //await filterConsistentPicks(selectedDate)
+                //
+                  //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                  //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                  //await getCoversWinPercentages(selectedDate, descriptiveDate);
+                  //await consolidateAlgorithmResults(selectedDate)
 
-                await CalculateWinnersViaFormula(selectedDate, noSelections, type)
+                  await CalculateWinnersViaFormula(selectedDate, noSelections, type)
                 }
                 catch(ex){
                     //throw ex;
