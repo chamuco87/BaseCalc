@@ -120,7 +120,7 @@ try {
              const yearData = previousYears[ater];
             //await getPreviousScheduleData(yearData.year);
             //await ProcessPreviousGameByGame(yearData.year);
-            // await getPreviousPitcherGameByGame(yearData.year);
+            //await getPreviousPitcherGameByGame(yearData.year);
             // await getPreviousBatterGameByGame(yearData.year);
             // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
 
@@ -190,7 +190,7 @@ try {
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
                     // await ProcessGameByGame();
-                    // await getPitcherGameByGame();
+                    //await getPitcherGameByGame();
                     // await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
@@ -409,7 +409,12 @@ try {
     {
         var gameDataAnalysis = await load(date+"NewGamesConsolidated", "NewGames");
         var MLResults = await load(date+"MLResults");
-
+        var patternSelections = await load(date+'finalSelectionsCSV');
+        var relevingRunsAllowed = await load(date+'OverallPitcherTeamsByRunsAllowed');
+        var teamsSchedule = await load(date+"TeamSchedules");
+        teamsSchedule = teamsSchedule.filter(function(item){
+            return item.period == 0; 
+        });
         var formattedGames = [];
         
     
@@ -417,7 +422,7 @@ try {
         for (let index = 0; index < gameDataAnalysis.length; index++) {
             const game = gameDataAnalysis[index];
             var keys = Object.keys(game);
-            var gameFormatted = {common : {},compare : { awayRow:{}, homeRow:{} } };
+            var gameFormatted = {common : {},compare : { awayRow:{}, homeRow:{}, selected:{} } };
 
             for (let sds = 0; sds < keys.length; sds++) {
                 const key = keys[sds];
@@ -426,6 +431,48 @@ try {
                     if(key.toLowerCase() === "away")
                     {
                         gameFormatted.compare.awayRow[key.replace("away","team")] = game[key];
+                        var isSelectedPattern = patternSelections.filter(function(item){
+                            return item.selectedTeam == game[key];
+                        });
+                        if(isSelectedPattern.length > 0)
+                        {
+                            gameFormatted.compare.selected["team"] = game[key];
+                        }
+                        var teamPitchersStats = relevingRunsAllowed.filter(function(item){
+                            return item.teamName.indexOf(game[key]) >=0;;
+                        })[0].pitchersData;
+
+                        var relevingPitchers = teamPitchersStats.filter(function(item){
+                            return item.name.indexOf(" SP") < 0;
+                        });
+
+                        var stats = relevingPitchers.map(function(item){
+                            return item.playerStats;
+                        });
+
+                        var totalGames = teamsSchedule.filter(function(item){
+                            return item.teamName.indexOf(game[key])>=0;
+                        })[0].scheduleData.length;
+
+                        
+                        var statER = 0;
+                        for (let resr = 0; resr < stats.length; resr++) {
+                            const stat = stats[resr];
+                            for (let gsts = 0; gsts < stat.length; gsts++) {
+                                const statss = stat[gsts];
+                                if(statss.stat == 'ER')
+                                {
+                                    statER += parseFloat(statss.value);
+                                }
+                                
+                                
+                            }
+                            
+                            
+                        }
+
+                        gameFormatted.compare.awayRow["RelevingRuns"] = statER/totalGames;
+                        
                     }
                     else{
                         gameFormatted.compare.awayRow[key.replace("away","").replace("Away","")] = game[key];
@@ -436,6 +483,47 @@ try {
                     if(key.toLowerCase() === "home")
                     {
                         gameFormatted.compare.homeRow[key.replace("home","team")] = game[key];
+                        var isSelectedPattern = patternSelections.filter(function(item){
+                            return item.selectedTeam == game[key];
+                        });
+                        if(isSelectedPattern.length > 0)
+                        {
+                            gameFormatted.compare.selected["team"] = game[key];
+                        }
+                        var teamPitchersStats = relevingRunsAllowed.filter(function(item){
+                            return item.teamName.indexOf(game[key]) >=0;
+                        })[0].pitchersData;
+
+                        var relevingPitchers = teamPitchersStats.filter(function(item){
+                            return item.name.indexOf(" SP") < 0;
+                        });
+
+                        var stats = relevingPitchers.map(function(item){
+                            return item.playerStats;
+                        });
+
+                        var totalGames = teamsSchedule.filter(function(item){
+                            return item.teamName.indexOf(game[key])>=0;
+                        })[0].scheduleData.length;
+
+                        var statER = 0;
+                        for (let resr = 0; resr < stats.length; resr++) {
+                            const stat = stats[resr];
+                            for (let gsts = 0; gsts < stat.length; gsts++) {
+                                const statss = stat[gsts];
+
+                                if(statss.stat == 'ER')
+                                {
+                                    statER += parseFloat(statss.value);
+                                }
+                                
+                                
+                            }
+                            
+                            
+                        }
+
+                        gameFormatted.compare.homeRow["RelevingRuns"] = statER/totalGames;
                     }
                     else{
                         gameFormatted.compare.homeRow[key.replace("home","").replace("Home","")] = game[key];
@@ -3388,8 +3476,11 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
 
         var awayBatterComplete = awayBattersComplete.battersData.games[awayBattersComplete.battersData.games.length-1];
         if(homePitcherCompleteSliced.length > 0 && awayPitcherCompleteSliced.length > 0){
-            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra};
-            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra}
+
+            var awayPitcherData = awayPitcherComplete[awayPitcherComplete.length-1];
+            var homePitcherData = homePitcherComplete[homePitcherComplete.length-1];
+            var completeAwayPitcher = {currentEra:awayPitcherData.eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra, awayHomeEra:awayPitcherData.eraAvgAway };
+            var completeHomePitcher = {currentEra:homePitcherData.eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra, awayHomeEra:homePitcherData.eraAvgHome}
             var completeAwayBatter = {totalsData:[]};
             completeAwayBatter.totalsData.push({stat:"AVG",value:awayBatterComplete.avgAvg});
             completeAwayBatter.totalsData.push({stat:"OPS",value:awayBatterComplete.avgRunsHitsFactor});
@@ -3605,6 +3696,9 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
+            gameData.awaySpecificEra = awayPitcherData.eraAvgAway != null ? awayPitcherData.eraAvgAway : 0;
+            gameData.awayPitcherWins = awayPitcherData.totalAwayWins;
+            gameData.awayPitcherLoses = awayPitcherData.totalAwayLoses;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
             gameData.awayAVG = completeAwayBatter.totalsData[0].value;
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
@@ -3613,6 +3707,9 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
+            gameData.homeSpecificEra = homePitcherData.eraAvgHome != null ? homePitcherData.eraAvgHome :0 ;
+            gameData.homePitcherWins = homePitcherData.totalHomeWins;
+            gameData.homePitcherLoses = homePitcherData.totalHomeLoses;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
             gameData.homeAVG = completeHomeBatter.totalsData[0].value;
             gameData.homeOPS = completeHomeBatter.totalsData[1].value;
@@ -3785,7 +3882,7 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         expectedWinners = detail.expectedWinners;
                         finalSelectionsCSV = detail.finalSelectionsCSV;
                     }
-                    await save("finalSelectionsCSV", finalSelectionsCSV, function(){}, "replace" ,"GameByGame");
+                    await save(date+"finalSelectionsCSV", finalSelectionsCSV, function(){}, "replace");
                 }
             }
 
@@ -3958,8 +4055,18 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
         var awayBatterComplete = awayBatterCompleteSliced[awayBatterCompleteSliced.length-1];
 
         if(homePitcherCompleteSliced.length > 0 && awayPitcherCompleteSliced.length > 0){
-            var completeAwayPitcher = {currentEra:awayPitcherComplete[awayPitcherComplete.length-1].eraAvg, carrerEra:game.awayTeam.awayPitcherDataNew[0].carrerEra};
-            var completeHomePitcher = {currentEra:homePitcherComplete[homePitcherComplete.length-1].eraAvg, carrerEra:game.homeTeam.homePitcherDataNew[0].carrerEra}
+            var awayPitcherData = awayPitcherComplete[awayPitcherComplete.length - 1];
+                var homePitcherData = homePitcherComplete[homePitcherComplete.length - 1];
+                var completeAwayPitcher = {
+                    currentEra: awayPitcherData.eraAvg,
+                    carrerEra: game.awayTeam.awayPitcherDataNew[0].carrerEra,
+                    awayHomeEra: awayPitcherData.eraAvgAway
+                };
+                var completeHomePitcher = {
+                    currentEra: homePitcherData.eraAvg,
+                    carrerEra: game.homeTeam.homePitcherDataNew[0].carrerEra,
+                    awayHomeEra: homePitcherData.eraAvgHome
+                };
             var completeAwayBatter = {totalsData:[]};
             completeAwayBatter.totalsData.push({stat:"AVG",value:awayBatterComplete.avgAvg});
             completeAwayBatter.totalsData.push({stat:"OPS",value:awayBatterComplete.avgRunsHitsFactor});
@@ -3984,7 +4091,7 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             
 
             var completeStdDev = await getStandardDeviation(eras);
-
+            completeStdDev = completeStdDev == 0 ? 1 : completeStdDev;
             var completeCalcs = await CalculateDiffsAndPercentages(completeAwayFactors, completeHomeFactors, completeStdDev);
 
         
@@ -4038,6 +4145,13 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
                     seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10: 0;
                     seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90  ? 10: 0;
                     confidenceRanking = ((serie0.confidenceRanking + serie3.confidenceRanking)/2)*((serie0.expectedHandicap + serie3.expectedHandicap)/2);
+                }
+                else{
+                    seriesWinner = serie0.seriesExpectedWinner;
+                    seriesWinnerPercentage = (((serie0.expectedWinnerRuns) / 1) * 10);
+                    seriesWinnerPercentage += serie0.isConsistent && seriesWinnerPercentage < 90 ? 10 : 0;
+                    seriesWinnerPercentage += serie3.isConsistent && seriesWinnerPercentage < 90 ? 10 : 0;
+                    confidenceRanking = ((serie0.confidenceRanking) / 1) * ((serie0.expectedHandicap) / 1);
                 }
             }
 
@@ -4168,6 +4282,9 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.awayPitcher = game.awayTeam.awayPitcher;
             gameData.awayCarrerEra = game.awayTeam.awayPitcherDataNew[0].carrerEra;
             gameData.awayCurrentEra = game.awayTeam.awayPitcherDataNew[0].currentEra;
+            gameData.awaySpecificEra = awayPitcherData.eraAvgAway != null ? awayPitcherData.eraAvgAway : 0;
+            gameData.awayPitcherWins = awayPitcherData.totalAwayWins;
+            gameData.awayPitcherLoses = awayPitcherData.totalAwayLoses;
             gameData.awayFinalEra = game.awayTeam.awayPitcherDataNew[0].finalEra;
             gameData.awayAVG = completeAwayBatter.totalsData[0].value;
             gameData.awayOPS = completeAwayBatter.totalsData[1].value;
@@ -4176,6 +4293,9 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.homePitcher = game.homeTeam.homePitcher;
             gameData.homeCarrerEra = game.homeTeam.homePitcherDataNew[0].carrerEra;
             gameData.homeCurrentEra = game.homeTeam.homePitcherDataNew[0].currentEra;
+            gameData.homeSpecificEra = homePitcherData.eraAvgHome != null ? homePitcherData.eraAvgHome : 0;
+            gameData.homePitcherWins = homePitcherData.totalHomeWins;
+            gameData.homePitcherLoses = homePitcherData.totalHomeLoses;
             gameData.homeFinalEra = game.homeTeam.homePitcherDataNew[0].finalEra;
             gameData.homeAVG = completeHomeBatter.totalsData[0].value;
             gameData.homeOPS = completeHomeBatter.totalsData[1].value;
@@ -4192,7 +4312,9 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.date = date;
             
             games.push(gameData);
-            allConsolidatedGames.push(gameData);
+            if (!isNaN(gameData.formulaawayWinPercentage) && !isNaN(gameData.formulaawayWinPercentage)) {
+                allConsolidatedGames.push(gameData);
+            }
 
             await save(date+"FinalSelections", games, function(){}, "replace", year+"/"+date);
 
@@ -4288,9 +4410,15 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
 }
 
 function getStandardDeviation (array) {
+    if(array.length >0)
+    {
     const n = array.length
     const mean = array.reduce((a, b) => a + b) / n
-    return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n)
+    return Math.sqrt(array.map(x => Math.pow(x - mean, 2)).reduce((a, b) => a + b) / n);
+    }
+    else {
+        return 0
+    };
   }
 
 
@@ -4401,6 +4529,9 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
         carrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
         currentCarrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
         carrerCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        currentAwayHome:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        awayHomeCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+
         awayPercentage : 0,
         homePercenatge: 0,
         awayScenarios: 0,
@@ -4415,6 +4546,9 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
         carrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
         currentCarrer:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
         carrerCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        currentAwayHome:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+        awayHomeCurrent:{diff:0, winPercenatge:0, lostPercentage:0, winner:""},
+
         awayPercentage : 0,
         homePercenatge: 0,
         awayScenarios: 0,
@@ -4428,51 +4562,68 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
     old.carrer.diff = awayFactors.old.carrer > homeFactors.old.carrer ? awayFactors.old.carrer - homeFactors.old.carrer : homeFactors.old.carrer - awayFactors.old.carrer;
     old.currentCarrer.diff = awayFactors.old.current > homeFactors.old.carrer ? awayFactors.old.current - homeFactors.old.carrer : homeFactors.old.carrer - awayFactors.old.current;
     old.carrerCurrent.diff = awayFactors.old.carrer > homeFactors.old.current ? awayFactors.old.carrer - homeFactors.old.current : homeFactors.old.current - awayFactors.old.carrer;
+    old.currentAwayHome.diff = awayFactors.old.current > homeFactors.old.awayHomeEra ? awayFactors.old.current - homeFactors.old.awayHomeEra : homeFactors.old.awayHomeEra - awayFactors.old.current;
+    old.awayHomeCurrent.diff = awayFactors.old.awayHomeEra > homeFactors.old.current ? awayFactors.old.awayHomeEra - homeFactors.old.current : homeFactors.old.current - awayFactors.old.awayHomeEra;
     
     old.average.winPercenatge = awayFactors.old.average > homeFactors.old.average ? (Math.abs(awayFactors.old.average)/ (Math.abs(homeFactors.old.average) + Math.abs(awayFactors.old.average)))*100 : (Math.abs(homeFactors.old.average)/ (Math.abs(homeFactors.old.average) + Math.abs(awayFactors.old.average)))*100;
     old.current.winPercenatge = awayFactors.old.current > homeFactors.old.current ? (Math.abs(awayFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.current)))*100 : (Math.abs(homeFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.current)))*100;
     old.carrer.winPercenatge = awayFactors.old.carrer > homeFactors.old.carrer ? (Math.abs(awayFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.carrer)))*100 : (Math.abs(homeFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.carrer)))*100;
     old.currentCarrer.winPercenatge = awayFactors.old.current > homeFactors.old.carrer ? (Math.abs(awayFactors.old.current)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.current)))*100 : (Math.abs(homeFactors.old.carrer)/ (Math.abs(homeFactors.old.carrer) + Math.abs(awayFactors.old.current)))*100;
     old.carrerCurrent.winPercenatge = awayFactors.old.carrer > homeFactors.old.current ? (Math.abs(awayFactors.old.carrer)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.carrer)))*100 : (Math.abs(homeFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.carrer)))*100;
+    old.currentAwayHome.winPercenatge = awayFactors.old.current > homeFactors.old.awayHomeEra ? (Math.abs(awayFactors.old.current)/ (Math.abs(homeFactors.old.awayHomeEra) + Math.abs(awayFactors.old.current)))*100 : (Math.abs(homeFactors.old.awayHomeEra)/ (Math.abs(homeFactors.old.awayHomeEra) + Math.abs(awayFactors.old.current)))*100;
+    old.awayHomeCurrent.winPercenatge = awayFactors.old.awayHomeEra > homeFactors.old.current ? (Math.abs(awayFactors.old.awayHomeEra)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.awayHomeEra)))*100 : (Math.abs(homeFactors.old.current)/ (Math.abs(homeFactors.old.current) + Math.abs(awayFactors.old.awayHomeEra)))*100;
+
 
     old.average.lostPercentage = 100 - old.average.winPercenatge;
     old.current.lostPercentage = 100 - old.current.winPercenatge;
     old.carrer.lostPercentage = 100 - old.carrer.winPercenatge;
     old.currentCarrer.lostPercentage = 100 - old.currentCarrer.winPercenatge;
     old.carrerCurrent.lostPercentage = 100 - old.carrerCurrent.winPercenatge;
+    old.currentAwayHome.lostPercentage = 100 - old.currentAwayHome.winPercenatge;
+    old.awayHomeCurrent.lostPercentage = 100 - old.awayHomeCurrent.winPercenatge;
 
     old.average.winner = awayFactors.old.average < homeFactors.old.average ? "away" : "home";
     old.current.winner = awayFactors.old.current < homeFactors.old.current ? "away" : "home";
     old.carrer.winner = awayFactors.old.carrer < homeFactors.old.carrer ? "away" : "home";
     old.currentCarrer.winner = awayFactors.old.current < homeFactors.old.carrer ? "away" : "home";
     old.carrerCurrent.winner = awayFactors.old.carrer < homeFactors.old.current ? "away" : "home";
+    old.currentAwayHome.winner = awayFactors.old.current < homeFactors.old.awayHomeEra ? "away" : "home";
+    old.awayHomeCurrent.winner = awayFactors.old.awayHomeEra < homeFactors.old.current ? "away" : "home";
 
     old.awayScenarios = old.average.winner == "away"? 1:0;
     old.awayScenarios += old.current.winner == "away"? 1:0;
     old.awayScenarios += old.carrer.winner == "away"? 1:0;
     old.awayScenarios += old.currentCarrer.winner == "away"? 1:0;
     old.awayScenarios += old.carrerCurrent.winner == "away"? 1:0;
+    old.awayScenarios += old.currentAwayHome.winner == "away"? 1:0;
+    old.awayScenarios += old.awayHomeCurrent.winner == "away"? 1:0;
 
     old.homeScenarios = old.average.winner == "home"? 1:0;
     old.homeScenarios += old.current.winner == "home"? 1:0;
     old.homeScenarios += old.carrer.winner == "home"? 1:0;
     old.homeScenarios += old.currentCarrer.winner == "home"? 1:0;
     old.homeScenarios += old.carrerCurrent.winner == "home"? 1:0;
+    old.homeScenarios += old.currentAwayHome.winner == "home"? 1:0;
+    old.homeScenarios += old.awayHomeCurrent.winner == "home"? 1:0;
 
     var awaySum = old.average.winner == "away"? old.average.winPercenatge:old.average.lostPercentage;
     awaySum += old.current.winner == "away"? old.current.winPercenatge:old.current.lostPercentage;
     awaySum += old.carrer.winner == "away"? old.carrer.winPercenatge:old.carrer.lostPercentage;
     awaySum += old.currentCarrer.winner == "away"? old.currentCarrer.winPercenatge:old.currentCarrer.lostPercentage;
     awaySum += old.carrerCurrent.winner == "away"? old.carrerCurrent.winPercenatge:old.carrerCurrent.lostPercentage;
+    awaySum += old.currentAwayHome.winner == "away"? old.currentAwayHome.winPercenatge:old.currentAwayHome.lostPercentage;
+    awaySum += old.awayHomeCurrent.winner == "away"? old.awayHomeCurrent.winPercenatge:old.awayHomeCurrent.lostPercentage;
 
     var homeSum = old.average.winner == "home"? old.average.winPercenatge:old.currentCarrer.lostPercentage;
     homeSum += old.current.winner == "home"? old.current.winPercenatge:old.currentCarrer.lostPercentage;
     homeSum += old.carrer.winner == "home"? old.carrer.winPercenatge:old.currentCarrer.lostPercentage;
     homeSum += old.currentCarrer.winner == "home"? old.currentCarrer.winPercenatge:old.currentCarrer.lostPercentage;
     homeSum += old.carrerCurrent.winner == "home"? old.carrerCurrent.winPercenatge:old.carrerCurrent.lostPercentage;
+    homeSum += old.currentAwayHome.winner == "home"? old.currentAwayHome.winPercenatge:old.currentAwayHome.lostPercentage;
+    homeSum += old.awayHomeCurrent.winner == "home"? old.awayHomeCurrent.winPercenatge:old.awayHomeCurrent.lostPercentage;
 
-    old.awayPercentage = awaySum/5;
-    old.homePercenatge = homeSum/5;
+    old.awayPercentage = awaySum/7;
+    old.homePercenatge = homeSum/7;
 
     old.awayScenarios = old.awayScenarios*20;
     old.homeScenarios = old.homeScenarios*20;
@@ -4486,51 +4637,70 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
     neww.carrer.diff = awayFactors.new.carrer > homeFactors.new.carrer ? awayFactors.new.carrer - homeFactors.new.carrer : homeFactors.new.carrer - awayFactors.new.carrer;
     neww.currentCarrer.diff = awayFactors.new.current > homeFactors.new.carrer ? awayFactors.new.current - homeFactors.new.carrer : homeFactors.new.carrer - awayFactors.new.current;
     neww.carrerCurrent.diff = awayFactors.new.carrer > homeFactors.new.current ? awayFactors.new.carrer - homeFactors.new.current : homeFactors.new.current - awayFactors.new.carrer;
-    
+    neww.currentAwayHome.diff = awayFactors.new.current > homeFactors.new.awayHomeEra ? awayFactors.new.current - homeFactors.new.awayHomeEra : homeFactors.new.awayHomeEra - awayFactors.new.current;
+    neww.awayHomeCurrent.diff = awayFactors.new.awayHomeEra > homeFactors.new.current ? awayFactors.new.awayHomeEra - homeFactors.new.current : homeFactors.new.current - awayFactors.new.awayHomeEra;
+
+
     neww.average.winPercenatge = awayFactors.new.average > homeFactors.new.average ? (Math.abs(awayFactors.new.average)/ (Math.abs(homeFactors.new.average) + Math.abs(awayFactors.new.average)))*100: (Math.abs(homeFactors.new.average)/ (Math.abs(homeFactors.new.average) + Math.abs(awayFactors.new.average)))*100;
     neww.current.winPercenatge = awayFactors.new.current > homeFactors.new.current ? (Math.abs(awayFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.current)))*100 : (Math.abs(homeFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.current)))*100;
     neww.carrer.winPercenatge = awayFactors.new.carrer > homeFactors.new.carrer ? (Math.abs(awayFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.carrer)))*100 : (Math.abs(homeFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.carrer)))*100;
     neww.currentCarrer.winPercenatge = awayFactors.new.current > homeFactors.new.carrer ? (Math.abs(awayFactors.new.current)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.current)))*100 : (Math.abs(homeFactors.new.carrer)/ (Math.abs(homeFactors.new.carrer) + Math.abs(awayFactors.new.current)))*100;
     neww.carrerCurrent.winPercenatge = awayFactors.new.carrer > homeFactors.new.current ? (Math.abs(awayFactors.new.carrer)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.carrer)))*100 : (Math.abs(homeFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.carrer)))*100;
+    neww.currentAwayHome.winPercenatge = awayFactors.new.current > homeFactors.new.awayHomeEra ? (Math.abs(awayFactors.new.current)/ (Math.abs(homeFactors.new.awayHomeEra) + Math.abs(awayFactors.new.current)))*100 : (Math.abs(homeFactors.new.awayHomeEra)/ (Math.abs(homeFactors.new.awayHomeEra) + Math.abs(awayFactors.new.current)))*100;
+    neww.awayHomeCurrent.winPercenatge = awayFactors.new.awayHomeEra > homeFactors.new.current ? (Math.abs(awayFactors.new.awayHomeEra)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.awayHomeEra)))*100 : (Math.abs(homeFactors.new.current)/ (Math.abs(homeFactors.new.current) + Math.abs(awayFactors.new.awayHomeEra)))*100;
+
+
 
     neww.average.lostPercentage = 100 - neww.average.winPercenatge;
     neww.current.lostPercentage = 100 - neww.current.winPercenatge;
     neww.carrer.lostPercentage = 100 - neww.carrer.winPercenatge;
     neww.currentCarrer.lostPercentage = 100 - neww.currentCarrer.winPercenatge;
     neww.carrerCurrent.lostPercentage = 100 - neww.carrerCurrent.winPercenatge;
+    neww.currentAwayHome.lostPercentage = 100 - neww.currentAwayHome.winPercenatge;
+    neww.awayHomeCurrent.lostPercentage = 100 - neww.awayHomeCurrent.winPercenatge;
 
     neww.average.winner = awayFactors.new.average < homeFactors.new.average ? "away" : "home";
     neww.current.winner = awayFactors.new.current < homeFactors.new.current ? "away" : "home";
     neww.carrer.winner = awayFactors.new.carrer < homeFactors.new.carrer ? "away" : "home";
     neww.currentCarrer.winner = awayFactors.new.current < homeFactors.new.carrer ? "away" : "home";
     neww.carrerCurrent.winner = awayFactors.new.carrer < homeFactors.new.current ? "away" : "home";
+    neww.currentAwayHome.winner = awayFactors.new.current < homeFactors.new.awayHomeEra ? "away" : "home";
+    neww.awayHomeCurrent.winner = awayFactors.new.awayHomeEra < homeFactors.new.current ? "away" : "home";
 
     neww.awayScenarios = neww.average.winner == "away"? 1:0;
     neww.awayScenarios += neww.current.winner == "away"? 1:0;
     neww.awayScenarios += neww.carrer.winner == "away"? 1:0;
     neww.awayScenarios += neww.currentCarrer.winner == "away"? 1:0;
     neww.awayScenarios += neww.carrerCurrent.winner == "away"? 1:0;
+    neww.awayScenarios += neww.currentAwayHome.winner == "away"? 1:0;
+    neww.awayScenarios += neww.awayHomeCurrent.winner == "away"? 1:0;
 
     neww.homeScenarios = neww.average.winner == "home"? 1:0;
     neww.homeScenarios += neww.current.winner == "home"? 1:0;
     neww.homeScenarios += neww.carrer.winner == "home"? 1:0;
     neww.homeScenarios += neww.currentCarrer.winner == "home"? 1:0;
     neww.homeScenarios += neww.carrerCurrent.winner == "home"? 1:0;
+    neww.homeScenarios += neww.currentAwayHome.winner == "home"? 1:0;
+    neww.homeScenarios += neww.awayHomeCurrent.winner == "home"? 1:0;
 
     var awaySum = neww.average.winner == "away"? neww.average.winPercenatge:neww.average.lostPercentage;
     awaySum += neww.current.winner == "away"? neww.current.winPercenatge:neww.current.lostPercentage;
     awaySum += neww.carrer.winner == "away"? neww.carrer.winPercenatge:neww.carrer.lostPercentage;
     awaySum += neww.currentCarrer.winner == "away"? neww.currentCarrer.winPercenatge:neww.currentCarrer.lostPercentage;
     awaySum += neww.carrerCurrent.winner == "away"? neww.carrerCurrent.winPercenatge:neww.carrerCurrent.lostPercentage;
+    awaySum += neww.currentAwayHome.winner == "away"? neww.currentAwayHome.winPercenatge:neww.currentAwayHome.lostPercentage;
+    awaySum += neww.awayHomeCurrent.winner == "away"? neww.awayHomeCurrent.winPercenatge:neww.awayHomeCurrent.lostPercentage;
 
     var homeSum = neww.average.winner == "home"? neww.average.winPercenatge:neww.currentCarrer.lostPercentage;
     homeSum += neww.current.winner == "home"? neww.current.winPercenatge:neww.currentCarrer.lostPercentage;
     homeSum += neww.carrer.winner == "home"? neww.carrer.winPercenatge:neww.currentCarrer.lostPercentage;
     homeSum += neww.currentCarrer.winner == "home"? neww.currentCarrer.winPercenatge:neww.currentCarrer.lostPercentage;
     homeSum += neww.carrerCurrent.winner == "home"? neww.carrerCurrent.winPercenatge:neww.carrerCurrent.lostPercentage;
+    homeSum += neww.currentAwayHome.winner == "home"? neww.currentAwayHome.winPercenatge:neww.currentAwayHome.lostPercentage;
+    homeSum += neww.awayHomeCurrent.winner == "home"? neww.awayHomeCurrent.winPercenatge:neww.awayHomeCurrent.lostPercentage;
 
-    neww.awayPercentage = awaySum/5;
-    neww.homePercenatge = homeSum/5;
+    neww.awayPercentage = awaySum/7;
+    neww.homePercenatge = homeSum/7;
 
     neww.awayScenarios = neww.awayScenarios*20;
     neww.homeScenarios = neww.homeScenarios*20;
@@ -4567,7 +4737,7 @@ async function CalculateDiffsAndPercentages(awayFactors, homeFactors, stdDev)
 
 async function CalculateFactors(pitcher, batter)
 {
-    var factors = {old:{ average:0, current:0, carrer:0 }, new:{ average:0, current:0, carrer:0 }};
+    var factors = {old:{ average:0, current:0, carrer:0, awayHomeEra:0 }, new:{ average:0, current:0, carrer:0, awayHomeEra:0 }};
 
     var avg = parseFloat(batter.totalsData.filter(function(item){
         return item.stat == "AVG"
@@ -4585,13 +4755,15 @@ async function CalculateFactors(pitcher, batter)
         return item.stat == "OPS"
     })[0].value);
 
-    factors.old.average = (avg + obp + slg + ops) + ((pitcher.currentEra + pitcher.carrerEra)/2);
+    factors.old.average = (avg + obp + slg + ops) + ((pitcher.currentEra + pitcher.carrerEra +pitcher.awayHomeEra)/3);
     factors.old.current = (avg + obp + slg + ops) + pitcher.currentEra;
     factors.old.carrer = (avg + obp + slg + ops) + pitcher.carrerEra;
+    factors.old.awayHomeEra = (avg + obp + slg + ops) + pitcher.awayHomeEra;
 
-    factors.new.average = ((pitcher.currentEra + pitcher.carrerEra)/2) - (avg + obp + slg + ops);
+    factors.new.average = ((pitcher.currentEra + pitcher.carrerEra+ pitcher.awayHomeEra)/3) - (avg + obp + slg + ops);
     factors.new.current = pitcher.currentEra - (avg + obp + slg + ops);
     factors.new.carrer = pitcher.carrerEra - (avg + obp + slg + ops);
+    factors.new.awayHomeEra = pitcher.awayHomeEra - (avg + obp + slg + ops);
 
     return factors;
 
@@ -4619,9 +4791,11 @@ async function getPitcherGameByGame()
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
+          var isHomeGame = 0;
             if(game.game.indexOf(" @ " + team.teamName) >= 0)
             {
                 scope = game.homeDetails.pitchersDeatils;
+                isHomeGame = 1;
             }
             else{
                 scope = game.awayDetails.pitchersDeatils;
@@ -4633,7 +4807,9 @@ async function getPitcherGameByGame()
                     team: team.teamName,
                     date: game.date, 
                     pitcher: pitcher.PITCHERS, 
-                    eraGame: pitcher.ERA
+                    eraGame: pitcher.ERA,
+                    isHomeGame : isHomeGame,
+                    isWin: game.resultDetails.ISWIN == "Win" ?  1 : 0
                 };
                 pitchersTeam.push(pitcherData);
                 var isPitcherInList = uniquePitchers.filter(function(item){
@@ -4659,6 +4835,18 @@ async function getPitcherGameByGame()
             var sumEra = 0;
             var eraValues = [];
             var avgCount = 0;
+            var sumEraHome = 0;
+            var eraValuesHome = [];
+            var avgCountHome = 0;
+            var sumEraAway = 0;
+            var eraValuesAway = [];
+            var avgCountAway = 0;
+            var totalWins = 0;
+            var totalLoses = 0;
+            var totalHomeWins = 0;
+            var totalHomeLoses = 0;
+            var totalAwayWins = 0;
+            var totalAwayLoses = 0
             for (let rr = 0; rr < pitcherGames.length; rr++) {
                 const game = pitcherGames[rr];
                 var era = parseFloat(game.eraGame);
@@ -4669,8 +4857,52 @@ async function getPitcherGameByGame()
                     game.eraAvg = sumEra/(avgCount);
                     eraValues.push(parseFloat(game.eraGame));
                     game.stdDev= getStandardDeviation(eraValues);
+                    totalWins = game.isWin ? totalWins + game.isWin : totalWins ;
+                    game.totalWins = totalWins;
+                    totalLoses = !game.isWin ? totalLoses + 1 : totalLoses ;
+                    game.totalLoses = totalLoses;
                     //console.log(game);
+                    if(game.isHomeGame)
+                    {
+                        avgCountHome++;
+                        sumEraHome += era;
+                        game.eraAvgHome = sumEraHome/(avgCountHome);
+                        eraValuesHome.push(parseFloat(game.eraGame));
+                        game.stdDevHome= getStandardDeviation(eraValuesHome);
+                        game.eraAvgAway = sumEraAway/(avgCountAway);
+                        game.stdDevAway= getStandardDeviation(eraValuesAway);
+                        totalHomeWins = game.isWin ? totalHomeWins + game.isWin : totalHomeWins ;
+                        game.totalHomeWins = totalHomeWins;
+                        totalHomeLoses = !game.isWin ? totalHomeLoses + 1 : totalHomeLoses ;
+                        game.totalHomeLoses = totalHomeLoses;
+                        totalAwayWins = totalAwayWins;
+                        game.totalAwayWins = totalAwayWins;
+                        totalAwayLoses = totalAwayLoses ;
+                        game.totalAwayLoses = totalAwayLoses;
+                        //console.log(game);
+                    }
+                    else if(!game.isHomeGame)
+                    {
+                        avgCountAway++;
+                        sumEraAway += era;
+                        game.eraAvgAway = sumEraAway/(avgCountAway);
+                        eraValuesAway.push(parseFloat(game.eraGame));
+                        game.stdDevAway= getStandardDeviation(eraValuesAway);
+                        game.eraAvgHome = sumEraHome/(avgCountHome);
+                        game.stdDevHome= getStandardDeviation(eraValuesHome);
+                        totalAwayWins = game.isWin ? totalAwayWins + game.isWin : totalAwayWins ;
+                        game.totalAwayWins = totalAwayWins;
+                        totalAwayLoses = !game.isWin ? totalAwayLoses + 1 : totalAwayLoses ;
+                        game.totalAwayLoses = totalAwayLoses;
+                        totalHomeWins = totalHomeWins;
+                        game.totalHomeWins = totalHomeWins;
+                        totalHomeLoses = totalHomeLoses ;
+                        game.totalHomeLoses = totalHomeLoses;
+                        //console.log(game);
+                    }
                 }
+                
+                
             }
             var stopHere = "";
         }
@@ -4687,12 +4919,12 @@ async function getPreviousPitcherGameByGame(year)
     var dataScope = teamsResultsData.filter(function(item){
         return item.period == 0;         
         });
-        try{
-            var pitchersByTeam = await load("PitchersByTeamByGame",year);
-        }
-        catch{
+        //try{
+            //var pitchersByTeam = await load("PitchersByTeamByGame",year);
+        //}
+        //catch{
             var pitchersByTeam = [];
-        }
+        //}
     for (let index = 0; index < dataScope.length; index++) {
         const team = dataScope[index];
         
@@ -4703,9 +4935,11 @@ async function getPreviousPitcherGameByGame(year)
         for (let tr = 0; tr < allGamesDetails.games.length; tr++) {
             const game = allGamesDetails.games[tr];
           var scope = [];
+			var isHomeGame = 0;
             if(game.game.indexOf(" @ "+ team.teamName ) >= 0)
             {
                 scope = game.homeDetails.pitchersDeatils;
+				isHomeGame = 1;			   
             }
             else{
                 scope = game.awayDetails.pitchersDeatils;
@@ -4717,7 +4951,9 @@ async function getPreviousPitcherGameByGame(year)
                     team: team.teamName,
                     date: game.date, 
                     pitcher: pitcher.PITCHERS, 
-                    eraGame: pitcher.ERA
+                    eraGame: pitcher.ERA,
+					isHomeGame : isHomeGame,
+                    isWin: game.resultDetails.ISWIN == "Win" ?  1 : 0						
                 };
                 pitchersTeam.push(pitcherData);
                 var isPitcherInList = uniquePitchers.filter(function(item){
@@ -4743,6 +4979,18 @@ async function getPreviousPitcherGameByGame(year)
             var sumEra = 0;
             var eraValues = [];
             var avgCount = 0;
+			var sumEraHome = 0;
+            var eraValuesHome = [];
+            var avgCountHome = 0;
+            var sumEraAway = 0;
+            var eraValuesAway = [];
+            var avgCountAway = 0;
+            var totalWins = 0;
+            var totalLoses = 0;
+            var totalHomeWins = 0;
+            var totalHomeLoses = 0;
+            var totalAwayWins = 0;
+            var totalAwayLoses = 0
             for (let rr = 0; rr < pitcherGames.length; rr++) {
                 const game = pitcherGames[rr];
                 var era = parseFloat(game.eraGame);
@@ -4753,8 +5001,52 @@ async function getPreviousPitcherGameByGame(year)
                     game.eraAvg = sumEra/(avgCount);
                     eraValues.push(parseFloat(game.eraGame));
                     game.stdDev= getStandardDeviation(eraValues);
+                    totalWins = game.isWin ? totalWins + game.isWin : totalWins ;
+                    game.totalWins = totalWins;
+                    totalLoses = !game.isWin ? totalLoses + 1 : totalLoses ;
+                    game.totalLoses = totalLoses;
                     //console.log(game);
+                    if(game.isHomeGame)
+                    {
+                        avgCountHome++;
+                        sumEraHome += era;
+                        game.eraAvgHome = sumEraHome/(avgCountHome);
+                        eraValuesHome.push(parseFloat(game.eraGame));
+                        game.stdDevHome= getStandardDeviation(eraValuesHome);
+                        game.eraAvgAway = sumEraAway/(avgCountAway);
+                        game.stdDevAway= getStandardDeviation(eraValuesAway);
+                        totalHomeWins = game.isWin ? totalHomeWins + game.isWin : totalHomeWins ;
+                        game.totalHomeWins = totalHomeWins;
+                        totalHomeLoses = !game.isWin ? totalHomeLoses + 1 : totalHomeLoses ;
+                        game.totalHomeLoses = totalHomeLoses;
+                        totalAwayWins = totalAwayWins;
+                        game.totalAwayWins = totalAwayWins;
+                        totalAwayLoses = totalAwayLoses ;
+                        game.totalAwayLoses = totalAwayLoses;
+                        //console.log(game);
+                    }
+                    else if(!game.isHomeGame)
+                    {
+                        avgCountAway++;
+                        sumEraAway += era;
+                        game.eraAvgAway = sumEraAway/(avgCountAway);
+                        eraValuesAway.push(parseFloat(game.eraGame));
+                        game.stdDevAway= getStandardDeviation(eraValuesAway);
+                        game.eraAvgHome = sumEraHome/(avgCountHome);
+                        game.stdDevHome= getStandardDeviation(eraValuesHome);
+                        totalAwayWins = game.isWin ? totalAwayWins + game.isWin : totalAwayWins ;
+                        game.totalAwayWins = totalAwayWins;
+                        totalAwayLoses = !game.isWin ? totalAwayLoses + 1 : totalAwayLoses ;
+                        game.totalAwayLoses = totalAwayLoses;
+                        totalHomeWins = totalHomeWins;
+                        game.totalHomeWins = totalHomeWins;
+                        totalHomeLoses = totalHomeLoses ;
+                        game.totalHomeLoses = totalHomeLoses;
+                        //console.log(game);
+                    }
                 }
+                
+                
             }
             var stopHere = "";
         }
@@ -7645,15 +7937,20 @@ async function getScheduleData(date)
         });  
 
 
-        await driver.get(schedulesURL+team.url+"/half/2");
+        await driver.get(schedulesURL+team.url+"//seasontype/2/half/2");
         await driver.manage().setTimeouts({ implicit: 1000 });
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
             console.log(return_value);
             scheduleData = JSON.parse(return_value);
-            var data = ProcessScheduleData(scheduleData,teamName);
-            for (let ar = 0; ar < data.length; ar++) {
-                const schedule = data[ar];
-                schedulesAllData.push(schedule);  
+            if(scheduleData.length > 0)
+            {
+
+                var data = ProcessScheduleData(scheduleData,teamName);
+                for (let ar = 0; ar < data.length; ar++) {
+                    const schedule = data[ar];
+                    //To write the code to append more result to existing dates.
+                    schedulesAllData.push(schedule);  
+                }
             }
                       
         });  
