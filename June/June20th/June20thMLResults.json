@@ -1,0 +1,204 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ COL Rockies",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.71,
+            "probability_lr": 0.8924337910853729,
+            "average_probability": 0.8012168955426864,
+            "standard_deviation": 0.09121689554268647
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "BAL Orioles @ NY Yankees",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.72,
+            "probability_lr": 0.7880928522884618,
+            "average_probability": 0.7540464261442309,
+            "standard_deviation": 0.034046426144230924
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "KC Royals @ OAK Athletics",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.69,
+            "probability_lr": 0.7618406781829328,
+            "average_probability": 0.7259203390914664,
+            "standard_deviation": 0.03592033909146641
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ WAS Nationals",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.6,
+            "probability_lr": 0.8275887720102215,
+            "average_probability": 0.7137943860051108,
+            "standard_deviation": 0.11379438600511077
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "SF Giants @ STL Cardinals",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.68,
+            "probability_lr": 0.7210512631079731,
+            "average_probability": 0.7005256315539865,
+            "standard_deviation": 0.020525631553986512
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "MIL Brewers @ SD Padres",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.64,
+            "probability_lr": 0.7434171483081998,
+            "average_probability": 0.6917085741540999,
+            "standard_deviation": 0.05170857415409991
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ COL Rockies",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.7,
+            "probability_lr": 0.6605446959559373,
+            "average_probability": 0.6802723479779686,
+            "standard_deviation": 0.019727652022031306
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ COL Rockies",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.65,
+            "probability_lr": 0.6954477897508962,
+            "average_probability": 0.6727238948754481,
+            "standard_deviation": 0.02272389487544807
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "KC Royals @ OAK Athletics",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6556840136720921,
+            "average_probability": 0.6428420068360461,
+            "standard_deviation": 0.012842006836046027
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "MIL Brewers @ SD Padres",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.65,
+            "probability_lr": 0.6269218701274523,
+            "average_probability": 0.6384609350637261,
+            "standard_deviation": 0.01153906493627388
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "TB Rays @ MIN Twins",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.68,
+            "probability_lr": 0.5705690004352734,
+            "average_probability": 0.6252845002176367,
+            "standard_deviation": 0.05471549978236334
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ WAS Nationals",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.67,
+            "probability_lr": 0.5754370199418453,
+            "average_probability": 0.6227185099709227,
+            "standard_deviation": 0.04728149002907739
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "HOU Astros @ CHI White",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.52,
+            "probability_lr": 0.6836167224122404,
+            "average_probability": 0.6018083612061202,
+            "standard_deviation": 0.08180836120612017
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "TB Rays @ MIN Twins",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.59,
+            "probability_lr": 0.6105667656802709,
+            "average_probability": 0.6002833828401355,
+            "standard_deviation": 0.010283382840135469
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ CLE Guardians",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.56,
+            "probability_lr": 0.5788745920020912,
+            "average_probability": 0.5694372960010456,
+            "standard_deviation": 0.009437296001045592
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "MIL Brewers @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.61,
+            "probability_lr": 0.5108629680887364,
+            "average_probability": 0.5604314840443683,
+            "standard_deviation": 0.049568515955631776
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "SF Giants @ STL Cardinals",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.58,
+            "probability_lr": 0.5315082610322612,
+            "average_probability": 0.5557541305161307,
+            "standard_deviation": 0.024245869483869364
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "BAL Orioles @ NY Yankees",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.5598593544504142,
+            "average_probability": 0.5499296772252071,
+            "standard_deviation": 0.0099296772252071
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ WAS Nationals",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.5244430532488896,
+            "average_probability": 0.5372215266244449,
+            "standard_deviation": 0.01277847337555521
+        },
+        {
+            "file": "/content/NewGames/June20thNewGamesConsolidated.json",
+            "game": "HOU Astros @ CHI White",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.52,
+            "probability_lr": 0.5158629323108084,
+            "average_probability": 0.5179314661554042,
+            "standard_deviation": 0.0020685338445958212
+        }
+    ]
+}

@@ -118,23 +118,23 @@ try {
 
         for (let ater = 0; ater < previousYears.length; ater++) {
              const yearData = previousYears[ater];
-            //await getPreviousScheduleData(yearData.year);
-            //await ProcessPreviousGameByGame(yearData.year);
-            //await getPreviousPitcherGameByGame(yearData.year);
-            // await getPreviousBatterGameByGame(yearData.year);
-            // await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
+            // await getPreviousScheduleData(yearData.year);
+            // await ProcessPreviousGameByGame(yearData.year);
+            // await getPreviousPitcherGameByGame(yearData.year);
+            //  await getPreviousBatterGameByGame(yearData.year);
+            //  await getPreviousAllPitchersData(yearData.year);//true for noselections to be shown/included
 
-            // var type = "AllGamesConsolidated";
-            // await save(yearData.year+type, [], function(){}, "replace" ,"allConsolidatedGames");
-            // await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
-            // await ProcessDailyGames(yearData.dates,false, type, yearData.year);
+            var type = "AllGamesConsolidated";
+            await save(yearData.year+type, [], function(){}, "replace" ,"allConsolidatedGames");
+            await save("finalSelectionsCSV", [], function(){}, "replace" ,yearData.year);
+            await ProcessDailyGames(yearData.dates,false, type, yearData.year);
 
-            // var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", "allConsolidatedGames");
-            // allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
+            var yearPredicitions = await load(yearData.year+"AllGamesConsolidated", "allConsolidatedGames");
+            allYearsPredictions = allYearsPredictions.concat(yearPredicitions);
 
         }
     
-        //await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+        await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
         async function getAllCombinations(array) {
             const results = [];
@@ -169,19 +169,19 @@ try {
 
           // Example usage:
           const array = [results2018, results2019, results2020, results2021, results2022, results2023];
-          //const combinations = await getAllCombinations(array);
+          const combinations = await getAllCombinations(array);
     
   //----------------------------------------  
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:26, monthNumber:"06"}
+        {month:"June", from:1, to:20, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:31, to:31, monthNumber:"05"},
-        {month:"June", from:27, to:27, monthNumber:"06"}
+        {month:"June", from:21, to:21, monthNumber:"06"}
     ];
     
     //await CheckMLResults();
@@ -189,25 +189,25 @@ try {
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    // await ProcessGameByGame();
+                    //await ProcessGameByGame();
                     //await getPitcherGameByGame();
-                    // await getBatterGameByGame();
+                    //await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
     ///     *    
-                    //await CleanUpAndGenerateStats(fullDatesAnalysis);
+                    await CleanUpAndGenerateStats(fullDatesAnalysis);
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // ///     *    
-                        // var type = "AllGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        // var allYearsPredictions = await load("allYearsPredictions", "allConsolidatedGames");
-                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-                        // allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
-                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+                        var type = "AllGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        var allYearsPredictions = await load("allYearsPredictions", "allConsolidatedGames");
+                        var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        allYearsPredictions = allYearsPredictions.concat(allConsolidatedGames);
+                        await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
 
                         var type = "NewGamesConsolidated";
@@ -350,7 +350,7 @@ try {
                     //await AlgoPreviousSeriesWinnerBasedOnResultAndPattern(selectedDate, year);
                     //await getPreviousESPNData(selectedDate, year);
                     //await getPreviousCoversWinPercentages(selectedDate, descriptiveDate, year);
-                    //await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year);
+                    await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year);
                 }
                 else{   
                 //-----------------------------    
@@ -358,9 +358,9 @@ try {
                 //await getScheduleData(selectedDate);
 
 
-                //await ProcessGameByGame(selectedDate);
-                //await getPitcherGameByGame(selectedDate);
-                //await getBatterGameByGame(selectedDate);
+                //await ProcessGameByGame();
+                //await getPitcherGameByGame();
+                //await getBatterGameByGame();
                 //await getESPNData(selectedDate);
                 //await getBattersData(selectedDate);
                 //await getBestScoringTeamsByBatting(selectedDate);
@@ -369,25 +369,25 @@ try {
                 //await getBestStartingPitchersTeams(selectedDate);
                 //await getBestRelievingPitchersTeams(selectedDate);
                 //await getBestOverallPitchersTeams(selectedDate);
-                // 
+                //    
                 //await getMoreWininigTeams(selectedDate);
                 //await getMoreScoringTeams(selectedDate);
                 //await getMoreReceivingTeams(selectedDate);
                 //await evaluateGames(selectedDate);
                 //await sortBetterAvgs(selectedDate);
                 //await filterConsistentPicks(selectedDate)
-            //////
+            /// //
                 //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
                 //await consolidateAlgorithmResults(selectedDate);
 
-                //await CalculateWinnersViaFormula(selectedDate, noSelections, type);
+                await CalculateWinnersViaFormula(selectedDate, noSelections, type);
                 
 
                 // After running ML
 
-                await GenerateDataForVisualization(selectedDate);
+                //await GenerateDataForVisualization(selectedDate);
 
                 //await ConsolidateMachineLearningResults(selectedDate);
                 //}
@@ -416,13 +416,17 @@ try {
             return item.period == 0; 
         });
         var formattedGames = [];
+
+        var todayParts = new Date().toString().split(" ");
+        var today = todayParts[2];
+        var isTodaysFile = gameDataAnalysis[0].date.toLowerCase().indexOf(today.toLowerCase()) >=0;
         
     
 
         for (let index = 0; index < gameDataAnalysis.length; index++) {
             const game = gameDataAnalysis[index];
             var keys = Object.keys(game);
-            var gameFormatted = {common : {},compare : { awayRow:{}, homeRow:{}, selected:{} } };
+            var gameFormatted = {common : {},compare : { awayRow:{}, homeRow:{}, selected:{}, results:{} } };
 
             for (let sds = 0; sds < keys.length; sds++) {
                 const key = keys[sds];
@@ -569,14 +573,76 @@ try {
                     
                 }
             }
+            if(!isTodaysFile)
+            {
+                gameFormatted.compare.results["isHomeWinner"] = game.isHomeWinner == 1 ? game.home : game.away;
+                gameFormatted.compare.results["isF5HomeWinner"] = game.isF5HomeWinner == 1 ? game.home : game.away;
+                gameFormatted.compare.results["isOver"] = game.isOver == 1 ? "Over" : game.isOver == 0 ? "Under" : "Push";
+            }
 
+            var awaySum = 0;
+            awaySum += parseFloat(gameFormatted.compare.awayRow["RelevingRuns"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["formulaWinPercentage"])/100;
+            awaySum += parseFloat(gameFormatted.compare.awayRow["SeriesPercentage"])/100;
+            awaySum += parseFloat(gameFormatted.compare.awayRow["NextWinningPercentage"])/100;
+            awaySum += parseFloat(gameFormatted.compare.awayRow["TotalPercentage"])/100;
+            awaySum -= parseFloat(gameFormatted.compare.awayRow["CarrerEra"]);
+            awaySum -= parseFloat(gameFormatted.compare.awayRow["CurrentEra"]);
+            awaySum -= parseFloat(gameFormatted.compare.awayRow["SpecificEra"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["PitcherWins"]);
+            awaySum -= parseFloat(gameFormatted.compare.awayRow["PitcherLoses"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["AVG"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["OPS"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["OBP"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["SLG"]);
+            awaySum += parseFloat(gameFormatted.compare.awayRow["CoversPer"])/100;
 
+            gameFormatted.compare.awayRow["totalFactor"] = awaySum;
+
+            var homeSum = 0;
+            homeSum += parseFloat(gameFormatted.compare.homeRow["RelevingRuns"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["formulaWinPercentage"])/100;
+            homeSum += parseFloat(gameFormatted.compare.homeRow["SeriesPercentage"])/100;
+            homeSum += parseFloat(gameFormatted.compare.homeRow["NextWinningPercentage"])/100;
+            homeSum += parseFloat(gameFormatted.compare.homeRow["TotalPercentage"])/100;
+            homeSum -= parseFloat(gameFormatted.compare.homeRow["CarrerEra"]);
+            homeSum -= parseFloat(gameFormatted.compare.homeRow["CurrentEra"]);
+            homeSum -= parseFloat(gameFormatted.compare.homeRow["SpecificEra"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["PitcherWins"]);
+            homeSum -= parseFloat(gameFormatted.compare.homeRow["PitcherLoses"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["AVG"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["OPS"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["OBP"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["SLG"]);
+            homeSum += parseFloat(gameFormatted.compare.homeRow["CoversPer"])/100;
+
+            gameFormatted.compare.homeRow["totalFactor"] = homeSum;
+            
+            var factorDiff = 0;
+            if(homeSum < 0 && awaySum < 0)
+            {
+                factorDiff = Math.abs(homeSum) > Math.abs(awaySum) ? Math.abs(homeSum) - Math.abs(awaySum) : Math.abs(awaySum) - Math.abs(homeSum);
+            }
+            else if(awaySum < 0 && homeSum > 0)
+            {
+                factorDiff = homeSum - awaySum;
+            }
+            else if(awaySum > 0 && homeSum < 0)
+            {
+                factorDiff = awaySum - homeSum;
+            }
+            else{
+                 factorDiff = homeSum > awaySum ? homeSum - awaySum : awaySum - homeSum;
+            }
+            gameFormatted.common["factorDiff"] = Math.abs(factorDiff);
+            gameFormatted["factorDiff"] = Math.abs(factorDiff);
             formattedGames.push(gameFormatted);
             
             
         }   
+        var formattedGamesSorted = await sorting(formattedGames, "factorDiff", "desc");
 
-        await save(date+"JsonViewObject",formattedGames, function(){}, "replace", "JsonViewObjects" );
+        await save(date+"JsonViewObject",formattedGamesSorted, function(){}, "replace", "JsonViewObjects" );
 
         
 
@@ -3718,11 +3784,21 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             gameData.awayCoversPer = awayCoversPer;
             gameData.homeCoversPer = homeCoversPer;
             var winnerData = await GetResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam);
-            gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
-            //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
-            gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
+            if(winnerData.f5Winner){
+                gameData.isF5HomeWinner = winnerData.f5Winner.indexOf(game.homeTeam.homeTeam) >= 0 ? 1 : 0;
+                //gameData.finalWinner = winnerData.finalWinner;
+                gameData.isHomeWinner = winnerData.finalWinner.indexOf(game.homeTeam.homeTeam) >=0 ? 1 : 0;
+                //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
+                gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
+            }
+            else{
+                gameData.isF5HomeWinner = 0;
+                //gameData.finalWinner = winnerData.finalWinner;
+                gameData.isHomeWinner = 0;
+                //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
+                gameData.isOver = 2;
+            }
+            
             gameData.date = date;
             
             games.push(gameData);
@@ -4304,9 +4380,9 @@ async function CalculatePreviousWinnersViaFormula(date, noSelections, type, year
             gameData.awayCoversPer = awayCoversPer;
             gameData.homeCoversPer = homeCoversPer;
             var winnerData = await GetPreviousResultDetails(date, {away: game.awayTeam.awayTeam, home: game.homeTeam.homeTeam}, game.homeTeam.homeTeam, year);
-            gameData.isF5HomeWinner = winnerData.f5Winner == game.homeTeam.homeTeam ? 1 : 0;
+            gameData.isF5HomeWinner = winnerData.f5Winner.indexOf(game.homeTeam.homeTeam) >=0 ? 1 : 0;
             //gameData.finalWinner = winnerData.finalWinner;
-            gameData.isHomeWinner = winnerData.finalWinner == game.homeTeam.homeTeam ? 1 : 0;
+            gameData.isHomeWinner = winnerData.finalWinner.indexOf(game.homeTeam.homeTeam) >=0 ? 1 : 0;
             //gameData.isHomeHandicap = winnerData.homeTotalRuns - winnerData.awayTotalRuns >= 2 ? 1:0;
             gameData.isOver = (winnerData.homeTotalRuns + winnerData.awayTotalRuns) >= 9 ? 1:(winnerData.homeTotalRuns + winnerData.awayTotalRuns) <= 7 ? 0: 2;
             gameData.date = date;

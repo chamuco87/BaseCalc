@@ -47,7 +47,7 @@ df[numeric_cols] = df[numeric_cols].fillna(df[numeric_cols].mean())
 df = pd.get_dummies(df, drop_first=True)
 
 # Normalize numerical features
-numerical_features = ['formulaawayWinPercentage', 'awaySeriesPercentage', 'awayNextWinningPercentage', 'formulahomeWinPercentage', 'homeSeriesPercentage', 'homeNextWinningPercentage', 'awayTotalPercentage', 'homeTotalPercentage', 'overallDiff', 'stdDev', 'awayCarrerEra', 'awayCurrentEra', 'awayFinalEra', 'awayAVG', 'awayOPS', 'awayOBP', 'awaySLG', 'homeCarrerEra', 'homeCurrentEra', 'homeFinalEra', 'homeAVG', 'homeOPS', 'homeOBP', 'homeSLG']
+numerical_features = ['formulaawayWinPercentage', 'awaySeriesPercentage', 'awayNextWinningPercentage', 'formulahomeWinPercentage', 'homeSeriesPercentage', 'homeNextWinningPercentage', 'awayTotalPercentage', 'homeTotalPercentage', 'overallDiff', 'stdDev', 'awayCarrerEra', 'awayCurrentEra', 'awayFinalEra', 'awayAVG', 'awayOPS', 'awayOBP', 'awaySLG', 'homeCarrerEra', 'homeCurrentEra', 'homeFinalEra', 'homeAVG', 'homeOPS', 'homeOBP', 'homeSLG', 'awayCoversPer', 'homeCoversPer', 'awaySpecificEra', 'awayPitcherWins', 'awayPitcherLoses', 'homeSpecificEra', 'homePitcherWins', 'homePitcherLoses']
 scaler = StandardScaler()
 df[numerical_features] = scaler.fit_transform(df[numerical_features])
 
@@ -102,7 +102,7 @@ for file_path in new_game_files:
     game_column = new_df['game'].copy()
 
     # Ensure the columns exist in new_df before applying get_dummies
-    categorical_cols = ['game', 'time', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isF5HomeWinner', 'isHomeWinner', 'isOver', 'date']
+    categorical_cols = ['game', 'away', 'home', 'formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'awayPitcher', 'homePitcher', 'isF5HomeWinner', 'isHomeWinner' ,'isOver', 'date']
     categorical_cols_existing = [col for col in categorical_cols if col in new_df.columns]
 
     # Get dummy variables for categorical columns in new_df
