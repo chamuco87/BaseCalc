@@ -1,0 +1,137 @@
+{"selections":[{
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "OAK Athletics @ HOU Astros",
+    "target": "isHomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.84,
+    "probability_lr": 0.7910493207133603,
+    "average_probability": 0.8155246603566801,
+    "standard_deviation": 0.024475339643319827
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "OAK Athletics @ HOU Astros",
+    "target": "isF5HomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.73,
+    "probability_lr": 0.7469727826844026,
+    "average_probability": 0.7384863913422013,
+    "standard_deviation": 0.008486391342201305
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "CIN Reds @ LA Dodgers",
+    "target": "isHomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.74,
+    "probability_lr": 0.6736297164226492,
+    "average_probability": 0.7068148582113246,
+    "standard_deviation": 0.033185141788675376
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "NY Yankees @ MIN Twins",
+    "target": "isHomeWinner",
+    "prediction": 0,
+    "probability_rf": 0.63,
+    "probability_lr": 0.6292587376837386,
+    "average_probability": 0.6296293688418693,
+    "standard_deviation": 0.00037063115813068537
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "PIT Pirates @ CHI Cubs",
+    "target": "isHomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.52,
+    "probability_lr": 0.7013071286251533,
+    "average_probability": 0.6106535643125767,
+    "standard_deviation": 0.09065356431257665
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "NY Yankees @ MIN Twins",
+    "target": "isOver",
+    "prediction": 1,
+    "probability_rf": 0.5,
+    "probability_lr": 0.7037046073232502,
+    "average_probability": 0.6018523036616251,
+    "standard_deviation": 0.10185230366162512
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "CIN Reds @ LA Dodgers",
+    "target": "isOver",
+    "prediction": 1,
+    "probability_rf": 0.49,
+    "probability_lr": 0.6730027773359877,
+    "average_probability": 0.5815013886679938,
+    "standard_deviation": 0.09150138866799384
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "NY Mets @ PHI Phillies",
+    "target": "isHomeWinner",
+    "prediction": 0,
+    "probability_rf": 0.58,
+    "probability_lr": 0.5678570478837044,
+    "average_probability": 0.5739285239418521,
+    "standard_deviation": 0.0060714760581477845
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "CIN Reds @ LA Dodgers",
+    "target": "isF5HomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.62,
+    "probability_lr": 0.5113769783673661,
+    "average_probability": 0.5656884891836831,
+    "standard_deviation": 0.054311510816316966
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "TB Rays @ BOS Red",
+    "target": "isF5HomeWinner",
+    "prediction": 0,
+    "probability_rf": 0.58,
+    "probability_lr": 0.5489922225627397,
+    "average_probability": 0.5644961112813698,
+    "standard_deviation": 0.015503888718630121
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "NY Mets @ PHI Phillies",
+    "target": "isOver",
+    "prediction": 1,
+    "probability_rf": 0.63,
+    "probability_lr": 0.49654515011315853,
+    "average_probability": 0.5632725750565792,
+    "standard_deviation": 0.06672742494342074
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "NY Yankees @ MIN Twins",
+    "target": "isF5HomeWinner",
+    "prediction": 0,
+    "probability_rf": 0.54,
+    "probability_lr": 0.5844795617025155,
+    "average_probability": 0.5622397808512578,
+    "standard_deviation": 0.022239780851257718
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "TB Rays @ BOS Red",
+    "target": "isOver",
+    "prediction": 1,
+    "probability_rf": 0.49,
+    "probability_lr": 0.5511031037385368,
+    "average_probability": 0.5205515518692684,
+    "standard_deviation": 0.03055155186926839
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "PIT Pirates @ CHI Cubs",
+    "target": "isOver",
+    "prediction": 1,
+    "probability_rf": 0.48,
+    "probability_lr": 0.5498828023772463,
+    "average_probability": 0.5149414011886231,
+    "standard_deviation": 0.034941401188623156
+}, {
+    "file": "/content/NewGames/May16thNewGamesConsolidated.json",
+    "game": "PIT Pirates @ CHI Cubs",
+    "target": "isF5HomeWinner",
+    "prediction": 1,
+    "probability_rf": 0.51,
+    "probability_lr": 0.501607229191635,
+    "average_probability": 0.5058036145958176,
+    "standard_deviation": 0.00419638540418249
+}
+]}

@@ -1,0 +1,142 @@
+{"selections":[
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "BAL Orioles @ TB Rays",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.8,
+        "probability_lr": 0.8200170657411952,
+        "average_probability": 0.8100085328705976,
+        "standard_deviation": 0.010008532870597553
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "OAK Athletics @ SD Padres",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.71,
+        "probability_lr": 0.7531893935671649,
+        "average_probability": 0.7315946967835825,
+        "standard_deviation": 0.021594696783582445
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "BAL Orioles @ TB Rays",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.83,
+        "probability_lr": 0.6274025025907131,
+        "average_probability": 0.7287012512953566,
+        "standard_deviation": 0.10129874870464345
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "COL Rockies @ MIN Twins",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.72,
+        "probability_lr": 0.6377199827951011,
+        "average_probability": 0.6788599913975506,
+        "standard_deviation": 0.04114000860244943
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "HOU Astros @ SF Giants",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.62,
+        "probability_lr": 0.7286462544613802,
+        "average_probability": 0.6743231272306901,
+        "standard_deviation": 0.054323127230690105
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "TOR Blue @ MIL Brewers",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.64,
+        "probability_lr": 0.7026652115671169,
+        "average_probability": 0.6713326057835585,
+        "standard_deviation": 0.031332605783558454
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "CHI White @ SEA Mariners",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.69,
+        "probability_lr": 0.6380233665130364,
+        "average_probability": 0.6640116832565182,
+        "standard_deviation": 0.025988316743481787
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "OAK Athletics @ SD Padres",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.72,
+        "probability_lr": 0.574583286993102,
+        "average_probability": 0.647291643496551,
+        "standard_deviation": 0.07270835650344898
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "HOU Astros @ SF Giants",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.61,
+        "probability_lr": 0.6788840990688095,
+        "average_probability": 0.6444420495344048,
+        "standard_deviation": 0.03444204953440477
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "NY Yankees @ KC Royals",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.67,
+        "probability_lr": 0.5420052451598909,
+        "average_probability": 0.6060026225799455,
+        "standard_deviation": 0.06399737742005457
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "HOU Astros @ SF Giants",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.62,
+        "probability_lr": 0.5280350958610796,
+        "average_probability": 0.5740175479305398,
+        "standard_deviation": 0.04598245206946022
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "COL Rockies @ MIN Twins",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.61,
+        "probability_lr": 0.5013305611484238,
+        "average_probability": 0.5556652805742119,
+        "standard_deviation": 0.0543347194257881
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "NY Yankees @ KC Royals",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.53,
+        "probability_lr": 0.5637419427334582,
+        "average_probability": 0.5468709713667291,
+        "standard_deviation": 0.016870971366729104
+    },
+    {
+        "file": "/content/NewGames/June10thNewGamesConsolidated.json",
+        "game": "COL Rockies @ MIN Twins",
+        "target": "isOver",
+        "prediction": 0,
+        "probability_rf": 0.51,
+        "probability_lr": 0.5092633319988225,
+        "average_probability": 0.5096316659994112,
+        "standard_deviation": 0.00036833400058877697
+    }
+]}

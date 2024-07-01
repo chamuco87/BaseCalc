@@ -1,0 +1,52 @@
+{"selections":[
+    {
+        "file": "/content/NewGames/April18thNewGamesConsolidated.json",
+        "game": "LAAngels @ TBRays",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.71,
+        "probability_lr": 0.8354427118967326,
+        "average_probability": 0.7727213559483663,
+        "standard_deviation": 0.06272135594836631
+    },
+    {
+        "file": "/content/NewGames/April18thNewGamesConsolidated.json",
+        "game": "LAAngels @ TBRays",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.6,
+        "probability_lr": 0.7694100594977619,
+        "average_probability": 0.6847050297488809,
+        "standard_deviation": 0.08470502974888094
+    },
+    {
+        "file": "/content/NewGames/April18thNewGamesConsolidated.json",
+        "game": "CLEGuardians @ BOSRed Sox",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.68,
+        "probability_lr": 0.6181011683223887,
+        "average_probability": 0.6490505841611944,
+        "standard_deviation": 0.03094941583880567
+    },
+    {
+        "file": "/content/NewGames/April18thNewGamesConsolidated.json",
+        "game": "TEXRangers @ DETTigers",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.53,
+        "probability_lr": 0.6752281632276759,
+        "average_probability": 0.6026140816138379,
+        "standard_deviation": 0.07261408161383792
+    },
+    {
+        "file": "/content/NewGames/April18thNewGamesConsolidated.json",
+        "game": "TEXRangers @ DETTigers",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.59,
+        "probability_lr": 0.5012163342362769,
+        "average_probability": 0.5456081671181384,
+        "standard_deviation": 0.04439183288186155
+    }
+]}

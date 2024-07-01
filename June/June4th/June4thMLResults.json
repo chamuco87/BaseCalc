@@ -1,0 +1,352 @@
+{"selections": [
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "CHI White @ CHI Cubs",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.85,
+        "probability_lr": 0.8904546897395885,
+        "average_probability": 0.8702273448697943,
+        "standard_deviation": 0.020227344869794273
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "MIN Twins @ NY Yankees",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.83,
+        "probability_lr": 0.8905794505025688,
+        "average_probability": 0.8602897252512844,
+        "standard_deviation": 0.030289725251284427
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "BAL Orioles @ TOR Blue",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.8,
+        "probability_lr": 0.7564186404191948,
+        "average_probability": 0.7782093202095974,
+        "standard_deviation": 0.02179067979040261
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "MIL Brewers @ PHI Phillies",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.75,
+        "probability_lr": 0.7365508262777052,
+        "average_probability": 0.7432754131388526,
+        "standard_deviation": 0.006724586861147408
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "ATL Braves @ BOS Red",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.62,
+        "probability_lr": 0.8217361026178269,
+        "average_probability": 0.7208680513089134,
+        "standard_deviation": 0.10086805130891346
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "LA Dodgers @ PIT Pirates",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.63,
+        "probability_lr": 0.7963585298078455,
+        "average_probability": 0.7131792649039228,
+        "standard_deviation": 0.08317926490392274
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "MIN Twins @ NY Yankees",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.72,
+        "probability_lr": 0.6995445169764397,
+        "average_probability": 0.7097722584882198,
+        "standard_deviation": 0.01022774151178013
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "KC Royals @ CLE Guardians",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.61,
+        "probability_lr": 0.8080348596017737,
+        "average_probability": 0.7090174298008869,
+        "standard_deviation": 0.09901742980088685
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SEA Mariners @ OAK Athletics",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.64,
+        "probability_lr": 0.758099836091817,
+        "average_probability": 0.6990499180459084,
+        "standard_deviation": 0.05904991804590848
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SD Padres @ LA Angels",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.66,
+        "probability_lr": 0.7351162816386936,
+        "average_probability": 0.6975581408193468,
+        "standard_deviation": 0.037558140819346775
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "BAL Orioles @ TOR Blue",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.7,
+        "probability_lr": 0.6732614639926506,
+        "average_probability": 0.6866307319963253,
+        "standard_deviation": 0.013369268003674661
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "LA Dodgers @ PIT Pirates",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.69,
+        "probability_lr": 0.6453467032925881,
+        "average_probability": 0.667673351646294,
+        "standard_deviation": 0.022326648353705902
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "BAL Orioles @ TOR Blue",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.56,
+        "probability_lr": 0.7624379154650865,
+        "average_probability": 0.6612189577325434,
+        "standard_deviation": 0.10121895773254325
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "DET Tigers @ TEX Rangers",
+        "target": "isOver",
+        "prediction": 0,
+        "probability_rf": 0.58,
+        "probability_lr": 0.7423059955048186,
+        "average_probability": 0.6611529977524093,
+        "standard_deviation": 0.0811529977524093
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SD Padres @ LA Angels",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.51,
+        "probability_lr": 0.8110124595984126,
+        "average_probability": 0.6605062297992064,
+        "standard_deviation": 0.1505062297992063
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "CHI White @ CHI Cubs",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.65,
+        "probability_lr": 0.6646379971643347,
+        "average_probability": 0.6573189985821674,
+        "standard_deviation": 0.007318998582167335
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "MIN Twins @ NY Yankees",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.52,
+        "probability_lr": 0.779995854513561,
+        "average_probability": 0.6499979272567805,
+        "standard_deviation": 0.1299979272567805
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "TB Rays @ MIA Marlins",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.68,
+        "probability_lr": 0.611600136776557,
+        "average_probability": 0.6458000683882785,
+        "standard_deviation": 0.034199931611721524
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SD Padres @ LA Angels",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.51,
+        "probability_lr": 0.7795577681017474,
+        "average_probability": 0.6447788840508737,
+        "standard_deviation": 0.13477888405087368
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "TB Rays @ MIA Marlins",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.68,
+        "probability_lr": 0.608264897072013,
+        "average_probability": 0.6441324485360065,
+        "standard_deviation": 0.03586755146399351
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "ATL Braves @ BOS Red",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.64,
+        "probability_lr": 0.6351335577062024,
+        "average_probability": 0.6375667788531012,
+        "standard_deviation": 0.002433221146898812
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "STL Cardinals @ HOU Astros",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.58,
+        "probability_lr": 0.685335405234107,
+        "average_probability": 0.6326677026170535,
+        "standard_deviation": 0.0526677026170535
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "ATL Braves @ BOS Red",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.58,
+        "probability_lr": 0.6825255852817084,
+        "average_probability": 0.6312627926408542,
+        "standard_deviation": 0.051262792640854205
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "NY Mets @ WAS Nationals",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.56,
+        "probability_lr": 0.6802309560886716,
+        "average_probability": 0.6201154780443359,
+        "standard_deviation": 0.06011547804433576
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "CIN Reds @ COL Rockies",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.48,
+        "probability_lr": 0.7598738075712734,
+        "average_probability": 0.6199369037856367,
+        "standard_deviation": 0.13993690378563672
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "CIN Reds @ COL Rockies",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.51,
+        "probability_lr": 0.7231238029655388,
+        "average_probability": 0.6165619014827695,
+        "standard_deviation": 0.1065619014827694
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SF Giants @ ARI Diamondbacks",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.57,
+        "probability_lr": 0.6568546639532354,
+        "average_probability": 0.6134273319766177,
+        "standard_deviation": 0.043427331976617745
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "STL Cardinals @ HOU Astros",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.59,
+        "probability_lr": 0.6142242870631317,
+        "average_probability": 0.6021121435315658,
+        "standard_deviation": 0.012112143531565867
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SEA Mariners @ OAK Athletics",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.55,
+        "probability_lr": 0.6407392423625816,
+        "average_probability": 0.5953696211812909,
+        "standard_deviation": 0.04536962118129079
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "NY Mets @ WAS Nationals",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.66,
+        "probability_lr": 0.5204962484769773,
+        "average_probability": 0.5902481242384887,
+        "standard_deviation": 0.06975187576151137
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "DET Tigers @ TEX Rangers",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.56,
+        "probability_lr": 0.5657966077873016,
+        "average_probability": 0.5628983038936508,
+        "standard_deviation": 0.0028983038936507555
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "KC Royals @ CLE Guardians",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.54,
+        "probability_lr": 0.57512577521407,
+        "average_probability": 0.5575628876070351,
+        "standard_deviation": 0.017562887607035005
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "MIL Brewers @ PHI Phillies",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.51,
+        "probability_lr": 0.6025068242800562,
+        "average_probability": 0.5562534121400281,
+        "standard_deviation": 0.046253412140028094
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "SEA Mariners @ OAK Athletics",
+        "target": "isOver",
+        "prediction": 0,
+        "probability_rf": 0.6,
+        "probability_lr": 0.4589624246396003,
+        "average_probability": 0.5294812123198002,
+        "standard_deviation": 0.07051878768019984
+    },
+    {
+        "file": "/content/NewGames/June4thNewGamesConsolidated.json",
+        "game": "TB Rays @ MIA Marlins",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.5,
+        "probability_lr": 0.46430186827974995,
+        "average_probability": 0.482150934139875,
+        "standard_deviation": 0.017849065860125024
+    }
+]}

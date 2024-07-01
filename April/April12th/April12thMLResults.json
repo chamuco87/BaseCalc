@@ -1,0 +1,292 @@
+{"selections":[
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "PITPirates @ PHIPhillies",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.77,
+        "probability_lr": 0.8909849337556729,
+        "average_probability": 0.8304924668778364,
+        "standard_deviation": 0.06049246687783644
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "CINReds @ CHIWhite Sox",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.75,
+        "probability_lr": 0.826444465313147,
+        "average_probability": 0.7882222326565735,
+        "standard_deviation": 0.038222232656573485
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "SDPadres @ LADodgers",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.69,
+        "probability_lr": 0.8563871253740387,
+        "average_probability": 0.7731935626870193,
+        "standard_deviation": 0.08319356268701938
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "SFGiants @ TBRays",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.87,
+        "probability_lr": 0.6691068488829384,
+        "average_probability": 0.7695534244414692,
+        "standard_deviation": 0.10044657555853082
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "MINTwins @ DETTigers",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.69,
+        "probability_lr": 0.8370104601161412,
+        "average_probability": 0.7635052300580706,
+        "standard_deviation": 0.07350523005807064
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "KCRoyals @ NYMets",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.69,
+        "probability_lr": 0.8280931870520231,
+        "average_probability": 0.7590465935260116,
+        "standard_deviation": 0.06904659352601156
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "PITPirates @ PHIPhillies",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.62,
+        "probability_lr": 0.8782489067245901,
+        "average_probability": 0.749124453362295,
+        "standard_deviation": 0.12912445336229506
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "ATLBraves @ MIAMarlins",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.73,
+        "probability_lr": 0.767024850692579,
+        "average_probability": 0.7485124253462895,
+        "standard_deviation": 0.018512425346289496
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "LAAngels @ BOSRed Sox",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.63,
+        "probability_lr": 0.86033764820549,
+        "average_probability": 0.745168824102745,
+        "standard_deviation": 0.11516882410274498
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "ATLBraves @ MIAMarlins",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.67,
+        "probability_lr": 0.7950412639354576,
+        "average_probability": 0.7325206319677289,
+        "standard_deviation": 0.06252063196772878
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "WASNationals @ OAKAthletics",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.65,
+        "probability_lr": 0.7732727276332881,
+        "average_probability": 0.7116363638166441,
+        "standard_deviation": 0.06163636381664406
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "MILBrewers @ BALOrioles",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.65,
+        "probability_lr": 0.7715796309059312,
+        "average_probability": 0.7107898154529656,
+        "standard_deviation": 0.06078981545296558
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "STLCardinals @ ARIDiamondbacks",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.57,
+        "probability_lr": 0.8441547591701745,
+        "average_probability": 0.7070773795850872,
+        "standard_deviation": 0.13707737958508726
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "MINTwins @ DETTigers",
+        "target": "isOver",
+        "prediction": 0,
+        "probability_rf": 0.62,
+        "probability_lr": 0.7612925847359281,
+        "average_probability": 0.690646292367964,
+        "standard_deviation": 0.07064629236796405
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "LAAngels @ BOSRed Sox",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.67,
+        "probability_lr": 0.6992735642904802,
+        "average_probability": 0.6846367821452402,
+        "standard_deviation": 0.014636782145240057
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "SDPadres @ LADodgers",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.56,
+        "probability_lr": 0.8036447075794071,
+        "average_probability": 0.6818223537897036,
+        "standard_deviation": 0.12182235378970352
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "MINTwins @ DETTigers",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.6,
+        "probability_lr": 0.7565504943759279,
+        "average_probability": 0.678275247187964,
+        "standard_deviation": 0.07827524718796397
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "SFGiants @ TBRays",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.73,
+        "probability_lr": 0.6123944380742647,
+        "average_probability": 0.6711972190371324,
+        "standard_deviation": 0.05880278096286762
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "WASNationals @ OAKAthletics",
+        "target": "isHomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.51,
+        "probability_lr": 0.8181735786806906,
+        "average_probability": 0.6640867893403453,
+        "standard_deviation": 0.1540867893403453
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "MILBrewers @ BALOrioles",
+        "target": "isF5HomeWinner",
+        "prediction": 0,
+        "probability_rf": 0.67,
+        "probability_lr": 0.652769082164562,
+        "average_probability": 0.661384541082281,
+        "standard_deviation": 0.008615458917719032
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "CHICubs @ SEAMariners",
+        "target": "isF5HomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.63,
+        "probability_lr": 0.6438047098751751,
+        "average_probability": 0.6369023549375876,
+        "standard_deviation": 0.006902354937587563
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "CHICubs @ SEAMariners",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.69,
+        "probability_lr": 0.5744671206279978,
+        "average_probability": 0.6322335603139988,
+        "standard_deviation": 0.05776643968600109
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "SDPadres @ LADodgers",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.55,
+        "probability_lr": 0.6868597179124002,
+        "average_probability": 0.6184298589562001,
+        "standard_deviation": 0.06842985895620007
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "CINReds @ CHIWhite Sox",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.58,
+        "probability_lr": 0.6384407486682341,
+        "average_probability": 0.609220374334117,
+        "standard_deviation": 0.02922037433411706
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "KCRoyals @ NYMets",
+        "target": "isHomeWinner",
+        "prediction": 1,
+        "probability_rf": 0.51,
+        "probability_lr": 0.6693410233913731,
+        "average_probability": 0.5896705116956866,
+        "standard_deviation": 0.07967051169568656
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "COLRockies @ TORBlue Jays",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.61,
+        "probability_lr": 0.5527692442421778,
+        "average_probability": 0.5813846221210889,
+        "standard_deviation": 0.028615377878911108
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "PITPirates @ PHIPhillies",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.52,
+        "probability_lr": 0.5824685963763303,
+        "average_probability": 0.5512342981881652,
+        "standard_deviation": 0.031234298188165144
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "TEXRangers @ HOUAstros",
+        "target": "isOver",
+        "prediction": 1,
+        "probability_rf": 0.57,
+        "probability_lr": 0.5209104743275655,
+        "average_probability": 0.5454552371637827,
+        "standard_deviation": 0.024544762836217204
+    },
+    {
+        "file": "/content/NewGames/April12thNewGamesConsolidated.json",
+        "game": "LAAngels @ BOSRed Sox",
+        "target": "isOver",
+        "prediction": 0,
+        "probability_rf": 0.44,
+        "probability_lr": 0.47609494175225936,
+        "average_probability": 0.4580474708761297,
+        "standard_deviation": 0.01804747087612968
+    }
+]}
