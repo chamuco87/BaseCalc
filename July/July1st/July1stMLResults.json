@@ -1,0 +1,74 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "NY Mets @ WAS Nationals",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.52,
+            "probability_lr": 0.8029451591669108,
+            "average_probability": 0.6614725795834554,
+            "standard_deviation": 0.14147257958345538
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "MIL Brewers @ COL Rockies",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.7,
+            "probability_lr": 0.5975211932091412,
+            "average_probability": 0.6487605966045706,
+            "standard_deviation": 0.05123940339542937
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "HOU Astros @ TOR Blue",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.61,
+            "probability_lr": 0.672486695996744,
+            "average_probability": 0.641243347998372,
+            "standard_deviation": 0.03124334799837203
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "NY Mets @ WAS Nationals",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.53,
+            "probability_lr": 0.7322514071182957,
+            "average_probability": 0.6311257035591479,
+            "standard_deviation": 0.10112570355914785
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "MIL Brewers @ COL Rockies",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.57,
+            "probability_lr": 0.6653339644011129,
+            "average_probability": 0.6176669822005565,
+            "standard_deviation": 0.047666982200556485
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "HOU Astros @ TOR Blue",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.56,
+            "probability_lr": 0.6136806788823974,
+            "average_probability": 0.5868403394411987,
+            "standard_deviation": 0.02684033944119868
+        },
+        {
+            "file": "/content/NewGames/July1stNewGamesConsolidated.json",
+            "game": "MIL Brewers @ COL Rockies",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.58,
+            "probability_lr": 0.5316542611003467,
+            "average_probability": 0.5558271305501734,
+            "standard_deviation": 0.024172869449826606
+        }
+    ]
+}

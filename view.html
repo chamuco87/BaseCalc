@@ -210,17 +210,15 @@
              const months = ["January", "February", "March", "April", "May", "June",
                             "July", "August", "September", "October", "November", "December"];
 
-            // Mapping to keep track of month order
             const monthOrder = months.reduce((acc, month, index) => {
                 acc[month] = index;
                 return acc;
             }, {});
 
-            // Organize games by month and date
             const monthData = {};
             data.forEach(game => {
                 const monthMatch = game.common.date.match(/^[a-zA-Z]+/)[0];
-                const dayMatch = parseInt(game.common.date.match(/\d+/)[0]);  // Convert day to integer for correct sorting
+                const dayMatch = parseInt(game.common.date.match(/\d+/)[0]);
                 if (!monthData[monthMatch]) {
                     monthData[monthMatch] = {};
                 }
@@ -233,37 +231,34 @@
             const monthTabs = document.getElementById('monthTabs');
             const monthTabContent = document.getElementById('monthTabContent');
 
-            // Sort months according to their order in the year
-            Object.keys(monthData).sort((a, b) => monthOrder[a] - monthOrder[b]).forEach((month, monthIndex) => {
-                // Create month tabs
+            const sortedMonths = Object.keys(monthData).sort((a, b) => monthOrder[a] - monthOrder[b]);
+            sortedMonths.forEach((month, monthIndex) => {
                 const monthTab = document.createElement('li');
                 monthTab.className = 'nav-item';
-                monthTab.innerHTML = `<a class="nav-link ${monthIndex === 0 ? 'active' : ''}" id="tab-${month}-tab" data-toggle="tab" href="#tab-${month}" role="tab" aria-controls="tab-${month}" aria-selected="${monthIndex === 0 ? 'true' : 'false'}">${month}</a>`;
+                monthTab.innerHTML = `<a class="nav-link ${monthIndex === sortedMonths.length - 1 ? 'active' : ''}" id="tab-${month}-tab" data-toggle="tab" href="#tab-${month}" role="tab" aria-controls="tab-${month}" aria-selected="${monthIndex === sortedMonths.length - 1 ? 'true' : 'false'}">${month}</a>`;
                 monthTabs.appendChild(monthTab);
 
-                // Create month tab content
                 const monthTabPane = document.createElement('div');
-                monthTabPane.className = `tab-pane fade ${monthIndex === 0 ? 'show active' : ''}`;
+                monthTabPane.className = `tab-pane fade ${monthIndex === sortedMonths.length - 1 ? 'show active' : ''}`;
                 monthTabPane.id = `tab-${month}`;
                 monthTabPane.setAttribute('role', 'tabpanel');
                 monthTabPane.setAttribute('aria-labelledby', `tab-${month}-tab`);
 
-                // Nested tabs for dates within the month
                 const dateTabs = document.createElement('ul');
                 dateTabs.className = 'nav nav-tabs';
                 const dateTabContent = document.createElement('div');
                 dateTabContent.className = 'tab-content';
 
-                // Sort dates numerically before creating tabs
-                Object.keys(monthData[month]).sort((a, b) => a - b).forEach((date, dateIndex) => {
+                const sortedDays = Object.keys(monthData[month]).sort((a, b) => a - b);
+                sortedDays.forEach((date, dateIndex) => {
                     const fullDate = `${month}${date}th`;
                     const dateTab = document.createElement('li');
                     dateTab.className = 'nav-item';
-                    dateTab.innerHTML = `<a class="nav-link ${dateIndex === 0 ? 'active' : ''}" id="tab-${fullDate}-tab" data-toggle="tab" href="#tab-${fullDate}" role="tab" aria-controls="tab-${fullDate}" aria-selected="${dateIndex === 0 ? 'true' : 'false'}">${fullDate}</a>`;
+                    dateTab.innerHTML = `<a class="nav-link ${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'active' : ''}" id="tab-${fullDate}-tab" data-toggle="tab" href="#tab-${fullDate}" role="tab" aria-controls="tab-${fullDate}" aria-selected="${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'true' : 'false'}">${fullDate}</a>`;
                     dateTabs.appendChild(dateTab);
 
                     const dateTabPane = document.createElement('div');
-                    dateTabPane.className = `tab-pane fade ${dateIndex === 0 ? 'show active' : ''}`;
+                    dateTabPane.className = `tab-pane fade ${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'show active' : ''}`;
                     dateTabPane.id = `tab-${fullDate}`;
                     dateTabPane.setAttribute('role', 'tabpanel');
                     dateTabPane.setAttribute('aria-labelledby', `tab-${fullDate}-tab`);

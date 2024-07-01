@@ -179,13 +179,15 @@ try {
     var fullDatesAnalysis = [
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:1, to:29, monthNumber:"06"}
+        {month:"June", from:1, to:30, monthNumber:"06"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
-        {month:"June", from:30, to:30, monthNumber:"06"}
+        //{month:"June", from:30, to:30, monthNumber:"06"},
+        {month:"July", from:1, to:1, monthNumber:"07"}
+
     ];
     
     //await CheckMLResults();
@@ -193,9 +195,9 @@ try {
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    // await ProcessGameByGame();
-                    // await getPitcherGameByGame();
-                    // await getBatterGameByGame();
+                    //await ProcessGameByGame();
+                    //await getPitcherGameByGame();
+                    //await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -365,28 +367,28 @@ try {
                 //await ProcessGameByGame();
                 //await getPitcherGameByGame();
                 //await getBatterGameByGame();
-            //     await getESPNData(selectedDate);
-            //     await getBattersData(selectedDate);
-            //     await getBestScoringTeamsByBatting(selectedDate);
-            //     await getBestHittingTeamsByBatting(selectedDate);
-            //     await getAllPitchersData(selectedDate);
-            //     await getBestStartingPitchersTeams(selectedDate);
-            //     await getBestRelievingPitchersTeams(selectedDate);
-            //     await getBestOverallPitchersTeams(selectedDate);
-                    
-            //     await getMoreWininigTeams(selectedDate);
-            //     await getMoreScoringTeams(selectedDate);
-            //     await getMoreReceivingTeams(selectedDate);
-            //     await evaluateGames(selectedDate);
-            //     await sortBetterAvgs(selectedDate);
-            //     await filterConsistentPicks(selectedDate)
-            // /// 
-            //     await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-            //     await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-            //     await getCoversWinPercentages(selectedDate, descriptiveDate);
-            //     await consolidateAlgorithmResults(selectedDate);
+                 //await getESPNData(selectedDate);
+                 //await getBattersData(selectedDate);
+                 //await getBestScoringTeamsByBatting(selectedDate);
+                 //await getBestHittingTeamsByBatting(selectedDate);
+                 //await getAllPitchersData(selectedDate);
+                 //await getBestStartingPitchersTeams(selectedDate);
+                 //await getBestRelievingPitchersTeams(selectedDate);
+                 //await getBestOverallPitchersTeams(selectedDate);
+                 //   
+                 //await getMoreWininigTeams(selectedDate);
+                 //await getMoreScoringTeams(selectedDate);
+                 //await getMoreReceivingTeams(selectedDate);
+                 //await evaluateGames(selectedDate);
+                 //await sortBetterAvgs(selectedDate);
+                 //await filterConsistentPicks(selectedDate)
+                 //   
+                 //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
+                 //await consolidateAlgorithmResults(selectedDate);
 
-                await CalculateWinnersViaFormula(selectedDate, noSelections, type);
+                 //await CalculateWinnersViaFormula(selectedDate, noSelections, type);
             
 
                 // After running ML
@@ -6401,7 +6403,11 @@ async function PopulatePitcherData(date)
 async function GetLatestTeamSchedules(date = null)
 {
     var dateparts = Date().split(" ");
-    if(dateparts[1] == "Jun")
+    if(dateparts[1] == "Jul")
+    {
+        var mmmmonth = "July";
+    }
+    else if(dateparts[1] == "Jun")
     {
         var mmmmonth = "June";
     }
