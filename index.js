@@ -219,9 +219,11 @@ try {
                         var type = "NewGamesConsolidated";
                         await save(type, [], function(){}, "replace" ,"GameByGame");
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        await ProcessDailyGames(fullDatesAnalysis,true, type);//true for noselections to be shown/included
 
 //}                     
+
+                        
 
     //  4. Calculate Picks(can be individualDate or allDays) Obsolete
     ///     *
@@ -392,6 +394,7 @@ try {
             
 
                 // After running ML
+                //await CalculatePatternsForVisualisations();
                 await GenerateDataForVisualization(selectedDate);
 
                 //await ConsolidateMachineLearningResults(selectedDate);
@@ -408,6 +411,147 @@ try {
             }
                 }
             }
+    }
+
+    async function CalculatePatternsForVisualisations()
+    {
+        var fs = require('fs');
+        var files = fs.readdirSync('./JsonViewObjects');
+        var fileNames = Object.values(files);
+        var allFiles = [];
+        var agnosticPatterns =[];
+        for (let dgss = 0; dgss < fileNames.length; dgss++) {
+            const file = fileNames[dgss].replace(".json","");
+            if(file != "allFiles"){
+                var data = await load(file, "JsonViewObjects");
+                for (let gdtg = 0; gdtg < data.length; gdtg++) {
+                    const game = data[gdtg];
+                    agnosticPatterns = await GetAgnosticPatterns(game, agnosticPatterns);
+                }
+                
+            }
+            
+        }
+        var sortedByMostWins = await sorting(agnosticPatterns, "winsCount", "desc");
+        var sortedByMostLoses = await sorting(agnosticPatterns, "losesCount", "desc");
+        await save("agnosticPatterns",agnosticPatterns, function(){}, "replace", "agnosticPatterns")
+    }
+
+    async function GetAgnosticPatterns(game, agnosticPatterns)
+    {
+        
+        var home = game.common.game.split(" @ ")[1].replace(" ","");
+        var away = game.common.game.split(" @ ")[0].replace(" ","");
+
+        var pattern = {formulaWinner:"",	seriesWinner:"",	nextWinners:"",	overallWinner:"", isF5HomeWinner:"", isHomeWinner:"", pattern:"", agnosticPattern:"",wins:{ handicap:[], factorDiff:[], count:0, handicapSum:0, factorDiffSum:0 ,avgHandicap:0, avgFactorDiff:0} , loses:{ handicap:[], factorDiff:[], count:0, handicapSum:0, factorDiffSum:0 ,avgHandicap:0, avgFactorDiff:0}, winsCount:0, losesCount:0, totalCount:0 , expWinner:""}
+
+        var awayRepeated = 0;
+        var homeRepeated = 0;
+        pattern.formulaWinner = game.common.formulaWinner.replace(" ","").indexOf(home) >= 0 ? 1 : 0;
+        awayRepeated += pattern.formulaWinner == 0 ? 1 : 0;
+        homeRepeated += pattern.formulaWinner == 1 ? 1 : 0;
+        pattern.seriesWinner = game.common.seriesWinner.replace(" ","").indexOf(home) >= 0 ? 1 : 0;
+        awayRepeated += pattern.seriesWinner == 0 ? 1 : 0;
+        homeRepeated += pattern.seriesWinner == 1 ? 1 : 0;
+        pattern.nextWinners = game.common.nextWinners.replace(" ","").indexOf(home) >= 0 ? 1 : 0;
+        awayRepeated += pattern.nextWinners == 0 ? 1 : 0;
+        homeRepeated += pattern.nextWinners == 1 ? 1 : 0;
+        pattern.overallWinner = game.common.overallWinner.replace(" ","").indexOf(home) >= 0 ? 1 : 0;
+        awayRepeated += pattern.overallWinner == 0 ? 1 : 0;
+        homeRepeated += pattern.overallWinner == 1 ? 1 : 0;
+        pattern.isF5HomeWinner = game.common.isF5HomeWinner.replace(" ","").indexOf(home) >= 0 ? 1 : game.common.isF5HomeWinner.replace(" ","").indexOf(away) >= 0 ? 0:3;
+        awayRepeated += pattern.isF5HomeWinner == 0 ? 1 : 0;
+        homeRepeated += pattern.isF5HomeWinner == 1 ? 1 : 0;
+        pattern.isF5HomeWinner = game.common.isHomeWinner.replace(" ","").indexOf(home) >= 0 ? 1 : game.common.isHomeWinner.replace(" ","").indexOf(away) >= 0 ? 0:3;
+        awayRepeated += pattern.isHomeWinner == 0 ? 1 : 0;
+        homeRepeated += pattern.isHomeWinner == 1 ? 1 : 0;
+        pattern.pattern = pattern.formulaWinner.toString()+pattern.seriesWinner.toString()+pattern.nextWinners.toString()+pattern.overallWinner.toString()+pattern.isF5HomeWinner.toString()+pattern.isHomeWinner.toString();
+        pattern.agnosticPattern = pattern.pattern;
+        var isPatternWin = false;
+        while(pattern.agnosticPattern.indexOf("0")>=0 ||pattern.agnosticPattern.indexOf("1")>=0 ||pattern.agnosticPattern.indexOf("3")>=0)
+        {
+            if(homeRepeated > awayRepeated || homeRepeated == awayRepeated )
+            {
+                pattern.expWinner = "home";
+                pattern.agnosticPattern = pattern.agnosticPattern.replace("1","X").replace("0","Y");
+                if(game.compare.results.isHomeWinner && game.compare.results.isHomeWinner.replace(" ","").indexOf(home) >= 0)
+                {
+
+                    isPatternWin = true;
+                    
+                }
+            }
+            else{
+                pattern.agnosticPattern = pattern.agnosticPattern.replace("0","X").replace("1","Y");
+                pattern.expWinner = "away";
+                if(game.compare.results.isHomeWinner && game.compare.results.isHomeWinner.replace(" ","").indexOf(away) >= 0)
+                {
+                    isPatternWin = true;
+                    
+                }
+            }
+            pattern.agnosticPattern = pattern.agnosticPattern.replace("3","Z");
+        }
+        
+        
+
+        var isPatternInLibrary = agnosticPatterns.filter(function(item){
+            return item.agnosticPattern == pattern.agnosticPattern;
+        });
+
+        if(isPatternInLibrary.length == 0)
+        {
+            if(isPatternWin)
+            {
+                pattern.wins.handicap.push(Math.abs(game.common.handicap));
+                pattern.wins.factorDiff.push(Math.round(game.common.factorDiff));
+                pattern.wins.handicapSum += Math.abs(game.common.handicap);
+                pattern.wins.factorDiffSum += Math.round(game.common.factorDiff);
+                pattern.wins.count++;
+                pattern.winsCount++;
+                pattern.wins.avgHandicap = pattern.wins.handicapSum/pattern.wins.count;
+                pattern.wins.avgFactorDiff = pattern.wins.factorDiffSum/pattern.wins.count;
+            }
+            else{
+                pattern.loses.handicap.push(Math.abs(game.common.handicap));
+                pattern.loses.factorDiff.push(Math.round(game.common.factorDiff));
+                pattern.loses.handicapSum += Math.abs(game.common.handicap);
+                pattern.loses.factorDiffSum += Math.round(game.common.factorDiff);
+                pattern.loses.count++;
+                pattern.losesCount++;
+                pattern.loses.avgHandicap = pattern.loses.handicapSum/pattern.loses.count;
+                pattern.loses.avgFactorDiff = pattern.loses.factorDiffSum/pattern.loses.count;
+            }
+            pattern.totalCount++;
+            agnosticPatterns.push(pattern);
+        }
+        else{
+            var agnosticIndex = agnosticPatterns.findIndex(x => x.agnosticPattern == pattern.agnosticPattern);
+            if(isPatternWin)
+            {
+                agnosticPatterns[agnosticIndex].wins.handicap.push(Math.abs(game.common.handicap));
+                agnosticPatterns[agnosticIndex].wins.factorDiff.push(Math.round(game.common.factorDiff));
+                agnosticPatterns[agnosticIndex].wins.handicapSum += Math.abs(game.common.handicap);
+                agnosticPatterns[agnosticIndex].wins.factorDiffSum += Math.round(game.common.factorDiff);
+                agnosticPatterns[agnosticIndex].wins.count++;
+                agnosticPatterns[agnosticIndex].winsCount++;
+                agnosticPatterns[agnosticIndex].wins.avgHandicap = agnosticPatterns[agnosticIndex].wins.handicapSum/agnosticPatterns[agnosticIndex].wins.count;
+                agnosticPatterns[agnosticIndex].wins.avgFactorDiff = agnosticPatterns[agnosticIndex].wins.factorDiffSum/agnosticPatterns[agnosticIndex].wins.count;
+            }
+            else{
+                agnosticPatterns[agnosticIndex].loses.handicap.push(Math.abs(game.common.handicap));
+                agnosticPatterns[agnosticIndex].loses.factorDiff.push(Math.round(game.common.factorDiff));
+                agnosticPatterns[agnosticIndex].loses.handicapSum += Math.abs(game.common.handicap);
+                agnosticPatterns[agnosticIndex].loses.factorDiffSum += Math.round(game.common.factorDiff);
+                agnosticPatterns[agnosticIndex].loses.count++;
+                agnosticPatterns[agnosticIndex].losesCount++;
+                agnosticPatterns[agnosticIndex].loses.avgHandicap = agnosticPatterns[agnosticIndex].loses.handicapSum/agnosticPatterns[agnosticIndex].loses.count;
+                agnosticPatterns[agnosticIndex].loses.avgFactorDiff = agnosticPatterns[agnosticIndex].loses.factorDiffSum/agnosticPatterns[agnosticIndex].loses.count;
+            }
+            agnosticPatterns[agnosticIndex].totalCount++;
+            
+        }
+        return agnosticPatterns;
     }
 
     async function GenerateDataForVisualization(date)
@@ -428,8 +572,9 @@ try {
         var formattedGames = [];
 
         var todayParts = new Date().toString().split(" ");
-        var today = todayParts[2];
-        var isTodaysFile = gameDataAnalysis[0].date.toLowerCase().indexOf(today.toLowerCase()) >=0;
+        var month = todayParts[1];
+        var today = parseInt(todayParts[2]);
+        var isTodaysFile = gameDataAnalysis[0].date.toLowerCase().indexOf(today.toString().toLowerCase()) >=0 && gameDataAnalysis[0].date.toLowerCase().indexOf(month.toLowerCase()) >=0;
         
     
 
@@ -607,6 +752,12 @@ try {
                 var stopHere ="";
             }
 
+            let awayGreatestValue = Math.max(
+                 gameFormatted.compare.awayRow["CarrerEra"],
+                 gameFormatted.compare.awayRow["CurrentEra"], 
+                 gameFormatted.compare.awayRow["SpecificEra"],
+                 gameFormatted.compare.awayRow["FinalEra"]);
+
             var awaySum = 0;
             awaySum += parseFloat(gameFormatted.compare.awayRow["RelevingRuns"]);
             awaySum += parseFloat(gameFormatted.compare.awayRow["formulaWinPercentage"])/100;
@@ -616,6 +767,7 @@ try {
             awaySum -= parseFloat(gameFormatted.compare.awayRow["CarrerEra"]);
             awaySum -= parseFloat(gameFormatted.compare.awayRow["CurrentEra"]);
             awaySum -= parseFloat(gameFormatted.compare.awayRow["SpecificEra"]);
+            awaySum -= parseFloat(gameFormatted.compare.awayRow["FinalEra"]);
             awaySum += parseFloat(gameFormatted.compare.awayRow["PitcherWins"]);
             awaySum -= parseFloat(gameFormatted.compare.awayRow["PitcherLoses"]);
             awaySum += parseFloat(gameFormatted.compare.awayRow["AVG"]);
@@ -623,8 +775,15 @@ try {
             awaySum += parseFloat(gameFormatted.compare.awayRow["OBP"]);
             awaySum += parseFloat(gameFormatted.compare.awayRow["SLG"]);
             awaySum += parseFloat(gameFormatted.compare.awayRow["CoversPer"])/100;
+            awaySum = awaySum + awayGreatestValue;
 
             gameFormatted.compare.awayRow["totalFactor"] = awaySum;
+
+            let homeGreatestValue = Math.max(
+                gameFormatted.compare.homeRow["CarrerEra"],
+                gameFormatted.compare.homeRow["CurrentEra"], 
+                gameFormatted.compare.homeRow["SpecificEra"],
+                gameFormatted.compare.homeRow["FinalEra"]);
 
             var homeSum = 0;
             homeSum += parseFloat(gameFormatted.compare.homeRow["RelevingRuns"]);
@@ -635,6 +794,7 @@ try {
             homeSum -= parseFloat(gameFormatted.compare.homeRow["CarrerEra"]);
             homeSum -= parseFloat(gameFormatted.compare.homeRow["CurrentEra"]);
             homeSum -= parseFloat(gameFormatted.compare.homeRow["SpecificEra"]);
+            homeSum -= parseFloat(gameFormatted.compare.homeRow["FinalEra"]);
             homeSum += parseFloat(gameFormatted.compare.homeRow["PitcherWins"]);
             homeSum -= parseFloat(gameFormatted.compare.homeRow["PitcherLoses"]);
             homeSum += parseFloat(gameFormatted.compare.homeRow["AVG"]);
@@ -642,6 +802,7 @@ try {
             homeSum += parseFloat(gameFormatted.compare.homeRow["OBP"]);
             homeSum += parseFloat(gameFormatted.compare.homeRow["SLG"]);
             homeSum += parseFloat(gameFormatted.compare.homeRow["CoversPer"])/100;
+            homeSum = homeSum + homeGreatestValue;
 
             gameFormatted.compare.homeRow["totalFactor"] = homeSum;
             
@@ -663,11 +824,39 @@ try {
             }
             gameFormatted.common["factorDiff"] = Math.abs(factorDiff);
             gameFormatted["factorDiff"] = Math.abs(factorDiff);
+            
+            //Comment This block to build patterns, excute this commented out and reintroduce it.
+            var agnosticPatterns =  await load("agnosticPatterns", "agnosticPatterns");
+            var gamePattern = await GetAgnosticPatterns(gameFormatted,[]);
+            var selectedPattern = agnosticPatterns.filter(function(item){
+                return item.agnosticPattern == gamePattern[0].agnosticPattern;
+            })[0];
+            var winsCount = selectedPattern.wins.factorDiff.filter(function(item){
+                return item <= Math.round(gameFormatted.factorDiff);
+            }).length;
+
+            var losesCount = selectedPattern.loses.factorDiff.filter(function(item){
+                return item <= Math.round(gameFormatted.factorDiff);
+            }).length;
+            
+            var patternChances = Math.round(((winsCount)*(100))/(winsCount+losesCount));
+            var otherTeamChances = 100 - patternChances;
+            var otherTeam = gamePattern[0].expWinner == "away" ? "home" : gamePattern[0].expWinner == "home" ? "away":"check";
+            gameFormatted["biggestChances"] = patternChances >= otherTeamChances ? patternChances : otherTeamChances;
+            gameFormatted.common["patternChances"] = patternChances.toString()+"%("+game[gamePattern[0].expWinner]+")  "+otherTeamChances.toString()+"%("+game[otherTeam]+")"  ;
+            gameFormatted.common["sample"] = "wins:"+ winsCount+" loses:"+losesCount+" ="+(winsCount+losesCount);
+            gameFormatted.common["avgHandicap"] = selectedPattern.wins.avgHandicap;
+            gameFormatted["recommendedBet"] = ((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100);
+            gameFormatted.common["factor"] = gameFormatted.recommendedBet;
+            var stopHere = "";
+            ///here
+            
+
             formattedGames.push(gameFormatted);
             
             
         }   
-        var formattedGamesSorted = await sorting(formattedGames, "factorDiff", "desc");
+        var formattedGamesSorted = await sorting(formattedGames, "recommendedBet", "desc");
 
         await save(date+"JsonViewObject",formattedGamesSorted, function(){}, "replace", "JsonViewObjects" );
 
