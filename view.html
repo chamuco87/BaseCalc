@@ -34,9 +34,18 @@
         body{
             font-size: 12px;
         }
+        .statistics-table {
+            font-size: 20px !important; /* Set font size for statistics tables */
+        }
     </style>
 </head>
 <body>
+
+    <div class="container custom-container">
+        <h1>Game Statistics Index and Days</h1>
+        <div id="indexStatsTable" class="table-responsive"></div>
+        <div id="dayStatsTable" class="table-responsive"></div>
+    </div>
     <div class="container custom-container">
         <h1>Game Statistics</h1>
     <!-- Month Tab Navigation -->
@@ -286,6 +295,7 @@
 });
 
 
+
         document.addEventListener('DOMContentLoaded', () => {
             const dates = [...new Set(data.map(game => game.common.date))]; // Get unique dates
             const mainContainer = document.querySelector('.custom-container');
@@ -318,6 +328,76 @@
             });
         });
 
+        var  statsData =[];
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://carbajalsalinas.com/IndexAndDayStats.json')
+        .then(response => response.json())
+        .then(statsData => {
+            console.log("Data loaded:", statsData);
+             
+
+            // Function to create the index stats table
+            function createIndexStatsTable(data) {
+                const table = document.createElement('table');
+                table.className = 'table table-bordered statistics-table';
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+                const valueRow = document.createElement('tr');
+
+                data.forEach(stat => {
+                    const th = document.createElement('th');
+                    th.textContent = `Index ${stat.index}`;
+                    headerRow.appendChild(th);
+
+                    const td = document.createElement('td');
+                    td.innerHTML = `winPercenatge: ${stat.winPercenatge}%<br>Wins: ${stat.wins}<br>Loses: ${stat.loses}<br>handicaps: ${stat.winsWandicaps}`;
+                    valueRow.appendChild(td);
+                });
+
+                thead.appendChild(headerRow);
+                tbody.appendChild(valueRow);
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                document.getElementById('indexStatsTable').appendChild(table);
+            }
+
+            // Function to create the day stats table
+            function createDayStatsTable(dayStats) {
+                const table = document.createElement('table');
+                table.className = 'table table-bordered';
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+                const valueRow = document.createElement('tr');
+
+                
+                Object.keys(dayStats).forEach(day => {
+                    if (day !== "topGamesWon") {
+                    const th = document.createElement('th');
+                    th.textContent = day;
+                    headerRow.appendChild(th);
+
+                    const td = document.createElement('td');
+                    td.innerHTML = `Top Game Avg: ${dayStats[day].TopGameAvg}<br>Win %: ${dayStats[day].WinPercentage}`;
+                    valueRow.appendChild(td);
+                    }
+                });
+
+                thead.appendChild(headerRow);
+                tbody.appendChild(valueRow);
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                document.getElementById('dayStatsTable').appendChild(table);
+            }
+
+            createIndexStatsTable(statsData.indexStats);
+            createDayStatsTable(statsData.dayStats);
+        })
+        .catch(error => console.error("Error loading the JSON data:", error));
+        });
     </script>
 </body>
 </html>
