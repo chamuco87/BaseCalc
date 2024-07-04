@@ -110,8 +110,12 @@
             headerRow.appendChild(th);
 
             const td = document.createElement('td');
+            if (key === "factor" || key ===  "patternChances") {
+            // Replace ")" with ")<br>" to add line breaks after each parenthesis
+            td.innerHTML = game.common[key].replace(/\)/g, ')<br>');
+            }else{
             td.textContent = isNaN(game.common[key]) ? game.common[key] : parseFloat(game.common[key]).toFixed(2);
-
+            }
             if (game.common[key] === mostRepeatedValue) {
                 td.classList.add('highlight');
             }
@@ -351,7 +355,7 @@
                     headerRow.appendChild(th);
 
                     const td = document.createElement('td');
-                    td.innerHTML = `winPercenatge: ${stat.winPercenatge}%<br>Wins: ${stat.wins}<br>Loses: ${stat.loses}<br>handicaps: ${stat.winsWandicaps}`;
+                    td.innerHTML = `winPercenatge: ${stat.winPercenatge}%<br>Wins: ${stat.wins}<br>Loses: ${stat.loses}<br>handicaps: ${stat.winsWandicaps}<br>hot%: ${stat.hotChances}`;
                     valueRow.appendChild(td);
                 });
 

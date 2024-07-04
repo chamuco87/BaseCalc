@@ -214,20 +214,20 @@ try {
                         // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
                         // allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
                         // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
-
+                        
 
                         var type = "NewGamesConsolidated";
                         await save(type, [], function(){}, "replace" ,"GameByGame");
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // //For full dates run this line to generate analysisFile then comment it out
-                        // //await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
-                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        // // // // //For full dates run this line to generate analysisFile then comment it out
+                        //  await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
+                        await ProcessDailyGames(fullDatesAnalysis,true, type);//true for noselections to be shown/included
 
                         //After visualisationFilesCreated
-                        // await CalculatePatternsForVisualisations();
-                        // await AnalyzeFactors();
-                        //await AnalyzeIndexes();
-
+                        //  await CalculatePatternsForVisualisations();
+                        //  await AnalyzeFactors();
+                        //  await AnalyzeIndexes();
+                        //  await BuildBettingStrategy();
 //}                     
 
                         
@@ -264,6 +264,268 @@ try {
         await driver.quit();
     }
 
+    async function BuildBettingStrategy()
+    {
+        var selections = await load("analysisGameDetails", "analysisGameDetails");
+        var IndexAndDayStats =  await load("IndexAndDayStats", "analysisGameDetails");
+        var dayWonPatterns = {parlays:[], trilays:[], fourlays:[], parlaysWinPercentage:0, parlayTimeLine : [], parlaysBestStreak:"", parlaysWorstStreak:"", parlaysAvgBestStreak:"", parlaysAvgWorstStreak:"",trilayTimeLine : [], trilaysBestStreak:"", trilaysWorstStreak:"", trilaysAvgBestStreak:"", trilaysAvgWorstStreak:"",fourlayTimeLine : [], fourlaysBestStreak:"", fourlaysWorstStreak:"", fourlaysAvgBestStreak:"", fourlaysAvgWorstStreak:""};
+        for (let index = 0; index < selections.length; index++) {
+            const day = selections[index];
+
+            
+            var dayGameWonResults = day.games.map(function(item){
+                return item.betWon
+            });
+
+            var numberOfParlays = Math.floor(dayGameWonResults.length/2);
+            var numberOfTrilays = Math.floor(dayGameWonResults.length/3);
+            var numberOfFourlays = Math.floor(dayGameWonResults.length/4);
+           
+            //workon selections only top
+            var numberOfTopParlays = 1;
+            if(numberOfParlays > numberOfTopParlays)
+            {
+                numberOfParlays = numberOfTopParlays;
+            }
+
+            var startParlay = 0;
+            var lastParlay = 2;
+            var totalParlaysWon = 0;
+            var parlayIndexesWon = [];
+            
+            for (let sin = 0; sin < numberOfParlays; sin++) {
+
+                var parlay = dayGameWonResults.slice(startParlay,lastParlay);
+                startParlay += 2;
+                lastParlay += 2;
+                var isParlayWon = parlay.reduce((accumulator, current) => accumulator + current, 0) == 2 ? 1:0;
+                totalParlaysWon += isParlayWon;
+                if(isParlayWon)
+                {
+                    parlayIndexesWon.push(sin);
+                    
+                }
+                
+                var stopHere = "";          
+            }
+            dayWonPatterns.parlayTimeLine.push((totalParlaysWon == numberOfTopParlays ? 1:0))
+            dayWonPatterns.parlays.push({date: day.date,dayOfWeek: GetDayOfWeek(day.date) ,dayGameWonResults:dayGameWonResults, numberOfParlays:numberOfParlays, totalParlaysWon:totalParlaysWon, parlayIndexesWon:parlayIndexesWon, winPercentage:Math.round((totalParlaysWon*100)/(numberOfParlays ==0 ? 1 :numberOfParlays))});
+            
+
+            //workon selections only top
+            var numberOfTopTrilays = 1;
+            if(numberOfTrilays > numberOfTopTrilays)
+            {
+                numberOfTrilays = numberOfTopTrilays;
+            }
+
+            var startTrilay = 0;
+            var lastTrilay = 3;
+            var totalTrilaysWon = 0;
+            var trilayIndexesWon = [];
+            for (let sin = 0; sin < numberOfTrilays; sin++) {
+
+                var trilay = dayGameWonResults.slice(startTrilay,lastTrilay);
+                startTrilay += 2;
+                lastTrilay += 2;
+                var isTrilayWon = trilay.reduce((accumulator, current) => accumulator + current, 0) == 2 ? 1:0;
+                totalTrilaysWon += isTrilayWon;
+                if(isTrilayWon)
+                {
+                    trilayIndexesWon.push(sin);
+                }
+                var stopHere = "";          
+            }
+            dayWonPatterns.trilayTimeLine.push((totalTrilaysWon == numberOfTopTrilays ? 1:0));
+            dayWonPatterns.trilays.push({date: day.date,dayOfWeek: GetDayOfWeek(day.date) ,dayGameWonResults:dayGameWonResults, numberOfTrilays:numberOfTrilays, totalTrilaysWon:totalTrilaysWon, trilayIndexesWon:trilayIndexesWon, winPercentage:Math.round((totalTrilaysWon*100)/(numberOfTrilays == 0 ? 1 : numberOfTrilays))});
+            
+
+            //workon selections only top
+            var numberOfTopFourlays = 1;
+            if(numberOfFourlays > numberOfTopFourlays)
+            {
+                numberOfFourlays = numberOfTopFourlays;
+            }
+
+            var startFourlay = 0;
+            var lastFourlay = 3;
+            var totalFourlaysWon = 0;
+            var fourlayIndexesWon = [];
+            for (let sin = 0; sin < numberOfFourlays; sin++) {
+
+                var fourlay = dayGameWonResults.slice(startFourlay,lastFourlay);
+                startFourlay += 2;
+                lastFourlay += 2;
+                var isFourlayWon = fourlay.reduce((accumulator, current) => accumulator + current, 0) == 2 ? 1:0;
+                totalFourlaysWon += isFourlayWon;
+                if(isFourlayWon)
+                {
+                    fourlayIndexesWon.push(sin);
+                }
+                var stopHere = "";          
+            }
+            dayWonPatterns.fourlayTimeLine.push((totalFourlaysWon == numberOfTopFourlays ? 1:0));
+            dayWonPatterns.fourlays.push({date: day.date,dayOfWeek: GetDayOfWeek(day.date) ,dayGameWonResults:dayGameWonResults, numberOfFourlays:numberOfFourlays, totalFourlaysWon:totalFourlaysWon, fourlayIndexesWon:fourlayIndexesWon, winPercentage:Math.round((totalFourlaysWon*100)/(numberOfFourlays ==0?1:numberOfFourlays))});
+            
+            await save("ParlaysStats", dayWonPatterns, function(){}, "replace", "ParlaysStats")
+            var stopHere = "";
+        }
+        //var parlaysWinPercentages = dayWonPatterns.parlays.map(function(item){return item.winPercentage});
+        dayWonPatterns.parlaysWinPercentage = Math.round(dayWonPatterns.parlayTimeLine.reduce((accumulator, current) => accumulator + current, 0)*100/dayWonPatterns.parlayTimeLine.length);
+        dayWonPatterns.parlaysBestStreak = "W-"+longestStreak(dayWonPatterns.parlayTimeLine, 1);
+        dayWonPatterns.parlaysWorstStreak = "L-"+longestStreak(dayWonPatterns.parlayTimeLine, 0);
+        dayWonPatterns.parlaysAvgBestStreak = "W-"+averageStreak(dayWonPatterns.parlayTimeLine, 1);
+        dayWonPatterns.parlaysAvgWorstStreak = "L-"+averageStreak(dayWonPatterns.parlayTimeLine, 0);
+        dayWonPatterns.parlaysCurrentStreak = currentStreak(dayWonPatterns.parlayTimeLine, 1);
+        dayWonPatterns.parlaysHotWinChances = probabilityNextOne(dayWonPatterns.parlayTimeLine);
+
+        dayWonPatterns.trilaysWinPercentage = Math.round(dayWonPatterns.trilayTimeLine.reduce((accumulator, current) => accumulator + current, 0)*100/dayWonPatterns.trilayTimeLine.length);
+        dayWonPatterns.trilaysBestStreak = "W-"+longestStreak(dayWonPatterns.trilayTimeLine, 1);
+        dayWonPatterns.trilaysWorstStreak = "L-"+longestStreak(dayWonPatterns.trilayTimeLine, 0);
+        dayWonPatterns.trilaysAvgBestStreak = "W-"+averageStreak(dayWonPatterns.trilayTimeLine, 1);
+        dayWonPatterns.trilaysAvgWorstStreak = "L-"+averageStreak(dayWonPatterns.trilayTimeLine, 0);
+        dayWonPatterns.trilaysCurrentStreak = currentStreak(dayWonPatterns.trilayTimeLine, 1);
+        dayWonPatterns.trilaysHotWinChances = probabilityNextOne(dayWonPatterns.trilayTimeLine);
+
+
+        dayWonPatterns.fourlaysWinPercentage = Math.round(dayWonPatterns.fourlayTimeLine.reduce((accumulator, current) => accumulator + current, 0)*100/dayWonPatterns.fourlayTimeLine.length);
+        dayWonPatterns.fourlaysBestStreak = "W-"+longestStreak(dayWonPatterns.fourlayTimeLine, 1);
+        dayWonPatterns.fourlaysWorstStreak = "L-"+longestStreak(dayWonPatterns.fourlayTimeLine, 0);
+        dayWonPatterns.fourlaysAvgBestStreak = "W-"+averageStreak(dayWonPatterns.fourlayTimeLine, 1);
+        dayWonPatterns.fourlaysAvgWorstStreak = "L-"+averageStreak(dayWonPatterns.fourlayTimeLine, 0);
+        dayWonPatterns.fourlaysCurrentStreak = currentStreak(dayWonPatterns.fourlayTimeLine, 1);
+        dayWonPatterns.fourlaysHotWinChances = probabilityNextOne(dayWonPatterns.fourlayTimeLine);
+
+        var stopHere = "";
+
+    }
+
+    function analyzeStreaks(data, value) {
+        let streaks = [];
+        let currentStreak = 0;
+        let lastValue = value;
+    
+        // Calculate all streaks for the given value
+        data.forEach((val, index) => {
+            if (val === lastValue) {
+                currentStreak++;
+            } else {
+                if (currentStreak > 0) {
+                    streaks.push(currentStreak);
+                }
+                currentStreak = 0; // Reset streak when value changes
+            }
+        });
+    
+        // Include the last streak if the last value matches
+        if (currentStreak > 0 && data[data.length - 1] === lastValue) {
+            streaks.push(currentStreak);
+        }
+    
+        return streaks;
+    }
+    
+    function calculateAverage(streaks) {
+        if (streaks.length === 0) return 0;
+        const sum = streaks.reduce((acc, cur) => acc + cur, 0);
+        return sum / streaks.length;
+    }
+    
+    function probabilityNextOne(data) {
+        const streaks1 = analyzeStreaks(data, 1);
+        const streaks0 = analyzeStreaks(data, 0);
+    
+        const averageStreak1 = calculateAverage(streaks1);
+        const averageStreak0 = calculateAverage(streaks0);
+    
+        // Determine current value to identify current streak type
+        const currentStreakValue = data[data.length - 1];
+        const currentStreak = (currentStreakValue === 1 ? streaks1 : streaks0).pop() || 0;
+    
+        if (currentStreakValue === 0) {
+            // Probability model if the last value was 0
+            if (currentStreak < averageStreak0) {
+                return Math.ceil(100 * (currentStreak / averageStreak0));
+            } else {
+                return Math.ceil(100 * (averageStreak0 / currentStreak));
+            }
+        } else {
+            // Probability model if the last value was 1
+            if (currentStreak < averageStreak1) {
+                return Math.ceil(100 * (currentStreak / averageStreak1));
+            } else {
+                return Math.ceil(100 * (averageStreak1 / currentStreak));
+            }
+        }
+    }
+    
+
+    function currentStreak(arr) {
+        if (arr.length === 0) {
+            return "No data";
+        }
+    
+        let lastValue = arr[arr.length - 1];
+        let streak = 0;
+    
+        for (let i = arr.length - 1; i >= 0; i--) {
+            if (arr[i] === lastValue) {
+                streak++;
+            } else {
+                break;
+            }
+        }
+    
+        // Format the result based on the value of the streak
+        if (lastValue === 0) {
+            return "L-" + Math.ceil(streak);
+        } else if (lastValue === 1) {
+            return "W-" + Math.ceil(streak);
+        } else {
+            return "Current streak: " + streak; // Fallback for any other number
+        }
+    }
+
+    function averageStreak(arr, value) {
+        let totalStreaks = 0;
+        let totalStreakLength = 0;
+        let currentStreak = 0;
+    
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                currentStreak++;
+            } else if (currentStreak > 0) {
+                totalStreaks++;
+                totalStreakLength += currentStreak;
+                currentStreak = 0;
+            }
+        }
+    
+        // Check if the last element was part of a streak
+        if (currentStreak > 0) {
+            totalStreaks++;
+            totalStreakLength += currentStreak;
+        }
+    
+        // Compute average; avoid division by zero
+        return Math.ceil(totalStreaks > 0 ? totalStreakLength / totalStreaks : 0);
+    }
+
+    function longestStreak(arr, value) {
+        let maxStreak = 0;
+        let currentStreak = 0;
+    
+        for (let i = 0; i < arr.length; i++) {
+            if (arr[i] === value) {
+                currentStreak++;
+                maxStreak = Math.max(maxStreak, currentStreak);
+            } else {
+                currentStreak = 0; // Reset streak count on mismatch
+            }
+        }
+    
+        return maxStreak;
+    }
 
     async function AnalyzeIndexes()
     {
@@ -273,7 +535,7 @@ try {
         var indexStats = [];
         for (let sdf = 0; sdf < 16; sdf++) {
             const ind = sdf;
-            var indexDetail = {index:ind, wins:0, loses:0, winsWandicaps:0, winPercenatge:0, winHandicapPercentage:0, totalGames:0, games:[]};
+            var indexDetail = {index:ind, wins:0, loses:0, winsWandicaps:0, winPercenatge:0, winHandicapPercentage:0, totalGames:0, games:[], hotChances:0};
             indexStats.push(indexDetail);
         }
 
@@ -321,7 +583,12 @@ try {
             
         }
 
-        var indexStatsSorted = await sorting(indexStats, "winPercenatge", "desc");
+        indexStats.forEach(function(item){
+            var indexBetWons = item.games.map(function(item){return item.betWon;});
+            item.hotChances = probabilityNextOne(indexBetWons);
+        });
+
+        var indexStatsSorted = await sorting(indexStats, "hotChances", "desc");
 
         var mon = topGamesWon.filter(function(item){return item.dayOfWeek == "Mon"});
         var monTopGameValues = mon.map(function(item){return item.topGamesWon});
@@ -1275,14 +1542,20 @@ try {
             }
             var gamePostponed = false;
             if(!isTodaysFile)
-            {
+            {   
+                //if(date == "May13th" && game.game.indexOf("Dodgers")>=0){
+            //     var stopHere = "";
+            //     }
                 var winnerData = await GetResultDetails(date, {away: game.away, home: game.home}, game.home);
-                gameFormatted.compare.results["isHomeWinner"] = winnerData.finalWinner.indexOf(game.home) >=0 ? game.home : game.away;
-                gameFormatted.compare.results["isF5HomeWinner"] = winnerData.f5Winner.indexOf(game.home) >=0 ? game.home : game.away;
-                gameFormatted.compare.results["isOver"] = (winnerData.awayTotalRuns + winnerData.homeTotalRuns) > 8 ? "Over" : (winnerData.awayTotalRuns + winnerData.homeTotalRuns) < 8 ? "Under" : "Push";
-                gameFormatted.common["handicap"] = winnerData.homeTotalRuns - winnerData.awayTotalRuns;
-                if(gameFormatted.common.handicap == null || isNaN(gameFormatted.common.handicap) && !isTodaysFile){
-                    gamePostponed = false;//true;
+                if(winnerData.finalWinner == "undefined" || winnerData.finalWinner == null )
+                {
+                    gamePostponed = true;
+                }
+                if(!gamePostponed){
+                    gameFormatted.compare.results["isHomeWinner"] = winnerData.finalWinner.indexOf(game.home) >=0 ? game.home : game.away;
+                    gameFormatted.compare.results["isF5HomeWinner"] = winnerData.f5Winner.indexOf(game.home) >=0 ? game.home : game.away;
+                    gameFormatted.compare.results["isOver"] = (winnerData.awayTotalRuns + winnerData.homeTotalRuns) > 8 ? "Over" : (winnerData.awayTotalRuns + winnerData.homeTotalRuns) < 8 ? "Under" : "Push";
+                    gameFormatted.common["handicap"] = winnerData.homeTotalRuns - winnerData.awayTotalRuns;                    
                 }
             }
 
@@ -1378,7 +1651,9 @@ try {
                 gameFactorCompleteness = 0.25;
             }
             //Comment This block to build patterns, excute this commented out and reintroduce it.
+            
             var agnosticPatterns =  await load("agnosticPatterns", "agnosticPatterns");
+
             var gamePattern = await GetAgnosticPatterns(gameFormatted,[], [], "agnostic");
             var selectedPattern = agnosticPatterns.filter(function(item){
                 return item.agnosticPattern == gamePattern[0].agnosticPattern;
@@ -1452,9 +1727,14 @@ try {
                 var factorDetails = percentageFactors.filter(function(item){
                     return item.factor == roundedFactor;
                 })[0];
-
-                gameFormatted["recommendedBet"] = (((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100)+ (Math.round(factorDetails.winPercenatge)/100)) * gameFactorCompleteness;
-                gameFormatted.common["factor"] = parseFloat(gameFormatted.recommendedBet.toFixed(2))+" Win("+Math.round(factorDetails.winPercenatge)+"%) Hand("+Math.round(factorDetails.winHandicapPercentage)+"%) totGam:"+factorDetails.totalGames;
+                if(game.date == "April12th" && game.game.indexOf("Braves") >= 0)
+                    {
+                        var stopHere = "";
+                    }
+                    if(factorDetails){
+                    gameFormatted["recommendedBet"] = (((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100)+ (Math.round(factorDetails.winPercenatge)/100)) * gameFactorCompleteness;
+                    gameFormatted.common["factor"] = parseFloat(gameFormatted.recommendedBet.toFixed(2))+" Win("+Math.round(factorDetails.winPercenatge)+"%) Hand("+Math.round(factorDetails.winHandicapPercentage)+"%) totGam:"+factorDetails.totalGames;
+                    }
             }
             else{
                 gameFormatted.common["factor"] = gameFormatted.recommendedBet;
@@ -1469,7 +1749,7 @@ try {
             var analysisGameDetail = {};
             if(!isTodaysFile && isGamePlayed)
             {
-                //console.log(date+" "+game.game)
+                console.log(date+" "+game.game)
                 analysisGameDetail["winnerData"] = winData;
                 var expWinnerFinal = patternChances >= otherTeamChances ? game[gamePattern[0].expWinner] : game[otherTeam];
                 var analysisGameDetail = {};
@@ -1525,7 +1805,7 @@ try {
                     else{
                         var gamesForStreak = indexData.games;
                     }
-                    gameSort.common["factor"] += " Index"+indexData.index+"("+indexData.winPercenatge+"%)";
+                    gameSort.common["factor"] += " Index"+indexData.index+"("+indexData.winPercenatge+"%) hot%("+indexData.hotChances+")";
                     
                     var streak= "";
                     var lastGame = "";
