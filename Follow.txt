@@ -1,0 +1,18 @@
+If before the day is over, change single to next day and ger schedules/
+If the day before is still on, refresh schedules for both
+Get GamePerGame
+GenerateStats
+Get PithcherData and Evaluate Winners
+Generate for all dates and single date to generate ML Files
+Run ML
+Clear AnalysisGame file for all previous dates and clear await save "analysisGameDetails", [] 
+Run GenerateVisualisations
+comment out the await save "analysisGameDetails", [] 
+Run patterns, factors, Indexes
+Run GenerateVisualisations
+
+
+
+Todo
+Team hot numbers
+Series Hot numbers

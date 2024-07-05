@@ -180,14 +180,14 @@ try {
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
         {month:"June", from:1, to:30, monthNumber:"06"},
-        {month:"July", from:1, to:4, monthNumber:"07"}
+        {month:"July", from:1, to:5, monthNumber:"07"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
-        {month:"July", from:4, to:4, monthNumber:"07"}
+        {month:"July", from:5, to:5, monthNumber:"07"}
 
     ];
     
@@ -195,9 +195,9 @@ try {
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    // await ProcessGameByGame();
-                    // await getPitcherGameByGame();
-                    // await getBatterGameByGame();
+                    //await ProcessGameByGame();
+                    //await getPitcherGameByGame();
+                    //await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -220,14 +220,14 @@ try {
                         await save(type, [], function(){}, "replace" ,"GameByGame");
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                         // // // // //For full dates run this line to generate analysisFile then comment it out
-                        //await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
-                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
+                        await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
+                        await ProcessDailyGames(fullDatesAnalysis,true, type);//true for noselections to be shown/included
 
                         //After visualisationFilesCreated
-//                         await CalculatePatternsForVisualisations();
-//                         await AnalyzeFactors();
-//                         await AnalyzeIndexes();
-//                         await BuildBettingStrategy();
+                        //await CalculatePatternsForVisualisations();
+                        //await AnalyzeFactors();
+                        //await AnalyzeIndexes();
+                        //await BuildBettingStrategy();
 // //}                     
 
                         
