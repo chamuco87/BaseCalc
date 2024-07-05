@@ -1,0 +1,407 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Game Statistics</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .highlight {
+            background-color: lightgreen; /* Highlights the most repeated value or highest values */
+        }
+        .highlight-lowest {
+            background-color: lightgreen; /* Highlights the lowest values for ERA stats */
+        }
+        .custom-container {
+            margin: 10px;
+            max-width: 98%;
+        }
+        .table-container {
+            border: 3px solid black; /* Bold border for each table container */
+            padding: 10px;
+            margin-bottom: 20px; /* Adds bottom margin for spacing between each game's tables */
+        }
+        .highlight-different {
+            background-color: red; /* Highlights discrepancies */
+        }
+        /* thead {
+            th,
+            td {
+                font-size: 9px;
+            }
+        } */
+        body{
+            font-size: 12px;
+        }
+        .statistics-table {
+            font-size: 20px !important; /* Set font size for statistics tables */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container custom-container">
+        <h1>Game Statistics Index and Days</h1>
+        <div id="indexStatsTable" class="table-responsive"></div>
+        <div id="dayStatsTable" class="table-responsive"></div>
+    </div>
+    <div class="container custom-container">
+        <h1>Game Statistics</h1>
+    <!-- Month Tab Navigation -->
+    <ul class="nav nav-tabs" id="monthTabs" role="tablist">
+        <!-- Month tabs dynamically inserted here -->
+    </ul>
+    <!-- Month Tab Content -->
+    <div class="tab-content" id="monthTabContent">
+        <!-- Month tabs content dynamically inserted here -->
+    </div>
+    </div>
+
+    <!-- Bootstrap JS and dependencies -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.3/dist/umd/popper.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+
+    <script>
+        const data = [];
+
+
+        function calculateMostRepeatedValue(game) {
+            const keys = ['formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner', 'isF5HomeWinner', 'isHomeWinner'];
+            const counts = {};
+
+            keys.forEach(key => {
+                const value = game.common[key];
+                if (!counts[value]) counts[value] = 0;
+                counts[value]++;
+            });
+
+            let maxCount = 0;
+            let mostRepeatedValue = null;
+            Object.entries(counts).forEach(([value, count]) => {
+                if (count > maxCount) {
+                    mostRepeatedValue = value;
+                    maxCount = count;
+                }
+            });
+
+            return mostRepeatedValue;
+        }
+
+        function createCommonTable(game, container) {
+        const mostRepeatedValue = calculateMostRepeatedValue(game);
+        const responsiveDiv = document.createElement('div');
+        responsiveDiv.className = 'table-responsive';
+
+        const table = document.createElement('table');
+        table.className = 'table table-bordered';
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+        const headerRow = document.createElement('tr');
+        const valueRow = document.createElement('tr');
+
+		// Retrieve the winner from results if available
+        const resultWinner = game.compare.results ? game.compare.results.isHomeWinner : null;
+        const isOver = game.compare.results ? game.compare.results.isOver : null;											
+        Object.keys(game.common).forEach(key => {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+
+            const td = document.createElement('td');
+            if (key === "factor" || key ===  "patternChances") {
+            // Replace ")" with ")<br>" to add line breaks after each parenthesis
+            td.innerHTML = game.common[key].replace(/\)/g, ')<br>');
+            }else{
+            td.textContent = isNaN(game.common[key]) ? game.common[key] : parseFloat(game.common[key]).toFixed(2);
+            }
+            if (game.common[key] === mostRepeatedValue) {
+                td.classList.add('highlight');
+            }
+			// Highlight most repeated value if not checking results	
+            if(key == "handicap")					
+            {								
+                if (game.compare.results.isHomeWinner === mostRepeatedValue) {
+                    td.classList.add('highlight');
+                }
+                else{
+                    td.classList.add('highlight-different');
+                }
+            }
+			// Additional comparisons with results
+            if (resultWinner && ['formulaWinner', 'seriesWinner', 'nextWinners', 'overallWinner' , 'isHomeWinner', 'isF5HomeWinner'].includes(key)) {
+                if (game.common[key] === resultWinner) {
+                    td.classList.add('highlight'); // Highlight green if they match
+                } else if(game.common[key] != "No consistent" ){
+                    td.classList.add('highlight-different'); // Highlight red if different
+                }
+            }
+
+            if (isOver && ['isOver'].includes(key)) {
+                if (game.common[key] === isOver) {
+                    td.classList.add('highlight'); // Highlight green if they match
+                } else if(game.common[key] != "No consistent" ){
+                    td.classList.add('highlight-different'); // Highlight red if different
+                }
+            }
+            valueRow.appendChild(td);
+        });
+
+        thead.appendChild(headerRow);
+        tbody.appendChild(valueRow);
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        responsiveDiv.appendChild(table); // Add the table inside the responsive div
+        container.appendChild(responsiveDiv); // Add the responsive div to the container
+    }
+
+    function createCompareTable(game, container) {
+        const selectedTeam = game.compare.selected.team;
+
+        const responsiveDiv = document.createElement('div');
+        responsiveDiv.className = 'table-responsive';
+
+        const table = document.createElement('table');
+        table.className = 'table table-bordered';
+        const thead = document.createElement('thead');
+        const tbody = document.createElement('tbody');
+        const headerRow = document.createElement('tr');
+        const awayRow = document.createElement('tr');
+        const homeRow = document.createElement('tr');
+
+        Object.keys(game.compare.awayRow).forEach(key => {
+            const th = document.createElement('th');
+            th.textContent = key;
+            headerRow.appendChild(th);
+
+            const tdAway = document.createElement('td');
+            
+            const tdHome = document.createElement('td');
+            tdAway.textContent = isNaN(game.compare.awayRow[key]) ? game.compare.awayRow[key] : parseFloat(game.compare.awayRow[key]).toFixed(2);
+			tdHome.textContent = isNaN(game.compare.homeRow[key]) ? game.compare.homeRow[key] : parseFloat(game.compare.homeRow[key]).toFixed(2);
+
+            if (!isNaN(parseFloat(tdAway.textContent)) && !isNaN(parseFloat(tdHome.textContent))) {
+                const awayValue = parseFloat(tdAway.textContent);
+                const homeValue = parseFloat(tdHome.textContent);
+                if (key.toLowerCase().includes('era') || (key == 'PitcherLoses') || key == "RelevingRuns")  {
+                    if (awayValue < homeValue) tdAway.classList.add('highlight-lowest');
+                    else if (homeValue < awayValue) tdHome.classList.add('highlight-lowest');
+                } else {
+                    if (awayValue > homeValue) tdAway.classList.add('highlight');
+                    else if (homeValue > awayValue) tdHome.classList.add('highlight');
+                }
+            }
+
+            if (key === 'team') {
+                if (game.compare.awayRow.team === selectedTeam) tdAway.classList.add('highlight');
+                if (game.compare.homeRow.team === selectedTeam) tdHome.classList.add('highlight');
+            }
+
+            if (['SpecificEra', 'PitcherWins', 'PitcherLoses'].includes(key)) {
+                if (parseFloat(tdAway.textContent) === 0) tdAway.style.backgroundColor = 'yellow';
+                if (parseFloat(tdHome.textContent) === 0) tdHome.style.backgroundColor = 'yellow';
+            }
+
+            awayRow.appendChild(tdAway);
+            homeRow.appendChild(tdHome);
+        });
+
+        thead.appendChild(headerRow);
+        tbody.appendChild(awayRow);
+        tbody.appendChild(homeRow);
+        table.appendChild(thead);
+        table.appendChild(tbody);
+        responsiveDiv.appendChild(table);
+        container.appendChild(responsiveDiv);
+    }
+
+    document.addEventListener('DOMContentLoaded', () => {
+    // Function to fetch and load the JSON data
+    fetch('http://carbajalsalinas.com/DecisionViewObject.json')
+        .then(response => response.json())
+        .then(data => {
+            console.log("Data loaded:", data); // Log the data to see if it's loaded correctly
+             // Parse and sort dates
+             const months = ["January", "February", "March", "April", "May", "June",
+                            "July", "August", "September", "October", "November", "December"];
+
+            const monthOrder = months.reduce((acc, month, index) => {
+                acc[month] = index;
+                return acc;
+            }, {});
+
+            const monthData = {};
+            data.forEach(game => {
+                const monthMatch = game.common.date.match(/^[a-zA-Z]+/)[0];
+                const dayMatch = parseInt(game.common.date.match(/\d+/)[0]);
+                if (!monthData[monthMatch]) {
+                    monthData[monthMatch] = {};
+                }
+                if (!monthData[monthMatch][dayMatch]) {
+                    monthData[monthMatch][dayMatch] = [];
+                }
+                monthData[monthMatch][dayMatch].push(game);
+            });
+
+            const monthTabs = document.getElementById('monthTabs');
+            const monthTabContent = document.getElementById('monthTabContent');
+
+            const sortedMonths = Object.keys(monthData).sort((a, b) => monthOrder[a] - monthOrder[b]);
+            sortedMonths.forEach((month, monthIndex) => {
+                const monthTab = document.createElement('li');
+                monthTab.className = 'nav-item';
+                monthTab.innerHTML = `<a class="nav-link ${monthIndex === sortedMonths.length - 1 ? 'active' : ''}" id="tab-${month}-tab" data-toggle="tab" href="#tab-${month}" role="tab" aria-controls="tab-${month}" aria-selected="${monthIndex === sortedMonths.length - 1 ? 'true' : 'false'}">${month}</a>`;
+                monthTabs.appendChild(monthTab);
+
+                const monthTabPane = document.createElement('div');
+                monthTabPane.className = `tab-pane fade ${monthIndex === sortedMonths.length - 1 ? 'show active' : ''}`;
+                monthTabPane.id = `tab-${month}`;
+                monthTabPane.setAttribute('role', 'tabpanel');
+                monthTabPane.setAttribute('aria-labelledby', `tab-${month}-tab`);
+
+                const dateTabs = document.createElement('ul');
+                dateTabs.className = 'nav nav-tabs';
+                const dateTabContent = document.createElement('div');
+                dateTabContent.className = 'tab-content';
+
+                const sortedDays = Object.keys(monthData[month]).sort((a, b) => a - b);
+                sortedDays.forEach((date, dateIndex) => {
+                    const fullDate = `${month}${date}th`;
+                    const dateTab = document.createElement('li');
+                    dateTab.className = 'nav-item';
+                    dateTab.innerHTML = `<a class="nav-link ${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'active' : ''}" id="tab-${fullDate}-tab" data-toggle="tab" href="#tab-${fullDate}" role="tab" aria-controls="tab-${fullDate}" aria-selected="${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'true' : 'false'}">${fullDate}</a>`;
+                    dateTabs.appendChild(dateTab);
+
+                    const dateTabPane = document.createElement('div');
+                    dateTabPane.className = `tab-pane fade ${dateIndex === sortedDays.length - 1 && monthIndex === sortedMonths.length - 1 ? 'show active' : ''}`;
+                    dateTabPane.id = `tab-${fullDate}`;
+                    dateTabPane.setAttribute('role', 'tabpanel');
+                    dateTabPane.setAttribute('aria-labelledby', `tab-${fullDate}-tab`);
+
+                    monthData[month][date].forEach(game => {
+                        const tableContainer = document.createElement('div');
+                        tableContainer.className = 'table-container';
+                        createCommonTable(game, tableContainer);
+                        createCompareTable(game, tableContainer);
+                        dateTabPane.appendChild(tableContainer);
+                    });
+
+                    dateTabContent.appendChild(dateTabPane);
+                });
+
+                monthTabPane.appendChild(dateTabs);
+                monthTabPane.appendChild(dateTabContent);
+                monthTabContent.appendChild(monthTabPane);
+            });
+        })
+        .catch(error => console.error("Error loading the JSON data:", error));
+});
+
+
+
+        document.addEventListener('DOMContentLoaded', () => {
+            const dates = [...new Set(data.map(game => game.common.date))]; // Get unique dates
+            const mainContainer = document.querySelector('.custom-container');
+            const tabs = document.getElementById('dateTabs');
+            const tabContent = document.getElementById('tabContent');
+
+            dates.forEach((date, index) => {
+                // Create a new tab for each date
+                const tab = document.createElement('li');
+                tab.className = 'nav-item';
+                tab.innerHTML = `<a class="nav-link ${index === 0 ? 'active' : ''}" id="tab-${date}-tab" data-toggle="tab" href="#tab-${date}" role="tab" aria-controls="tab-${date}" aria-selected="${index === 0 ? 'true' : 'false'}">${date}</a>`;
+                tabs.appendChild(tab);
+
+                // Create tab content for each date
+                const dateTabPane = document.createElement('div');
+                dateTabPane.className = `tab-pane fade ${index === 0 ? 'show active' : ''}`;
+                dateTabPane.id = `tab-${date}`;
+                dateTabPane.setAttribute('role', 'tabpanel');
+                dateTabPane.setAttribute('aria-labelledby', `tab-${date}-tab`);
+
+                data.filter(game => game.common.date === date).forEach(game => {
+                    const tableContainer = document.createElement('div');
+                    tableContainer.className = 'table-container';
+                    createCommonTable(game, tableContainer);
+                    createCompareTable(game, tableContainer);
+                    dateTabPane.appendChild(tableContainer);
+                });
+
+                tabContent.appendChild(dateTabPane);
+            });
+        });
+
+        var  statsData =[];
+        document.addEventListener('DOMContentLoaded', function() {
+            fetch('http://carbajalsalinas.com/IndexAndDayStats.json')
+        .then(response => response.json())
+        .then(statsData => {
+            console.log("Data loaded:", statsData);
+             
+
+            // Function to create the index stats table
+            function createIndexStatsTable(data) {
+                const table = document.createElement('table');
+                table.className = 'table table-bordered statistics-table';
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+                const valueRow = document.createElement('tr');
+
+                data.forEach(stat => {
+                    const th = document.createElement('th');
+                    th.textContent = `Index ${stat.index}`;
+                    headerRow.appendChild(th);
+
+                    const td = document.createElement('td');
+                    td.innerHTML = `winPercenatge: ${stat.winPercenatge}%<br>Wins: ${stat.wins}<br>Loses: ${stat.loses}<br>handicaps: ${stat.winsWandicaps}<br>hot%: ${stat.hotChances}`;
+                    valueRow.appendChild(td);
+                });
+
+                thead.appendChild(headerRow);
+                tbody.appendChild(valueRow);
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                document.getElementById('indexStatsTable').appendChild(table);
+            }
+
+            // Function to create the day stats table
+            function createDayStatsTable(dayStats) {
+                const table = document.createElement('table');
+                table.className = 'table table-bordered';
+                const thead = document.createElement('thead');
+                const tbody = document.createElement('tbody');
+                const headerRow = document.createElement('tr');
+                const valueRow = document.createElement('tr');
+
+                
+                Object.keys(dayStats).forEach(day => {
+                    if (day !== "topGamesWon") {
+                    const th = document.createElement('th');
+                    th.textContent = day;
+                    headerRow.appendChild(th);
+
+                    const td = document.createElement('td');
+                    td.innerHTML = `Top Game Avg: ${dayStats[day].TopGameAvg}<br>Win %: ${dayStats[day].WinPercentage}`;
+                    valueRow.appendChild(td);
+                    }
+                });
+
+                thead.appendChild(headerRow);
+                tbody.appendChild(valueRow);
+                table.appendChild(thead);
+                table.appendChild(tbody);
+
+                document.getElementById('dayStatsTable').appendChild(table);
+            }
+
+            createIndexStatsTable(statsData.indexStats);
+            createDayStatsTable(statsData.dayStats);
+        })
+        .catch(error => console.error("Error loading the JSON data:", error));
+        });
+    </script>
+</body>
+</html>

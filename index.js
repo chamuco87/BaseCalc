@@ -221,7 +221,7 @@ try {
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                         // // // // //For full dates run this line to generate analysisFile then comment it out
                         //await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
-                        await ProcessDailyGames(fullDatesAnalysis,true, type);//true for noselections to be shown/included
+                        await ProcessDailyGames(singleDayAnalysis,true, type);//true for noselections to be shown/included
 
                         //After visualisationFilesCreated
 //                         await CalculatePatternsForVisualisations();
@@ -1650,6 +1650,7 @@ try {
             {
                 gameFactorCompleteness = 0.25;
             }
+            gameFormatted["gameFactorCompleteness"] = gameFactorCompleteness;
             //Comment This block to build patterns, excute this commented out and reintroduce it.
             
             var agnosticPatterns =  await load("agnosticPatterns", "agnosticPatterns");
@@ -1713,8 +1714,11 @@ try {
             gameFormatted.common["patternChances"] = patternChances.toString()+"%("+game[gamePattern[0].expWinner]+")  "+otherTeamChances.toString()+"%("+game[otherTeam]+")"  ;
             gameFormatted.common["sample"] = "wins:"+ winsCount+" loses:"+losesCount+" ="+(winsCount+losesCount);
             gameFormatted.common["avgHandicap"] = "Win:"+Math.round(handicapWinFinal) +" Lost:"+Math.round(handicapLoseFinal);
-            gameFormatted["recommendedBet"] = (((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100)) * gameFactorCompleteness;
             
+            gameFormatted["sample"] = winsCount+losesCount;
+            gameFormatted["factorDiff"] = gameFormatted.factorDiff;
+            gameFormatted["recommendedBet"] = (((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100)) * gameFactorCompleteness;
+
             try{
                 var percentageFactors = await load("consolidatedFactors", "analysisGameDetails");
             }
@@ -1732,6 +1736,7 @@ try {
                         var stopHere = "";
                     }
                     if(factorDetails){
+                    gameFormatted["factorDetailsWinPercenatge"] = factorDetails.winPercenatge;
                     gameFormatted["recommendedBet"] = (((gameFormatted.biggestChances)/100) + ((winsCount+losesCount)/100) + (gameFormatted.factorDiff/100)+ (Math.round(factorDetails.winPercenatge)/100)) * gameFactorCompleteness;
                     gameFormatted.common["factor"] = parseFloat(gameFormatted.recommendedBet.toFixed(2))+" Win("+Math.round(factorDetails.winPercenatge)+"%) Hand("+Math.round(factorDetails.winHandicapPercentage)+"%) totGam:"+factorDetails.totalGames;
                     }
@@ -1774,6 +1779,8 @@ try {
                 
                 analysisGames.push(analysisGameDetail)
             }
+
+            
             if(!gamePostponed)
             {
                 formattedGames.push(gameFormatted);
@@ -1784,6 +1791,10 @@ try {
         }   
         var formattedGamesSorted = await sorting(formattedGames, "recommendedBet", "desc");
         var analysisGamesSorted = await sorting(analysisGames, "recommendedBet", "desc");
+
+        
+
+
         if(typeof analysisGameDetails[gameDataAnalysis[0].date] == "undefined")
         {
             analysisGameDetails.push({ date:gameDataAnalysis[0].date, games:analysisGamesSorted,gamesPlayed:gamesDay, gamesWon: gamesWon, gamesLost:gamesLost, perWin:(gamesWon*100)/(gamesWon+gamesLost), gamesWonHome:gamesWonHome, gamesWonAway:gamesWonAway });
@@ -1805,6 +1816,8 @@ try {
                     else{
                         var gamesForStreak = indexData.games;
                     }
+                    gameSort["indexDataWinPercenatge"] = indexData.winPercenatge;
+                    gameSort["indexDataHotChances"] = indexData.hotChances;
                     gameSort.common["factor"] += " Index"+indexData.index+"("+indexData.winPercenatge+"%) hot%("+indexData.hotChances+")";
                     
                     var streak= "";
@@ -1834,10 +1847,13 @@ try {
                     var stopHere = "";
                 }
             }
-            
+            gameSort["decisionTakerFactor"] = (((gameSort["biggestChances"])/100) + ((gameSort["sample"])/100) + (gameSort["factorDiff"]/100) + (gameSort["factorDetailsWinPercenatge"]/100) +(gameSort["indexDataWinPercenatge"]/100) +(gameSort["indexDataHotChances"]/100 )) * gameFactorCompleteness;
         }
 
+
+        var decisionTaking = await sorting(formattedGames, "decisionTakerFactor", "desc");
         await save(date+"JsonViewObject",formattedGamesSorted, function(){}, "replace", "JsonViewObjects" );
+        await save(date+"DecisionViewObject",decisionTaking, function(){}, "replace", "DecisionViewObject" );
         await save("analysisGameDetails",analysisGameDetails, function(){}, "replace", "analysisGameDetails" );
 
         var fs = require('fs');
