@@ -11,6 +11,12 @@ comment out the await save "analysisGameDetails", []
 Run patterns, factors, Indexes
 Run GenerateVisualisations
 
+Dependencies
+var evaluatePatterns = false;
+var processIndexAndDays = false;
+await GenerateDataForVisualization(selectedDate, evaluatePatterns, processIndexAndDays);
+For all dates after this generate patterns
+
 
 
 Todo
