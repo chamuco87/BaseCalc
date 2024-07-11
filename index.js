@@ -45,7 +45,14 @@ var teams = [
 
 ];
 
-
+const indexToVariable = [
+    'formulaWinner',
+    'seriesWinner',
+    'nextWinners',
+    'isF5HomeWinner',
+    'isHomeWinner',
+    'patternWinner'
+  ];
 
 
 var previousScheduleUrl = "https://www.espn.com/mlb/team/schedule/_/name/{team}/season/{year}/seasontype/2/half/{order}";
@@ -180,14 +187,14 @@ try {
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
         {month:"June", from:1, to:30, monthNumber:"06"},
-        {month:"July", from:1, to:5, monthNumber:"07"}
+        {month:"July", from:1, to:10, monthNumber:"07"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
-        {month:"July", from:2, to:2, monthNumber:"07"}
+        {month:"July", from:11, to:111, monthNumber:"07"}
 
     ];
     
@@ -195,9 +202,9 @@ try {
     //Steps
     /// 1.Daily Updates(requires GetScheduleData to be in place)
     ///     *    
-                    //await ProcessGameByGame();
-                    //await getPitcherGameByGame();
-                    //await getBatterGameByGame();
+                    // await ProcessGameByGame();
+                    // await getPitcherGameByGame();
+                    // await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
     ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
@@ -206,31 +213,34 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // ///     *    
-                        // var type = "AllGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        // var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
-                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-                        // allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
-                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
-                        
-
-                        // var type = "NewGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,true ,type);//true for noselections to be shown/included
+//                         var type = "AllGamesConsolidated";
+//                         await save(type, [], function(){}, "replace" ,"GameByGame");
+//                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+//                         await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+//                         var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
+//                         var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+//                         allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
+//                         await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+// //                         //
+// // // //
+                        var type = "NewGamesConsolidated";
+                        await save(type, [], function(){}, "replace" ,"GameByGame");
+                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
-                        await GenerateRawJsonViewObjects(fullDatesAnalysis);
-                        await CalculatePatternsForVisualisations();
-                        var cleanAnalysisFile = true;
-                        await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
-                        await AnalyzeFactors();
-                        await AnalyzeIndexes();
-                        await GenerateFinalViewObjects(fullDatesAnalysis);
-                        //await EnrichDecision();
+                        //await GenerateRawJsonViewObjects(fullDatesAnalysis);
+                        //await CalculatePatternsForVisualisations();
+                        //var cleanAnalysisFile = true;
+                        //await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
+                        //await AnalyzeFactors();
+                        //await AnalyzeIndexes();
+                        //await GenerateFinalViewObjects(fullDatesAnalysis);
+                        await GetHotNumberPerTeam()
+                        await EnrichDecision();
+                        //await processVariables()
                         //await BuildBettingStrategy();
+                        //await GPTEvaluation()
 // //}                     
 
                         
@@ -267,10 +277,236 @@ try {
         await driver.quit();
     }
 
+    function filterByIndices(results, indicesToFilter) {
+        return results.filter(result => 
+          indicesToFilter.every(index => result.indices.includes(index))
+        );
+      }
+
+      function groupBySeries(games)
+      {
+        games.forEach(element => {
+            element.OPPONENT = element.OPPONENT.replace(/(?:\r\n|\r|\n)/g, '');
+        });
+        const series = games.reduce((serie, item) => {
+            const { OPPONENT } = item;
+            if (!serie[OPPONENT]) {
+              serie[OPPONENT] = [];
+            }
+            serie[OPPONENT].push(item);
+            return serie;
+          }, {});
+
+          return series;
+      }
+
+      async function GetHotNumberPerTeam(){
+        
+        var teamsSchedule = await GetLatestTeamSchedules();
+        teamsSchedule = teamsSchedule.filter(function(item){
+            return item.period == 0; 
+        });
+        var hotChancesByTeamByDay = [];
+        for (let index = 0; index < teamsSchedule.length; index++) {
+            const team = teamsSchedule[index];
+            var det = {team:team.teamName, winChances:[]};
+            var gameDates = team.scheduleData.map(function(item){
+                return item.DATE;
+            });
+            var  distinctGameDates= [...new Set(gameDates)];
+            var today = new Date().toLocaleDateString('en-us', { weekday:"short", month:"short", day:"numeric"}).toString() ;
+            var isTodayIn = distinctGameDates.filter(function(item){return item == today});
+            if(isTodayIn.length == 0){ 
+                distinctGameDates.push(today);
+            }
+            for (let dateIndex = 0; dateIndex < distinctGameDates.length; dateIndex++) {
+                const date = distinctGameDates[dateIndex];
+                
+                var chances = {date : ConvertESPNDate(date), winPer:0, lostPer:0};
+                var ind = team.scheduleData.findIndex(x =>x.DATE == date) == 0 ? 1:team.scheduleData.findIndex(x =>x.DATE == date) ;
+                if(ind !=-1)
+                {
+                    var dataScope = team.scheduleData.slice(0,ind);
+                    var winsLoses = dataScope.map(function(item){return item.ISWIN =="Win"?1:0;} );
+                    chances.winPer = probabilityNextOne(winsLoses);
+
+            
+                }
+                else{
+                    var winsLoses = team.scheduleData.map(function(item){return item.ISWIN =="Win"?1:0;} );
+                    chances.winPer = probabilityNextOne(winsLoses);
+                }
+                
+                det.winChances.push(chances);
+            }
+            hotChancesByTeamByDay.push(det);
+            var series = groupBySeries(team.scheduleData);
+        }
+        await save("hotChancesByTeam", hotChancesByTeamByDay, function(){}, "replace", "hotChancesByTeamByDay");
+      }
+
+      function ConvertESPNDate(date)
+      {
+        var espnDate = date;
+        var day = date.split(", ")[1];
+        var number = day.split(" ")[1];
+        var month =  day.split(" ")[0] == "Jan" ? "January" : day.split(" ")[0] == "Feb" ? "February" : day.split(" ")[0] == "Mar" ? "March" :day.split(" ")[0] == "Apr" ? "April" :
+        day.split(" ")[0] == "May" ? "May" :day.split(" ")[0] == "Jun" ? "June"  : day.split(" ")[0] == "Jul" ? "July" :day.split(" ")[0] == "Aug" ? "August" :day.split(" ")[0] == "Sep" ? "September" :
+        day.split(" ")[0] == "Oct" ? "October" :day.split(" ")[0] == "Nov" ? "November" :day.split(" ")[0] == "Dec" ? "December":"None";
+        var selectedDate = month+number;
+        if(number == 1 || number == 31)
+            {
+                selectedDate += "st";
+            }
+            else if(number == 3)
+            {
+                selectedDate += "rd";
+
+            }
+            else if(number == 2)
+            {
+                selectedDate += "nd";
+
+            }
+            else{
+                selectedDate += "th";
+            }
+
+            return selectedDate;
+      }
+
+      function generatePatternCombinationsWithIndices(pattern) {
+        const combinations = [];
+        const length = pattern.length;
+      
+        // Generate all combinations of 1 to length characters with their indices
+        for (let i = 1; i < (1 << length); i++) {
+          let combination = '';
+          let indices = [];
+          for (let j = 0; j < length; j++) {
+            if (i & (1 << j)) {
+              combination += pattern[j];
+              indices.push(indexToVariable[j]);
+            }
+          }
+          combinations.push({ combination, indices });
+        }
+      
+        return combinations;
+      }
+
+      
+    async function GPTEvaluation(){
+        // Example JSON data
+    var jsonData = await load("allAnalysisData", "allAnalysisData" );
+  
+    function generatePatternCombinationsWithIndices(pattern) {
+        const combinations = [];
+        const length = pattern.length;
+      
+        // Generate all combinations of 1 to length characters with their indices
+        for (let i = 1; i < (1 << length); i++) {
+          let combination = '';
+          let indices = [];
+          for (let j = 0; j < length; j++) {
+            if (i & (1 << j)) {
+              combination += pattern[j];
+              indices.push(indexToVariable[j]);
+            }
+          }
+          combinations.push({ combination, indices });
+        }
+      
+        return combinations;
+      }
+      
+      // Function to determine the target value based on the most repeated character
+      function determineTargetValue(combination) {
+        const counts = {};
+        for (const char of combination) {
+          if (!counts[char]) {
+            counts[char] = 0;
+          }
+          counts[char] += 1;
+        }
+        return Object.keys(counts).reduce((a, b) => counts[a] > counts[b] ? a : b);
+      }
+      
+      // Function to evaluate matches for all combinations of agnosticPattern
+      function evaluatePatternMatches(data) {
+        const allCombinations = new Set();
+        data.forEach(obj => {
+          const combinations = generatePatternCombinationsWithIndices(obj.variables.agnosticPattern);
+          combinations.forEach(comb => allCombinations.add(JSON.stringify(comb)));
+        });
+      
+        const matchCounts = {};
+      
+        allCombinations.forEach(combination => {
+          const parsedCombination = JSON.parse(combination);
+          matchCounts[combination] = { 
+            combination: parsedCombination.combination,
+            indices: parsedCombination.indices,
+            targetValue: determineTargetValue(parsedCombination.combination),
+            isHomeWinner: { match: 0, total: 0 }, 
+            isF5HomeWinner: { match: 0, total: 0 } 
+          };
+        });
+      
+        data.forEach(obj => {
+          const pattern = obj.variables.agnosticPattern;
+          const combinations = generatePatternCombinationsWithIndices(pattern);
+      
+          combinations.forEach(combination => {
+            const key = JSON.stringify(combination);
+            const targetValue = matchCounts[key].targetValue;
+      
+            if (targetValue === obj.results.isHomeWinner) {
+              matchCounts[key].isHomeWinner.match += 1;
+            }
+            matchCounts[key].isHomeWinner.total += 1;
+      
+            if (targetValue === obj.results.isF5HomeWinner) {
+              matchCounts[key].isF5HomeWinner.match += 1;
+            }
+            matchCounts[key].isF5HomeWinner.total += 1;
+          });
+        });
+      
+        const resultPercentages = [];
+      
+        for (const key in matchCounts) {
+          const homeWinTracker = matchCounts[key].isHomeWinner;
+          const f5HomeWinTracker = matchCounts[key].isF5HomeWinner;
+          resultPercentages.push({
+            combination: matchCounts[key].combination,
+            indices: matchCounts[key].indices,
+            targetValue: matchCounts[key].targetValue,
+            total: homeWinTracker.total, // Adding the total count
+            isHomeWinnerPercentage: homeWinTracker.total > 0 ? (homeWinTracker.match / homeWinTracker.total) * 100 : 0,
+            isF5HomeWinnerPercentage: f5HomeWinTracker.total > 0 ? (f5HomeWinTracker.match / f5HomeWinTracker.total) * 100 : 0
+          });
+        }
+      
+        // Sort the result by isHomeWinnerPercentage in descending order
+        resultPercentages.sort((a, b) => b.isHomeWinnerPercentage - a.isHomeWinnerPercentage);
+      
+        return resultPercentages;
+      }
+      
+      
+      
+      // Example usage
+      const resultPercentages = evaluatePatternMatches(jsonData);
+      console.log(resultPercentages);
+  await save("resultsPercentages", resultPercentages, function(){}, "replace" ,"resultPercentages");
+  
+    }
+
     async function BuildBettingStrategy()
     {
         var selections = await load("analysisGameDetails", "analysisGameDetails");
-        var IndexAndDayStats =  await load("IndexAndDayStats", "analysisGameDetails");
+        var IndexAndDayStats =  await load("IndexAndDayStats", "IndexAndDayStats");
         var dayWonPatterns = {parlays:[], trilays:[], fourlays:[], parlaysWinPercentage:0, parlayTimeLine : [], parlaysBestStreak:"", parlaysWorstStreak:"", parlaysAvgBestStreak:"", parlaysAvgWorstStreak:"",trilayTimeLine : [], trilaysBestStreak:"", trilaysWorstStreak:"", trilaysAvgBestStreak:"", trilaysAvgWorstStreak:"",fourlayTimeLine : [], fourlaysBestStreak:"", fourlaysWorstStreak:"", fourlaysAvgBestStreak:"", fourlaysAvgWorstStreak:""};
         for (let index = 0; index < selections.length; index++) {
             const day = selections[index];
@@ -463,6 +699,34 @@ try {
     }
     
 
+    function probabilityNextLost(data) {
+        const streaks1 = analyzeStreaks(data, 1);
+        const streaks0 = analyzeStreaks(data, 0);
+    
+        const averageStreak1 = calculateAverage(streaks1);
+        const averageStreak0 = calculateAverage(streaks0);
+    
+        // Determine current value to identify current streak type
+        const currentStreakValue = data[data.length - 1];
+        const currentStreak = (currentStreakValue === 1 ? streaks1 : streaks0).pop() || 0;
+    
+        if (currentStreakValue === 1) {
+            // Probability model if the last value was 1
+            if (currentStreak < averageStreak1) {
+                return Math.ceil(100 * (currentStreak / averageStreak1));
+            } else {
+                return Math.ceil(100 * (averageStreak1 / currentStreak));
+            }
+        } else {
+            // Probability model if the last value was 0
+            if (currentStreak < averageStreak0) {
+                return Math.ceil(100 * (currentStreak / averageStreak0));
+            } else {
+                return Math.ceil(100 * (averageStreak0 / currentStreak));
+            }
+        }
+    }
+
     function currentStreak(arr) {
         if (arr.length === 0) {
             return "No data";
@@ -534,7 +798,7 @@ try {
     {
         
         var selections = await load("analysisGameDetails", "analysisGameDetails");
-
+        var allStats = [];
         var dates = selections.map(function(item){
             return item.date;
         });
@@ -682,12 +946,12 @@ try {
                         Sat:{TopGameAvg:satTopGameAvg, WinPercentage:satWinPercentage },
                         Sun:{TopGameAvg:sunTopGameAvg, WinPercentage:sunWinPercentage },
                     }};
-
-                    await save(date+"IndexAndDayStats",stats, function(){},"replace", "analysisGameDetails");
+                    allStats.push({date: date, stats:stats});
+                    await save(date+"IndexAndDayStats",stats, function(){},"replace", "IndexAndDayStats");
                     var stopHere = "";
                 }
         }
-
+        await save("allIndexAndDayStats",allStats, function(){},"replace", "IndexAndDayStats");
         
     }
 
@@ -789,10 +1053,6 @@ try {
     async function ProcessDailyGames(datesAnalysis, noSelections, type ,year = null){
         numberPicks = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
         winsCount = {0:0, 1:0, 2:0, 3:0, 4:0, 5:0};
-        if(cleanAnalysisFile)
-        {
-            await save("analysisGameDetails", [] ,function(){}, "replace" ,"analysisGameDetails");
-        }
         var singleExec = true;
         allConsolidatedGames = [];
         for (let te = 0; te < datesAnalysis.length; te++) {
@@ -847,9 +1107,9 @@ try {
                 //await getScheduleData(selectedDate);
 
 
-                // await ProcessGameByGame();
-                // await getPitcherGameByGame();
-                // await getBatterGameByGame();
+                //await ProcessGameByGame();
+                //await getPitcherGameByGame();
+                //await getBatterGameByGame();
                 //await getESPNData(selectedDate);
                 //await getBattersData(selectedDate);
                 //await getBestScoringTeamsByBatting(selectedDate);
@@ -858,7 +1118,7 @@ try {
                 //await getBestStartingPitchersTeams(selectedDate);
                 //await getBestRelievingPitchersTeams(selectedDate);
                 //await getBestOverallPitchersTeams(selectedDate);
-                //   
+                // 
                 //await getMoreWininigTeams(selectedDate);
                 //await getMoreScoringTeams(selectedDate);
                 //await getMoreReceivingTeams(selectedDate);
@@ -870,7 +1130,7 @@ try {
                 //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
                 //await getCoversWinPercentages(selectedDate, descriptiveDate);
                 //await consolidateAlgorithmResults(selectedDate);
-//
+////
                 //await CalculateWinnersViaFormula(selectedDate, noSelections, type);
             
 
@@ -1026,7 +1286,7 @@ try {
                 var evaluatePatterns = true;
                 var processIndexAndDays = false;
                 var evaluateFactors = false;
-                var refreshAnalysisGameDetails = false
+                var refreshAnalysisGameDetails = cleanAnalysisFile;
                 await GenerateDataForVisualization(selectedDate, evaluatePatterns, evaluateFactors , processIndexAndDays, refreshAnalysisGameDetails);
                
             
@@ -1532,7 +1792,7 @@ try {
         if(processIndexAndDays)
         {
             try{
-                var IndexAndDayStats = await load(date+'IndexAndDayStats', "analysisGameDetails");
+                var IndexAndDayStats = await load(date+'IndexAndDayStats', "IndexAndDayStats");
             }
             catch{
                 var IndexAndDayStats = [];
@@ -1728,11 +1988,7 @@ try {
             //     var stopHere = "";
             //     }
                 var winnerData = await GetResultDetails(date, {away: game.away, home: game.home}, game.home);
-                if(winnerData.finalWinner == "undefined" || winnerData.finalWinner == null )
-                {
-                    gamePostponed = true;
-                }
-                if(!gamePostponed){
+                if(typeof winnerData.finalWinner != "undefined"){
                     gameFormatted.compare.results["isHomeWinner"] = winnerData.finalWinner.indexOf(game.home) >=0 ? game.home : game.away;
                     gameFormatted.compare.results["isF5HomeWinner"] = winnerData.f5Winner.indexOf(game.home) >=0 ? game.home : game.away;
                     gameFormatted.compare.results["isOver"] = (winnerData.awayTotalRuns + winnerData.homeTotalRuns) > 8 ? "Over" : (winnerData.awayTotalRuns + winnerData.homeTotalRuns) < 8 ? "Under" : "Push";
@@ -1885,10 +2141,9 @@ try {
             }
 
             
-            if(!gamePostponed)
-            {
-                formattedGames.push(gameFormatted);
-            }
+            
+            formattedGames.push(gameFormatted);
+            
             
             
             
@@ -1929,21 +2184,24 @@ try {
             await save("analysisGameDetails",analysisGameDetails, function(){}, "replace", "analysisGameDetails" );
         }
 
+        var resultsPercentages = await load("resultsPercentages", "resultPercentages");
         var fs = require('fs');
         var files = fs.readdirSync('./JsonViewObjects');
         var fileNames = Object.values(files);
         var allFiles = [];
+        var matchCount = 0;
+        var allAnalysisData = [];
         for (let dgss = 0; dgss < fileNames.length; dgss++) {
             const file = fileNames[dgss].replace(".json","");
-            if(file.indexOf("July2th")>=0)
-            {
-                var stopHere = "";
-            }
-            if(file != "allFiles"){
+            
+           if(file != "allFiles"){
                 var data = await load(file, "JsonViewObjects");
                 allFiles = allFiles.concat(data);
+            
             }
         }
+
+        await save("allAnalysisData",allAnalysisData, function(){}, "replace", "allAnalysisData" );
 
         var fs = require('fs');
         var decisions = fs.readdirSync('./DecisionViewObject');
@@ -1966,6 +2224,118 @@ try {
         var stopHere = "";
     }
 
+    async function processVariables()
+    {
+        var resultsPercentages = await load("resultsPercentages", "resultPercentages");
+        var fs = require('fs');
+        var files = fs.readdirSync('./JsonViewObjects');
+        var fileNames = Object.values(files);
+        var allFiles = [];
+        var matchCount = 0;
+        var allAnalysisData = [];
+        for (let dgss = 0; dgss < fileNames.length; dgss++) {
+            const file = fileNames[dgss].replace(".json","");
+            
+           if(file != "allFiles"){
+                var data = await load(file, "JsonViewObjects");
+                allFiles = allFiles.concat(data);
+            if(true){
+                for (let shjdgsaj = 0; shjdgsaj < data.length; shjdgsaj++) {
+                    var objectAnalysis = {variables:{}, results:{}};
+                    const game = data[shjdgsaj];
+                        if(game.common.date == "July7th")
+                        {
+                            var stopHere = "";
+                        }
+                        console.log(game.common.date);
+                        var xElement = game.compare.homeRow.team;
+                        var yElement = game.compare.awayRow.team;
+                        
+                        objectAnalysis.variables.formulaWinner = game.common.formulaWinner == xElement ? "X":"Y";
+                        objectAnalysis.variables.seriesWinner = game.common.seriesWinner == xElement ? "X":"Y";
+                        objectAnalysis.variables.nextWinners = game.common.nextWinners == xElement ? "X":"Y";
+                        objectAnalysis.variables.factorDiff = roundToClosestQuarterOrInt(game.common.factorDiff);
+                        objectAnalysis.variables.isF5HomeWinner = game.common.isF5HomeWinner == xElement ? "X":game.common.isF5HomeWinner == yElement ? "Y":"Z";
+                        objectAnalysis.variables.isF5HomeWinnerProb = roundToClosestQuarterOrInt(game.common.isF5HomeWinnerProb);
+                        objectAnalysis.variables.isHomeWinner = game.common.isHomeWinner == xElement ? "X":game.common.isF5HomeWinner == yElement ? "Y":"Z";
+                        objectAnalysis.variables.isHomeWinnerProb = roundToClosestQuarterOrInt(game.common.isHomeWinnerProb);
+                        //objectAnalysis.variables.isOver = game.common.isOver;
+                        //objectAnalysis.variables.isOverProb = roundToClosestQuarterOrInt(game.common.isOverProb);
+                        var patternChancesElements = game.common.patternChances.split("  ");
+                        var team1Chances = parseInt(patternChancesElements[0].split("%")[0]);
+                        var  team1 = patternChancesElements[0].split("%(")[1].replace(")","");
+                        var team2Chances = parseInt(patternChancesElements[1].split("%")[0]);
+                        var  team2 = patternChancesElements[1].split("%(")[1].replace(")","");
+                        objectAnalysis.variables.patternWinner = team1Chances >= team2Chances ?team1 :team2;
+                        objectAnalysis.variables.patternWinner = objectAnalysis.variables.patternWinner == xElement ? "X":"Y";
+                        objectAnalysis.variables.patternWinnerProb =roundToClosestQuarterOrInt((team1Chances >= team2Chances ?team1Chances :team2Chances)/100);
+                        objectAnalysis.variables.agnosticPattern = game.common.formulaWinner == xElement ? "X":"Y";
+                        objectAnalysis.variables.agnosticPattern += game.common.seriesWinner == xElement ? "X":"Y";
+                        objectAnalysis.variables.agnosticPattern += game.common.nextWinners == xElement ? "X":"Y";
+                        objectAnalysis.variables.agnosticPattern += game.common.isF5HomeWinner == xElement ? "X":game.common.isF5HomeWinner == yElement ? "Y":"Z";
+                        objectAnalysis.variables.agnosticPattern += game.common.isHomeWinner == xElement ? "X":game.common.isF5HomeWinner == yElement ? "Y":"Z";
+                        objectAnalysis.variables.agnosticPattern += objectAnalysis.variables.patternWinner;
+
+                        
+                        
+                        
+                        //objectAnalysis.results.isOver = game.compare.results.isOver;
+
+                        if(!isNaN(game.compare.results.isHomeWinner && typeof game.compare.results.isHomeWinner != 'undefined'))
+                        {
+                            objectAnalysis.results.isHomeWinner = game.compare.results.isHomeWinner == xElement ? "X":"Y";
+                            objectAnalysis.results.isF5HomeWinner = game.compare.results.isF5HomeWinner == xElement ? "X":"Y";
+                            allAnalysisData.push(objectAnalysis);
+                        }
+
+                        if(resultsPercentages.length > 0)
+                        {
+                            var combinations = generatePatternCombinationsWithIndices(objectAnalysis.variables.agnosticPattern).filter(function(item){return item.combination.length >=4});
+                            var isF5HomeWinnerXValues = [];
+                            var isF5HomeWinnerYValues = [];
+                            var isHomeWinnerXValues = [];
+                            var isHomeWinnerYValues = [];
+                            for (let gsg = 0; gsg < combinations.length; gsg++) {
+                                const combination = combinations[gsg];
+                                var results = filterByIndices(resultsPercentages,combination.indices).filter(function(item){return item.combination == combination.combination;})[0];
+                                if(results)
+                                {
+                                    if(results.targetValue == "X")
+                                    {
+                                        isF5HomeWinnerXValues.push(results.isF5HomeWinnerPercentage);
+                                        isF5HomeWinnerYValues.push(100-results.isF5HomeWinnerPercentage);
+
+                                        isHomeWinnerXValues.push(results.isHomeWinnerPercentage);
+                                        isHomeWinnerYValues.push(100-results.isHomeWinnerPercentage);
+                                    }
+                                    else{
+                                        isF5HomeWinnerYValues.push(results.isF5HomeWinnerPercentage);
+                                        isF5HomeWinnerXValues.push(100-results.isF5HomeWinnerPercentage);
+
+                                        isHomeWinnerYValues.push(results.isHomeWinnerPercentage);
+                                        isHomeWinnerXValues.push(100-results.isHomeWinnerPercentage);
+                                    }
+                                    
+                                    var averageHomeWinPercentage = isHomeWinnerXValues.reduce((accumulator, current) => accumulator + current, 0)/isHomeWinnerXValues.length;
+                                    var averageAwayWinPercentage = isHomeWinnerYValues.reduce((accumulator, current) => accumulator + current, 0)/isHomeWinnerXValues.length;
+                                    game.compare.awayRow.WinPercentage = averageAwayWinPercentage;
+                                    game.compare.homeRow.WinPercentage = averageHomeWinPercentage;
+                                }
+                                else{
+                                    var stopHere = "";
+                                }
+                            }
+                            
+                            //game["selection"] = 
+                        }
+                        var stopHere = "";
+                }
+                    
+                }
+            }
+        }
+        await save("allFiles",allFiles, function(){}, "replace", "JsonViewObjects" );
+    }
 
     function convertSortingDate(input) {
         // Regular expression to extract the month name and the day number
@@ -2008,66 +2378,308 @@ try {
 
     async function EnrichDecision()
     {
-        var allDecisions = await load("allDecisions", "DecisionViewObject" );
+        var allViewObjects = await load("allFiles", "JsonViewObjects");
+        var allIndexAndDays = await load("allIndexAndDayStats","IndexAndDayStats");
+        var hotChancesByTeam =  await load("hotChancesByTeam", "hotChancesByTeamByDay");
 
-        var dateSortedDecisions = sortDataByStringDate(allDecisions, "stringDate", "asc");
-
-        var dates = allDecisions.map(function(item){
+        var viewDates = allViewObjects.map(function(item){
             return item.common.date;
         });
 
-        const distinctDates = [...new Set(dates)];
+        var indexDates = allIndexAndDays.map(function(item){
+            return item.date;
+        });
 
-        for (let tsgt = 1; tsgt < distinctDates.length; tsgt++) {
-            const dateAnalysis = distinctDates[tsgt];
-            const dateData = distinctDates[tsgt-1];
+        const distinctViewDates= [...new Set(viewDates)];
+        const distinctIndexDates= [...new Set(indexDates)];
+        
+        var allSelections = [];
+        var allKeys = [];
+        var allTeams = [];
+        var plainData = [];
+        var decisionObjects = [];
+        var indexNormalizedRecords = [];
+        var datesSubject = distinctViewDates.length >= distinctIndexDates.length ? distinctViewDates : distinctIndexDates;
+        for (let tsgt = 1; tsgt < datesSubject.length; tsgt++) {
+            var targetDate = datesSubject[tsgt];
+
+            var normalizedObject = {};
             
-            var  dateIndex = dateSortedDecisions.reduceRight((acc, current, index) => {
-                return acc === -1 && current.common.date === dateData ? index : acc;
-            }, -1);
-            dateIndex = dateIndex == 0 ? 1 : dateIndex+1;
 
-            var analysisGames = dateSortedDecisions.filter(function(item){
-                return item.common.date == dateAnalysis;
-            });
-            if(dateIndex != -1)
-            {
-                    var dataScope = dateSortedDecisions.slice(0, dateIndex);
-                    analysisGames.forEach(function(game){
-                        if(game.FinalFactor){
-                        var filer  = dataScope.filter(function(item){return (item.common.FinalFactor + item.common.factorDiff) >= game.FinalFactor});
-                        if(filer.length == 0){
-                            var filer  = dataScope.filter(function(item){return (item.common.FinalFactor + item.common.factorDiff) <= game.FinalFactor});
-                        }
+            var viewObjects = await sorting(allViewObjects
+                .filter(function(item){
+                return item.common.date == targetDate &&
+                    item.common.formulaWinner == item.common.overallWinner &&
+                    item.common.overallWinner == item.common.isHomeWinner &&
+                    item.common.isHomeWinner == item.compare[item.expWinner+"Row"].team &&
+                    item.patternChances > 50 
+                    //&& item.patternChances > 50 
+                    //&& item.common.isF5HomeWinner == item.common.formulaWinner ;
+                    }
+        ), "recommendedBet", "desc");
 
-                        if(filer.length> 0){
-                            var model = filer.map(function(item){return item.compare[item.expWinner+"Row"].team == item.compare.results.isHomeWinner ? 1 :0});
-                            game.common.FinalFactor = game.common.FinalFactor.toFixed(2)+" ("+ (Math.round((model.reduce((accumulator, current) => accumulator + current, 0)/model.length)*100)+ "%/"+model.length+"games)");
-                            
-                            game["magicFactor"] = (game.FinalFactor/100)+(model.reduce((accumulator, current) => accumulator + current, 0)/model.length)+(model.length)/100;
-                            game["magicFactor"] = parseFloat(game.magicFactor.toFixed(2));
-                            game.common["magicFactor"] = parseFloat(game.magicFactor.toFixed(2));
-                            console.log(game.common.date+ " " + game.magicFactor);
-                        }
+            viewObjects.forEach(function(item){
+                item.common.FinalFactor = item.common.overallWinner;
+                item.coversPer = item.compare[item.expWinner+"Row"].CoversPer != 100 ? item.compare[item.expWinner+"Row"].CoversPer : 10;
+                item.isWin = item.common.isHomeWinner == item.compare.results.isHomeWinner;
+                item.dayOfWeek = GetDayOfWeek(item.common.date);
+                var hotChancesAway = hotChancesByTeam.filter(function(it){
+                    return it.team.indexOf(item.compare["homeRow"].team) >= 0
+                });
+                var hotChancesHome = hotChancesByTeam.filter(function(it){
+                    return it.team.indexOf(item.compare["awayRow"].team) >= 0
+                });
+
+                if(hotChancesAway.length > 0 &&  hotChancesHome.length > 0)
+                {
+                    var homeChances = hotChancesHome[0].winChances.filter(function(ye){
+                        return item.common.date.replace("th","").replace("nd","").replace("st","").replace("rd","") == ye.date.replace("th","").replace("nd","").replace("st","").replace("rd","");
+                    });
+
+                    var awayChances = hotChancesAway[0].winChances.filter(function(ye){
+                        return item.common.date.replace("th","").replace("nd","").replace("st","").replace("rd","") == ye.date.replace("th","").replace("nd","").replace("st","").replace("rd","");
+                    });
+
+                    if(homeChances.length > 0 && awayChances.length){
+                        item.hotChancesDiff = item.compare["homeRow"].team == item.common.isHomeWinner ? (homeChances[0].winPer - awayChances[0].winPer) : (awayChances[0].winPer - homeChances[0].winPer) ;
+                        item.hotChancesByTeam = item.compare["homeRow"].team == item.common.isHomeWinner ? homeChances[0].winPer : awayChances[0].winPer;
+                        item.compare["homeRow"].hot = homeChances[0].winPer;
+                        item.compare["awayRow"].hot = awayChances[0].winPer;
                     }
                     else{
-                        game["magicFactor"] = parseFloat(0);
-                        game.common["magicFactor"] = parseFloat(0);
-                    }
+                        item.common.hot = 0;
+                        item.hotChancesDiff = 0;
+                        item.compare["homeRow"].hot = 0;
+                        item.compare["awayRow"].hot = 0;
                         
-                    });
-                    
-            }
-            else{
-                game["magicFactor"] = parseFloat(0);
-                game.common["magicFactor"] = parseFloat(0);
-            }
+                    }
+                }
+                else{
+                    item.common.hot = 0;
+                    item.hotChancesDiff = 0;
+                    item.compare["homeRow"].hot = 0;
+                    item.compare["awayRow"].hot = 0;
+                }
+            });
+           
+            
+
+            viewObjects = await sorting(viewObjects, "recommendedBet", "desc");
+            decisionObjects = decisionObjects.concat(viewObjects);
+
+        
+            if(viewObjects.length >0){
+                var isNewKey = false; 
+                var isNewTeam = false; 
+                var keys = Object.keys(viewObjects[0]);
+                for (let tye = 0; tye < keys.length; tye++) {
+                    const key = keys[tye];
+                    const selectedTeam = viewObjects[0].common.isHomeWinner;
+                    if(!isNaN(parseFloat(viewObjects[0][key])))
+                    {
+                        var obje = allKeys.filter(function(item){return item.key == key});
+                        
+                        if(obje.length == 0){
+                            obje = {key:key, indexes:[] ,winAvg:[]};
+                            isNewKey = true;  
+                        }
+                        else{
+                            obje = obje[0];  
+                        }
+
+                        
+                                            
+                        viewObjects = await sorting(viewObjects, key, "desc");
+                        var winLostPatern = viewObjects.map(function(item){return item.isWin == true ? 1: 0;});
+                        for (let hdys = 0; hdys < winLostPatern.length; hdys++) {
+                            const win = winLostPatern[hdys];
+                            try{
+                                obje.indexes[hdys].push(win);
+                                obje.winAvg[hdys] = ((obje.indexes[hdys].reduce((accumulator, current) => accumulator + current, 0)*100)/obje.indexes[hdys].length);
+                            }
+                            catch{
+                                obje.indexes[hdys] = [];
+                                obje.indexes[hdys].push(win);
+                                obje.winAvg[hdys] = ((obje.indexes[hdys].reduce((accumulator, current) => accumulator + current, 0)*100)/obje.indexes[hdys].length);
+                                
+                            }
+                        }
+                        if(isNewKey)
+                        allKeys.push(obje);
+
+                        var teamPatern = viewObjects.map(item => ({ isWin: item.isWin == true ? 1: 0, isHomeWinner: item.common.isHomeWinner }));
+                        for (let hdys = 0; hdys < teamPatern.length; hdys++) {
+                            var isNewTeam = false; 
+                            const tem = teamPatern[hdys];
+                            if(tem.isHomeWinner.indexOf("Red") >= 0)
+                                var stopHere = "";
+                            var team  = allTeams.filter(function(item){return item.team.replace(" ","").replace("BOSRedSox","BOSRed").indexOf(tem.isHomeWinner.replace(" ","").replace("BOSRedSox","BOSRed")) >= 0});
+                            
+                            if(team.length == 0){
+                                team = {team:tem.isHomeWinner, wins:[], loses:[] ,winAvg:[]};
+                                isNewTeam = true;  
+                            }
+                            else{
+                                team = team[0];  
+                            }
+                            
+                            if(tem.isWin)
+                            {
+                                team.team = tem.isHomeWinner;
+                                team.wins.push(tem.isWin);
+                            }
+                            else{
+                                team.loses.push(1);
+                            }
+                            
+                            team.winAvg = ((team.wins.reduce((accumulator, current) => accumulator + current, 0)*100)/(team.wins.length + team.loses.length));
+                            
+                        }
+                        if(isNewTeam)
+                        allTeams.push(team);
+
+                    }
+                }
+            
+        }
+            
         }
 
-        var validSortedDecisions = dateSortedDecisions.filter(function(item){return item.magicFactor != null});
-        var validSortedDecisions = await sorting(validSortedDecisions, "magicFactor", "desc");
-        await save("allDecisions", validSortedDecisions, function(){}, "replace" ,"DecisionViewObject" );
+        decisionObjects.forEach(function(item){
+            var teamData = allTeams.filter(function(alt){return alt.team.indexOf(item.common.isHomeWinner)>=0 || item.common.isHomeWinner.indexOf(alt.team)>=0});
+            if(teamData.length > 0)
+            {
+                item.winPerCalc = teamData[0].winAvg;
+                item.common.FinalFactor = teamData[0].winAvg;
+            }
+            else{
+                item.winPerCalc = 0;
+                item.common.FinalFactor = 0;
+            }
+            //item.sorting = ((Math.abs(item.compare.awayRow.formulaWinPercentage - item.compare.homeRow.formulaWinPercentage)/100)  + (item.common.isHomeWinnerProb) + (item.patternChances/100) + (item.winPerCalc/100)  +  (item.hotChancesByTeam/100) + (item.hotChancesDiff/100) );
+            item.sorting = item.common.isHomeWinner;
+            item.common.FinalFactor = item.hotChancesDiff;
+        });
+
+        var topSelections = decisionObjects.filter(function(item){
+            if(item.common.date == "June30th")
+            {
+                var stopHere = "";
+            }
+            return (item.common.isF5HomeWinner == item.common.formulaWinner 
+            && (item.common.isF5HomeWinner == item.common.nextWinners )) 
+            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot
+            && item.common.FinalFactor >= 10
+            && item.compare[item.expWinner+"Row"].hot > 50 && item.compare[item.otherTeam+"Row"].hot < 50 ;
+        });
+
+        var sortedTopSelections = await sorting(topSelections, "hotChancesDiff", "desc");
+
+        sortedTopSelections.forEach(function(item){
+            item.order = 1;
+            item.common.order = 1;
+        });
+
+        var secondSelections = decisionObjects.filter(function(item){
+            return item.common.isF5HomeWinner == item.common.formulaWinner 
+            && (item.common.isF5HomeWinner == item.common.nextWinners || item.common.isF5HomeWinner == item.common.seriesWinner) 
+            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
+        });
+
+        secondSelections = arrayDifference(secondSelections, topSelections);
+
+        var sortedSecondSelections = await sorting(secondSelections, "sorting", "desc");
+
+        sortedSecondSelections.forEach(function(item){
+            item.order = 2;
+            item.common.order = 2;
+        });
+
+        var thirdSelections = decisionObjects.filter(function(item){
+            return item.common.isF5HomeWinner == item.common.formulaWinner 
+            && item.common.isF5HomeWinner == item.common.nextWinners 
+            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
+        });
+
+        thirdSelections = arrayDifference(thirdSelections, topSelections);
+        thirdSelections = arrayDifference(thirdSelections, secondSelections);
+
+        var sortedThirdSelections = await sorting(thirdSelections, "sorting", "desc");
+
+        sortedThirdSelections.forEach(function(item){
+            item.order = 3;
+            item.common.order = 3;
+        });
+
+        var fourthSelections = decisionObjects.filter(function(item){
+            return item.common.isF5HomeWinner == item.common.formulaWinner 
+            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
+        });
+
+        fourthSelections = arrayDifference(fourthSelections, topSelections);
+        fourthSelections = arrayDifference(fourthSelections, secondSelections);
+        fourthSelections = arrayDifference(fourthSelections, thirdSelections);
+
+        var sortedFourthSelections = await sorting(fourthSelections, "sorting", "desc");
+
+        sortedFourthSelections.forEach(function(item){
+            item.order = 4;
+            item.common.order = 4;
+        });
+
+        var fifthSelections = decisionObjects.filter(function(item){
+            item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
+        });
+
+        fifthSelections = arrayDifference(fifthSelections, topSelections);
+        fifthSelections = arrayDifference(fifthSelections, secondSelections);
+        fifthSelections = arrayDifference(fifthSelections, thirdSelections);
+        fifthSelections = arrayDifference(fifthSelections, fourthSelections);
+
+        var sortedFifthSelections = await sorting(fifthSelections, "sorting", "desc");
+
+        sortedFifthSelections.forEach(function(item){
+            item.order = 5;
+            item.common.order = 5;
+        });
+
+        allSelections = allSelections.concat(sortedTopSelections);
+        allSelections = allSelections.concat(sortedSecondSelections);
+        allSelections = allSelections.concat(sortedThirdSelections);
+        allSelections = allSelections.concat(sortedFourthSelections);
+        allSelections = allSelections.concat(sortedFifthSelections);
+
+
+        allKeys.forEach(function(item){
+            item.top2Avg = (item.winAvg[0]+ item.winAvg[1])/2;
+            item.top3Avg = (item.winAvg[0]+ item.winAvg[1]+ item.winAvg[3])/3;
+        });
+
+        var sortedData = await sorting(allKeys, "top3Avg", "desc");
+        var sortedTeamData = await sorting(allTeams, "winAvg", "desc");
+
+
+        var wons = decisionObjects.filter(function(item){
+            return item.isWin  == true;
+        });
+
+
+        var loses = decisionObjects.filter(function(item){
+            return item.isWin  != true;
+        });
+
+        var winAvg = (wons.length*100)/(loses.length+wons.length);
+
+        console.log(winAvg.toFixed(2));
+
+        
+
+        await save("allDecisions",allSelections, function(){}, "replace" ,"DecisionViewObject");
         var stopHere = "";
+    }
+
+    function arrayDifference(arr1, arr2) {
+        return arr1.filter(element => !arr2.includes(element));
     }
 
     async function AddIndexAndDays(gameSort, IndexAndDayStats, asdnjsnd, gameDataAnalysis, gameFactorCompleteness)
