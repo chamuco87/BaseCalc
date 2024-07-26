@@ -187,14 +187,15 @@ try {
         {month:"April", from:8, to:30, monthNumber:"04"}, 
         {month:"May", from:1, to:31, monthNumber:"05"},
         {month:"June", from:1, to:30, monthNumber:"06"},
-        {month:"July", from:1, to:10, monthNumber:"07"}
+        {month:"July", from:1, to:14, monthNumber:"07"},
+        {month:"July", from:19, to:25, monthNumber:"07"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
-        {month:"July", from:11, to:111, monthNumber:"07"}
+        {month:"July", from:26, to:26, monthNumber:"07"}
 
     ];
     
@@ -221,23 +222,23 @@ try {
 //                         var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
 //                         allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
 //                         await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
-// //                         //
-// // // //
+// // // // // // // // // //                         //
+// // // // // // // // // // // //
                         var type = "NewGamesConsolidated";
                         await save(type, [], function(){}, "replace" ,"GameByGame");
                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
                         await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
-                        //await GenerateRawJsonViewObjects(fullDatesAnalysis);
-                        //await CalculatePatternsForVisualisations();
-                        //var cleanAnalysisFile = true;
-                        //await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
-                        //await AnalyzeFactors();
-                        //await AnalyzeIndexes();
-                        //await GenerateFinalViewObjects(fullDatesAnalysis);
-                        await GetHotNumberPerTeam()
-                        await EnrichDecision();
+                        // await GenerateRawJsonViewObjects(fullDatesAnalysis);
+                        // await CalculatePatternsForVisualisations();
+                        // var cleanAnalysisFile = true;
+                        // await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
+                        // await AnalyzeFactors();
+                        // await AnalyzeIndexes();
+                        // await GenerateFinalViewObjects(fullDatesAnalysis);
+                        // await GetHotNumberPerTeam()
+                        // await EnrichDecision();
                         //await processVariables()
                         //await BuildBettingStrategy();
                         //await GPTEvaluation()
@@ -813,7 +814,7 @@ try {
             {
                     var dataScope = selections.slice(0, dateIndex);
                         var indexStats = [];
-                    for (let sdf = 0; sdf < 16; sdf++) {
+                    for (let sdf = 0; sdf < 18; sdf++) {
                         const ind = sdf;
                         var indexDetail = {index:ind, wins:0, loses:0, winsWandicaps:0, winPercenatge:0, winHandicapPercentage:0, totalGames:0, games:[], hotChances:0};
                         indexStats.push(indexDetail);
@@ -830,31 +831,37 @@ try {
                         var loses= 0;
                         for (let hsbd = 0; hsbd < gamesInDay.length; hsbd++) {
                             var indexDetail = indexStats.filter(function(item){return item.index == hsbd})[0];
-                            const game = gamesInDay[hsbd];
-                            indexDetail.games.push(game);
-                            indexDetail.wins += game.betWon == 1 ? 1 : 0;
-                            indexDetail.loses += game.betWon == 0 ? 1 : 0;
-                            wins += game.betWon == 1 ? 1 : 0;
-                            loses += game.betWon == 0 ? 1 : 0;
-                            indexDetail.totalGames++;
-                            indexDetail.winPercenatge = Math.round((indexDetail.wins*100)/ (indexDetail.wins + indexDetail.loses));
-                            indexDetail.winsWandicaps += (game.betWon == 1 && game.wasHandicapped)? 1 : 0;
-                            indexDetail.winHandicapPercentage = Math.round((indexDetail.winsWandicaps*100)/ (indexDetail.wins + indexDetail.loses));
-                            if(game.betWon == 0)
+                            if(indexDetail)
                             {
-                                isFirstLost = true;
+                                const game = gamesInDay[hsbd];
+                                indexDetail.games.push(game);
+                                indexDetail.wins += game.betWon == 1 ? 1 : 0;
+                                indexDetail.loses += game.betWon == 0 ? 1 : 0;
+                                wins += game.betWon == 1 ? 1 : 0;
+                                loses += game.betWon == 0 ? 1 : 0;
+                                indexDetail.totalGames++;
+                                indexDetail.winPercenatge = Math.round((indexDetail.wins*100)/ (indexDetail.wins + indexDetail.loses));
+                                indexDetail.winsWandicaps += (game.betWon == 1 && game.wasHandicapped)? 1 : 0;
+                                indexDetail.winHandicapPercentage = Math.round((indexDetail.winsWandicaps*100)/ (indexDetail.wins + indexDetail.loses));
+                                if(game.betWon == 0)
+                                {
+                                    isFirstLost = true;
+                                }
+                                if(!isFirstLost)
+                                {
+                                    topGamesWonCount++;
+                                }
+                                if(game.wasHandicapped == 0)
+                                { 
+                                    isHandicapLost = true;
+                                }
+                                if(!isFirstLost && !isHandicapLost)
+                                {
+                                    topGamesHandicapped++;
+                                }
                             }
-                            if(!isFirstLost)
-                            {
-                                topGamesWonCount++;
-                            }
-                            if(game.wasHandicapped == 0)
-                            { 
-                                isHandicapLost = true;
-                            }
-                            if(!isFirstLost && !isHandicapLost)
-                            {
-                                topGamesHandicapped++;
+                            else{
+                                var stopHere = "";
                             }
                         }
                         if(gamesInDay.length > 0){
@@ -1101,37 +1108,38 @@ try {
                     //await getPreviousCoversWinPercentages(selectedDate, descriptiveDate, year);
                     //await CalculatePreviousWinnersViaFormula(selectedDate, noSelections, type, year);
                 }
-                else{   
+                //if(selectedDate != "July15th" && selectedDate != "July16th" &&  selectedDate != "July17th" && selectedDate != "July18th")
+                else {   
                 //-----------------------------    
                 //try{
-                //await getScheduleData(selectedDate);
+                //   await getScheduleData(selectedDate);
+                //   await ProcessGameByGame();
+                //   await getPitcherGameByGame();
+                //   await getBatterGameByGame();
+                //   await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
+                  await getAllPitchersData(selectedDate);
+                  await getESPNData(selectedDate);
+                  await getBattersData(selectedDate);
+                  await getBestScoringTeamsByBatting(selectedDate);
+                  await getBestHittingTeamsByBatting(selectedDate);
+                  await getBestStartingPitchersTeams(selectedDate);
+                  await getBestRelievingPitchersTeams(selectedDate);
+                  await getBestOverallPitchersTeams(selectedDate);
+             
+                  await getMoreWininigTeams(selectedDate);
+                  await getMoreScoringTeams(selectedDate);
+                  await getMoreReceivingTeams(selectedDate);
+                  await evaluateGames(selectedDate);
+                  await sortBetterAvgs(selectedDate);
+                  await filterConsistentPicks(selectedDate)
+             
+                  await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                  await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                  await getCoversWinPercentages(selectedDate, descriptiveDate);
+                  await consolidateAlgorithmResults(selectedDate);
 
-                //await ProcessGameByGame();
-                //await getPitcherGameByGame();
-                //await getBatterGameByGame();
-                //await getESPNData(selectedDate);
-                //await getBattersData(selectedDate);
-                //await getBestScoringTeamsByBatting(selectedDate);
-                //await getBestHittingTeamsByBatting(selectedDate);
-                //await getAllPitchersData(selectedDate);
-                //await getBestStartingPitchersTeams(selectedDate);
-                //await getBestRelievingPitchersTeams(selectedDate);
-                //await getBestOverallPitchersTeams(selectedDate);
-                // 
-                //await getMoreWininigTeams(selectedDate);
-                //await getMoreScoringTeams(selectedDate);
-                //await getMoreReceivingTeams(selectedDate);
-                //await evaluateGames(selectedDate);
-                //await sortBetterAvgs(selectedDate);
-                //await filterConsistentPicks(selectedDate)
-                //   
-                //await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                //await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                //await getCoversWinPercentages(selectedDate, descriptiveDate);
-                //await consolidateAlgorithmResults(selectedDate);
-////
-                //await CalculateWinnersViaFormula(selectedDate, noSelections, type);
+                  await CalculateWinnersViaFormula(selectedDate, noSelections, type);
             
 
                 
@@ -1995,6 +2003,9 @@ try {
                     gameFormatted.common["handicap"] = winnerData.homeTotalRuns - winnerData.awayTotalRuns;                    
                 }
             }
+            else{
+                var stopHere = "";
+            }
 
             var awayEras = [gameFormatted.compare.awayRow["CarrerEra"],
             gameFormatted.compare.awayRow["CurrentEra"], 
@@ -2243,7 +2254,7 @@ try {
                 for (let shjdgsaj = 0; shjdgsaj < data.length; shjdgsaj++) {
                     var objectAnalysis = {variables:{}, results:{}};
                     const game = data[shjdgsaj];
-                        if(game.common.date == "July7th")
+                        if(game.common.date == "July21th")
                         {
                             var stopHere = "";
                         }
@@ -2405,23 +2416,22 @@ try {
 
             var normalizedObject = {};
             
-
-            var viewObjects = await sorting(allViewObjects
-                .filter(function(item){
-                return item.common.date == targetDate &&
-                    item.common.formulaWinner == item.common.overallWinner &&
-                    item.common.overallWinner == item.common.isHomeWinner &&
-                    item.common.isHomeWinner == item.compare[item.expWinner+"Row"].team &&
-                    item.patternChances > 50 
-                    //&& item.patternChances > 50 
-                    //&& item.common.isF5HomeWinner == item.common.formulaWinner ;
-                    }
-        ), "recommendedBet", "desc");
-
-            viewObjects.forEach(function(item){
-                item.common.FinalFactor = item.common.overallWinner;
+            allViewObjects.forEach(function(item){
+                item.common.RecommendedBet = item.recommendedBet; //item.common.overallWinner;
+                item.common.patternExpWinner = item.patternChances;
+                item.common.patternOtherTeam = item.otherTeamChances;
                 item.coversPer = item.compare[item.expWinner+"Row"].CoversPer != 100 ? item.compare[item.expWinner+"Row"].CoversPer : 10;
-                item.isWin = item.common.isHomeWinner == item.compare.results.isHomeWinner;
+                item.isMLWin = item.common.isHomeWinner == item.compare.results.isHomeWinner;
+                item.isFormulaWin = item.common.formulaWinner == item.compare.results.isHomeWinner;
+                item.isSeriesWin = item.common.seriesWinner == item.compare.results.isHomeWinner;
+                if(item.common.date == "July21th")
+                {
+                    var stopHere = "";
+                }
+                item.patternWinner = item.compare[item.expWinner+"Row"].team;
+                item.isPatternWin = item.patternWinner == item.compare.results.isHomeWinner;
+                item.hotWinner = item.compare["homeRow"].hot >= item.compare["awayRow"].hot ? item.compare["homeRow"].team : item.compare["awayRow"].team;
+                item.isHotWin = item.hotWinner == item.compare.results.isHomeWinner;
                 item.dayOfWeek = GetDayOfWeek(item.common.date);
                 var hotChancesAway = hotChancesByTeam.filter(function(it){
                     return it.team.indexOf(item.compare["homeRow"].team) >= 0
@@ -2460,11 +2470,82 @@ try {
                     item.compare["homeRow"].hot = 0;
                     item.compare["awayRow"].hot = 0;
                 }
+                if(item.common.date == "July22th")
+                {
+                    var stopHere = "";
+                }
+                item.common.hotExpWinner = item.compare[item.expWinner+"Row"].hot;
+                item.common.hotOtherTeam = item.compare[item.otherTeam+"Row"].hot;
             });
+
+
+            var viewObjects = await sorting(allViewObjects
+                .filter(function(item){
+                return item.common.date == targetDate &&
+                    // ((item.common.formulaWinner == item.common.overallWinner &&
+                    // item.common.overallWinner == item.common.isHomeWinner &&
+                    // item.common.isHomeWinner == item.compare[item.expWinner+"Row"].team &&
+                    // item.patternChances > 50 )
+                    // ||
+                    ((item.common.patternExpWinner >= 70 &&item.recommendedBet < 5 ) 
+                    ||
+                    (item.agnosticPattern == "XXXXX" && item.common.isF5HomeWinnerProb >= .50 && item.common.isHomeWinnerProb >=.50 && item.common.patternExpWinner >=50 && item.common.hotExpWinner >= 56)
+                     //||
+                    //(item.common.isHomeWinnerProb >=.50 &&item.common.patternOtherTeam >= 65 ) 
+                    )
+                    //&& item.patternChances > 50 
+                    //&& item.common.isF5HomeWinner == item.common.formulaWinner ;
+                    }
+        ), "patternChances", "desc");
+
+            // viewObjects.forEach(function(item){
+            //     item.common.FinalFactor = item.common.overallWinner;
+            //     item.coversPer = item.compare[item.expWinner+"Row"].CoversPer != 100 ? item.compare[item.expWinner+"Row"].CoversPer : 10;
+            //     item.isWin = item.common.isHomeWinner == item.compare.results.isHomeWinner;
+            //     item.dayOfWeek = GetDayOfWeek(item.common.date);
+            //     var hotChancesAway = hotChancesByTeam.filter(function(it){
+            //         return it.team.indexOf(item.compare["homeRow"].team) >= 0
+            //     });
+            //     var hotChancesHome = hotChancesByTeam.filter(function(it){
+            //         return it.team.indexOf(item.compare["awayRow"].team) >= 0
+            //     });
+
+            //     if(hotChancesAway.length > 0 &&  hotChancesHome.length > 0)
+            //     {
+            //         var homeChances = hotChancesHome[0].winChances.filter(function(ye){
+            //             return item.common.date.replace("th","").replace("nd","").replace("st","").replace("rd","") == ye.date.replace("th","").replace("nd","").replace("st","").replace("rd","");
+            //         });
+
+            //         var awayChances = hotChancesAway[0].winChances.filter(function(ye){
+            //             return item.common.date.replace("th","").replace("nd","").replace("st","").replace("rd","") == ye.date.replace("th","").replace("nd","").replace("st","").replace("rd","");
+            //         });
+
+            //         if(homeChances.length > 0 && awayChances.length){
+            //             item.hotChancesDiff = item.compare["homeRow"].team == item.common.isHomeWinner ? (homeChances[0].winPer - awayChances[0].winPer) : (awayChances[0].winPer - homeChances[0].winPer) ;
+            //             item.hotChancesByTeam = item.compare["homeRow"].team == item.common.isHomeWinner ? homeChances[0].winPer : awayChances[0].winPer;
+            //             item.compare["homeRow"].hot = homeChances[0].winPer;
+            //             item.compare["awayRow"].hot = awayChances[0].winPer;
+            //         }
+            //         else{
+            //             item.common.hot = 0;
+            //             item.hotChancesDiff = 0;
+            //             item.compare["homeRow"].hot = 0;
+            //             item.compare["awayRow"].hot = 0;
+                        
+            //         }
+            //     }
+            //     else{
+            //         item.common.hot = 0;
+            //         item.hotChancesDiff = 0;
+            //         item.compare["homeRow"].hot = 0;
+            //         item.compare["awayRow"].hot = 0;
+            //     }
+            // });
            
             
+            await save("allFiles", allViewObjects, function(){}, "replace" ,"JsonViewObjects");
 
-            viewObjects = await sorting(viewObjects, "recommendedBet", "desc");
+            viewObjects = await sorting(viewObjects, "patternChances", "desc");
             decisionObjects = decisionObjects.concat(viewObjects);
 
         
@@ -2561,93 +2642,8 @@ try {
             item.common.FinalFactor = item.hotChancesDiff;
         });
 
-        var topSelections = decisionObjects.filter(function(item){
-            if(item.common.date == "June30th")
-            {
-                var stopHere = "";
-            }
-            return (item.common.isF5HomeWinner == item.common.formulaWinner 
-            && (item.common.isF5HomeWinner == item.common.nextWinners )) 
-            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot
-            && item.common.FinalFactor >= 10
-            && item.compare[item.expWinner+"Row"].hot > 50 && item.compare[item.otherTeam+"Row"].hot < 50 ;
-        });
-
-        var sortedTopSelections = await sorting(topSelections, "hotChancesDiff", "desc");
-
-        sortedTopSelections.forEach(function(item){
-            item.order = 1;
-            item.common.order = 1;
-        });
-
-        var secondSelections = decisionObjects.filter(function(item){
-            return item.common.isF5HomeWinner == item.common.formulaWinner 
-            && (item.common.isF5HomeWinner == item.common.nextWinners || item.common.isF5HomeWinner == item.common.seriesWinner) 
-            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
-        });
-
-        secondSelections = arrayDifference(secondSelections, topSelections);
-
-        var sortedSecondSelections = await sorting(secondSelections, "sorting", "desc");
-
-        sortedSecondSelections.forEach(function(item){
-            item.order = 2;
-            item.common.order = 2;
-        });
-
-        var thirdSelections = decisionObjects.filter(function(item){
-            return item.common.isF5HomeWinner == item.common.formulaWinner 
-            && item.common.isF5HomeWinner == item.common.nextWinners 
-            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
-        });
-
-        thirdSelections = arrayDifference(thirdSelections, topSelections);
-        thirdSelections = arrayDifference(thirdSelections, secondSelections);
-
-        var sortedThirdSelections = await sorting(thirdSelections, "sorting", "desc");
-
-        sortedThirdSelections.forEach(function(item){
-            item.order = 3;
-            item.common.order = 3;
-        });
-
-        var fourthSelections = decisionObjects.filter(function(item){
-            return item.common.isF5HomeWinner == item.common.formulaWinner 
-            && item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
-        });
-
-        fourthSelections = arrayDifference(fourthSelections, topSelections);
-        fourthSelections = arrayDifference(fourthSelections, secondSelections);
-        fourthSelections = arrayDifference(fourthSelections, thirdSelections);
-
-        var sortedFourthSelections = await sorting(fourthSelections, "sorting", "desc");
-
-        sortedFourthSelections.forEach(function(item){
-            item.order = 4;
-            item.common.order = 4;
-        });
-
-        var fifthSelections = decisionObjects.filter(function(item){
-            item.compare[item.expWinner+"Row"].hot > item.compare[item.otherTeam+"Row"].hot;
-        });
-
-        fifthSelections = arrayDifference(fifthSelections, topSelections);
-        fifthSelections = arrayDifference(fifthSelections, secondSelections);
-        fifthSelections = arrayDifference(fifthSelections, thirdSelections);
-        fifthSelections = arrayDifference(fifthSelections, fourthSelections);
-
-        var sortedFifthSelections = await sorting(fifthSelections, "sorting", "desc");
-
-        sortedFifthSelections.forEach(function(item){
-            item.order = 5;
-            item.common.order = 5;
-        });
-
-        allSelections = allSelections.concat(sortedTopSelections);
-        allSelections = allSelections.concat(sortedSecondSelections);
-        allSelections = allSelections.concat(sortedThirdSelections);
-        allSelections = allSelections.concat(sortedFourthSelections);
-        allSelections = allSelections.concat(sortedFifthSelections);
+        
+        allSelections = allSelections.concat(decisionObjects);
 
 
         allKeys.forEach(function(item){
@@ -2673,7 +2669,7 @@ try {
         console.log(winAvg.toFixed(2));
 
         
-
+        allSelections = await sorting(allSelections, "patternChances", "desc");
         await save("allDecisions",allSelections, function(){}, "replace" ,"DecisionViewObject");
         var stopHere = "";
     }
@@ -4355,36 +4351,36 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
 
     async function CleanUpAndGenerateStats(datesAnalysis, currentMonth, currentDay)
     {
-        var date = "May15th";
+        // var date = "May15th";
 
-        var games = await load(date+"FinalSelections");
+        // var games = await load(date+"FinalSelections");
 
-        var keys = Object.keys(games[0]);
+        // var keys = Object.keys(games[0]);
 
-        var evaluationKeys = [];
-            for (let sds = 0; sds < keys.length; sds++) {
-                const key = keys[sds];
+        // var evaluationKeys = [];
+        //     for (let sds = 0; sds < keys.length; sds++) {
+        //         const key = keys[sds];
                 
-                var isNum = parseFloat(games[0][key]);
-                if(!isNaN(isNum))
-                {
-                    evaluationKeys.push(key);
-                }
+        //         var isNum = parseFloat(games[0][key]);
+        //         if(!isNaN(isNum))
+        //         {
+        //             evaluationKeys.push(key);
+        //         }
                 
-            }
+        //     }
 
-        var selectedProperty = "";
-        var orderByDirection = "";
-        var generalStats = [];
-        for (let tet = 0; tet < evaluationKeys.length; tet++) {
-            const key = evaluationKeys[tet];
-            selectedProperty = key;
-            orderByDirection = "desc";
+        // var selectedProperty = "";
+        // var orderByDirection = "";
+        // var generalStats = [];
+        // for (let tet = 0; tet < evaluationKeys.length; tet++) {
+        //     const key = evaluationKeys[tet];
+        //     selectedProperty = key;
+        //     orderByDirection = "desc";
             
-            await save("GeneralStats"+selectedProperty+orderByDirection, generalStats, function(){}, "replace", "GameByGame");
+        //     await save("GeneralStats"+selectedProperty+orderByDirection, generalStats, function(){}, "replace", "GameByGame");
 
-        }
-        await save("ExpectedResults", generalStats, function(){}, "replace", "GameByGame");
+        // }
+        //await save("ExpectedResults", generalStats, function(){}, "replace", "GameByGame");
         //
 
         for (let te = 0; te < datesAnalysis.length; te++) {
@@ -4393,7 +4389,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                     for (let index =mmonth.from; index <= mmonth.to; index++)
                     {
                     if((currentMonth == null && currentDay ==null)||((mmonth.month == currentMonth.month && index < currentDay) || (currentMonth.month == 'May' && mmonth.month == "April"))){
-                        var selectedDate = mmonth.month+ index;
+                        var selectedDate = mmonth.month+ (index-1);//Change to index only if you want to process all date, index-1 if you want to pass the current day
                         if(index == 1 || index == 31)
                         {
                             selectedDate += "st";
@@ -6054,6 +6050,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             {
                 var patterns = await load("June30th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
+            else if(date == "July19th" || date == "July19st" )
+                {
+                    var patterns = await load("July14th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
@@ -10229,37 +10229,33 @@ async function getScheduleData(date)
     for (let index = 0; index < teams.length; index++) {
         const team = teams[index];
         var teamName = team.team.replace(" ","");
-        await driver.get(schedulesURL+team.url);
+        //await driver.get(schedulesURL+team.url);
+        await driver.get(schedulesURL+team.url+"//seasontype/2/half/1");
         await driver.manage().setTimeouts({ implicit: 1000 });
         var scheduleData = [];
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
             console.log(return_value);
             scheduleData = JSON.parse(return_value);
-            var data = ProcessScheduleData(scheduleData,teamName);
-            for (let ar = 0; ar < data.length; ar++) {
-                const schedule = data[ar];
-                schedulesAllData.push(schedule);  
-            }
+            // var data = ProcessScheduleData(scheduleData,teamName);
+            // for (let ar = 0; ar < data.length; ar++) {
+            //     const schedule = data[ar];
+            //     schedulesAllData.push(schedule);  
+            // }
                       
         });  
 
 
-        await driver.get(schedulesURL+team.url+"//seasontype/2/half/2");
+        await driver.get(schedulesURL+team.url);
         await driver.manage().setTimeouts({ implicit: 1000 });
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
             console.log(return_value);
-            scheduleData = JSON.parse(return_value);
-            if(scheduleData.length > 0)
-            {
-
-                var data = ProcessScheduleData(scheduleData,teamName);
-                for (let ar = 0; ar < data.length; ar++) {
-                    const schedule = data[ar];
-                    //To write the code to append more result to existing dates.
-                    schedulesAllData.push(schedule);  
-                }
-            }
-                      
+            //scheduleData = JSON.parse(return_value);
+            scheduleData = scheduleData.concat(JSON.parse(return_value));
+            var data = ProcessScheduleData(scheduleData,teamName);
+            for (let ar = 0; ar < data.length; ar++) {
+                const schedule = data[ar];
+                schedulesAllData.push(schedule);  
+            }  
         });  
         
         await save(date+"TeamSchedules", schedulesAllData, function(){}, "replace");
@@ -10380,7 +10376,7 @@ async function getAllPitchersData(date)
                 pitchersAllData.push({teamName: teamName, starterPitchingAvg: starterPitchingAvg, relevingPitchingAvg:relevingPitchingAvg , totalPitchingAvgRuns:relevingPitchingAvg + starterPitchingAvg ,pitchersData: pitchersData});
                 
             });
-
+            await save("PitchersData",pitchersAllData, function(){}, "replace", "GameByGame");
             await save(date+"PitchersData",pitchersAllData, function(){}, "replace");
             await save(date+"AllPitchersInfo",allPitchersInfo, function(){}, "replace");
             
@@ -10649,6 +10645,7 @@ async function getAllPitchersData(date)
                 pitcherUrl = pitcher[0].playerUrl;
             }
             else{
+                console.log(game[homeOrAway+"Team"][homeOrAway+"Team"] + " " + game[homeOrAway+"Team"][homeOrAway+"Pitcher"]);
                 var stopHere = "";
             }
         }
