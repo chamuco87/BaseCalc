@@ -1,0 +1,94 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "KC Royals @ DET Tigers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.64,
+            "probability_lr": 0.7802487953713395,
+            "average_probability": 0.7101243976856697,
+            "standard_deviation": 0.07012439768566975
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.76,
+            "probability_lr": 0.6509826340506465,
+            "average_probability": 0.7054913170253232,
+            "standard_deviation": 0.05450868297467676
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "KC Royals @ DET Tigers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.61,
+            "probability_lr": 0.7352500024673979,
+            "average_probability": 0.672625001233699,
+            "standard_deviation": 0.06262500123369896
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "STL Cardinals @ CHI Cubs",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.63,
+            "probability_lr": 0.7020380951908878,
+            "average_probability": 0.666019047595444,
+            "standard_deviation": 0.03601904759544389
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "MIA Marlins @ ATL Braves",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.7235543094358797,
+            "average_probability": 0.6367771547179399,
+            "standard_deviation": 0.08677715471793984
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.58,
+            "probability_lr": 0.6375512060756018,
+            "average_probability": 0.6087756030378009,
+            "standard_deviation": 0.028775603037800912
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.5575990973175708,
+            "average_probability": 0.6037995486587855,
+            "standard_deviation": 0.04620045134121459
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "MIA Marlins @ ATL Braves",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.6004835815370476,
+            "average_probability": 0.5702417907685238,
+            "standard_deviation": 0.03024179076852379
+        },
+        {
+            "file": "/content/NewGames/August1stNewGamesConsolidated.json",
+            "game": "MIA Marlins @ ATL Braves",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5271227024606515,
+            "average_probability": 0.5285613512303258,
+            "standard_deviation": 0.0014386487696742556
+        }
+    ]
+}

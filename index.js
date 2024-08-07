@@ -188,14 +188,16 @@ try {
         {month:"May", from:1, to:31, monthNumber:"05"},
         {month:"June", from:1, to:30, monthNumber:"06"},
         {month:"July", from:1, to:14, monthNumber:"07"},
-        {month:"July", from:19, to:25, monthNumber:"07"}
+        {month:"July", from:19, to:31, monthNumber:"07"},
+        {month:"August", from:1, to:6, monthNumber:"08"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
-        {month:"July", from:26, to:26, monthNumber:"07"}
+        //{month:"July", from:31, to:31, monthNumber:"07"}
+        {month:"August", from:6, to:6, monthNumber:"08"}
 
     ];
     
@@ -214,31 +216,30 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // ///     *    
-//                         var type = "AllGamesConsolidated";
-//                         await save(type, [], function(){}, "replace" ,"GameByGame");
-//                         await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-//                         await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-//                         var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
-//                         var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-//                         allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
-//                         await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
-// // // // // // // // // //                         //
-// // // // // // // // // // // //
-                        var type = "NewGamesConsolidated";
-                        await save(type, [], function(){}, "replace" ,"GameByGame");
-                        await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
+                        // var type = "AllGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        // var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
+                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        // allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
+                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+
+                        // var type = "NewGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
-                        // await GenerateRawJsonViewObjects(fullDatesAnalysis);
-                        // await CalculatePatternsForVisualisations();
-                        // var cleanAnalysisFile = true;
-                        // await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
-                        // await AnalyzeFactors();
-                        // await AnalyzeIndexes();
-                        // await GenerateFinalViewObjects(fullDatesAnalysis);
-                        // await GetHotNumberPerTeam()
-                        // await EnrichDecision();
+                        await GenerateRawJsonViewObjects(fullDatesAnalysis);
+                        await CalculatePatternsForVisualisations();
+                        var cleanAnalysisFile = true;
+                        await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
+                        await AnalyzeFactors();
+                        await AnalyzeIndexes();
+                        await GenerateFinalViewObjects(fullDatesAnalysis);
+                        await GetHotNumberPerTeam()
+                        await EnrichDecision();
                         //await processVariables()
                         //await BuildBettingStrategy();
                         //await GPTEvaluation()
@@ -1112,34 +1113,34 @@ try {
                 else {   
                 //-----------------------------    
                 //try{
-                //   await getScheduleData(selectedDate);
-                //   await ProcessGameByGame();
-                //   await getPitcherGameByGame();
-                //   await getBatterGameByGame();
-                //   await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
+                // await getScheduleData(selectedDate);
+                // await ProcessGameByGame();
+                // await getPitcherGameByGame();
+                // await getBatterGameByGame();
+                // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                  await getAllPitchersData(selectedDate);
-                  await getESPNData(selectedDate);
-                  await getBattersData(selectedDate);
-                  await getBestScoringTeamsByBatting(selectedDate);
-                  await getBestHittingTeamsByBatting(selectedDate);
-                  await getBestStartingPitchersTeams(selectedDate);
-                  await getBestRelievingPitchersTeams(selectedDate);
-                  await getBestOverallPitchersTeams(selectedDate);
+                //  await getAllPitchersData(selectedDate);
+                //  await getESPNData(selectedDate);
+                //  await getBattersData(selectedDate);
+                //  await getBestScoringTeamsByBatting(selectedDate);
+                //  await getBestHittingTeamsByBatting(selectedDate);
+                //  await getBestStartingPitchersTeams(selectedDate);
+                //  await getBestRelievingPitchersTeams(selectedDate);
+                //  await getBestOverallPitchersTeams(selectedDate);
              
-                  await getMoreWininigTeams(selectedDate);
-                  await getMoreScoringTeams(selectedDate);
-                  await getMoreReceivingTeams(selectedDate);
-                  await evaluateGames(selectedDate);
-                  await sortBetterAvgs(selectedDate);
-                  await filterConsistentPicks(selectedDate)
+                //  await getMoreWininigTeams(selectedDate);
+                //  await getMoreScoringTeams(selectedDate);
+                //  await getMoreReceivingTeams(selectedDate);
+                //  await evaluateGames(selectedDate);
+                //  await sortBetterAvgs(selectedDate);
+                //  await filterConsistentPicks(selectedDate)
              
-                  await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
-                  await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
-                  await getCoversWinPercentages(selectedDate, descriptiveDate);
-                  await consolidateAlgorithmResults(selectedDate);
+                //  await AlgoSeriesWinnerBasedOnResultAndPattern(selectedDate);
+                //  await AlgoDetailedPitchingAndBattingAnalysis(selectedDate)
+                //  await getCoversWinPercentages(selectedDate, descriptiveDate);
+                //  await consolidateAlgorithmResults(selectedDate);
 
-                  await CalculateWinnersViaFormula(selectedDate, noSelections, type);
+                 await CalculateWinnersViaFormula(selectedDate, noSelections, type);
             
 
                 
@@ -4390,11 +4391,11 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                     {
                     if((currentMonth == null && currentDay ==null)||((mmonth.month == currentMonth.month && index < currentDay) || (currentMonth.month == 'May' && mmonth.month == "April"))){
                         var selectedDate = mmonth.month+ (index-1);//Change to index only if you want to process all date, index-1 if you want to pass the current day
-                        if(index == 1 || index == 31)
+                        if((index-1) == 1 || (index-1) == 31)
                         {
                             selectedDate += "st";
                         }
-                        else if(index == 3)
+                        else if((index-1) == 3)
                         {
                             selectedDate += "rd";
             
@@ -4402,13 +4403,15 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                         else{
                             selectedDate += "th";
                         }
-                        if(index <10)
+                        if((index-1) <10)
                         {
                             var descriptiveDate = "2024-"+mmonth.monthNumber+"-0"+index;
                         }
                         else{
                             var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
                         }
+
+                        //selectedDate = "July31st";
             
                         await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
                         await EvaluateOverUnderPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
@@ -6032,7 +6035,8 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
         if(thenum != 1 )
         {
 
-            previousDate = date.replace(thenum.toString(),(thenum-1).toString()).replace("nd", "th");
+            previousDate = date.replace(thenum.toString(),(thenum-1).toString()).replace("nd", "th").replace("st","th").replace("rd", "th").replace("Auguth","August");
+
             //.replace("rd", "th").replace("st", "th");
 
         } 
@@ -6040,7 +6044,16 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
             var patterns = await load(previousDate+"GeneralStatsPerSummary","GeneralStatsPerSummary");
         }
         catch{
-            if(previousDate == "July3st" || previousDate == "July3th"){
+            if(previousDate == "Auguth3th"){
+                var patterns = await load("August3rd"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                }
+            else if(previousDate == "Auguth2th"){
+                var patterns = await load("August2th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                }
+            else if(previousDate == "Auguth1th"){
+                var patterns = await load("August1st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                }
+            else if(previousDate == "July3st" || previousDate == "July3th"){
                 var patterns = await load("July3rd"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                 }
             else if(date == "July2nd" || date == "July2th"){
@@ -6054,6 +6067,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                 {
                     var patterns = await load("July14th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                 }
+                else if(date == "August1st" || date == "August1st" )
+                    {
+                        var patterns = await load("July31st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                    }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
@@ -8587,6 +8604,10 @@ async function GetLatestTeamSchedules(date = null)
     else if(dateparts[1] == "Jun")
     {
         var mmmmonth = "June";
+    }
+    else if(dateparts[1] == "Aug")
+    {
+        var mmmmonth = "August";
     }
     else{
         var mmmmonth = dateparts[1];
@@ -11435,6 +11456,18 @@ async function load(filename, foldername = null)
             }
             else if(filename.indexOf("st") >= 0){
                 folder = filename.split("st")[0]+"st";
+                if(filename.indexOf("August1st") >= 0)
+                {
+                    folder = filename.split("1st")[0]+"1st";
+                }
+                else if(filename.indexOf("August21st") >= 0)
+                {
+                    folder = filename.split("21st")[0]+"21st";
+                }
+                else if(filename.indexOf("August31st") >= 0)
+                {
+                    folder = filename.split("31st")[0]+"31st";
+                }
             }
         const data = fs.readFileSync("./"+filename.split(/[0-9]/)[0]+"/"+folder+"/"+filename+".json");
         return JSON.parse(data);
@@ -11472,6 +11505,18 @@ async function save(fileName, jsonObject, callback, appendOrReplace, foldername 
             }
             else if(fileName.indexOf("st") >= 0){
                 folder = fileName.split("st")[0]+"st";
+                if(fileName.indexOf("August1st") >= 0)
+                {
+                    folder = fileName.split("1st")[0]+"1st";
+                }
+                else if(fileName.indexOf("August21st") >= 0)
+                {
+                    folder = fileName.split("21st")[0]+"21st";
+                }
+                else if(fileName.indexOf("August31st") >= 0)
+                {
+                    folder = fileName.split("31st")[0]+"31st";
+                }
             }
 
             var dir = "./"+fileName.split(/[0-9]/)[0]+"/"+folder+"/";
@@ -11482,6 +11527,17 @@ async function save(fileName, jsonObject, callback, appendOrReplace, foldername 
             fs.writeFileSync(dir+fileName + '.json', JSON.stringify(jsonObject) , 'utf8', callback);
         }
     }
+}
+
+function splitAtFirstNumber(str) {
+    // Find the index of the first occurrence of a number
+    let match = str.match(/\d/);
+    if (match) {
+        let index = match.index;
+        return [str.slice(0, index), str.slice(index)];
+    }
+    // If no number is found, return the original string in an array
+    return [str];
 }
 
 
