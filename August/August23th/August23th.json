@@ -1,0 +1,397 @@
+[
+    {
+        "date": "Vie 23 ago",
+        "games": [
+            {
+                "game": "CIN Reds @ PIT Pirates",
+                "gameTime": "16:40",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.95",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.86"
+                },
+                "awayTeam": {
+                    "awayTeam": "CINReds",
+                    "awayId": "CIN",
+                    "awayPitcher": "B Farmer",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.47",
+                    "awayML": "2.00"
+                },
+                "homeTeam": {
+                    "homeTeam": "PITPirates",
+                    "homeId": "PIT",
+                    "homePitcher": "B Falter",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.75",
+                    "homeML": "1.83"
+                }
+            },
+            {
+                "game": "COL Rockies @ NY Yankees",
+                "gameTime": "17:05",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "2.00",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.83"
+                },
+                "awayTeam": {
+                    "awayTeam": "COLRockies",
+                    "awayId": "COL",
+                    "awayPitcher": "K Freeland",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "2.20",
+                    "awayML": "3.55"
+                },
+                "homeTeam": {
+                    "homeTeam": "NYYankees",
+                    "homeId": "NY",
+                    "homePitcher": "C Rodon",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "1.71",
+                    "homeML": "1.31"
+                }
+            },
+            {
+                "game": "HOU Astros @ BAL Orioles",
+                "gameTime": "17:05",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.86",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.95"
+                },
+                "awayTeam": {
+                    "awayTeam": "HOUAstros",
+                    "awayId": "HOU",
+                    "awayPitcher": "H Brown",
+                    "awayHandicapRuns": "-1.5",
+                    "awayHandicapOdds": "2.40",
+                    "awayML": "1.86"
+                },
+                "homeTeam": {
+                    "homeTeam": "BALOrioles",
+                    "homeId": "BAL",
+                    "homePitcher": "C Povich",
+                    "homeHandicapRuns": "+1.5",
+                    "homeHandicapOdds": "1.60",
+                    "homeML": "1.95"
+                }
+            },
+            {
+                "game": "LA Angels @ TOR Blue",
+                "gameTime": "17:07",
+                "overUnder": {
+                    "overRuns": "O 9.0",
+                    "overOdd": "2.05",
+                    "underRuns": "U 9.0",
+                    "underOdd": "1.80"
+                },
+                "awayTeam": {
+                    "awayTeam": "LAAngels",
+                    "awayId": "LA",
+                    "awayPitcher": "J Kochanowicz",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.83",
+                    "awayML": "2.70"
+                },
+                "homeTeam": {
+                    "homeTeam": "TORBlue",
+                    "homeId": "TOR",
+                    "homePitcher": "C Bassitt",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.00",
+                    "homeML": "1.48"
+                }
+            },
+            {
+                "game": "ARI Diamondbacks @ BOS Red",
+                "gameTime": "17:10",
+                "overUnder": {
+                    "overRuns": "O 9.5",
+                    "overOdd": "1.83",
+                    "underRuns": "U 9.5",
+                    "underOdd": "2.00"
+                },
+                "awayTeam": {
+                    "awayTeam": "ARIDiamondbacks",
+                    "awayId": "ARI",
+                    "awayPitcher": "R Nelson",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.58",
+                    "awayML": "2.10"
+                },
+                "homeTeam": {
+                    "homeTeam": "BOSRed",
+                    "homeId": "BOS",
+                    "homePitcher": "B Bello",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.45",
+                    "homeML": "1.76"
+                }
+            },
+            {
+                "game": "CHI Cubs @ MIA Marlins",
+                "gameTime": "17:10",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.95",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.86"
+                },
+                "awayTeam": {
+                    "awayTeam": "CHICubs",
+                    "awayId": "CHI",
+                    "awayPitcher": "K Hendricks",
+                    "awayHandicapRuns": "-1.5",
+                    "awayHandicapOdds": "2.35",
+                    "awayML": "1.80"
+                },
+                "homeTeam": {
+                    "homeTeam": "MIAMarlins",
+                    "homeId": "MIA",
+                    "homePitcher": "M Meyer",
+                    "homeHandicapRuns": "+1.5",
+                    "homeHandicapOdds": "1.62",
+                    "homeML": "2.05"
+                }
+            },
+            {
+                "game": "TEX Rangers @ CLE Guardians",
+                "gameTime": "17:10",
+                "overUnder": {
+                    "overRuns": "O 7.0",
+                    "overOdd": "1.86",
+                    "underRuns": "U 7.0",
+                    "underOdd": "1.95"
+                },
+                "awayTeam": {
+                    "awayTeam": "TEXRangers",
+                    "awayId": "TEX",
+                    "awayPitcher": "N Eovaldi",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.52",
+                    "awayML": "2.15"
+                },
+                "homeTeam": {
+                    "homeTeam": "CLEGuardians",
+                    "homeId": "CLE",
+                    "homePitcher": "T Bibee",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.60",
+                    "homeML": "1.74"
+                }
+            },
+            {
+                "game": "WAS Nationals @ ATL Braves",
+                "gameTime": "17:20",
+                "overUnder": {
+                    "overRuns": "O 7.5",
+                    "overOdd": "2.00",
+                    "underRuns": "U 7.5",
+                    "underOdd": "1.83"
+                },
+                "awayTeam": {
+                    "awayTeam": "WASNationals",
+                    "awayId": "WAS",
+                    "awayPitcher": "M Gore",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "2.00",
+                    "awayML": "3.10"
+                },
+                "homeTeam": {
+                    "homeTeam": "ATLBraves",
+                    "homeId": "ATL",
+                    "homePitcher": "C Sale",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "1.83",
+                    "homeML": "1.38"
+                }
+            },
+            {
+                "game": "DET Tigers @ CHI White",
+                "gameTime": "18:10",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.83",
+                    "underRuns": "U 8.5",
+                    "underOdd": "2.00"
+                },
+                "awayTeam": {
+                    "awayTeam": "DETTigers",
+                    "awayId": "DET",
+                    "awayPitcher": "K Montero",
+                    "awayHandicapRuns": "-1.5",
+                    "awayHandicapOdds": "2.00",
+                    "awayML": "1.64"
+                },
+                "homeTeam": {
+                    "homeTeam": "CHIWhite",
+                    "homeId": "CHI",
+                    "homePitcher": "C Flexen",
+                    "homeHandicapRuns": "+1.5",
+                    "homeHandicapOdds": "1.83",
+                    "homeML": "2.30"
+                }
+            },
+            {
+                "game": "PHI Phillies @ KC Royals",
+                "gameTime": "18:10",
+                "overUnder": {
+                    "overRuns": "O 9.0",
+                    "overOdd": "1.83",
+                    "underRuns": "U 9.0",
+                    "underOdd": "2.00"
+                },
+                "awayTeam": {
+                    "awayTeam": "PHIPhillies",
+                    "awayId": "PHI",
+                    "awayPitcher": "T Walker",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.60",
+                    "awayML": "2.20"
+                },
+                "homeTeam": {
+                    "homeTeam": "KCRoyals",
+                    "homeId": "KC",
+                    "homePitcher": "M Wacha",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.40",
+                    "homeML": "1.71"
+                }
+            },
+            {
+                "game": "STL Cardinals @ MIN Twins",
+                "gameTime": "18:10",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.86",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.95"
+                },
+                "awayTeam": {
+                    "awayTeam": "STLCardinals",
+                    "awayId": "STL",
+                    "awayPitcher": "A Pallante",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.62",
+                    "awayML": "2.25"
+                },
+                "homeTeam": {
+                    "homeTeam": "MINTwins",
+                    "homeId": "MIN",
+                    "homePitcher": "D Festa",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.35",
+                    "homeML": "1.66"
+                }
+            },
+            {
+                "game": "MIL Brewers @ OAK Athletics",
+                "gameTime": "19:40",
+                "overUnder": {
+                    "overRuns": "O 7.5",
+                    "overOdd": "1.86",
+                    "underRuns": "U 7.5",
+                    "underOdd": "1.95"
+                },
+                "awayTeam": {
+                    "awayTeam": "MILBrewers",
+                    "awayId": "MIL",
+                    "awayPitcher": "A Civale",
+                    "awayHandicapRuns": "-1.5",
+                    "awayHandicapOdds": "2.35",
+                    "awayML": "1.80"
+                },
+                "homeTeam": {
+                    "homeTeam": "OAKAthletics",
+                    "homeId": "OAK",
+                    "homePitcher": "J Sears",
+                    "homeHandicapRuns": "+1.5",
+                    "homeHandicapOdds": "1.62",
+                    "homeML": "2.05"
+                }
+            },
+            {
+                "game": "NY Mets @ SD Padres",
+                "gameTime": "19:40",
+                "overUnder": {
+                    "overRuns": "O 8.0",
+                    "overOdd": "2.00",
+                    "underRuns": "U 8.0",
+                    "underOdd": "1.83"
+                },
+                "awayTeam": {
+                    "awayTeam": "NYMets",
+                    "awayId": "NY",
+                    "awayPitcher": "P Blackburn",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.55",
+                    "awayML": "2.25"
+                },
+                "homeTeam": {
+                    "homeTeam": "SDPadres",
+                    "homeId": "SD",
+                    "homePitcher": "J Musgrove",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.50",
+                    "homeML": "1.66"
+                }
+            },
+            {
+                "game": "SF Giants @ SEA Mariners",
+                "gameTime": "20:10",
+                "overUnder": {
+                    "overRuns": "O 7.0",
+                    "overOdd": "1.83",
+                    "underRuns": "U 7.0",
+                    "underOdd": "2.00"
+                },
+                "awayTeam": {
+                    "awayTeam": "SFGiants",
+                    "awayId": "SF",
+                    "awayPitcher": "H Birdsong",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.58",
+                    "awayML": "2.25"
+                },
+                "homeTeam": {
+                    "homeTeam": "SEAMariners",
+                    "homeId": "SEA",
+                    "homePitcher": "L Castillo",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.45",
+                    "homeML": "1.66"
+                }
+            },
+            {
+                "game": "TB Rays @ LA Dodgers",
+                "gameTime": "20:10",
+                "overUnder": {
+                    "overRuns": "O 8.5",
+                    "overOdd": "1.86",
+                    "underRuns": "U 8.5",
+                    "underOdd": "1.95"
+                },
+                "awayTeam": {
+                    "awayTeam": "TBRays",
+                    "awayId": "TB",
+                    "awayPitcher": "T Alexander",
+                    "awayHandicapRuns": "+1.5",
+                    "awayHandicapOdds": "1.83",
+                    "awayML": "2.65"
+                },
+                "homeTeam": {
+                    "homeTeam": "LADodgers",
+                    "homeId": "LA",
+                    "homePitcher": "B Miller",
+                    "homeHandicapRuns": "-1.5",
+                    "homeHandicapOdds": "2.00",
+                    "homeML": "1.50"
+                }
+            }
+        ]
+    }
+]

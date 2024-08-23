@@ -1,0 +1,154 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ PHI Phillies",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.64,
+            "probability_lr": 0.8364279659554967,
+            "average_probability": 0.7382139829777483,
+            "standard_deviation": 0.09821398297774836
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ PHI Phillies",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.9248107155126427,
+            "average_probability": 0.7374053577563213,
+            "standard_deviation": 0.18740535775632133
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ MIL Brewers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.54,
+            "probability_lr": 0.812224054528216,
+            "average_probability": 0.676112027264108,
+            "standard_deviation": 0.13611202726410798
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "BOS Red @ BAL Orioles",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.52,
+            "probability_lr": 0.8042887097696987,
+            "average_probability": 0.6621443548848494,
+            "standard_deviation": 0.14214435488484933
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "ATL Braves @ SF Giants",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.761604422268271,
+            "average_probability": 0.6358022111341355,
+            "standard_deviation": 0.12580221113413548
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "ATL Braves @ SF Giants",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.5728545426366307,
+            "average_probability": 0.6114272713183153,
+            "standard_deviation": 0.038572728681684654
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ DET Tigers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.52,
+            "probability_lr": 0.6888011453027137,
+            "average_probability": 0.6044005726513568,
+            "standard_deviation": 0.08440057265135686
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "MIN Twins @ TEX Rangers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.6248999083283071,
+            "average_probability": 0.5874499541641536,
+            "standard_deviation": 0.03744995416415353
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ MIL Brewers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.6406174637631047,
+            "average_probability": 0.5853087318815524,
+            "standard_deviation": 0.05530873188155233
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "MIN Twins @ TEX Rangers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.6138118464109926,
+            "average_probability": 0.5819059232054964,
+            "standard_deviation": 0.03190592320549629
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ DET Tigers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.59,
+            "probability_lr": 0.555831912152922,
+            "average_probability": 0.572915956076461,
+            "standard_deviation": 0.01708404392353896
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "MIN Twins @ TEX Rangers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5996044484466803,
+            "average_probability": 0.5648022242233401,
+            "standard_deviation": 0.03480222422334012
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "BOS Red @ BAL Orioles",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.56,
+            "probability_lr": 0.5516251710835733,
+            "average_probability": 0.5558125855417867,
+            "standard_deviation": 0.0041874144582133566
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ DET Tigers",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5096106614188418,
+            "average_probability": 0.5198053307094209,
+            "standard_deviation": 0.010194669290579106
+        },
+        {
+            "file": "/content/NewGames/August15thNewGamesConsolidated.json",
+            "game": "ATL Braves @ SF Giants",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.48,
+            "probability_lr": 0.45772121042012676,
+            "average_probability": 0.46886060521006334,
+            "standard_deviation": 0.011139394789936613
+        }
+    ]
+}
