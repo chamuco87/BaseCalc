@@ -190,7 +190,7 @@ try {
         {month:"July", from:1, to:14, monthNumber:"07"},
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
-        {month:"August", from:22, to:22, monthNumber:"08"}
+        {month:"August", from:22, to:26, monthNumber:"08"}
     ];
 
     var singleDayAnalysis = [ 
@@ -198,7 +198,7 @@ try {
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"}
-        {month:"August", from:22, to:22, monthNumber:"08"}
+        {month:"August", from:26, to:26, monthNumber:"08"}
 
     ];
     
@@ -217,19 +217,19 @@ try {
 
     /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
     // // // ///     *    
-    //                     var type = "AllGamesConsolidated";
-    //                     await save(type, [], function(){}, "replace" ,"GameByGame");
-    //                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-    //                     await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-    //                     var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
-    //                     var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-    //                     allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
-    //                     await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+                        // var type = "AllGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+                        // var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
+                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+                        // allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
+                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
-    //                     var type = "NewGamesConsolidated";
-    //                     await save(type, [], function(){}, "replace" ,"GameByGame");
-    //                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-    //                     await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
+                        // var type = "NewGamesConsolidated";
+                        // await save(type, [], function(){}, "replace" ,"GameByGame");
+                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+                        // await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
                         await GenerateRawJsonViewObjects(fullDatesAnalysis);
