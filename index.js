@@ -190,7 +190,7 @@ try {
         {month:"July", from:1, to:14, monthNumber:"07"},
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
-        {month:"August", from:22, to:27, monthNumber:"08"}
+        {month:"August", from:22, to:28, monthNumber:"08"}
     ];
 
     var singleDayAnalysis = [ 
@@ -198,7 +198,7 @@ try {
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"}
-        {month:"August", from:27, to:27, monthNumber:"08"}
+        {month:"August", from:28, to:28, monthNumber:"08"}
 
     ];
     
@@ -1120,7 +1120,7 @@ try {
                 // await getBatterGameByGame();
                 // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                 //await getAllPitchersData(selectedDate);
+                //  await getAllPitchersData(selectedDate);
                 //  await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
