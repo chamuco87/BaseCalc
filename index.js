@@ -190,7 +190,7 @@ try {
         {month:"July", from:1, to:14, monthNumber:"07"},
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
-        {month:"August", from:22, to:28, monthNumber:"08"}
+        {month:"August", from:22, to:30, monthNumber:"08"}
     ];
 
     var singleDayAnalysis = [ 
@@ -198,7 +198,7 @@ try {
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"}
-        {month:"August", from:28, to:28, monthNumber:"08"}
+        {month:"August", from:30, to:30, monthNumber:"08"}
 
     ];
     
@@ -1783,6 +1783,10 @@ try {
     async function GenerateDataForVisualization(date, evaluatePatterns, evaluateFactors,  processIndexAndDays, refreshAnalysisGameDetails)
     {
         var gameDataAnalysis = await load(date+"NewGamesConsolidated", "NewGames");
+        if(date == "August30th")
+        {
+            var stopHere ="";
+        }
         var MLResults = await load(date+"MLResults");
         var patternSelections = await load(date+'finalSelectionsCSV');
         try{
