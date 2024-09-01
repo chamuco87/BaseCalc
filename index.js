@@ -190,7 +190,7 @@ try {
         {month:"July", from:1, to:14, monthNumber:"07"},
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
-        {month:"August", from:22, to:30, monthNumber:"08"}
+        {month:"August", from:22, to:31, monthNumber:"08"}
     ];
 
     var singleDayAnalysis = [ 
@@ -198,7 +198,7 @@ try {
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"}
-        {month:"August", from:30, to:30, monthNumber:"08"}
+        {month:"August", from:31, to:31, monthNumber:"08"}
 
     ];
     
@@ -6080,6 +6080,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                         {
                             var patterns = await load("August17th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                         }
+                        else if(date == "August31st")
+                            {
+                                var patterns = await load("August30th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                            }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
