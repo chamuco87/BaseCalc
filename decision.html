@@ -64,7 +64,7 @@
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
     <script>
-        const data = [];
+        var data = [];
 
 
         function calculateMostRepeatedValue(game) {
@@ -218,7 +218,7 @@
 
     document.addEventListener('DOMContentLoaded', () => {
     // Function to fetch and load the JSON data
-    fetch('http://carbajalsalinas.com/DecisionViewObject.json')
+    fetch('http://carbajalsalinas.com/allDecisions.json')
         .then(response => response.json())
         .then(data => {
             console.log("Data loaded:", data); // Log the data to see if it's loaded correctly

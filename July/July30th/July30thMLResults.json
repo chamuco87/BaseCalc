@@ -1,0 +1,294 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ ARI Diamondbacks",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.76,
+            "probability_lr": 0.7940135269909225,
+            "average_probability": 0.7770067634954613,
+            "standard_deviation": 0.017006763495461263
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "MIN Twins @ NY Mets",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.78,
+            "probability_lr": 0.7658821762211379,
+            "average_probability": 0.7729410881105689,
+            "standard_deviation": 0.007058911889431085
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "OAK Athletics @ SF Giants",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.71,
+            "probability_lr": 0.7899770881294209,
+            "average_probability": 0.7499885440647105,
+            "standard_deviation": 0.039988544064710474
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.8650322601669509,
+            "average_probability": 0.7475161300834754,
+            "standard_deviation": 0.11751613008347545
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "MIN Twins @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.71,
+            "probability_lr": 0.7831167760392234,
+            "average_probability": 0.7465583880196116,
+            "standard_deviation": 0.0365583880196117
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "TOR Blue @ BAL Orioles",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.71,
+            "probability_lr": 0.7572951591140161,
+            "average_probability": 0.7336475795570081,
+            "standard_deviation": 0.02364757955700808
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "MIN Twins @ NY Mets",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.57,
+            "probability_lr": 0.8968917835781763,
+            "average_probability": 0.7334458917890881,
+            "standard_deviation": 0.1634458917890882
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "PIT Pirates @ HOU Astros",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.8410311073831673,
+            "average_probability": 0.6905155536915837,
+            "standard_deviation": 0.15051555369158365
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.63,
+            "probability_lr": 0.74858859001889,
+            "average_probability": 0.689294295009445,
+            "standard_deviation": 0.059294295009445
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ ARI Diamondbacks",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.6986827933103704,
+            "average_probability": 0.6743413966551852,
+            "standard_deviation": 0.0243413966551852
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "ATL Braves @ MIL Brewers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.62,
+            "probability_lr": 0.6747757079388875,
+            "average_probability": 0.6473878539694438,
+            "standard_deviation": 0.027387853969443765
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "OAK Athletics @ SF Giants",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6602666875621184,
+            "average_probability": 0.6451333437810591,
+            "standard_deviation": 0.015133343781059183
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "NY Yankees @ PHI Phillies",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6451083164446022,
+            "average_probability": 0.6375541582223011,
+            "standard_deviation": 0.0075541582223010995
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "KC Royals @ CHI White",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.51,
+            "probability_lr": 0.758520569275527,
+            "average_probability": 0.6342602846377635,
+            "standard_deviation": 0.12426028463776351
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "KC Royals @ CHI White",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.7036108282961222,
+            "average_probability": 0.6268054141480611,
+            "standard_deviation": 0.07680541414806108
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "ATL Braves @ MIL Brewers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.64,
+            "probability_lr": 0.603785742791938,
+            "average_probability": 0.621892871395969,
+            "standard_deviation": 0.01810712860403102
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "CHI Cubs @ CIN Reds",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6129322748409302,
+            "average_probability": 0.6214661374204651,
+            "standard_deviation": 0.008533862579534923
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.57,
+            "probability_lr": 0.6471731641295884,
+            "average_probability": 0.6085865820647942,
+            "standard_deviation": 0.038586582064794206
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "TEX Rangers @ STL Cardinals",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.49,
+            "probability_lr": 0.7163541945295879,
+            "average_probability": 0.603177097264794,
+            "standard_deviation": 0.11317709726479397
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.61,
+            "probability_lr": 0.574866439955415,
+            "average_probability": 0.5924332199777075,
+            "standard_deviation": 0.017566780022292505
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "TEX Rangers @ STL Cardinals",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.68,
+            "probability_lr": 0.5042917158570266,
+            "average_probability": 0.5921458579285133,
+            "standard_deviation": 0.08785414207148673
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "CHI Cubs @ CIN Reds",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.59,
+            "probability_lr": 0.5683432992087949,
+            "average_probability": 0.5791716496043975,
+            "standard_deviation": 0.010828350395602537
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "NY Yankees @ PHI Phillies",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.56,
+            "probability_lr": 0.5625374077428567,
+            "average_probability": 0.5612687038714284,
+            "standard_deviation": 0.0012687038714283005
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "KC Royals @ CHI White",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.56,
+            "probability_lr": 0.545248649909356,
+            "average_probability": 0.5526243249546781,
+            "standard_deviation": 0.00737567504532205
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "COL Rockies @ LA Angels",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.5,
+            "probability_lr": 0.5904348624925029,
+            "average_probability": 0.5452174312462514,
+            "standard_deviation": 0.04521743124625144
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.5392878270513295,
+            "average_probability": 0.5446439135256648,
+            "standard_deviation": 0.005356086474335275
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5739915201155864,
+            "average_probability": 0.5419957600577932,
+            "standard_deviation": 0.0319957600577932
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "NY Yankees @ PHI Phillies",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5133876076991536,
+            "average_probability": 0.5216938038495769,
+            "standard_deviation": 0.008306196150423217
+        },
+        {
+            "file": "/content/NewGames/July30thNewGamesConsolidated.json",
+            "game": "TOR Blue @ BAL Orioles",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.42,
+            "probability_lr": 0.5698038704687631,
+            "average_probability": 0.49490193523438153,
+            "standard_deviation": 0.07490193523438157
+        }
+    ]
+}

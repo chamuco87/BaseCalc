@@ -1,0 +1,244 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "TOR Blue @ LA Angels",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.69,
+            "probability_lr": 0.8447713716796188,
+            "average_probability": 0.7673856858398094,
+            "standard_deviation": 0.07738568583980943
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "NY Yankees @ CHI White",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.8550254693855879,
+            "average_probability": 0.752512734692794,
+            "standard_deviation": 0.10251273469279391
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "TOR Blue @ LA Angels",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.58,
+            "probability_lr": 0.903069990700871,
+            "average_probability": 0.7415349953504355,
+            "standard_deviation": 0.16153499535043553
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "MIA Marlins @ PHI Phillies",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.62,
+            "probability_lr": 0.8331843498003129,
+            "average_probability": 0.7265921749001565,
+            "standard_deviation": 0.10659217490015643
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "STL Cardinals @ CIN Reds",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.76,
+            "probability_lr": 0.6707034950146122,
+            "average_probability": 0.7153517475073061,
+            "standard_deviation": 0.044648252492693885
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "HOU Astros @ TB Rays",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.61,
+            "probability_lr": 0.7937763518292216,
+            "average_probability": 0.7018881759146107,
+            "standard_deviation": 0.09188817591461079
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "COL Rockies @ ARI Diamondbacks",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.61,
+            "probability_lr": 0.7909789562610421,
+            "average_probability": 0.7004894781305211,
+            "standard_deviation": 0.09048947813052105
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ BAL Orioles",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.49,
+            "probability_lr": 0.8317193268894778,
+            "average_probability": 0.6608596634447389,
+            "standard_deviation": 0.1708596634447389
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ MIL Brewers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6699957923152602,
+            "average_probability": 0.64999789615763,
+            "standard_deviation": 0.01999789615763009
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "TEX Rangers @ BOS Red",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6560493439189118,
+            "average_probability": 0.6430246719594559,
+            "standard_deviation": 0.013024671959455891
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "NY Yankees @ CHI White",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.61,
+            "probability_lr": 0.6710422491073184,
+            "average_probability": 0.6405211245536592,
+            "standard_deviation": 0.030521124553659185
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "PIT Pirates @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6459250079481555,
+            "average_probability": 0.6379625039740777,
+            "standard_deviation": 0.007962503974077773
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ BAL Orioles",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.53,
+            "probability_lr": 0.7318298956112095,
+            "average_probability": 0.6309149478056048,
+            "standard_deviation": 0.10091494780560473
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "COL Rockies @ ARI Diamondbacks",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.5896724910733752,
+            "average_probability": 0.6198362455366876,
+            "standard_deviation": 0.03016375446331243
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "OAK Athletics @ NY Mets",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.59,
+            "probability_lr": 0.6266851103522791,
+            "average_probability": 0.6083425551761396,
+            "standard_deviation": 0.018342555176139586
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "STL Cardinals @ CIN Reds",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.67,
+            "probability_lr": 0.5425547172842051,
+            "average_probability": 0.6062773586421026,
+            "standard_deviation": 0.06372264135789746
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "STL Cardinals @ CIN Reds",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.5,
+            "probability_lr": 0.7081693716801516,
+            "average_probability": 0.6040846858400758,
+            "standard_deviation": 0.1040846858400758
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ DET Tigers",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.47,
+            "probability_lr": 0.7295826848376207,
+            "average_probability": 0.5997913424188104,
+            "standard_deviation": 0.12979134241881035
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "HOU Astros @ TB Rays",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.6362312008549684,
+            "average_probability": 0.5931156004274842,
+            "standard_deviation": 0.04311560042748419
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ MIL Brewers",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.6,
+            "probability_lr": 0.5604037404393956,
+            "average_probability": 0.5802018702196978,
+            "standard_deviation": 0.01979812978030221
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "OAK Athletics @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5267314497503008,
+            "average_probability": 0.5283657248751504,
+            "standard_deviation": 0.0016342751248495935
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "ATL Braves @ SF Giants",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5067199638016726,
+            "average_probability": 0.5083599819008363,
+            "standard_deviation": 0.0016400180991636981
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "TEX Rangers @ BOS Red",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5022865355529645,
+            "average_probability": 0.5061432677764823,
+            "standard_deviation": 0.0038567322235177337
+        },
+        {
+            "file": "/content/NewGames/August13thNewGamesConsolidated.json",
+            "game": "OAK Athletics @ NY Mets",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.49,
+            "probability_lr": 0.4628420149925121,
+            "average_probability": 0.47642100749625604,
+            "standard_deviation": 0.013578992503743947
+        }
+    ]
+}
