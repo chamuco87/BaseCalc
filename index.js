@@ -190,15 +190,17 @@ try {
         {month:"July", from:1, to:14, monthNumber:"07"},
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
-        {month:"August", from:22, to:31, monthNumber:"08"}
+        {month:"August", from:22, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:1, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
         //{month:"April", from:8, to:30, monthNumber:"04"}, 
         //{month:"May", from:1, to:31, monthNumber:"05"},
         //{month:"June", from:30, to:30, monthNumber:"06"},
-        //{month:"July", from:31, to:31, monthNumber:"07"}
-        {month:"August", from:31, to:31, monthNumber:"08"}
+        //{month:"July", from:31, to:31, monthNumber:"07"},
+        //{month:"August", from:31, to:31, monthNumber:"08"},
+        {month:"September", from:1, to:1, monthNumber:"09"}
 
     ];
     
@@ -1118,9 +1120,9 @@ try {
                 // await ProcessGameByGame();
                 // await getPitcherGameByGame();
                 // await getBatterGameByGame();
-                // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
+                //await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                //  await getAllPitchersData(selectedDate);
+                 //await getAllPitchersData(selectedDate);
                 //  await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
@@ -4416,7 +4418,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                             var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
                         }
 
-                        //selectedDate = "August17th";
+                        selectedDate = "August31st";
             
                         await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
                         await EvaluateOverUnderPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
@@ -6084,6 +6086,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                             {
                                 var patterns = await load("August30th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                             }
+                            else if(date == "September1st")
+                                {
+                                    var patterns = await load("August31st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                                }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
