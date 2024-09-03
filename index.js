@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:1, monthNumber:"09"}
+        {month:"September", from:1, to:2, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:1, monthNumber:"09"}
+        {month:"September", from:2, to:2, monthNumber:"09"}
 
     ];
     
@@ -1120,9 +1120,9 @@ try {
                 // await ProcessGameByGame();
                 // await getPitcherGameByGame();
                 // await getBatterGameByGame();
-                //await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
+                // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                 //await getAllPitchersData(selectedDate);
+                //  await getAllPitchersData(selectedDate);
                 //  await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
@@ -1785,7 +1785,7 @@ try {
     async function GenerateDataForVisualization(date, evaluatePatterns, evaluateFactors,  processIndexAndDays, refreshAnalysisGameDetails)
     {
         var gameDataAnalysis = await load(date+"NewGamesConsolidated", "NewGames");
-        if(date == "August30th")
+        if(date == "September2th")
         {
             var stopHere ="";
         }
@@ -4418,7 +4418,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                             var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
                         }
 
-                        selectedDate = "August31st";
+                        //selectedDate = "August31st";
             
                         await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
                         await EvaluateOverUnderPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
@@ -6090,6 +6090,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                                 {
                                     var patterns = await load("August31st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                                 }
+                                else if(date == "September2th")
+                                    {
+                                        var patterns = await load("September1st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                                    }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
@@ -11857,4 +11861,33 @@ async function JSGetDataFromBet365()
 
     }
 
+}
+
+async function JSUpdateBetAmounts()
+{
+    const regex = /\d+\.\d{2}/g; // Using the global flag to find all matches
+    var bets  = document.getElementsByClassName("mbl-SettledBetItem");
+    for (let index = 0; index < bets.length; index++) {
+        var bet = bets[index];
+        var betHeader = bet.getElementsByClassName("mbl-SettledBetItemHeader_Text")[0];
+        var returnHeader = bet.getElementsByClassName("mbl-SettledBetItem_BetReturnLabel")[0];
+        var betFooter = bet.getElementsByClassName("lyx-StakeDisplay_StakeWrapper")[0];
+        var returnFooter = bet.getElementsByClassName("mbl-SettledBetItemFooter_BetInformationText")[0];
+        var betHeaderToBeReplaced = betHeader.innerText.match(regex)[0];
+        var returnHeaderToBeReplaced = returnHeader.innerText.match(regex)[0];
+        var betFooterToBeReplaced = betFooter.innerText.match(regex)[0];
+        var returnFooterToBeReplaced = returnFooter.innerText.match(regex)[0];
+        const betHeaderValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(betHeaderToBeReplaced)*10).toFixed(2));
+        const returnHeaderValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(returnHeaderToBeReplaced)*10).toFixed(2));
+        const betFooterValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(betFooterToBeReplaced)*10).toFixed(2));
+        const returnFooterValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(returnFooterToBeReplaced)*10).toFixed(2));
+        betHeader.innerText = betHeader.innerText.replace(betHeaderToBeReplaced, betHeaderValue);
+        returnHeader.innerText = returnHeader.innerText.replace(returnHeaderToBeReplaced, returnHeaderValue);
+        betFooter.innerText = betFooter.innerText.replace(betFooterToBeReplaced, betFooterValue);
+        returnFooter.innerText = returnFooter.innerText.replace(returnFooterToBeReplaced, returnFooterValue);
+        console.log(betHeaderValue);
+        console.log(returnHeaderValue);
+        console.log(betFooterValue);
+        console.log(returnFooterValue);
+    }
 }
