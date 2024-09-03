@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:2, monthNumber:"09"}
+        {month:"September", from:1, to:3, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:2, to:2, monthNumber:"09"}
+        {month:"September", from:3, to:3, monthNumber:"09"}
 
     ];
     
@@ -234,14 +234,14 @@ try {
                         // await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
-                        await GenerateRawJsonViewObjects(fullDatesAnalysis);
-                        await CalculatePatternsForVisualisations();
-                        var cleanAnalysisFile = true;
-                        await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
-                        await AnalyzeFactors();
-                        await AnalyzeIndexes();
-                        await GenerateFinalViewObjects(fullDatesAnalysis);
-                        await GetHotNumberPerTeam()
+                        // await GenerateRawJsonViewObjects(fullDatesAnalysis);
+                        // await CalculatePatternsForVisualisations();
+                        // var cleanAnalysisFile = true;
+                        // await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
+                        // await AnalyzeFactors();
+                        // await AnalyzeIndexes();
+                        // await GenerateFinalViewObjects(fullDatesAnalysis);
+                        // await GetHotNumberPerTeam();
                         await EnrichDecision();
                         //await processVariables()
                         //await BuildBettingStrategy();
@@ -2432,7 +2432,7 @@ try {
                 item.isMLWin = item.common.isHomeWinner == item.compare.results.isHomeWinner;
                 item.isFormulaWin = item.common.formulaWinner == item.compare.results.isHomeWinner;
                 item.isSeriesWin = item.common.seriesWinner == item.compare.results.isHomeWinner;
-                if(item.common.date == "July21th")
+                if(item.common.date == "September3rd")
                 {
                     var stopHere = "";
                 }
@@ -2489,6 +2489,10 @@ try {
 
             var viewObjects = await sorting(allViewObjects
                 .filter(function(item){
+                   if(item.common.date == "September3rd")
+                    {
+                        var stopHere = "";
+                    } 
                 return item.common.date == targetDate &&
                     // ((item.common.formulaWinner == item.common.overallWinner &&
                     // item.common.overallWinner == item.common.isHomeWinner &&
