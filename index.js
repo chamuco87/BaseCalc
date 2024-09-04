@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:3, monthNumber:"09"}
+        {month:"September", from:1, to:4, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:3, to:3, monthNumber:"09"}
+        {month:"September", from:4, to:4, monthNumber:"09"}
 
     ];
     
@@ -234,14 +234,14 @@ try {
                         // await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
-                        // await GenerateRawJsonViewObjects(fullDatesAnalysis);
-                        // await CalculatePatternsForVisualisations();
-                        // var cleanAnalysisFile = true;
-                        // await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
-                        // await AnalyzeFactors();
-                        // await AnalyzeIndexes();
-                        // await GenerateFinalViewObjects(fullDatesAnalysis);
-                        // await GetHotNumberPerTeam();
+                        await GenerateRawJsonViewObjects(fullDatesAnalysis);
+                        await CalculatePatternsForVisualisations();
+                        var cleanAnalysisFile = true;
+                        await GenerateAnalysisGameData(fullDatesAnalysis, cleanAnalysisFile);
+                        await AnalyzeFactors();
+                        await AnalyzeIndexes();
+                        await GenerateFinalViewObjects(fullDatesAnalysis);
+                        await GetHotNumberPerTeam();
                         await EnrichDecision();
                         //await processVariables()
                         //await BuildBettingStrategy();
@@ -1116,14 +1116,14 @@ try {
                 else {   
                 //-----------------------------    
                 //try{
-                // await getScheduleData(selectedDate);
+                //await getScheduleData(selectedDate);
                 // await ProcessGameByGame();
                 // await getPitcherGameByGame();
                 // await getBatterGameByGame();
                 // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                //  await getAllPitchersData(selectedDate);
-                //  await getESPNData(selectedDate);
+                 //await getAllPitchersData(selectedDate);
+                 //await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
                 //  await getBestHittingTeamsByBatting(selectedDate);
@@ -6098,6 +6098,10 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                                     {
                                         var patterns = await load("September1st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                                     }
+                                    else if(date == "September4th")
+                                        {
+                                            var patterns = await load("September3rd"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                                        }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
@@ -8636,6 +8640,14 @@ async function GetLatestTeamSchedules(date = null)
     {
         var mmmmonth = "August";
     }
+    else if(dateparts[1] == "Sep")
+        {
+            var mmmmonth = "September";
+        }
+        else if(dateparts[1] == "Oct")
+            {
+                var mmmmonth = "October";
+            }
     else{
         var mmmmonth = dateparts[1];
     }
@@ -10609,7 +10621,7 @@ async function getAllPitchersData(date)
         for (let i = 0; i < gams.length; i++) {
             var game = gams[i];
             //
-            if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher)&& (typeof game.homeTeam.homePitcherData == 'undefined' || typeof game.awayTeam.awayPitcherData == 'undefined'))
+            if((game.awayTeam.awayPitcher && game.homeTeam.homePitcher))
             {
                 var stopHere = "";
                 game = await getPitcherData(game, "away", date);
@@ -11894,4 +11906,81 @@ async function JSUpdateBetAmounts()
         console.log(betFooterValue);
         console.log(returnFooterValue);
     }
+}
+
+async function JSGetMLBGamesFromBet(){
+    var dayWithGames = document.getElementsByClassName("gsbb-ParticipantTwoWayWithPitchersBaseball rcl-MarketCouponAdvancedBase_Divider gl-Market_General-cn1");
+var games = document.getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_LhsContainer");
+var elements = document.getElementsByClassName("sac-ParticipantCenteredStacked60OTB");
+var moneyLines = [];
+var handicaps = [];
+var overs = [];
+var date = document.getElementsByClassName("rcl-MarketHeaderLabel-isdate")[0].innerText;
+
+for(var d=0; d<(games.length*2); d++)
+{
+
+	moneyLines.push(elements[d].innerText);
+
+}
+
+
+for(var d=(games.length*2); d<(games.length*4); d++)
+{
+
+	handicaps.push(elements[d].innerText);
+
+}
+
+for(var d=(games.length*4); d<(games.length*6); d++)
+{
+
+	overs.push(elements[d].innerText);
+
+}
+
+var upcomingGames = [];
+var schedule = {date: date, games:[]};
+
+for(var d=0; d<games.length; d++)
+{
+
+	var awayTeam = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Team")[0].innerText;
+	var homeTeam = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Team")[1].innerText;
+	var game = awayTeam+" @ "+ homeTeam;
+	var gameTime = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_BookCloses")[0].innerText.split("\n")[0];
+	var homePitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[0].innerText;
+	var awayPitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[1].innerText;
+	console.log(homePitcher);
+	console.log(awayPitcher);
+	var game =  {
+		game:game, 
+		gameTime: gameTime ,
+		overUnder: {
+			overOdd: overs[d],
+			underOdd: overs[d+1]
+		},
+
+		awayTeam: {
+			awayTeam: awayTeam.replace(/\s+/g, ''), 
+			awayId: awayTeam.split(" ")[0], 
+			awayPitcher: awayPitcher,
+			awayHandicapRuns: handicaps[d].split("\n")[0],
+			awayHandicapOdds: handicaps[d].split("\n")[1],
+			awayML: moneyLines[d]
+		}, 
+
+		homeTeam:{
+			homeTeam: homeTeam.replace(/\s+/g, ''), 
+			homeId: homeTeam.split(" ")[0],
+			homePitcher:homePitcher,
+			homeHandicapRuns: handicaps[d+1].split("\n")[0],
+			homeHandicapOdds: handicaps[d+1].split("\n")[1],
+			homeML: moneyLines[d+1]
+		}}
+	schedule.games.push(game);
+	
+}
+upcomingGames.push(schedule);
+JSON.stringify(upcomingGames);
 }
