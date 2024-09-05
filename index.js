@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:4, monthNumber:"09"}
+        {month:"September", from:1, to:5, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:4, to:4, monthNumber:"09"}
+        {month:"September", from:5, to:5, monthNumber:"09"}
 
     ];
     
@@ -213,25 +213,25 @@ try {
                     // await getBatterGameByGame();
 
     /// 2.Generate Patterns from Stats (Check to include the last day in the internal method) 
-    ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
-    ///     *    
-                    //await CleanUpAndGenerateStats(fullDatesAnalysis);
+    // ///    Theres is a big debendecy to have the Final Selections when the Get Picks happen
+    // ///     *    
+    //                 //await CleanUpAndGenerateStats(fullDatesAnalysis);
 
-    /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
-    // // // ///     *    
-                        // var type = "AllGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
-                        // var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
-                        // var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
-                        // allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
-                        // await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
+    // /// 3.Get specific data for a day of Games(make sure you have a json with initial data)
+    // // // // ///     *    
+    //                     var type = "AllGamesConsolidated";
+    //                     await save(type, [], function(){}, "replace" ,"GameByGame");
+    //                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+    //                     await ProcessDailyGames(fullDatesAnalysis,false, type);//true for noselections to be shown/included
+    //                     var oldYearsPredictions = await load("oldYearsPredictions", "allConsolidatedGames");
+    //                     var allConsolidatedGames = await load("AllGamesConsolidated", "GameByGame"); 
+    //                     allYearsPredictions = oldYearsPredictions.concat(allConsolidatedGames);
+    //                     await save("allYearsPredictions", allYearsPredictions, function(){}, "replace", "allConsolidatedGames");
 
-                        // var type = "NewGamesConsolidated";
-                        // await save(type, [], function(){}, "replace" ,"GameByGame");
-                        // await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
-                        // await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
+    //                     var type = "NewGamesConsolidated";
+    //                     await save(type, [], function(){}, "replace" ,"GameByGame");
+    //                     await save("finalSelectionsCSV", [], function(){}, "replace" ,"GameByGame");
+    //                     await ProcessDailyGames(singleDayAnalysis,true ,type);//true for noselections to be shown/included
 
                         //To generate visualisationFilesCreated
                         await GenerateRawJsonViewObjects(fullDatesAnalysis);
@@ -1116,14 +1116,14 @@ try {
                 else {   
                 //-----------------------------    
                 //try{
-                //await getScheduleData(selectedDate);
+                // await getScheduleData(selectedDate);
                 // await ProcessGameByGame();
                 // await getPitcherGameByGame();
                 // await getBatterGameByGame();
                 // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                 //await getAllPitchersData(selectedDate);
-                 //await getESPNData(selectedDate);
+                //  await getAllPitchersData(selectedDate);
+                //await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
                 //  await getBestHittingTeamsByBatting(selectedDate);
@@ -11909,7 +11909,7 @@ async function JSUpdateBetAmounts()
 }
 
 async function JSGetMLBGamesFromBet(){
-    var dayWithGames = document.getElementsByClassName("gsbb-ParticipantTwoWayWithPitchersBaseball rcl-MarketCouponAdvancedBase_Divider gl-Market_General-cn1");
+var dayWithGames = document.getElementsByClassName("gsbb-ParticipantTwoWayWithPitchersBaseball rcl-MarketCouponAdvancedBase_Divider gl-Market_General-cn1");
 var games = document.getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_LhsContainer");
 var elements = document.getElementsByClassName("sac-ParticipantCenteredStacked60OTB");
 var moneyLines = [];
@@ -11949,8 +11949,8 @@ for(var d=0; d<games.length; d++)
 	var homeTeam = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Team")[1].innerText;
 	var game = awayTeam+" @ "+ homeTeam;
 	var gameTime = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_BookCloses")[0].innerText.split("\n")[0];
-	var homePitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[0].innerText;
-	var awayPitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[1].innerText;
+	var homePitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[1].innerText;
+	var awayPitcher = games[d].getElementsByClassName("sbb-ParticipantTwoWayWithPitchersBaseball_Pitcher")[0].innerText;
 	console.log(homePitcher);
 	console.log(awayPitcher);
 	var game =  {
@@ -11983,4 +11983,38 @@ for(var d=0; d<games.length; d++)
 }
 upcomingGames.push(schedule);
 JSON.stringify(upcomingGames);
+}
+
+async function JSUpdateBetAmounts(){
+    const regex = /\d+\.\d{2}/g; // Using the global flag to find all matches
+    var bets  = document.getElementsByClassName("myb-OpenBetItem");
+    for (let index = 0; index < bets.length; index++) {
+        var bet = bets[index];
+        var betHeader = bet.getElementsByClassName("myb-OpenBetItem_StakeDesc")[0];
+        var returns = bet.querySelectorAll('.myb-CloseBetButtonBase_Return:not(.Hidden)');;
+        var returnHeader = bet.getElementsByClassName("myb-CloseBetButtonBase_Return")[returns.length-1];
+        var betFooter = bet.getElementsByClassName("myx-StakeDisplay_StakeWrapper")[0];
+        var returnFooter = bet.getElementsByClassName("myb-OpenBetItemInnerView_BetInformationText")[0];
+        
+        var betHeaderToBeReplaced = betHeader.innerText.match(regex)[0];
+        if(returns.length > 0){
+            var returnHeaderToBeReplaced = returnHeader.innerText.match(regex)[0];
+            const returnHeaderValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(returnHeaderToBeReplaced)*10).toFixed(2));
+            returnHeader.innerText = returnHeader.innerText.replace(returnHeaderToBeReplaced, returnHeaderValue);
+        }
+        var betFooterToBeReplaced = betFooter.innerText.match(regex)[0];
+        var returnFooterToBeReplaced = returnFooter.innerText.match(regex)[0];
+        const betHeaderValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(betHeaderToBeReplaced)*10).toFixed(2));
+        
+        const betFooterValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(betFooterToBeReplaced)*10).toFixed(2));
+        const returnFooterValue = new Intl.NumberFormat('en-US', {minimumFractionDigits: 2,maximumFractionDigits: 2}).format((parseFloat(returnFooterToBeReplaced)*10).toFixed(2));
+        betHeader.innerText = betHeader.innerText.replace(betHeaderToBeReplaced, betHeaderValue);
+        
+        betFooter.innerText = betFooter.innerText.replace(betFooterToBeReplaced, betFooterValue);
+        returnFooter.innerText = returnFooter.innerText.replace(returnFooterToBeReplaced, returnFooterValue);
+        console.log(betHeaderValue);
+        //console.log(returnHeaderValue);
+        console.log(betFooterValue);
+        console.log(returnFooterValue);
+    }
 }

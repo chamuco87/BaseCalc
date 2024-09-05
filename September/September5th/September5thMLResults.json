@@ -1,0 +1,234 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ PIT Pirates",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.63,
+            "probability_lr": 0.9092429356038056,
+            "average_probability": 0.7696214678019029,
+            "standard_deviation": 0.13962146780190282
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "COL Rockies @ ATL Braves",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.77,
+            "probability_lr": 0.6628789296551674,
+            "average_probability": 0.7164394648275837,
+            "standard_deviation": 0.053560535172416324
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "LA Angels @ TEX Rangers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.71,
+            "probability_lr": 0.7049945558637326,
+            "average_probability": 0.7074972779318662,
+            "standard_deviation": 0.002502722068133678
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "COL Rockies @ ATL Braves",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.74,
+            "probability_lr": 0.674641180132258,
+            "average_probability": 0.707320590066129,
+            "standard_deviation": 0.03267940993387097
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ PIT Pirates",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.59,
+            "probability_lr": 0.8079961780644268,
+            "average_probability": 0.6989980890322134,
+            "standard_deviation": 0.10899808903221342
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "PHI Phillies @ MIA Marlins",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.75,
+            "probability_lr": 0.6343178335400893,
+            "average_probability": 0.6921589167700446,
+            "standard_deviation": 0.05784108322995535
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "LA Angels @ TEX Rangers",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.68,
+            "probability_lr": 0.6801805386882589,
+            "average_probability": 0.6800902693441295,
+            "standard_deviation": 9.026934412942333e-05
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "PHI Phillies @ MIA Marlins",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.57,
+            "probability_lr": 0.731998801997188,
+            "average_probability": 0.650999400998594,
+            "standard_deviation": 0.08099940099859404
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ SF Giants",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.52,
+            "probability_lr": 0.7543211746175557,
+            "average_probability": 0.6371605873087778,
+            "standard_deviation": 0.11716058730877782
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "WAS Nationals @ PIT Pirates",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.7561721444687394,
+            "average_probability": 0.6330860722343696,
+            "standard_deviation": 0.12308607223436968
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ OAK Athletics",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.61,
+            "probability_lr": 0.6516297287639798,
+            "average_probability": 0.63081486438199,
+            "standard_deviation": 0.020814864381989928
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "HOU Astros @ CIN Reds",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.57,
+            "probability_lr": 0.6886898044186304,
+            "average_probability": 0.6293449022093152,
+            "standard_deviation": 0.05934490220931521
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ SF Giants",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.66,
+            "probability_lr": 0.5833641013878743,
+            "average_probability": 0.6216820506939371,
+            "standard_deviation": 0.03831794930606286
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "COL Rockies @ ATL Braves",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.46,
+            "probability_lr": 0.7740531399375893,
+            "average_probability": 0.6170265699687947,
+            "standard_deviation": 0.15702656996879463
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "DET Tigers @ SD Padres",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.6777935995302123,
+            "average_probability": 0.6038967997651061,
+            "standard_deviation": 0.07389679976510616
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "DET Tigers @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.6,
+            "probability_lr": 0.5102357669579292,
+            "average_probability": 0.5551178834789645,
+            "standard_deviation": 0.04488211652103541
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "DET Tigers @ SD Padres",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.56,
+            "probability_lr": 0.5247420560350656,
+            "average_probability": 0.5423710280175329,
+            "standard_deviation": 0.017628971982467212
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "LA Angels @ TEX Rangers",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.47,
+            "probability_lr": 0.6077276082214886,
+            "average_probability": 0.5388638041107443,
+            "standard_deviation": 0.06886380411074433
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "SEA Mariners @ OAK Athletics",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5462041389024657,
+            "average_probability": 0.5281020694512328,
+            "standard_deviation": 0.018102069451232827
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "ARI Diamondbacks @ SF Giants",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.55,
+            "probability_lr": 0.5060936360944803,
+            "average_probability": 0.5280468180472402,
+            "standard_deviation": 0.02195318195275986
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "MIN Twins @ TB Rays",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5248160748344401,
+            "average_probability": 0.5174080374172201,
+            "standard_deviation": 0.00740803741722007
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "MIN Twins @ TB Rays",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.48,
+            "probability_lr": 0.49974003208460355,
+            "average_probability": 0.48987001604230174,
+            "standard_deviation": 0.009870016042301782
+        },
+        {
+            "file": "/content/NewGames/September5thNewGamesConsolidated.json",
+            "game": "HOU Astros @ CIN Reds",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.46,
+            "probability_lr": 0.5090052653868264,
+            "average_probability": 0.4845026326934132,
+            "standard_deviation": 0.024502632693413212
+        }
+    ]
+}
