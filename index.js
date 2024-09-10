@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:9, monthNumber:"09"}
+        {month:"September", from:1, to:10, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:9, to:9, monthNumber:"09"}
+        {month:"September", from:10, to:10, monthNumber:"09"}
 
     ];
     
