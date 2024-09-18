@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:17, monthNumber:"09"}
+        {month:"September", from:1, to:18, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:17, to:17, monthNumber:"09"}
+        {month:"September", from:18, to:18, monthNumber:"09"}
 
     ];
     
@@ -11794,7 +11794,7 @@ script += '    return JSON.stringify(batterDetails);												';
 
 async function JSGetDataFromBet365()
 {
-    var dayWithGames = document.getElementsByClassName("gl-MarketGroup_Wrapper src-MarketGroup_Container");
+    var dayWithGames = document.getElementsByClassName("gl-MarketGroupContainer");
     var upcomingGames = [];
     for(var d=0; d<dayWithGames.length; d++)
 
