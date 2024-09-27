@@ -191,7 +191,7 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:24, monthNumber:"09"}
+        {month:"September", from:1, to:26, monthNumber:"09"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +200,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:24, to:24, monthNumber:"09"}
+        {month:"September", from:26, to:26, monthNumber:"09"}
 
     ];
     
@@ -1785,7 +1785,7 @@ try {
     async function GenerateDataForVisualization(date, evaluatePatterns, evaluateFactors,  processIndexAndDays, refreshAnalysisGameDetails)
     {
         var gameDataAnalysis = await load(date+"NewGamesConsolidated", "NewGames");
-        if(date == "September2th")
+        if(date == "September26th")
         {
             var stopHere ="";
         }
@@ -2499,10 +2499,16 @@ try {
                     // item.common.isHomeWinner == item.compare[item.expWinner+"Row"].team &&
                     // item.patternChances > 50 )
                     // ||
-                    ((item.common.patternExpWinner >= 70 &&item.recommendedBet < 5 ) 
+                    ((item.common.patternExpWinner >= 89 ||item.common.patternOtherTeam >= 89 ) 
                     ||
-                    (item.agnosticPattern == "XXXXX" && item.common.isF5HomeWinnerProb >= .50 && item.common.isHomeWinnerProb >=.50 && item.common.patternExpWinner >=50 && item.common.hotExpWinner >= 56)
-                     //||
+                    (item.recommendedBet >= 6.74 && item.recommendedBet <= 7.16)
+                    ||
+                    (item.factorDiff >= 11.56 && item.factorDiff <= 11.79)
+                    ||
+                    (item.FinalFactor >= 96.6)
+                    ||
+                    (item.factorDiff >= 10 && item.recommendedBet >= 7 && item.recommendedBet <= 9.43 && item.common.isF5HomeWinnerProb >= .65 && item.common.isHomeWinnerProb >=.65)
+                    //||
                     //(item.common.isHomeWinnerProb >=.50 &&item.common.patternOtherTeam >= 65 ) 
                     )
                     //&& item.patternChances > 50 
