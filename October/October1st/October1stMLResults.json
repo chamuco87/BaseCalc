@@ -1,0 +1,64 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "DET Tigers @ HOU Astros",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.8210710524328737,
+            "average_probability": 0.6805355262164369,
+            "standard_deviation": 0.14053552621643683
+        },
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "ATL Braves @ SD Padres",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.68,
+            "probability_lr": 0.6507667367596044,
+            "average_probability": 0.6653833683798023,
+            "standard_deviation": 0.014616631620197829
+        },
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "KC Royals @ BAL Orioles",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.67,
+            "probability_lr": 0.6600630464409976,
+            "average_probability": 0.6650315232204989,
+            "standard_deviation": 0.004968476779501241
+        },
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "NY Mets @ MIL Brewers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.59,
+            "probability_lr": 0.5937924553260299,
+            "average_probability": 0.5918962276630149,
+            "standard_deviation": 0.0018962276630149488
+        },
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "ATL Braves @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.6706445554645664,
+            "average_probability": 0.5903222777322832,
+            "standard_deviation": 0.08032227773228318
+        },
+        {
+            "file": "/content/NewGames/October1stNewGamesConsolidated.json",
+            "game": "DET Tigers @ HOU Astros",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.56,
+            "probability_lr": 0.5778357351869696,
+            "average_probability": 0.5689178675934848,
+            "standard_deviation": 0.008917867593484785
+        }
+    ]
+}

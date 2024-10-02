@@ -191,7 +191,8 @@ try {
         {month:"July", from:19, to:31, monthNumber:"07"},
         {month:"August", from:1, to:17, monthNumber:"08"},
         {month:"August", from:22, to:31, monthNumber:"08"},
-        {month:"September", from:1, to:27, monthNumber:"09"}
+        {month:"September", from:1, to:30, monthNumber:"09"},
+        {month:"October", from:1, to:2, monthNumber:"10"}
     ];
 
     var singleDayAnalysis = [ 
@@ -200,7 +201,7 @@ try {
         //{month:"June", from:30, to:30, monthNumber:"06"},
         //{month:"July", from:31, to:31, monthNumber:"07"},
         //{month:"August", from:31, to:31, monthNumber:"08"},
-        {month:"September", from:27, to:27, monthNumber:"09"}
+        {month:"October", from:2, to:2, monthNumber:"10"}
 
     ];
     
@@ -1120,9 +1121,9 @@ try {
                 // await ProcessGameByGame();
                 // await getPitcherGameByGame();
                 // await getBatterGameByGame();
-                // await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
+                //await CleanUpAndGenerateStats(datesAnalysis); //This process now only one for the day before
 
-                //  await getAllPitchersData(selectedDate);
+                // await getAllPitchersData(selectedDate);
                 // await getESPNData(selectedDate);
                 //  await getBattersData(selectedDate);
                 //  await getBestScoringTeamsByBatting(selectedDate);
@@ -2499,23 +2500,40 @@ try {
                     // item.common.isHomeWinner == item.compare[item.expWinner+"Row"].team &&
                     // item.patternChances > 50 )
                     // ||
-                    ((item.common.patternExpWinner >= 89 ||item.common.patternOtherTeam >= 89 ) 
-                    ||
-                    (item.recommendedBet >= 6.74 && item.recommendedBet <= 7.16)
-                    ||
-                    (item.factorDiff >= 11.56 && item.factorDiff <= 11.79)
-                    ||
-                    (item.FinalFactor >= 96.6)
-                    ||
-                    (item.factorDiff >= 10 && item.recommendedBet >= 7 && item.recommendedBet <= 9.43 && item.common.isF5HomeWinnerProb >= .65 && item.common.isHomeWinnerProb >=.65)
-                    //||
-                    //(item.common.isHomeWinnerProb >=.50 &&item.common.patternOtherTeam >= 65 ) 
-                    )
+                    (item.common.isF5HomeWinnerProb >= .79 || item.common.isHomeWinnerProb >= .79 || item.common.isOverProb >= .78 ) 
+                    // ||
+                    // (item.recommendedBet >= 6.74 && item.recommendedBet <= 7.16)
+                    // ||
+                    // (item.factorDiff >= 11.56 && item.factorDiff <= 11.79)
+                    // ||
+                    // (item.FinalFactor >= 96.6)
+                    // ||
+                    // (item.factorDiff >= 10 && item.recommendedBet >= 7 && item.recommendedBet <= 9.43 && item.common.isF5HomeWinnerProb >= .65 && item.common.isHomeWinnerProb >=.65)
+                    
+                    // )
                     //&& item.patternChances > 50 
                     //&& item.common.isF5HomeWinner == item.common.formulaWinner ;
                     }
         ), "patternChances", "desc");
 
+
+        // var maxF5Game = viewObjects.reduce((max, game) => {
+        //     return (game.common.isF5HomeWinnerProb > max.common.isF5HomeWinnerProb) ? game : max;
+        //   }, viewObjects[0]);
+
+        //   var maxIsHomeGame = viewObjects.reduce((max, game) => {
+        //     return (game.common.isHomeWinnerProb > max.common.isHomeWinnerProb) ? game : max;
+        //   }, viewObjects[0]);
+
+        //   var maxIsOverGame = viewObjects.reduce((max, game) => {
+        //     return (game.common.isOverProb > max.common.isOverProb) ? game : max;
+        //   }, viewObjects[0]);
+
+
+        //   viewObjects = [];
+        //   viewObjects.push(maxF5Game);
+        //   viewObjects.push(maxIsHomeGame);
+        //   viewObjects.push(maxIsOverGame);
             // viewObjects.forEach(function(item){
             //     item.common.FinalFactor = item.common.overallWinner;
             //     item.coversPer = item.compare[item.expWinner+"Row"].CoversPer != 100 ? item.compare[item.expWinner+"Row"].CoversPer : 10;
@@ -4428,7 +4446,7 @@ gameSelected = await sorting(games,"homeTotalPercentage", "desc");
                             var descriptiveDate = "2024-"+mmonth.monthNumber+"-"+index;
                         }
 
-                        //selectedDate = "August31st";
+                        selectedDate = "October1st";
             
                         await EvaluateAllPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
                         await EvaluateOverUnderPatterns(selectedDate,mmonth.month+" "+index+", 2024" );
@@ -6108,6 +6126,16 @@ async function CalculateWinnersViaFormula(date, noSelections, type)
                                         {
                                             var patterns = await load("September3rd"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
                                         }
+
+                                        else if(date == "October1st")
+                                            {
+                                                var patterns = await load("September30th"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                                            }
+
+                                            else if(date == "October2th" || date == "October2nd" )
+                                                {
+                                                    var patterns = await load("October1st"+"GeneralStatsPerSummary","GeneralStatsPerSummary");
+                                                }
             else{
                 var patterns = await load(date+"GeneralStatsPerSummary","GeneralStatsPerSummary");
             }
@@ -10310,13 +10338,25 @@ async function getScheduleData(date)
                       
         });  
 
+        // await driver.get(schedulesURL+team.url+"//seasontype/2/half/2");
+        // await driver.manage().setTimeouts({ implicit: 1000 });
+        // await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
+        //     console.log(return_value);
+        //     scheduleData = scheduleData.concat(JSON.parse(return_value));
+        //     // var data = ProcessScheduleData(scheduleData,teamName);
+        //     // for (let ar = 0; ar < data.length; ar++) {
+        //     //     const schedule = data[ar];
+        //     //     schedulesAllData.push(schedule);  
+        //     // }
+                      
+        // });  
 
-        await driver.get(schedulesURL+team.url);
+        await driver.get(schedulesURL+team.url+"//seasontype/2/half/2");
         await driver.manage().setTimeouts({ implicit: 1000 });
         await driver.executeScript(await GetTeamSchedule()).then(function(return_value) {
             console.log(return_value);
-            //scheduleData = JSON.parse(return_value);
             scheduleData = scheduleData.concat(JSON.parse(return_value));
+            
             var data = ProcessScheduleData(scheduleData,teamName);
             for (let ar = 0; ar < data.length; ar++) {
                 const schedule = data[ar];

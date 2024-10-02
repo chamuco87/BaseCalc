@@ -1,0 +1,14 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/September30thNewGamesConsolidated.json",
+            "game": "NY Mets @ ATL Braves",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.573659461828471,
+            "average_probability": 0.5518297309142355,
+            "standard_deviation": 0.021829730914235512
+        }
+    ]
+}
