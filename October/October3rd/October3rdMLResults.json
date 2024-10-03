@@ -1,0 +1,14 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October3rdNewGamesConsolidated.json",
+            "game": "NY Mets @ MIL Brewers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.68,
+            "probability_lr": 0.6272084656094504,
+            "average_probability": 0.6536042328047252,
+            "standard_deviation": 0.02639576719527481
+        }
+    ]
+}
