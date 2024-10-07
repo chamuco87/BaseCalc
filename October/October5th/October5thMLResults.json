@@ -1,0 +1,84 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.67,
+            "probability_lr": 0.7324629121671965,
+            "average_probability": 0.7012314560835983,
+            "standard_deviation": 0.03123145608359823
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "KC Royals @ NY Yankees",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.64,
+            "probability_lr": 0.7601023215156074,
+            "average_probability": 0.7000511607578037,
+            "standard_deviation": 0.0600511607578037
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.5,
+            "probability_lr": 0.7927644534108891,
+            "average_probability": 0.6463822267054445,
+            "standard_deviation": 0.14638222670544454
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.7018073959350783,
+            "average_probability": 0.6259036979675392,
+            "standard_deviation": 0.07590369796753915
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.6922888735442793,
+            "average_probability": 0.6161444367721396,
+            "standard_deviation": 0.07614443677213961
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.56,
+            "probability_lr": 0.6173747160951654,
+            "average_probability": 0.5886873580475827,
+            "standard_deviation": 0.028687358047582656
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "NY Mets @ PHI Phillies",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.52,
+            "probability_lr": 0.6022249286111245,
+            "average_probability": 0.5611124643055623,
+            "standard_deviation": 0.04111246430556226
+        },
+        {
+            "file": "/content/NewGames/October5thNewGamesConsolidated.json",
+            "game": "KC Royals @ NY Yankees",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5649705301264005,
+            "average_probability": 0.5374852650632003,
+            "standard_deviation": 0.02748526506320026
+        }
+    ]
+}

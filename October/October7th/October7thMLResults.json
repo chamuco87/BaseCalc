@@ -1,0 +1,54 @@
+{
+    "selections": [
+        {
+            "file": "/content/NewGames/October7thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.68,
+            "probability_lr": 0.9212108520173128,
+            "average_probability": 0.8006054260086564,
+            "standard_deviation": 0.12060542600865637
+        },
+        {
+            "file": "/content/NewGames/October7thNewGamesConsolidated.json",
+            "game": "KC Royals @ NY Yankees",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.65,
+            "probability_lr": 0.714575595997928,
+            "average_probability": 0.682287797998964,
+            "standard_deviation": 0.032287797998963974
+        },
+        {
+            "file": "/content/NewGames/October7thNewGamesConsolidated.json",
+            "game": "KC Royals @ NY Yankees",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.65,
+            "probability_lr": 0.6408209228070226,
+            "average_probability": 0.6454104614035113,
+            "standard_deviation": 0.004589538596488696
+        },
+        {
+            "file": "/content/NewGames/October7thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.7021288836707648,
+            "average_probability": 0.6260644418353825,
+            "standard_deviation": 0.07606444183538236
+        },
+        {
+            "file": "/content/NewGames/October7thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.59,
+            "probability_lr": 0.4631111552428366,
+            "average_probability": 0.5265555776214182,
+            "standard_deviation": 0.0634444223785817
+        }
+    ]
+}

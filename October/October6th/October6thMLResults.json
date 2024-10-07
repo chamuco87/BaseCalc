@@ -1,0 +1,64 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "NY Mets @ PHI Phillies",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.68,
+            "probability_lr": 0.6601628637250087,
+            "average_probability": 0.6700814318625044,
+            "standard_deviation": 0.009918568137495698
+        },
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "NY Mets @ PHI Phillies",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.48,
+            "probability_lr": 0.7578242072448218,
+            "average_probability": 0.6189121036224109,
+            "standard_deviation": 0.1389121036224109
+        },
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.55,
+            "probability_lr": 0.6628721805062818,
+            "average_probability": 0.6064360902531409,
+            "standard_deviation": 0.05643609025314089
+        },
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.51,
+            "probability_lr": 0.6782101755154295,
+            "average_probability": 0.5941050877577148,
+            "standard_deviation": 0.08410508775771475
+        },
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.5,
+            "probability_lr": 0.683859167949975,
+            "average_probability": 0.5919295839749875,
+            "standard_deviation": 0.09192958397498752
+        },
+        {
+            "file": "/content/NewGames/October6thNewGamesConsolidated.json",
+            "game": "NY Mets @ PHI Phillies",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.5,
+            "probability_lr": 0.564727308319299,
+            "average_probability": 0.5323636541596495,
+            "standard_deviation": 0.03236365415964948
+        }
+    ]
+}
