@@ -1,0 +1,84 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.73,
+            "probability_lr": 0.7732868874125006,
+            "average_probability": 0.7516434437062502,
+            "standard_deviation": 0.02164344370625032
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "NY Yankees @ KC Royals",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.56,
+            "probability_lr": 0.7493387311592486,
+            "average_probability": 0.6546693655796243,
+            "standard_deviation": 0.0946693655796243
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.62,
+            "probability_lr": 0.6324879962130061,
+            "average_probability": 0.6262439981065031,
+            "standard_deviation": 0.006243998106503057
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "PHI Phillies @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.64,
+            "probability_lr": 0.5716241195498234,
+            "average_probability": 0.6058120597749117,
+            "standard_deviation": 0.03418794022508831
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "NY Yankees @ KC Royals",
+            "target": "isOver",
+            "prediction": 0,
+            "probability_rf": 0.47,
+            "probability_lr": 0.7174679942001555,
+            "average_probability": 0.5937339971000777,
+            "standard_deviation": 0.12373399710007776
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.57,
+            "probability_lr": 0.5985146558980017,
+            "average_probability": 0.5842573279490009,
+            "standard_deviation": 0.014257327949000864
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.57,
+            "probability_lr": 0.5769862602020646,
+            "average_probability": 0.5734931301010322,
+            "standard_deviation": 0.0034931301010323046
+        },
+        {
+            "file": "/content/NewGames/October9thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.53,
+            "probability_lr": 0.5647776148429052,
+            "average_probability": 0.5473888074214526,
+            "standard_deviation": 0.0173888074214526
+        }
+    ]
+}

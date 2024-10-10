@@ -1,0 +1,44 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October10thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.72,
+            "probability_lr": 0.6440073816030878,
+            "average_probability": 0.6820036908015439,
+            "standard_deviation": 0.03799630919845609
+        },
+        {
+            "file": "/content/NewGames/October10thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.58,
+            "probability_lr": 0.616629157008607,
+            "average_probability": 0.5983145785043035,
+            "standard_deviation": 0.018314578504303514
+        },
+        {
+            "file": "/content/NewGames/October10thNewGamesConsolidated.json",
+            "game": "NY Yankees @ KC Royals",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.54,
+            "probability_lr": 0.6108029474772809,
+            "average_probability": 0.5754014737386405,
+            "standard_deviation": 0.03540147373864044
+        },
+        {
+            "file": "/content/NewGames/October10thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ DET Tigers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.51,
+            "probability_lr": 0.5814230543163573,
+            "average_probability": 0.5457115271581787,
+            "standard_deviation": 0.03571152715817866
+        }
+    ]
+}

@@ -1,0 +1,24 @@
+{
+    "selections": [
+        {
+            "file": "/content/NewGames/October8thNewGamesConsolidated.json",
+            "game": "PHI Phillies @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.62,
+            "probability_lr": 0.9351191288841101,
+            "average_probability": 0.777559564442055,
+            "standard_deviation": 0.15755956444205504
+        },
+        {
+            "file": "/content/NewGames/October8thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ SD Padres",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.61,
+            "probability_lr": 0.5424518570459052,
+            "average_probability": 0.5762259285229525,
+            "standard_deviation": 0.03377407147704742
+        }
+    ]
+}
