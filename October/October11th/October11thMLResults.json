@@ -1,0 +1,34 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October11thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.81,
+            "probability_lr": 0.7856228139348213,
+            "average_probability": 0.7978114069674107,
+            "standard_deviation": 0.012188593032589401
+        },
+        {
+            "file": "/content/NewGames/October11thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.61,
+            "probability_lr": 0.8332477375339812,
+            "average_probability": 0.7216238687669906,
+            "standard_deviation": 0.1116238687669906
+        },
+        {
+            "file": "/content/NewGames/October11thNewGamesConsolidated.json",
+            "game": "SD Padres @ LA Dodgers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.52,
+            "probability_lr": 0.6594567880852313,
+            "average_probability": 0.5897283940426157,
+            "standard_deviation": 0.06972839404261566
+        }
+    ]
+}
