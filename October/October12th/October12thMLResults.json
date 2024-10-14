@@ -1,0 +1,24 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October12thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.85,
+            "probability_lr": 0.7218036735998462,
+            "average_probability": 0.7859018367999231,
+            "standard_deviation": 0.06409816320007689
+        },
+        {
+            "file": "/content/NewGames/October12thNewGamesConsolidated.json",
+            "game": "DET Tigers @ CLE Guardians",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.68,
+            "probability_lr": 0.5851848971681378,
+            "average_probability": 0.6325924485840689,
+            "standard_deviation": 0.047407551415931115
+        }
+    ]
+}
