@@ -1,0 +1,24 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October15thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ NY Yankees",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.87,
+            "probability_lr": 0.7433058899098582,
+            "average_probability": 0.8066529449549291,
+            "standard_deviation": 0.06334705504507088
+        },
+        {
+            "file": "/content/NewGames/October15thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ NY Yankees",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.68,
+            "probability_lr": 0.6695337270306436,
+            "average_probability": 0.6747668635153219,
+            "standard_deviation": 0.005233136484678214
+        }
+    ]
+}

@@ -1,0 +1,64 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ NY Yankees",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.77,
+            "probability_lr": 0.7140500046350015,
+            "average_probability": 0.7420250023175008,
+            "standard_deviation": 0.02797499768249928
+        },
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "NY Mets @ LA Dodgers",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.66,
+            "probability_lr": 0.8031919255268584,
+            "average_probability": 0.7315959627634292,
+            "standard_deviation": 0.07159596276342917
+        },
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ NY Yankees",
+            "target": "isF5HomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.67,
+            "probability_lr": 0.6268774631995536,
+            "average_probability": 0.6484387315997768,
+            "standard_deviation": 0.02156126840022321
+        },
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "NY Mets @ LA Dodgers",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.5,
+            "probability_lr": 0.7352605432090034,
+            "average_probability": 0.6176302716045017,
+            "standard_deviation": 0.11763027160450168
+        },
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "CLE Guardians @ NY Yankees",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.63,
+            "probability_lr": 0.6023785828106486,
+            "average_probability": 0.6161892914053243,
+            "standard_deviation": 0.013810708594675702
+        },
+        {
+            "file": "/content/NewGames/October14thNewGamesConsolidated.json",
+            "game": "NY Mets @ LA Dodgers",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.58,
+            "probability_lr": 0.6177993355842959,
+            "average_probability": 0.5988996677921479,
+            "standard_deviation": 0.018899667792147967
+        }
+    ]
+}
