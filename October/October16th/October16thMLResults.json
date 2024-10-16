@@ -1,0 +1,34 @@
+{
+    "selections":[
+        {
+            "file": "/content/NewGames/October16thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ NY Mets",
+            "target": "isHomeWinner",
+            "prediction": 1,
+            "probability_rf": 0.62,
+            "probability_lr": 0.5705830021593463,
+            "average_probability": 0.5952915010796731,
+            "standard_deviation": 0.024708498920326838
+        },
+        {
+            "file": "/content/NewGames/October16thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ NY Mets",
+            "target": "isOver",
+            "prediction": 1,
+            "probability_rf": 0.57,
+            "probability_lr": 0.6195319819550961,
+            "average_probability": 0.594765990977548,
+            "standard_deviation": 0.024765990977548058
+        },
+        {
+            "file": "/content/NewGames/October16thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.54,
+            "probability_lr": 0.6067164028780753,
+            "average_probability": 0.5733582014390377,
+            "standard_deviation": 0.033358201439037616
+        }
+    ]
+}
