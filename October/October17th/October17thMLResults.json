@@ -1,0 +1,44 @@
+{
+    "selections": [
+        {
+            "file": "/content/NewGames/October17thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ NY Mets",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.84,
+            "probability_lr": 0.8897450731279137,
+            "average_probability": 0.8648725365639569,
+            "standard_deviation": 0.024872536563956882
+        },
+        {
+            "file": "/content/NewGames/October17thNewGamesConsolidated.json",
+            "game": "LA Dodgers @ NY Mets",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.69,
+            "probability_lr": 0.8727530588660264,
+            "average_probability": 0.7813765294330132,
+            "standard_deviation": 0.09137652943301322
+        },
+        {
+            "file": "/content/NewGames/October17thNewGamesConsolidated.json",
+            "game": "NY Yankees @ CLE Guardians",
+            "target": "isF5HomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.64,
+            "probability_lr": 0.8416260992641936,
+            "average_probability": 0.7408130496320968,
+            "standard_deviation": 0.10081304963209681
+        },
+        {
+            "file": "/content/NewGames/October17thNewGamesConsolidated.json",
+            "game": "NY Yankees @ CLE Guardians",
+            "target": "isHomeWinner",
+            "prediction": 0,
+            "probability_rf": 0.59,
+            "probability_lr": 0.5232284796330452,
+            "average_probability": 0.5566142398165226,
+            "standard_deviation": 0.033385760183477386
+        }
+    ]
+}
